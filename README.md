@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/stralya/.github/main/assets/klickbee-logo.svg" alt="Klickbee CMS Logo" height="80" />
-</p>
 
 <h1 align="center">Klickbee CMS</h1>
 
@@ -9,7 +6,7 @@
 <p align="center">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-green?style=flat-square">
   <img alt="Build" src="https://img.shields.io/badge/build-passing-brightgreen?style=flat-square">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue?style=flat-square">
+  <img alt="Version" src="https://img.shields.io/badge/version-MVP-blue?style=flat-square">
   <img alt="Made by Stralya" src="https://img.shields.io/badge/made%20by-Stralya-4B5563?style=flat-square">
 </p>
 
@@ -102,8 +99,8 @@ front/
 ### 🚀 Getting Started
 
 ```sh
-pnpm i
-pnpm dev
+npm i
+npm run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000) and enjoy.
@@ -118,7 +115,7 @@ See [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 
 ---
 
-### 🌐 Maintained by [Stralya](https://github.com/stralya)
+### 🌐 Maintained by [Stralya](https://github.com/stralya-company)
 
 We build tools for digital creators.
 
