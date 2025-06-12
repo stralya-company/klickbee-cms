@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="https://raw.githubusercontent.com/stralya/.github/main/assets/klickbee-logo.svg" alt="Klickbee CMS Logo" height="80" />
+</p>
 
-## Getting Started
+<h1 align="center">Klickbee CMS</h1>
 
-First, run the development server:
+<p align="center"><strong>The open-source CMS we always wanted. Monolithic. Visual. Built for speed.</strong></p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<p align="center">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-green?style=flat-square">
+  <img alt="Build" src="https://img.shields.io/badge/build-passing-brightgreen?style=flat-square">
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue?style=flat-square">
+  <img alt="Made by Stralya" src="https://img.shields.io/badge/made%20by-Stralya-4B5563?style=flat-square">
+</p>
+
+---
+
+### 🧠 What is Klickbee CMS?
+
+**Klickbee CMS** is a monolithic, open-source CMS designed to make developers fast and clients autonomous. Built with Next.js & React, it integrates:
+
+- A page builder interface
+- Custom Post Types (CPT)
+- Static & dynamic routing
+- A clean admin UI
+- And a dead-simple deployment model
+
+Built for SaaS, portfolios, and high-perf websites.
+
+---
+
+### 🛋️ Architecture
+
+#### FO (Front)
+```
+front/
+├── static/[slug]
+├── content/[cpt-type]/[cpt-slug]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### BO (Admin)
+```
+/admin_[generated_key]/
+├── auth
+├── manage/
+│   ├── content/[cpt-type]
+│   ├── static/[slug]
+│   ├── settings
+│   └── contact
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🚀 MVP Features
 
-## Learn More
+| Feature     | Description                                       |
+|-------------|---------------------------------------------------|
+| Pages       | Static pages: about, contact, etc.                |
+| Content     | CPT system with full CRUD                         |
+| Settings    | Email, metadata, admin identity setup             |
+| Builder     | Visual page builder (Webstudio.io or custom)      |
+| Sitemap     | Auto-generated sitemap                            |
+| Contact     | Message system for contact requests               |
+| Multi-BO    | Admin UI in FR/EN                                 |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🤣 Admin UI Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Contenu
+    - CPT (collection + entries)
+- Pages (static)
+- Contact (requests)
+- Réglages (admin setup, mail, i18n)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🌍 Features Coming Next
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 2D internal linking (smart mesh)
+- AI-powered page generation
+- Multilang frontend (i18n)
+- Google Analytics & Search Console integration
+- Broken link management
+
+---
+
+### 🧦 Stack
+
+| Tech         | Description                            |
+|--------------|----------------------------------------|
+| Next.js      | App Router + API routes                |
+| React        | Modern UI interactions                 |
+| Prisma ORM   | PostgreSQL/SQLite support              |
+| Zustand      | Admin state management                 |
+| Tailwind CSS | Utility styling                        |
+| shadcn/ui    | Headless UI components                 |
+| Auth         | Clerk or NextAuth compatible           |
+
+---
+
+### 🚀 Getting Started
+
+```sh
+pnpm i
+pnpm dev
+```
+
+Then open [http://localhost:3000](http://localhost:3000) and enjoy.
+
+---
+
+### 🚧 Contributing
+
+Klickbee CMS is built in the open. Feedback, ideas, PRs welcome.
+
+See [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+
+---
+
+### 🌐 Maintained by [Stralya](https://github.com/stralya)
+
+We build tools for digital creators.
+
+- ✉️ contact@stralya.com
+- 🌎 [stralya.com](https://stralya.com) *(coming soon)*
+
+---
+
+<p align="center">
+  <em>Klickbee CMS. The CMS you'd build if you had time to build one.</em>
+</p>
