@@ -62,7 +62,7 @@ front/
 
 ---
 
-### 🤣 Admin UI Structure
+### 👉 Admin UI Structure
 
 - Contenu
     - CPT (collection + entries)
