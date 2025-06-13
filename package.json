@@ -17,6 +17,10 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/github": "^11.0.3",
+    "@semantic-release/release-notes-generator": "^14.0.3",
     "@tailwindcss/postcss": "^4",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
@@ -24,6 +28,7 @@
     "@types/react-dom": "^19",
     "eslint": "9.28.0",
     "eslint-config-next": "15.3.3",
+    "semantic-release": "^24.2.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
