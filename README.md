@@ -124,6 +124,7 @@ See [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 We build tools for digital creators.
 
 - ✉️ contact@stralya.com
+- 💬 [Discord](https://discord.gg/keZVW6fE)
 - 🌎 [stralya.com](https://stralya.com) *(coming soon)*
 
 ---
