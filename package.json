@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.9.0",
-    "@stralya/auth": "file:../../../NPM/stralya/auth/stralya-auth-1.0.0.tgz",
+    "@stralya/auth": "^1.0.0",
     "next": "15.3.3",
     "prisma": "^6.9.0",
     "react": "^19.0.0",

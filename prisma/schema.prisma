@@ -33,8 +33,10 @@ model Role {
 }
 
 model Permission {
-  id     String @id @default(uuid())
+  id     Int    @id @default(autoincrement())
   action String
   roleId String
   role   Role   @relation(fields: [roleId], references: [id])
+
+  @@unique([roleId, action])
 }
