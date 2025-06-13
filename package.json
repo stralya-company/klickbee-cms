@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@prisma/client": "^6.9.0",
@@ -28,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "9.28.0",
     "eslint-config-next": "15.3.3",
+    "husky": "^9.1.7",
     "semantic-release": "^24.2.5",
     "tailwindcss": "^4",
     "typescript": "^5"
