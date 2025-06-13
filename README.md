@@ -99,20 +99,14 @@ front/
 ### 🚀 Getting Started
 **Option 1: With npm**  
 ```sh
-```
-```
 npm i
 npm run dev
 ```
-
 
 **Option 2: With Docker Compose**  
 ```sh
 docker compose up -d
 ```
-```
-```
-
 
 Then open [http://localhost:3000](http://localhost:3000) and enjoy.
 ---
