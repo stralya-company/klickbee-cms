@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "ignorePatterns": [
+    "prisma/",
+    "node_modules/",
+    ".next/",
+    ".idea/"
+  ]
+}
