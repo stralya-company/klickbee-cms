@@ -1,15 +1,11 @@
-name: Release
+name: Format
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
-  release:
-    name: Semantic Release
-    runs-on: ubuntu-latest
-
+  format:
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -23,7 +19,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Semantic Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+      - name: Check code format
+        run: npm run format:check

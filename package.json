@@ -9,7 +9,8 @@
     "lint": "next lint --max-warnings=0",
     "prepare": "husky",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test": "jest"
   },
   "dependencies": {
     "@prisma/client": "^6.9.0",
@@ -28,6 +29,7 @@
     "@semantic-release/release-notes-generator": "^14.0.3",
     "@tailwindcss/postcss": "^4",
     "@types/bcrypt": "^5.0.2",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -41,9 +43,11 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^9.1.7",
+    "jest": "^30.0.0",
     "prettier": "^3.5.3",
     "semantic-release": "^24.2.5",
     "tailwindcss": "^4",
+    "ts-jest": "^29.4.0",
     "typescript": "^5"
   }
 }
