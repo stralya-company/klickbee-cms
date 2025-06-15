@@ -108,7 +108,8 @@ npm run dev
 docker compose up -d
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) and enjoy.
+Then open [localhost:3000](http://localhost:3000), and enjoy!
+
 ---
 
 ### 🚧 Contributing
