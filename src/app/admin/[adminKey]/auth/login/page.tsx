@@ -41,7 +41,7 @@ export default function LoginPage({
 				setLoading(false);
 				return;
 			} else {
-				window.location.href = `/${adminKey}`;
+				window.location.href = `/admin/${adminKey}`;
 			}
 		} catch (err: Error | unknown) {
 			if (err instanceof Error) {
