@@ -1,4 +1,3 @@
-
 <h1 align="center">Klickbee CMS</h1>
 
 <p align="center"><strong>The open-source CMS we always wanted. Monolithic. Visual. Built for speed.</strong></p>
@@ -14,7 +13,8 @@
 
 ### 🧠 What is Klickbee CMS?
 
-**Klickbee CMS** is a monolithic, open-source CMS designed to make developers fast and clients autonomous. Built with Next.js & React, it integrates:
+**Klickbee CMS** is a monolithic, open-source CMS designed to make developers fast and clients autonomous. Built with
+Next.js & React, it integrates:
 
 - A page builder interface
 - Custom Post Types (CPT)
@@ -29,6 +29,7 @@ Built for SaaS, portfolios, and high-perf websites.
 ### 🛋️ Architecture
 
 #### FO (Front)
+
 ```
 front/
 ├── static/[slug]
@@ -36,8 +37,9 @@ front/
 ```
 
 #### BO (Admin)
+
 ```
-/admin_[generated_key]/
+/admin/[generated_key]/s
 ├── auth
 ├── manage/
 │   ├── content/[cpt-type]
@@ -50,22 +52,22 @@ front/
 
 ### 🚀 MVP Features
 
-| Feature     | Description                                       |
-|-------------|---------------------------------------------------|
-| Pages       | Static pages: about, contact, etc.                |
-| Content     | CPT system with full CRUD                         |
-| Settings    | Email, metadata, admin identity setup             |
-| Builder     | Visual page builder (Webstudio.io or custom)      |
-| Sitemap     | Auto-generated sitemap                            |
-| Contact     | Message system for contact requests               |
-| Multi-BO    | Admin UI in FR/EN                                 |
+| Feature  | Description                                  |
+|----------|----------------------------------------------|
+| Pages    | Static pages: about, contact, etc.           |
+| Content  | CPT system with full CRUD                    |
+| Settings | Email, metadata, admin identity setup        |
+| Builder  | Visual page builder (Webstudio.io or custom) |
+| Sitemap  | Auto-generated sitemap                       |
+| Contact  | Message system for contact requests          |
+| Multi-BO | Admin UI in FR/EN                            |
 
 ---
 
 ### 👉 Admin UI Structure
 
 - Contenu
-    - CPT (collection + entries)
+	- CPT (collection + entries)
 - Pages (static)
 - Contact (requests)
 - Réglages (admin setup, mail, i18n)
@@ -97,13 +99,16 @@ front/
 ---
 
 ### 🚀 Getting Started
-**Option 1: With npm**  
+
+**Option 1: With npm**
+
 ```sh
 npm i
 npm run dev
 ```
 
-**Option 2: With Docker Compose**  
+**Option 2: With Docker Compose**
+
 ```sh
 docker compose up -d
 ```
