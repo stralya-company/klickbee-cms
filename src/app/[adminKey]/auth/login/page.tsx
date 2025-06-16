@@ -5,13 +5,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useAdminKeyStore } from "@/lib/stores/storeAdminKey";
 
 export default function LoginPage({
 	params,
 }: {
-	params: { adminKey: string };
+	params: Promise<{ adminKey: string }>;
 }) {
-	const [adminKey] = useState(params.adminKey);
+	const paramsSync = React.use(params);
+	const adminKey = paramsSync.adminKey;
+	const { setAdminKey } = useAdminKeyStore();
+	setAdminKey(adminKey);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
