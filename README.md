@@ -41,6 +41,7 @@ front/
 ```
 /admin/[generated_key]/
 ├── auth
+	├── login
 ├── manage/
 │   ├── content/[cpt-type]
 │   ├── static/[slug]
