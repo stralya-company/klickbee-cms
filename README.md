@@ -126,6 +126,7 @@ We build tools for digital creators.
 
 - ✉️ contact@stralya.com
 - 💬 [Discord](https://discord.gg/keZVW6fE)
+- 💬 [Reddit](https://www.reddit.com/r/klickbee_cms/)
 - 🌎 [stralya.com](https://stralya.com) *(coming soon)*
 
 ---
