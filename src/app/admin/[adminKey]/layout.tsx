@@ -13,7 +13,7 @@ export default function AdminLayout({
 	return (
 		<UserProvider>
 			{currentUser && (
-				<Button variant="ghost" className="w-full justify-start">
+				<Button variant="ghost" className="w-full justify-start" asChild>
 					<a href={"/api/auth/logout"}> Logout </a>
 				</Button>
 			)}
