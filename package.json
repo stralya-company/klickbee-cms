@@ -56,5 +56,11 @@
     "tailwindcss": "^4",
     "ts-jest": "^29.4.0",
     "typescript": "^5"
+  },
+  "overrides": {
+    "glob": "^9.0.0",
+    "some-package": {
+      "inflight": "npm:lru-cache@^10.0.0"
+    }
   }
 }
