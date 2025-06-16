@@ -39,7 +39,7 @@ front/
 #### BO (Admin)
 
 ```
-/admin/[generated_key]/s
+/admin/[generated_key]/
 ├── auth
 ├── manage/
 │   ├── content/[cpt-type]
