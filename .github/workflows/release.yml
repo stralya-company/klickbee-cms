@@ -12,7 +12,7 @@ jobs:
     permissions:
         contents: write
         issues: write
-        pull-requests: writ
+        pull-requests: write
 
     steps:
       - name: Checkout code
