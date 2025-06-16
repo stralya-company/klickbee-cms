@@ -1,6 +1,6 @@
 import { setPrismaClient, register } from "@stralya/auth";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "../../../lib/prisma";
+import prisma from "../../../../lib/prisma";
 
 setPrismaClient(prisma);
 
