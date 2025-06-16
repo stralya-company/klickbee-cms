@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,9 @@ export default function LoginPage({
 	const paramsSync = React.use(params);
 	const adminKey = paramsSync.adminKey;
 	const { setAdminKey } = useAdminKeyStore();
-	setAdminKey(adminKey);
+	useEffect(() => {
+		setAdminKey(adminKey);
+	}, [adminKey, setAdminKey]);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");

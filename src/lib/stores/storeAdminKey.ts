@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 type AdminKeyStore = {
 	adminKey: string | null;
@@ -7,8 +8,15 @@ type AdminKeyStore = {
 	clearAdminKey: () => void;
 };
 
-export const useAdminKeyStore = create<AdminKeyStore>((set) => ({
-	adminKey: null,
-	setAdminKey: (key) => set({ adminKey: key }),
-	clearAdminKey: () => set({ adminKey: null }),
-}));
+export const useAdminKeyStore = create<AdminKeyStore>()(
+	persist(
+		(set) => ({
+			adminKey: null,
+			setAdminKey: (key) => set({ adminKey: key }),
+			clearAdminKey: () => set({ adminKey: null }),
+		}),
+		{
+			name: "admin-key-storage", // clé dans localStorage
+		},
+	),
+);

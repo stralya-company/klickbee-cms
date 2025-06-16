@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import { useCurrentUser } from "@/lib/queries/useUser";
 import { useAdminKeyStore } from "@/lib/stores/storeAdminKey";
+import { useUserStore } from "@/lib/stores/storeUser";
 
 export default function AdminPage() {
 	const adminKey = useAdminKeyStore((state) => state.adminKey);
-	const { data: currentUser } = useCurrentUser();
+	const currentUser = useUserStore((state) => state.user);
 	if (!adminKey) {
 		/** Just for dev purposes, in production this should never happen */
 	}
