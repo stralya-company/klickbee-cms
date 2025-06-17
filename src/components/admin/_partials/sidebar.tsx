@@ -3,7 +3,7 @@
 
 import { Home, Mail, FileText, Settings as SettingsIcon } from "lucide-react";
 import Link from "next/link";
-import { useTranslation } from "react-i18next"; // ou next-i18next
+import { useTranslation } from "next-i18next";
 
 export function Sidebar() {
 	const { t } = useTranslation();
