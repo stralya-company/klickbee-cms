@@ -3,7 +3,7 @@
 <p align="center"><strong>The open-source CMS we always wanted. Monolithic. Visual. Built for speed.</strong></p>
 
 <p align="center">
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-green?style=flat-square">
+  <img alt="License" src="https://img.shields.io/badge/license-AGPLv3-green?style=flat-square">
   <img alt="Build" src="https://img.shields.io/badge/build-passing-brightgreen?style=flat-square">
   <img alt="Version" src="https://img.shields.io/badge/version-MVP-blue?style=flat-square">
   <img alt="Made by Stralya" src="https://img.shields.io/badge/made%20by-Stralya-4B5563?style=flat-square">
@@ -123,6 +123,12 @@ Then open [localhost:3000](http://localhost:3000), and enjoy!
 Klickbee CMS is built in the open. Feedback, ideas, PRs welcome.
 
 See [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+
+---
+
+## License
+
+This project is licensed under the [GNU Affero General Public License v3.0](./LICENSE).
 
 ---
 
