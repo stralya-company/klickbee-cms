@@ -139,6 +139,19 @@ exports.Prisma.PermissionScalarFieldEnum = {
   roleId: 'roleId'
 };
 
+exports.Prisma.SettingsScalarFieldEnum = {
+  key: 'key',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserSettingsScalarFieldEnum = {
+  key: 'key',
+  value: 'value',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -153,7 +166,9 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
-  Permission: 'Permission'
+  Permission: 'Permission',
+  Settings: 'Settings',
+  UserSettings: 'UserSettings'
 };
 
 /**

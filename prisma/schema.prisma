@@ -6,14 +6,13 @@
 
 generator client {
   provider = "prisma-client-js"
-  // output   = "../src/generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 
 // === Auth Models ===
 model User {
@@ -41,8 +40,17 @@ model Permission {
   @@unique([roleId, action])
 }
 
+model Settings {
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-model Settings{
-	key String @unique
-	value String
+model UserSettings {
+  key    String
+  value  String
+  userId String
+
+  @@id([key, userId])
 }

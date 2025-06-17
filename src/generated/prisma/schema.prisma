@@ -14,6 +14,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// === Auth Models ===
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -31,8 +32,25 @@ model Role {
 }
 
 model Permission {
-  id     String @id @default(uuid())
+  id     Int    @id @default(autoincrement())
   action String
   roleId String
   role   Role   @relation(fields: [roleId], references: [id])
+
+  @@unique([roleId, action])
+}
+
+model Settings {
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserSettings {
+  key    String
+  value  String
+  userId String
+
+  @@id([key, userId])
 }
