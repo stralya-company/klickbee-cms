@@ -2,6 +2,7 @@
 import { UserProvider } from "@/components/providers/UserProvider";
 import { Button } from "@/components/ui/button";
 import { useUserStore } from "@/lib/stores/storeUser";
+import { Sidebar } from "@/components/admin/_partials/sidebar";
 
 export default function AdminLayout({
 	children,
@@ -11,17 +12,20 @@ export default function AdminLayout({
 	const currentUser = useUserStore((state) => state.user);
 
 	return (
-		<UserProvider>
-			{currentUser && (
-				<Button
-					variant="ghost"
-					className="w-full justify-start"
-					asChild
-				>
-					<a href={"/api/auth/logout"}> Logout </a>
-				</Button>
-			)}
-			{children}
-		</UserProvider>
+		<>
+			<Sidebar></Sidebar>
+			<UserProvider>
+				{currentUser && (
+					<Button
+						variant="ghost"
+						className="w-full justify-start"
+						asChild
+					>
+						<a href={"/api/auth/logout"}> Logout </a>
+					</Button>
+				)}
+				{children}
+			</UserProvider>
+		</>
 	);
 }
