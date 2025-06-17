@@ -40,3 +40,9 @@ model Permission {
 
   @@unique([roleId, action])
 }
+
+
+model Settings{
+	key String @unique
+	value String
+}
