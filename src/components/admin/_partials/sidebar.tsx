@@ -1,21 +1,33 @@
-// components/sidebar.tsx
 "use client";
 
 import { Home, Mail, FileText, Settings as SettingsIcon } from "lucide-react";
 import Link from "next/link";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
+import { useAdminKeyStore } from "@/lib/stores/storeAdminKey";
 
 export function Sidebar() {
-	const { t } = useTranslation();
-
+	const t = useTranslations("AdminSidebar");
+	const adminKey = useAdminKeyStore((state) => state.adminKey);
 	const menu = [
-		{ href: "/admin/manage/content", icon: Home, label: t("menu.content") },
-		{ href: "/admin/manage/contact", icon: Mail, label: t("menu.contact") },
-		{ href: "/admin/manage/pages", icon: FileText, label: t("menu.pages") },
 		{
-			href: "/admin/manage/settings",
+			href: `/admin/${adminKey}/manage/content`,
+			icon: Home,
+			label: t("Content"),
+		},
+		{
+			href: `/admin/${adminKey}/manage/contact`,
+			icon: Mail,
+			label: t("Contact"),
+		},
+		{
+			href: `/admin/${adminKey}/manage/pages`,
+			icon: FileText,
+			label: t("Pages"),
+		},
+		{
+			href: `/admin/${adminKey}/manage/settings`,
 			icon: SettingsIcon,
-			label: t("menu.settings"),
+			label: t("Settings"),
 		},
 	];
 
