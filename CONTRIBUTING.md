@@ -4,7 +4,7 @@ We welcome contributions of all kinds — bug fixes, features, improvements, ide
 
 ## 🚀 Getting Started
 
-Join us on Discord for real-time discussions: [Join Klickbee Discord](https://discord.gg/keZVW6fE)
+Join us on Discord for real-time discussions: [Join Klickbee Discord](https://discord.gg/AetD8jjs)
 
 1. **Fork** this repository
 2. **Clone** your fork locally: `git clone https://github.com/your-username/klickbee-cms`
