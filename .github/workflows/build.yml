@@ -31,5 +31,8 @@ jobs:
             -   name: Install dependencies
                 run: npm ci
 
+            -   name: Run migrations
+                run: npx prisma migrate deploy
+
             -   name: Build with linting
                 run: npm run build
