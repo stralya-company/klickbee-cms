@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"@prisma/client": "^6.9.0",
+		"@prisma/extension-accelerate": "^2.0.1",
 		"@radix-ui/react-label": "^2.1.7",
 		"@radix-ui/react-slot": "^1.2.3",
 		"@stralya/auth": "^1.1.3",
