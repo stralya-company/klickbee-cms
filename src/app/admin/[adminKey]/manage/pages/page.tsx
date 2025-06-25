@@ -1,4 +1,4 @@
-export function AdminPagesPage() {
+export default function AdminPagesPage() {
 	return (
 		<div className="flex flex-col min-h-screen items-center justify-center bg-muted">
 			<h1 className="text-2xl font-bold">Admin Pages Management</h1>
