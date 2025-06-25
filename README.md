@@ -105,6 +105,9 @@ front/
 
 ```sh
 npm i
+npx prisma migrate dev --name init
+npx prisma pull
+npx prisma generate
 npm run dev
 ```
 
