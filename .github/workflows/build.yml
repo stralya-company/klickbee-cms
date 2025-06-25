@@ -31,8 +31,18 @@ jobs:
             -   name: Install dependencies
                 run: npm ci
 
-            -   name: Run migrations
-                run: npx prisma migrate deploy
+            -   name: Wait for PostgreSQL
+                run: |
+                    for i in {1..10}; do
+                      pg_isready -h localhost -p 5432 && echo "Postgres is ready!" && break
+                      echo "Waiting for Postgres..." && sleep 2
+                    done
+
+            -   name: Deploy DB schema
+                run: |
+                    npx prisma migrate deploy
+                    npx prisma db pull
+                    npx prisma generate
 
             -   name: Build with linting
                 run: npm run build
