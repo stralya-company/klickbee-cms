@@ -6,8 +6,10 @@ const AUTH_COOKIE_NAME = "session";
 export function middleware(req: NextRequest) {
 	const { pathname } = req.nextUrl;
 
+	const response = NextResponse.next();
+
 	const match = pathname.match(/^\/admin\/([^/]+)/);
-	if (!match) return NextResponse.next();
+	if (!match) return response;
 
 	const key = match[1];
 
@@ -18,16 +20,15 @@ export function middleware(req: NextRequest) {
 	const isLoginPage = pathname.startsWith(`/admin/${ADMIN_KEY}/auth/login`);
 	const isAuthenticated = Boolean(req.cookies.get(AUTH_COOKIE_NAME));
 
-	// 🚫 Redirect only if NOT on login page AND not authenticated
 	if (!isAuthenticated && !isLoginPage) {
 		return NextResponse.redirect(
 			new URL(`/admin/${ADMIN_KEY}/auth/login`, req.url),
 		);
 	}
 
-	return NextResponse.next();
+	return response;
 }
 
 export const config = {
-	matcher: ["/admin/:adminKey/:path*"],
+	matcher: ["/:path*", "/admin/:adminKey/:path*"],
 };

@@ -6,9 +6,7 @@ import { useUserStore } from "@/lib/stores/storeUser";
 export default function AdminPage() {
 	const adminKey = useAdminKeyStore((state) => state.adminKey);
 	const currentUser = useUserStore((state) => state.user);
-	if (!adminKey) {
-		/** Just for dev purposes, in production this should never happen */
-	}
+
 	return (
 		<div className="flex flex-col min-h-screen items-center justify-center bg-muted">
 			<h1 className="text-2xl font-bold">
