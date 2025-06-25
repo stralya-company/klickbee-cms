@@ -137,7 +137,7 @@ This project is licensed under the [GNU Affero General Public License v3.0](./LI
 We build tools for digital creators.
 
 - ✉️ contact@stralya.com
-- 💬 [Discord](https://discord.gg/keZVW6fE)
+- 💬 [Discord](https://discord.gg/AetD8jjs)
 - 💬 [Reddit](https://www.reddit.com/r/klickbee_cms/)
 - 🌎 [stralya.com](https://stralya.com) *(coming soon)*
 
