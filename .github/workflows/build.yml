@@ -40,7 +40,7 @@ jobs:
 
             -   name: Deploy DB schema
                 run: |
-                    npx prisma migrate deploy
+                    npx prisma db push --accept-data-loss
                     npx prisma generate
 
             -   name: Build with linting
