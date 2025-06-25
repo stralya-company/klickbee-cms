@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    env:
+        DATABASE_URL: "postgres://postgres:root@localhost:5432/klickbee-cms"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
