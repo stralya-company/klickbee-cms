@@ -1,25 +1,40 @@
 name: Build
 
 on:
-  workflow_call:
+    workflow_call:
 
 jobs:
-  build:
-    runs-on: ubuntu-24.04
-    env:
-        DATABASE_URL: "postgres://postgres:root@localhost:5432/klickbee-cms"
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    build:
+        runs-on: ubuntu-24.04
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+        services:
+            postgres:
+                image: postgres:15
+                ports:
+                    - 5432:5432
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: root
+                    POSTGRES_DB: klickbee-cms
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5s
+        env:
+            DATABASE_URL: "postgres://postgres:root@localhost:5432/klickbee-cms"
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm ci
+            -   name: Setup Node.js
+                uses: actions/setup-node@v4
+                with:
+                    node-version: 22
+                    cache: npm
 
-      - name: Build with linting
-        run: npm run build
+            -   name: Install dependencies
+                run: npm ci
+
+            -   name: Build with linting
+                run: npm run build
