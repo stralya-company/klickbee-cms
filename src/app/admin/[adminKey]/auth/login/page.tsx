@@ -55,7 +55,7 @@ export default function LoginPage({
 	};
 
 	return (
-		<div className="flex min-h-screen items-center justify-center bg-muted">
+		<div className="flex min-h-screen items-center justify-center bg-muted w-full">
 			<Card className="w-full max-w-sm">
 				<CardHeader>
 					<CardTitle>Connexion admin</CardTitle>
