@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
 	if (!key || !value) {
 		return NextResponse.json(
-			{ error: "key ou value manquant" },
+			{ error: "key or value missing" },
 			{ status: 400 },
 		);
 	}
