@@ -40,6 +40,8 @@ model Permission {
   @@unique([roleId, action])
 }
 
+// === Settings Models ===
+
 model Settings {
   key       String   @unique
   value     String

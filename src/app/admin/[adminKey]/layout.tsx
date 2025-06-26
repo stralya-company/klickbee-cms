@@ -2,7 +2,7 @@
 import { NextIntlClientProvider, useMessages, useLocale } from "next-intl";
 import { UserProvider } from "@/components/providers/UserProvider";
 import { Button } from "@/components/ui/button";
-import { useUserStore } from "@/lib/stores/storeUser";
+import { useUserStore } from "@/feature/user/stores/storeUser";
 import { Sidebar } from "@/components/admin/_partials/sidebar";
 
 export default function AdminLayout({
