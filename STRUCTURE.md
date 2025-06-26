@@ -1,6 +1,7 @@
 # 📦 Feature Structure — Klickbee CMS
 
-To keep the codebase clean, scalable, and contributor-friendly, Klickbee CMS uses a **feature-first modular architecture** inside the `src/feature/` folder.
+To keep the codebase clean, scalable, and contributor-friendly, Klickbee CMS uses a **feature-first modular architecture
+** inside the `src/feature/` folder.
 
 ---
 
@@ -10,21 +11,27 @@ Each feature lives in its own folder:
 
 ```
 src/feature/<feature-name>/
-├── store<Feature>.ts   → Zustand store (state)
-├── use<Feature>.ts     → TanStack queries (data fetching)
-├── api<Feature>.ts     → API logic (client-side)
-├── <Feature>.tsx       → UI component (optional)
+├── stores/store<Feature>[Specification].ts   → Zustand store (state)
+├── queries/use<Feature>[Specification].ts     → TanStack queries (data fetching)
+├── api/api<Feature>[Specification].ts     → API logic (client-side)
+├── components/<Feature>[Specification].tsx       → UI component (optional)
 └── index.ts            → Barrel file (optional)
 ```
+
+[Specification] is optional and can be used to clarify the file's purpose or functionality.
 
 ### Example
 
 ```
 src/feature/user/
-├── storeUser.ts
-├── useUser.ts
-├── apiUser.ts
-└── UserForm.tsx
+├── stores/storeUser.ts
+├── queries/useUser.ts
+├── api/
+|   ├── apiUserLogin.ts
+|   ├── apiUserLogout.ts
+|   ├── apiUserRegister.ts
+|   ├── apiUserMe.ts
+└── components/UserForm.tsx
 ```
 
 ---

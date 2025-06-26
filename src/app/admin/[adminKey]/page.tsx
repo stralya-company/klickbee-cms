@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { useAdminKeyStore } from "@/lib/stores/storeAdminKey";
-import { useUserStore } from "@/lib/stores/storeUser";
+import { useAdminKeyStore } from "@/feature/admin-key/storeAdminKey";
+import { useUserStore } from "@/feature/user/stores/storeUser";
 
 export default function AdminPage() {
 	const adminKey = useAdminKeyStore((state) => state.adminKey);

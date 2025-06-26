@@ -3,7 +3,7 @@
 import { Home, Mail, FileText, Settings as SettingsIcon } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useAdminKeyStore } from "@/lib/stores/storeAdminKey";
+import { useAdminKeyStore } from "@/feature/admin-key/storeAdminKey";
 
 export function Sidebar() {
 	const t = useTranslations("AdminSidebar");
