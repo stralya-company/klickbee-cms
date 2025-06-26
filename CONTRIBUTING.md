@@ -21,32 +21,36 @@ Join us on Discord for real-time discussions: [Join Klickbee Discord](https://di
 
 ```
 klickbee-cms/
-├─ app/               # Next.js App Router
-├─ lib/               # Helpers & server utils
-├─ components/        # Reusable UI blocks
-├─ prisma/            # Prisma schema + migrations
-├─ public/            # Static assets
-├─ styles/            # Tailwind config and globals
+├─ src/
+│  ├─ app/               # Next.js App Router
+│  ├─ lib/               # Helpers & server utils
+│  ├─ components/        # Reusable UI blocks
+│  ├─ prisma/            # Prisma schema + migrations
+│  ├─ public/            # Static assets
+│  ├─ styles/            # Tailwind config and globals
+│  └─ feature/           # Modular features (Zustand, queries, API, UI)
 ```
 
 Admin and frontend are unified — monolith style — and separated logically under routes.
+
+For feature structure, see [STRUCTURE.md](./STRUCTURE.md)
 
 ---
 
 ## 🧪 Running Locally
 
-- **Install deps**: `npm install`
-- **Start dev**: `npm run dev`
-- Or use Docker: `docker compose up`
+* **Install deps**: `npm install`
+* **Start dev**: `npm run dev`
+* Or use Docker: `docker compose up`
 
 ---
 
 ## ✏️ Code Style
 
-- Use `eslint` via `npm run lint`
-- Use Tailwind utility classes
-- Use [shadcn/ui](https://ui.shadcn.dev/) components
-- Prefer Zustand for global state
+* Use `eslint` via `npm run lint`
+* Use Tailwind utility classes
+* Use [shadcn/ui](https://ui.shadcn.dev/) components
+* Prefer Zustand for global state
 
 No `pnpm` for now. Stick to `npm` unless updated.
 
@@ -54,11 +58,11 @@ No `pnpm` for now. Stick to `npm` unless updated.
 
 ## ✅ Pull Request Checklist
 
-- [ ] Your branch is up to date with `main`
-- [ ] Code runs locally without errors
-- [ ] Code is linted (`npm run lint`)
-- [ ] One feature or fix per PR
-- [ ] PR includes clear title and description
+* [ ] Your branch is up to date with `main`
+* [ ] Code runs locally without errors
+* [ ] Code is linted (`npm run lint`)
+* [ ] One feature or fix per PR
+* [ ] PR includes clear title and description
 
 ---
 
