@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 	const userId = searchParams.get("userId");
 
 	if (!key) {
-		return NextResponse.json({ error: "key manquant" }, { status: 400 });
+		return NextResponse.json({ error: "missing key" }, { status: 400 });
 	}
 
 	const value = await getSetting(key, userId);
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
 	if (!key || !value) {
 		return NextResponse.json(
-			{ error: "key ou value manquant" },
+			{ error: "key or value missing" },
 			{ status: 400 },
 		);
 	}
