@@ -59,6 +59,10 @@ const TypographyItemEditor = ({
 	filteredFonts: { label: string; value: string }[];
 	typography: FormValues["typography"];
 }) => {
+	const { field: lineHeightField } = useController({
+		name: `typography.${idx}.lineHeight`,
+		control,
+	});
 	const { field: fontSizeMinField } = useController({
 		name: `typography.${idx}.fontSize.min`,
 		control,
@@ -188,24 +192,15 @@ const TypographyItemEditor = ({
 						})}
 					/>
 					<Label>Line Height</Label>
-					<Input
-						type="number"
-						step="any"
-						{...register(`typography.${idx}.lineHeight`, {
-							valueAsNumber: true,
-						})}
+					<InputWithUnit
+						value={lineHeightField.value?.toString() ?? ""}
+						onChange={(v) => lineHeightField.onChange(Number(v))}
+						unit={typography?.[idx]?.lineHeightUnits ?? "em"}
+						onUnitChange={(u) =>
+							setValue(`typography.${idx}.lineHeightUnits`, u)
+						}
+						units={sizeUnits}
 					/>
-					<Label>Line Height Unit</Label>
-					<select
-						{...register(`typography.${idx}.lineHeightUnits`)}
-						className="border rounded px-2 py-1"
-					>
-						{sizeUnits.map((unit) => (
-							<option key={unit} value={unit}>
-								{unit}
-							</option>
-						))}
-					</select>
 					<Label>Font Weight</Label>
 					<Input {...register(`typography.${idx}.fontWeight`)} />
 					<Label>Font Style</Label>
