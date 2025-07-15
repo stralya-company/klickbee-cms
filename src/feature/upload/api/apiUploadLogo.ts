@@ -7,11 +7,17 @@ export async function POST(request: Request) {
 	const file = formData.get("logo") as File | null;
 
 	if (!file) {
-		return new Response("Aucun fichier envoyé", { status: 400 });
+		return NextResponse.json(
+			{ error: "Aucun fichier envoyé" },
+			{ status: 400 },
+		);
 	}
 
 	if (!["image/png", "image/jpeg"].includes(file.type)) {
-		return new Response("Type de fichier non supporté", { status: 415 });
+		return NextResponse.json(
+			{ error: "Type de fichier non supporté" },
+			{ status: 415 },
+		);
 	}
 
 	const arrayBuffer = await file.arrayBuffer();
