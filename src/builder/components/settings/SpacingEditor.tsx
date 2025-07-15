@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import type { FieldArrayWithId, UseFormRegister } from "react-hook-form";
+import { FieldArrayWithId, useForm, UseFormRegister } from "react-hook-form";
 import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
 import { SizeUnit } from "@/builder/types/FluidSize";
 
@@ -13,36 +13,38 @@ type SpacingEditorProps = {
 	register: UseFormRegister<FormValues>;
 	removeSpacing: (_index: number) => void;
 	appendSpacing: (_value: {
+		key: string;
+		maxWidth: number;
 		widthUnit: SizeUnit;
 		sectionPadding: {
 			default: {
 				top: {
 					min: number;
-					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: SizeUnit;
 					maxWidth: number;
+					sizeUnit: SizeUnit;
+					widthUnit: SizeUnit;
 				};
 				left: {
 					min: number;
-					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: SizeUnit;
 					maxWidth: number;
+					sizeUnit: SizeUnit;
+					widthUnit: SizeUnit;
 				};
 				bottom: {
 					min: number;
-					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: SizeUnit;
 					maxWidth: number;
+					sizeUnit: SizeUnit;
+					widthUnit: SizeUnit;
 				};
 				right: {
 					min: number;
-					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: SizeUnit;
 					maxWidth: number;
+					sizeUnit: SizeUnit;
+					widthUnit: SizeUnit;
 				};
 			};
 		};
@@ -50,30 +52,31 @@ type SpacingEditorProps = {
 			default: {
 				column: {
 					min: number;
-					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: SizeUnit;
 					maxWidth: number;
+					sizeUnit: SizeUnit;
+					widthUnit: SizeUnit;
 				};
 				row: {
 					min: number;
-					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: SizeUnit;
 					maxWidth: number;
+					sizeUnit: SizeUnit;
+					widthUnit: SizeUnit;
 				};
 			};
 		};
-		key: string;
-		maxWidth: number;
 	}) => void;
+	watch: ReturnType<typeof useForm<FormValues>>["watch"];
+	setValue: ReturnType<typeof useForm<FormValues>>["setValue"];
 };
-
 const SpacingEditor = React.memo(function SpacingEditor({
 	spacingFields,
 	register,
 	removeSpacing,
 	appendSpacing,
+	watch,
+	setValue,
 }: SpacingEditorProps) {
 	const handleAdd = useCallback(() => {
 		appendSpacing({
@@ -86,29 +89,29 @@ const SpacingEditor = React.memo(function SpacingEditor({
 						min: 1,
 						max: 2,
 						maxWidth: 1440,
-						widthUnit: "px",
 						sizeUnit: "rem",
+						widthUnit: "px",
 					},
 					right: {
 						min: 1,
 						max: 2,
 						maxWidth: 1440,
-						widthUnit: "px",
 						sizeUnit: "rem",
+						widthUnit: "px",
 					},
 					bottom: {
 						min: 1,
 						max: 2,
 						maxWidth: 1440,
-						widthUnit: "px",
 						sizeUnit: "rem",
+						widthUnit: "px",
 					},
 					left: {
 						min: 1,
 						max: 2,
 						maxWidth: 1440,
-						widthUnit: "px",
 						sizeUnit: "rem",
+						widthUnit: "px",
 					},
 				},
 			},
@@ -118,15 +121,15 @@ const SpacingEditor = React.memo(function SpacingEditor({
 						min: 1,
 						max: 2,
 						maxWidth: 1440,
-						widthUnit: "px",
 						sizeUnit: "rem",
+						widthUnit: "px",
 					},
 					column: {
 						min: 1,
 						max: 2,
 						maxWidth: 1440,
-						widthUnit: "px",
 						sizeUnit: "rem",
+						widthUnit: "px",
 					},
 				},
 			},
@@ -155,44 +158,42 @@ const SpacingEditor = React.memo(function SpacingEditor({
 						/>
 						<Label>Max Width</Label>
 						<Input
-							{...register(`spacing.${idx}.maxWidth`)}
-							placeholder="Largeur max"
-							aria-label="Largeur max"
+							value={watch(`spacing.${idx}.maxWidth`)}
+							onChange={(e) =>
+								setValue(
+									`spacing.${idx}.maxWidth`,
+									Number(e.target.value),
+								)
+							}
+							className="w-24 h-7 text-xs mb-2"
+							placeholder="Max Width"
+							aria-label="Max Width"
 						/>
-						<Label>Padding (Elementor style)</Label>
-						<div className="flex gap-1">
-							<Input
-								{...register(
-									`spacing.${idx}.sectionPadding.default.top.min`,
-								)}
-								placeholder="Top"
-								className="w-16"
-								aria-label="Padding haut"
-							/>
-							<Input
-								{...register(
-									`spacing.${idx}.sectionPadding.default.right.min`,
-								)}
-								placeholder="Right"
-								className="w-16"
-								aria-label="Padding droite"
-							/>
-							<Input
-								{...register(
-									`spacing.${idx}.sectionPadding.default.bottom.min`,
-								)}
-								placeholder="Bottom"
-								className="w-16"
-								aria-label="Padding bas"
-							/>
-							<Input
-								{...register(
-									`spacing.${idx}.sectionPadding.default.left.min`,
-								)}
-								placeholder="Left"
-								className="w-16"
-								aria-label="Padding gauche"
-							/>
+						<Label>Padding</Label>
+						<div className="flex gap-1 items-end">
+							{(["top", "right", "bottom", "left"] as const).map(
+								(side) => (
+									<div
+										key={side}
+										className="flex flex-col items-center"
+									>
+										<Input
+											{...register(
+												`spacing.${idx}.sectionPadding.default.${side}.min`,
+											)}
+											placeholder={
+												side.charAt(0).toUpperCase() +
+												side.slice(1)
+											}
+											className="w-16"
+											aria-label={`Padding ${side}`}
+										/>
+										<span className="text-xs text-muted-foreground">
+											{spacingFields[idx].widthUnit}
+										</span>
+									</div>
+								),
+							)}
 						</div>
 						{spacingFields.length > 1 && (
 							<Button

@@ -170,7 +170,7 @@ const TypographyItemEditor = ({
 					</div>
 					<Label>Size Min</Label>
 					<InputWithUnit
-						value={fontSizeMinField.value?.toString() ?? ""}
+						value={fontSizeMinField.value}
 						onChange={(v) => fontSizeMinField.onChange(Number(v))}
 						unit={fontSizeUnitField.value ?? "rem"}
 						onUnitChange={(u) => fontSizeUnitField.onChange(u)}
@@ -178,7 +178,7 @@ const TypographyItemEditor = ({
 					/>
 					<Label>Size Max</Label>
 					<InputWithUnit
-						value={fontSizeMaxField.value?.toString() ?? ""}
+						value={fontSizeMaxField.value}
 						onChange={(v) => fontSizeMaxField.onChange(Number(v))}
 						unit={fontSizeUnitField.value ?? "rem"}
 						onUnitChange={(u) => fontSizeUnitField.onChange(u)}
@@ -193,7 +193,7 @@ const TypographyItemEditor = ({
 					/>
 					<Label>Line Height</Label>
 					<InputWithUnit
-						value={lineHeightField.value?.toString() ?? ""}
+						value={lineHeightField.value}
 						onChange={(v) => lineHeightField.onChange(Number(v))}
 						unit={typography?.[idx]?.lineHeightUnits ?? "em"}
 						onUnitChange={(u) =>
@@ -207,7 +207,7 @@ const TypographyItemEditor = ({
 					<Input {...register(`typography.${idx}.fontStyle`)} />
 					<Label>Letter Spacing</Label>
 					<InputWithUnit
-						value={letterSpacingField.value?.toString() ?? ""}
+						value={letterSpacingField.value}
 						onChange={(v) => letterSpacingField.onChange(Number(v))}
 						unit={letterSpacingUnitField.value ?? "px"}
 						onUnitChange={(u) => letterSpacingUnitField.onChange(u)}

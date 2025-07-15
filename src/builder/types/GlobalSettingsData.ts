@@ -8,12 +8,13 @@ import {
 } from "@/builder/types/TypographySettings";
 import { colorSchema, ColorSettings } from "@/builder/types/ColorSettings";
 import { z } from "zod";
-import { LogoSettingsSchema } from "@/builder/types/LogoSettings";
+import { LogoSettings, LogoSettingsSchema } from "@/builder/types/LogoSettings";
 
 export type GlobalSettingsData = {
 	typography: TypographySettings[];
 	colors: ColorSettings[];
 	spacing: SpacingSettings[];
+	logos: LogoSettings[];
 };
 
 export const globalSettingsSchema = z.object({

@@ -1,4 +1,3 @@
-// src/components/ui/InputWithUnit.tsx
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,8 +18,8 @@ export function InputWithUnit({
 	inputProps,
 	buttonClassName = "",
 }: {
-	value: string;
-	onChange: (_v: string) => void;
+	value: number;
+	onChange: (_v: number) => void;
 	unit: string;
 	onUnitChange: (_u: SizeUnit) => void;
 	units: readonly string[];
@@ -35,7 +34,7 @@ export function InputWithUnit({
 				type="number"
 				step="any"
 				value={value}
-				onChange={(e) => onChange(e.target.value)}
+				onChange={(e) => onChange(Number(e.target.value))}
 				className="w-20"
 				{...inputProps}
 			/>
