@@ -85,7 +85,7 @@ model GlobalSettings {
 	typography Json
 	colors     Json
 	spacing    Json
-	logo			 Json
+	logos			 Json[]
 	createdAt  DateTime @default(now())
 	updatedAt  DateTime @updatedAt
 }
