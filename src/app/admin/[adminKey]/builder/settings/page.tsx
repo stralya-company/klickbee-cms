@@ -11,10 +11,12 @@ import SpacingEditor from "@/builder/components/settings/SpacingEditor";
 import SpacingPreview from "@/builder/components/settings/SpacingPreview";
 import ColorPreview from "@/builder/components/settings/ColorPreview";
 import TypographyPreview from "@/builder/components/settings/TypographyPreview";
+import LogoEditor from "@/builder/components/settings/LogoEditor";
 
 export type FormValues = z.output<typeof globalSettingsSchema>;
 
 const defaultValues: FormValues = {
+	logos: [],
 	typography: [
 		{
 			key: "Primary",
@@ -115,16 +117,6 @@ export default function AdminBuilderSettingsPage() {
 		console.error("Form errors:", errors);
 	}
 
-	// // Typographies dynamiques
-	// const {
-	// 	fields: typoFields,
-	// 	append: appendFont,
-	// 	remove: removeFont,
-	// } = useFieldArray({
-	// 	control,
-	// 	name: "typography",
-	// });
-
 	// Couleurs dynamiques
 	const {
 		fields: colorFields,
@@ -181,6 +173,12 @@ export default function AdminBuilderSettingsPage() {
 						appendSpacing={appendSpacing}
 					/>
 					<SpacingPreview spacing={spacing} />
+				</div>
+				<div className="grid grid-cols-2 gap-4 items-start">
+					<LogoEditor
+						logos={watched.logos}
+						onChange={(logos) => setValue("logos", logos)}
+					/>
 				</div>
 				<Button type="submit">Sauvegarder</Button>
 			</form>

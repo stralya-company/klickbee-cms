@@ -6,40 +6,42 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import type { FieldArrayWithId, UseFormRegister } from "react-hook-form";
 import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
+import { SizeUnit } from "@/builder/types/FluidSize";
 
 type SpacingEditorProps = {
 	spacingFields: FieldArrayWithId<FormValues, "spacing", "id">[];
 	register: UseFormRegister<FormValues>;
 	removeSpacing: (_index: number) => void;
 	appendSpacing: (_value: {
+		widthUnit: SizeUnit;
 		sectionPadding: {
 			default: {
 				top: {
 					min: number;
-					widthUnit: string;
+					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: string;
+					sizeUnit: SizeUnit;
 					maxWidth: number;
 				};
 				left: {
 					min: number;
-					widthUnit: string;
+					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: string;
+					sizeUnit: SizeUnit;
 					maxWidth: number;
 				};
 				bottom: {
 					min: number;
-					widthUnit: string;
+					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: string;
+					sizeUnit: SizeUnit;
 					maxWidth: number;
 				};
 				right: {
 					min: number;
-					widthUnit: string;
+					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: string;
+					sizeUnit: SizeUnit;
 					maxWidth: number;
 				};
 			};
@@ -48,16 +50,16 @@ type SpacingEditorProps = {
 			default: {
 				column: {
 					min: number;
-					widthUnit: string;
+					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: string;
+					sizeUnit: SizeUnit;
 					maxWidth: number;
 				};
 				row: {
 					min: number;
-					widthUnit: string;
+					widthUnit: SizeUnit;
 					max: number;
-					sizeUnit: string;
+					sizeUnit: SizeUnit;
 					maxWidth: number;
 				};
 			};
@@ -77,6 +79,7 @@ const SpacingEditor = React.memo(function SpacingEditor({
 		appendSpacing({
 			key: "",
 			maxWidth: 1440,
+			widthUnit: "px",
 			sectionPadding: {
 				default: {
 					top: {
