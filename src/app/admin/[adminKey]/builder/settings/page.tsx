@@ -83,8 +83,8 @@ const defaultValues: FormValues = {
 						min: 1,
 						max: 2,
 						maxWidth: 1440,
-						sizeUnit: "rem",
 						widthUnit: "px",
+						sizeUnit: "rem",
 					},
 					column: {
 						min: 1,
@@ -171,6 +171,8 @@ export default function AdminBuilderSettingsPage() {
 						register={register}
 						removeSpacing={removeSpacing}
 						appendSpacing={appendSpacing}
+						watch={watch}
+						setValue={setValue}
 					/>
 					<SpacingPreview spacing={spacing} />
 				</div>
