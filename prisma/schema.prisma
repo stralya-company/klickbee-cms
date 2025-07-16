@@ -44,11 +44,13 @@ model Permission {
 model UserPasswordReset {
   id        String   @id @default(uuid())
   userId    String
-  token     String   @unique
+  token     String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
   expiresAt DateTime
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 // === Settings Models ===
