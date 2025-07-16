@@ -30,7 +30,7 @@ describe("POST /api/auth/password-reset-request", () => {
 	});
 
 	it("should return 200 for valid email", async () => {
-		mockRequestPasswordReset.mockResolvedValue(undefined);
+		mockRequestPasswordReset.mockResolvedValue("reset-token");
 
 		const req = createMockRequest({
 			email: "valid@example.com",
