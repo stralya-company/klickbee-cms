@@ -2,6 +2,9 @@
 	"name": "klickbee-cms",
 	"version": "0.1.0",
 	"private": true,
+	"engines": {
+		"node": ">=20.0.0 <24.0.0"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/stralya-company/klickbee-cms.git"
