@@ -11,13 +11,17 @@ export type SectionPadding = {
 	left: FluidSize;
 	bottom: FluidSize;
 };
+export type SectionGap = {
+	row: FluidSize;
+	column: FluidSize;
+};
 
 export type SpacingSettings = {
 	sectionPadding: {
 		[key: string]: SectionPadding; // ex: default, small, large, etc.
 	};
 	gap: {
-		[key: string]: { row: FluidSize; column: FluidSize }; // idem
+		[key: string]: SectionGap; // idem
 	};
 	maxWidth: number;
 	widthUnit: SizeUnit; // Optional, e.g. "px", "em", "rem"
