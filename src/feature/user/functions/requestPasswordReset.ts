@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { randomUUID } from "crypto";
 
-export async function requestPasswordReset(email: string): Promise<void> {
+export async function requestPasswordReset(email: string): Promise<string> {
 	const user = await prisma.user.findUnique({
 		where: { email },
 		select: { id: true, email: true },
@@ -27,5 +27,5 @@ export async function requestPasswordReset(email: string): Promise<void> {
 		throw new Error("Failed to create password reset token");
 	}
 
-	// Example: await sendResetEmail(user.email, token); TODO: Implement email sending logic
+	return token;
 }
