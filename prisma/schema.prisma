@@ -44,7 +44,7 @@ model Permission {
 model UserPasswordReset {
   id        String   @id @default(uuid())
   userId    String
-  token     String   @unique
+  token     String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
   expiresAt DateTime
 
