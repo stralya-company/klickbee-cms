@@ -14,8 +14,16 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { InputWithUnit } from "@/builder/components/settings/_partials/InputWithUnit";
 import { sizeUnits } from "@/builder/types/FluidSize";
+import { typographyUsages } from "@/builder/types/TypographySettings";
 import {
 	Control,
 	useController,
@@ -213,6 +221,25 @@ const TypographyItemEditor = ({
 						onUnitChange={(u) => letterSpacingUnitField.onChange(u)}
 						units={sizeUnits}
 					/>
+					<Label>Usage</Label>
+					<Select
+						defaultValue={typography?.[idx]?.typographyUsage}
+						onValueChange={(value) =>
+							setValue(`typography.${idx}.typographyUsage`, value)
+						}
+					>
+						<SelectTrigger className="w-full">
+							<SelectValue placeholder="Sélectionner un usage" />
+						</SelectTrigger>
+						<SelectContent>
+							{typographyUsages.map((usage) => (
+								<SelectItem key={usage} value={usage}>
+									{usage.charAt(0).toUpperCase() +
+										usage.slice(1)}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
 				</PopoverContent>
 			</Popover>
 			<Button
