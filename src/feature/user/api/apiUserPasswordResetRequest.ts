@@ -25,6 +25,9 @@ export async function POST(req: NextRequest) {
 
 	try {
 		await requestPasswordReset(email);
+
+		// Todo: Implement email sending logic here
+
 		return NextResponse.json(
 			{ message: "Password reset request successful" },
 			{ status: 200 },
