@@ -52,3 +52,22 @@ export const spacingSettingsSchema = z.object({
 	maxWidth: z.number(),
 	widthUnit: z.enum(["px", "em", "rem"]),
 });
+
+export const defaultSpacingSettings: SpacingSettings = {
+	sectionPadding: {
+		default: {
+			top: { min: 1, max: 2, sizeUnit: "rem" },
+			right: { min: 1, max: 2, sizeUnit: "rem" },
+			left: { min: 1, max: 2, sizeUnit: "rem" },
+			bottom: { min: 1, max: 2, sizeUnit: "rem" },
+		},
+	},
+	gap: {
+		default: {
+			row: { min: 0.5, max: 1, sizeUnit: "rem" },
+			column: { min: 0.5, max: 1, sizeUnit: "rem" },
+		},
+	},
+	maxWidth: 1440,
+	widthUnit: "px",
+};
