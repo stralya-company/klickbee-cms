@@ -48,7 +48,7 @@ model UserPasswordReset {
   createdAt DateTime @default(now())
   expiresAt DateTime
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // === Settings Models ===
