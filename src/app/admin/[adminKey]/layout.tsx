@@ -4,6 +4,7 @@ import { UserProvider } from "@/components/providers/UserProvider";
 import { Button } from "@/components/ui/button";
 import { useUserStore } from "@/feature/user/stores/storeUser";
 import { Sidebar } from "@/components/admin/_partials/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function AdminLayout({
 	children,
@@ -30,6 +31,7 @@ export default function AdminLayout({
 							</Button>
 						)}
 						{children}
+						<Toaster />
 					</main>
 				</div>
 			</NextIntlClientProvider>
