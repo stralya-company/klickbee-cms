@@ -12,3 +12,14 @@ export const logoSettingsSchema = z.object({
 	format: z.enum(logoFormats),
 	url: z.string().url(),
 });
+
+export const defaultLogoSettings: LogoSettings[] = [
+	{
+		format: "square",
+		url: "/default-square-logo.png",
+	},
+	{
+		format: "rectangle",
+		url: "/default-rectangle-logo.png",
+	},
+];

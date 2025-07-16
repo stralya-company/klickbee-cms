@@ -40,15 +40,8 @@ export const gapSchema = z.object({
 });
 
 export const spacingSettingsSchema = z.object({
-	key: z.string(),
-	sectionPadding: z
-		.record(sectionPaddingSchema)
-		.refine((obj) => "default" in obj, {
-			message: "La clé 'default' est requise dans sectionPadding.",
-		}),
-	gap: z.record(gapSchema).refine((obj) => "default" in obj, {
-		message: "La clé 'default' est requise dans gap.",
-	}),
+	sectionPadding: z.record(sectionPaddingSchema),
+	gap: z.record(gapSchema),
 	maxWidth: z.number(),
 	widthUnit: z.enum(["px", "em", "rem"]),
 });
