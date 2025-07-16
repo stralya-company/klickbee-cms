@@ -22,7 +22,7 @@ model User {
   role              Role                @relation(fields: [roleId], references: [id])
   roleId            String
   createdAt         DateTime            @default(now())
-  userPasswordReset UserPasswordReset[]
+  userPasswordResets UserPasswordReset[]
 }
 
 model Role {
