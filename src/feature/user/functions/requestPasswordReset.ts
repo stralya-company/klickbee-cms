@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { randomUUID } from "crypto";
 
 export async function requestPasswordReset(email: string): Promise<void> {
 	const user = await prisma.user.findUnique({
@@ -15,7 +16,7 @@ export async function requestPasswordReset(email: string): Promise<void> {
 	const { token } = await prisma.userPasswordReset.create({
 		data: {
 			userId: user.id,
-			token: crypto.randomUUID(),
+			token: randomUUID(),
 			expiresAt: new Date(Date.now() + 3600000), // Token valid for 1 hour
 		},
 		select: { token: true },
