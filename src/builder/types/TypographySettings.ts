@@ -44,6 +44,7 @@ export const typographyUsages = [
 export type TypographyUsage = (typeof typographyUsages)[number];
 
 export type TypographySettings = {
+	key: string;
 	fontFamily: string;
 	fontSize: FluidSize;
 	lineHeight: number;
@@ -52,8 +53,8 @@ export type TypographySettings = {
 	fontStyle: TypographyFontStyle;
 	letterSpacingUnits: SizeUnit;
 	letterSpacing: number;
-	typographyUsage: TypographyUsage; // Optional, e.g. "body", "heading", etc.
-	[key: string]: string | FluidSize | number; // Allow additional properties
+	typographyUsage?: TypographyUsage; // Optional, e.g. "body", "heading", etc.
+	[key: string]: string | FluidSize | number | undefined; // Allow additional properties
 };
 
 export type FluidTypographySettings = {
@@ -64,6 +65,7 @@ export type FluidTypographySettings = {
 
 export const typographySettingsSchema = z
 	.object({
+		key: z.string(),
 		fontFamily: z.string(),
 		fontSize: fluidSizeSchema,
 		lineHeight: z.number(),
@@ -87,6 +89,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 	widthUnit: "px",
 	typographies: [
 		{
+			key: "Heading 1",
 			fontFamily: "Inter",
 			fontSize: { min: 2, max: 3, sizeUnit: "rem" },
 			lineHeight: 1.5,
@@ -98,6 +101,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			typographyUsage: "heading",
 		},
 		{
+			key: "Body 1",
 			fontFamily: "Poppins",
 			fontSize: { min: 1, max: 1.5, sizeUnit: "rem" },
 			lineHeight: 1.5,

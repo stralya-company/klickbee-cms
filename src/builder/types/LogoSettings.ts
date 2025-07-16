@@ -8,7 +8,18 @@ export type LogoSettings = {
 	url: string;
 };
 
-export const LogoSettingsSchema = z.object({
+export const logoSettingsSchema = z.object({
 	format: z.enum(logoFormats),
 	url: z.string().url(),
 });
+
+export const defaultLogoSettings: LogoSettings[] = [
+	{
+		format: "square",
+		url: "/logo-square-default.png",
+	},
+	{
+		format: "rectangle",
+		url: "/logo-rectangle-default.png",
+	},
+];
