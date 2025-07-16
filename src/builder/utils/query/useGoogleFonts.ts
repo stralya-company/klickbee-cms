@@ -22,7 +22,6 @@ export function useGoogleFonts() {
 	return useQuery({
 		queryKey: ["google-fonts"],
 		queryFn: fetchGoogleFonts,
-		// staleTime: 0,
 		staleTime: 1000 * 60 * 60, // 1h
 	});
 }
