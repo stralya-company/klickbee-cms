@@ -57,6 +57,12 @@ export type TypographySettings = {
 	[key: string]: string | FluidSize | number; // Allow additional properties
 };
 
+export type FluidTypographySettings = {
+	maxWidth: number;
+	widthUnit: SizeUnit;
+	typographies: TypographySettings[];
+};
+
 export const typographySettingsSchema = z
 	.object({
 		fontFamily: z.string(),
@@ -70,3 +76,38 @@ export const typographySettingsSchema = z
 		typographyUsage: z.enum(typographyUsages).optional(),
 	})
 	.catchall(z.union([z.string(), fluidSizeSchema, z.number()]));
+
+export const fluidTypographySettingsSchema = z.object({
+	maxWidth: z.number(),
+	widthUnit: z.enum(["px", "em", "rem"]),
+	typographies: z.array(typographySettingsSchema),
+});
+
+export const defaultFluidTypographySettings: FluidTypographySettings = {
+	maxWidth: 1440,
+	widthUnit: "px",
+	typographies: [
+		{
+			fontFamily: "Inter",
+			fontSize: { min: 2, max: 3, sizeUnit: "rem" },
+			lineHeight: 1.5,
+			lineHeightUnits: "rem",
+			fontWeight: "400",
+			fontStyle: "normal",
+			letterSpacing: 0,
+			letterSpacingUnits: "px",
+			typographyUsage: "heading",
+		},
+		{
+			fontFamily: "Poppins",
+			fontSize: { min: 1, max: 1.5, sizeUnit: "rem" },
+			lineHeight: 1.5,
+			lineHeightUnits: "rem",
+			fontWeight: "400",
+			fontStyle: "normal",
+			letterSpacing: 0,
+			letterSpacingUnits: "px",
+			typographyUsage: "body",
+		},
+	],
+};
