@@ -5,15 +5,55 @@ import {
 	SizeUnit,
 } from "@/builder/types/FluidSize";
 
+export const typographyFontStyles = [
+	"normal",
+	"italic",
+	"oblique",
+	"uppercase",
+	"lowercase",
+	"capitalize",
+] as const;
+export type TypographyFontStyle = (typeof typographyFontStyles)[number];
+
+export const typographyFontWeights = [
+	"100",
+	"200",
+	"300",
+	"400",
+	"500",
+	"600",
+	"700",
+	"800",
+	"900",
+	"normal",
+	"bold",
+	"bolder",
+] as const;
+
+export type TypographyFontWeight = (typeof typographyFontWeights)[number];
+
+export const typographyUsages = [
+	"body",
+	"heading",
+	"subheading",
+	"caption",
+	"button",
+	"link",
+	"code",
+] as const;
+
+export type TypographyUsage = (typeof typographyUsages)[number];
+
 export type TypographySettings = {
 	fontFamily: string;
 	fontSize: FluidSize;
 	lineHeight: number;
 	lineHeightUnits: SizeUnit;
-	fontWeight: string | number;
-	fontStyle: string;
+	fontWeight: TypographyFontWeight;
+	fontStyle: TypographyFontStyle;
 	letterSpacingUnits: SizeUnit;
 	letterSpacing: number;
+	typographyUsage: TypographyUsage; // Optional, e.g. "body", "heading", etc.
 	[key: string]: string | FluidSize | number; // Allow additional properties
 };
 
@@ -22,10 +62,11 @@ export const typographySettingsSchema = z
 		fontFamily: z.string(),
 		fontSize: fluidSizeSchema,
 		lineHeight: z.number(),
-		lineHeightUnits: z.enum(["px", "em", "rem"]), // Default to "px" if not provided
-		fontWeight: z.string().or(z.number()), // Default to "400" if not provided
+		lineHeightUnits: z.enum(["px", "em", "rem"]),
+		fontWeight: z.string().or(z.number()),
 		fontStyle: z.string(),
 		letterSpacing: z.number(),
 		letterSpacingUnits: z.enum(["px", "em", "rem"]),
+		typographyUsage: z.enum(typographyUsages).optional(),
 	})
 	.catchall(z.union([z.string(), fluidSizeSchema, z.number()]));

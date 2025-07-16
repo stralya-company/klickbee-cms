@@ -14,3 +14,26 @@ export const colorSchema = z.object({
 	name: z.string(),
 	type: z.enum(colorTypes),
 });
+
+export const defaultColorSettings = [
+	{
+		hexCode: "#000000",
+		name: "Default Color",
+		type: "primary" as ColorType,
+	},
+	{
+		hexCode: "#FFFFFF",
+		name: "White",
+		type: "secondary" as ColorType,
+	},
+	{
+		hexCode: "#FF5733",
+		name: "Accent Color",
+		type: "accent" as ColorType,
+	},
+	{
+		hexCode: "#123456",
+		name: "Unique Color",
+		type: "unique" as ColorType,
+	},
+];
