@@ -16,12 +16,13 @@ datasource db {
 
 // === Auth Models ===
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  role      Role     @relation(fields: [roleId], references: [id])
-  roleId    String
-  createdAt DateTime @default(now())
+  id                String              @id @default(uuid())
+  email             String              @unique
+  password          String
+  role              Role                @relation(fields: [roleId], references: [id])
+  roleId            String
+  createdAt         DateTime            @default(now())
+  userPasswordReset UserPasswordReset[]
 }
 
 model Role {
@@ -38,6 +39,16 @@ model Permission {
   role   Role   @relation(fields: [roleId], references: [id])
 
   @@unique([roleId, action])
+}
+
+model UserPasswordReset {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  user User @relation(fields: [userId], references: [id])
 }
 
 // === Settings Models ===
@@ -60,11 +71,11 @@ model UserSettings {
 // === Builder Models ===
 
 model GlobalSettings {
-	id        String   @id @default(cuid())
-	typography Json
-	colors     Json
-	spacing    Json
-	logos			 Json[]
-	createdAt  DateTime @default(now())
-	updatedAt  DateTime @updatedAt
+  id         String   @id @default(cuid())
+  typography Json
+  colors     Json
+  spacing    Json
+  logos      Json[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
