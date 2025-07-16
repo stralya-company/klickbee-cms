@@ -4,11 +4,11 @@ export const sizeUnits = ["px", "em", "rem"] as const;
 export type SizeUnit = (typeof sizeUnits)[number];
 
 export type FluidSize = {
-	min: number; // e.g. "1rem"
-	max: number; // e.g. "2rem"
+	min: number; // e.g. "1"
+	max: number; // e.g. "2"
 	sizeUnit: SizeUnit;
-	maxWidth: number; // e.g. "1200px"
-	widthUnit: SizeUnit; // Optional, e.g. "px", "em", "rem"
+	maxWidth: number; // e.g. "1200"
+	widthUnit: SizeUnit; // e.g. "px", "em", "rem"
 };
 
 export const fluidSizeSchema = z.object({
