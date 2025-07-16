@@ -39,7 +39,6 @@ export const typographyUsages = [
 	"caption",
 	"button",
 	"link",
-	"code",
 ] as const;
 
 export type TypographyUsage = (typeof typographyUsages)[number];
