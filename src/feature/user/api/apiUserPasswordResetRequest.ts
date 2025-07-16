@@ -46,8 +46,7 @@ export async function POST(req: NextRequest) {
 			}
 		}
 
-		const message =
-			err instanceof Error ? err.message : "Internal server error";
-		return NextResponse.json({ error: message }, { status: 500 });
+		console.error("Unhandled error during password reset request:", err);
+		return NextResponse.json({ error: "Internal server error" }, { status: 500 });
 	}
 }
