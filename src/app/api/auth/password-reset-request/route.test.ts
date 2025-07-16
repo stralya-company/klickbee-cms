@@ -128,7 +128,7 @@ describe("POST /api/auth/password-reset-request", () => {
 		const json = await res.json();
 
 		expect(res.status).toBe(500);
-		expect(json.error).toBe("Database error");
+		expect(json.error).toBe("Internal server error");
 		expect(mockRequestPasswordReset).toHaveBeenCalledWith(
 			"valid@example.com",
 		);
