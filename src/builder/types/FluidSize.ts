@@ -12,7 +12,5 @@ export type FluidSize = {
 export const fluidSizeSchema = z.object({
 	min: z.number(),
 	max: z.number(),
-	maxWidth: z.number(),
 	sizeUnit: z.enum(sizeUnits),
-	widthUnit: z.enum(sizeUnits),
 });
