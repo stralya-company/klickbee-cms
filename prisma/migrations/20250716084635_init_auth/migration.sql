@@ -19,11 +19,41 @@ CREATE TABLE "Role" (
 
 -- CreateTable
 CREATE TABLE "Permission" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "action" TEXT NOT NULL,
     "roleId" TEXT NOT NULL,
 
     CONSTRAINT "Permission_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Settings" (
+    "key" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "UserSettings" (
+    "key" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+
+    CONSTRAINT "UserSettings_pkey" PRIMARY KEY ("key","userId")
+);
+
+-- CreateTable
+CREATE TABLE "GlobalSettings" (
+    "id" TEXT NOT NULL,
+    "typography" JSONB NOT NULL,
+    "colors" JSONB NOT NULL,
+    "spacing" JSONB NOT NULL,
+    "logos" JSONB[],
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "GlobalSettings_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -31,6 +61,12 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Role_name_key" ON "Role"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Permission_roleId_action_key" ON "Permission"("roleId", "action");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Settings_key_key" ON "Settings"("key");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
