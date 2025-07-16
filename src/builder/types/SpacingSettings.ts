@@ -3,6 +3,7 @@ import {
 	FluidSize,
 	fluidSizeSchema,
 	SizeUnit,
+	sizeUnits,
 } from "@/builder/types/FluidSize";
 
 export type SectionPadding = {
@@ -10,10 +11,14 @@ export type SectionPadding = {
 	right: FluidSize;
 	left: FluidSize;
 	bottom: FluidSize;
+	maxWidth: number;
+	widthUnit: SizeUnit;
 };
 export type SectionGap = {
 	row: FluidSize;
 	column: FluidSize;
+	maxWidth: number;
+	widthUnit: SizeUnit;
 };
 
 export type SpacingSettings = {
@@ -32,6 +37,8 @@ export const sectionPaddingSchema = z.object({
 	right: fluidSizeSchema,
 	left: fluidSizeSchema,
 	bottom: fluidSizeSchema,
+	maxWidth: z.number(),
+	widthUnit: z.enum(sizeUnits),
 });
 
 export const gapSchema = z.object({
@@ -56,6 +63,8 @@ export const spacingSettingsSchema = z.object({
 export const defaultSpacingSettings: SpacingSettings = {
 	sectionPadding: {
 		default: {
+			maxWidth: 1440,
+			widthUnit: "px",
 			top: { min: 1, max: 2, sizeUnit: "rem" },
 			right: { min: 1, max: 2, sizeUnit: "rem" },
 			left: { min: 1, max: 2, sizeUnit: "rem" },
@@ -64,6 +73,8 @@ export const defaultSpacingSettings: SpacingSettings = {
 	},
 	gap: {
 		default: {
+			maxWidth: 1440,
+			widthUnit: "px",
 			row: { min: 0.5, max: 1, sizeUnit: "rem" },
 			column: { min: 0.5, max: 1, sizeUnit: "rem" },
 		},
