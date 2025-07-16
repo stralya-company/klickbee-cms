@@ -6,7 +6,7 @@ import {
 import {
 	defaultFluidTypographySettings,
 	FluidTypographySettings,
-	typographySettingsSchema,
+	fluidTypographySettingsSchema,
 } from "@/builder/types/TypographySettings";
 import {
 	colorSchema,
@@ -28,7 +28,7 @@ export type GlobalSettingsData = {
 };
 
 export const globalSettingsSchema = z.object({
-	typography: typographySettingsSchema,
+	typography: fluidTypographySettingsSchema,
 	colors: colorSchema.array(),
 	spacing: spacingSettingsSchema,
 	logos: logoSettingsSchema.array(),
