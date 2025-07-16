@@ -8,7 +8,7 @@ export type LogoSettings = {
 	url: string;
 };
 
-export const LogoSettingsSchema = z.object({
+export const logoSettingsSchema = z.object({
 	format: z.enum(logoFormats),
 	url: z.string().url(),
 });

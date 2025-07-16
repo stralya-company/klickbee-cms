@@ -3,23 +3,23 @@ import {
 	spacingSettingsSchema,
 } from "@/builder/types/SpacingSettings";
 import {
-	TypographySettings,
-	typographySettingsSchema,
+	FluidTypographySettings,
+	fluidTypographySettingsSchema,
 } from "@/builder/types/TypographySettings";
 import { colorSchema, ColorSettings } from "@/builder/types/ColorSettings";
 import { z } from "zod";
-import { LogoSettings, LogoSettingsSchema } from "@/builder/types/LogoSettings";
+import { LogoSettings, logoSettingsSchema } from "@/builder/types/LogoSettings";
 
 export type GlobalSettingsData = {
-	typography: TypographySettings[];
+	typography: FluidTypographySettings[];
 	colors: ColorSettings[];
 	spacing: SpacingSettings[];
 	logos: LogoSettings[];
 };
 
 export const globalSettingsSchema = z.object({
-	typography: typographySettingsSchema.array(),
+	typography: fluidTypographySettingsSchema.array(),
 	colors: colorSchema.array(),
 	spacing: spacingSettingsSchema.array(),
-	logos: LogoSettingsSchema.array(),
+	logos: logoSettingsSchema.array(),
 });
