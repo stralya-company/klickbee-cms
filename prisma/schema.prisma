@@ -59,27 +59,6 @@ model UserSettings {
 
 // === Builder Models ===
 
-model Page {
-	id        String   @id @default(cuid())
-	slug      String   @unique
-	title     String
-	content   Json     // structure JSON contenant sections & composants
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
-
-	sections  Section[]
-}
-
-model Section {
-	id        String   @id @default(cuid())
-	pageId    String
-	page      Page     @relation(fields: [pageId], references: [id])
-	type      String   // e.g. "hero", "features", "custom"
-	position  Int
-	props     Json     // props dynamiques spécifiques au type
-	style     Json?    // padding, background, etc.
-}
-
 model GlobalSettings {
 	id        String   @id @default(cuid())
 	typography Json
