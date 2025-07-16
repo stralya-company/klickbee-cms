@@ -59,6 +59,7 @@ const TypographyEditor = React.memo(function TypographyEditor({
 			fontStyle: "normal",
 			letterSpacing: 0,
 			letterSpacingUnits: "px",
+			typographyUsage: "body",
 		});
 	}, [append, filteredFonts]);
 
