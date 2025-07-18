@@ -28,7 +28,7 @@ const TypographyEditor = React.memo(function TypographyEditor({
 		fields: typoFields,
 		append,
 		remove,
-	} = useFieldArray({ control, name: "typography" });
+	} = useFieldArray({ control, name: "typography.typographies" });
 	const typography = watch("typography");
 	const [openIdx, setOpenIdx] = useState<number | null>(null);
 	const [dropdownOpenIdx, setDropdownOpenIdx] = useState<number | null>(null);
