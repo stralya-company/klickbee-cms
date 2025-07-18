@@ -1,1 +1,1 @@
-export { POST } from "@/feature/builder/api/apiUploadLogo";
+export { POST } from "@/feature/upload/api/apiUploadLogo";
