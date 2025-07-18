@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import QueryProvider from "@/components/providers/QueryProvider";
+import QueryProvider from "@/providers/QueryProvider";
 import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
