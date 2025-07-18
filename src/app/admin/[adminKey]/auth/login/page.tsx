@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import { useTranslations } from "next-intl";
 
 export default function LoginPage({
 	params,
@@ -15,6 +16,8 @@ export default function LoginPage({
 	const paramsSync = React.use(params);
 	const adminKey = paramsSync.adminKey;
 	const { setAdminKey } = useAdminKeyStore();
+	const t = useTranslations("Login");
+
 	useEffect(() => {
 		setAdminKey(adminKey);
 	}, [adminKey, setAdminKey]);
@@ -37,7 +40,7 @@ export default function LoginPage({
 
 			if (!res.ok) {
 				const data = await res.json();
-				setError(data.message || "Erreur lors de la connexion.");
+				setError(data.message || t("ConnectionError"));
 				setLoading(false);
 				return;
 			} else {
@@ -47,7 +50,7 @@ export default function LoginPage({
 			if (err instanceof Error) {
 				setError(`${err.message}`);
 			} else {
-				setError("Échec de la connexion. Veuillez réessayer.");
+				setError(t("ConnectionFailed"));
 			}
 		} finally {
 			setLoading(false);
@@ -58,12 +61,12 @@ export default function LoginPage({
 		<div className="flex min-h-screen items-center justify-center bg-muted w-full">
 			<Card className="w-full max-w-sm">
 				<CardHeader>
-					<CardTitle>Connexion admin</CardTitle>
+					<CardTitle>{t("AdminLogin")}</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<form onSubmit={handleSubmit} className="space-y-4">
 						<div>
-							<Label htmlFor="email">Email</Label>
+							<Label htmlFor="email">{t("Email")}</Label>
 							<Input
 								id="email"
 								type="email"
@@ -74,13 +77,13 @@ export default function LoginPage({
 							/>
 						</div>
 						<div>
-							<Label htmlFor="password">Mot de passe</Label>
+							<Label htmlFor="password">{t("Password")}</Label>
 							<Input
 								id="password"
 								type="password"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
-								placeholder="Votre mot de passe"
+								placeholder={t("PasswordPlaceholder")}
 								required
 							/>
 						</div>
@@ -94,7 +97,7 @@ export default function LoginPage({
 							className="w-full"
 							disabled={loading}
 						>
-							{loading ? "Connexion..." : "Se connecter"}
+							{loading ? t("LoggingIn") : t("LoginButton")}
 						</Button>
 					</form>
 				</CardContent>

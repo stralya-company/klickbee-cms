@@ -17,7 +17,7 @@ export default function TypographyPreview({
 }: TypographyPreviewProps) {
 	// Liste unique des familles de polices
 	const fontFamilies = Array.from(
-		new Set(typography.map((t) => t.fontFamily)),
+		new Set(typography.typographies.map((t) => t.fontFamily)),
 	);
 
 	return (
@@ -29,17 +29,15 @@ export default function TypographyPreview({
 				{fontFamilies.map((font) => (
 					<GoogleFontLoader key={font} fontFamily={font} />
 				))}
-				{typography.map((typo, idx) => (
+				{typography.typographies.map((typo, idx) => (
 					<p
-						key={
-							typeof typo.id === "string" ||
-							typeof typo.id === "number"
-								? typo.id
-								: idx
-						}
+						key={typo.key ? typo.key : idx}
 						style={{
 							fontFamily: typo.fontFamily,
-							fontSize: toClamp(typo.fontSize),
+							fontSize: toClamp(
+								typo.fontSize,
+								`${typography.maxWidth}px`,
+							),
 							lineHeight: `${typo.lineHeight}${typo.lineHeightUnits}`,
 							fontWeight: typo.fontWeight,
 							fontStyle: typo.fontStyle,

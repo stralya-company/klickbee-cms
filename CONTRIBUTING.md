@@ -23,6 +23,7 @@ Join us on Discord for real-time discussions: [Join Klickbee Discord](https://di
 klickbee-cms/
 ├─ src/
 │  ├─ app/               # Next.js App Router
+│  ├─ builder/           # Builder Source Code
 │  ├─ lib/               # Helpers & server utils
 │  ├─ components/        # Reusable UI blocks
 │  ├─ prisma/            # Prisma schema + migrations

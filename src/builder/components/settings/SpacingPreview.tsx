@@ -9,7 +9,7 @@ type SpacingPreviewProps = {
 export default function SpacingPreview({ spacing }: SpacingPreviewProps) {
 	return (
 		<>
-			{spacing.map((space, idx) => (
+			{spacing.sectionPadding.map((space, idx) => (
 				<Card key={idx}>
 					<CardHeader>
 						<CardTitle>
@@ -18,13 +18,11 @@ export default function SpacingPreview({ spacing }: SpacingPreviewProps) {
 					</CardHeader>
 					<CardContent
 						style={{
-							paddingTop: space.sectionPadding.default.top.min,
-							paddingRight:
-								space.sectionPadding.default.right.min,
-							paddingBottom:
-								space.sectionPadding.default.bottom.min,
-							paddingLeft: space.sectionPadding.default.left.min,
-							maxWidth: space.maxWidth,
+							paddingTop: space.top.min,
+							paddingRight: space.right.min,
+							paddingBottom: space.bottom.min,
+							paddingLeft: space.left.min,
+							maxWidth: spacing.maxWidth,
 							background: "#000",
 							color: "#fff",
 						}}
