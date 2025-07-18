@@ -1,14 +1,15 @@
 import { POST } from "./route";
 import { NextRequest } from "next/server";
-import { requestPasswordReset } from "@/feature/user/functions/requestPasswordReset";
+import { createPasswordResetRequest } from "@/feature/user/functions/createPasswordResetRequest";
 
-jest.mock("@/feature/user/functions/requestPasswordReset", () => ({
+jest.mock("@/feature/user/functions/createPasswordResetRequest", () => ({
 	requestPasswordReset: jest.fn(),
 }));
 
-const mockRequestPasswordReset = requestPasswordReset as jest.MockedFunction<
-	typeof requestPasswordReset
->;
+const mockRequestPasswordReset =
+	createPasswordResetRequest as jest.MockedFunction<
+		typeof createPasswordResetRequest
+	>;
 
 function createMockRequest(body: object): NextRequest {
 	return {
