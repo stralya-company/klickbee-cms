@@ -55,5 +55,27 @@
 		"SelectLogo": "Select a logo",
 		"ClickToChoose": "Click to choose",
 		"Uploading": "Uploading..."
+	},
+	"SpacingEditor": {
+		"Title": "Spacings",
+		"Padding": "Padding",
+		"Gap": "Gap",
+		"MaxWidth": "Max Width",
+		"Key": "Key:",
+		"PaddingName": "Padding name",
+		"GapName": "Gap name",
+		"DeletePadding": "Delete padding",
+		"AddPadding": "Add padding",
+		"DeleteGap": "Delete gap",
+		"AddGap": "Add gap"
+	},
+	"ColorEditor": {
+		"Title": "Colors",
+		"ColorPicker": "Color picker",
+		"ColorName": "Color name",
+		"DeleteColor": "Delete color",
+		"Type": "Type:",
+		"SelectType": "Select a type",
+		"AddColor": "Add color"
 	}
 }

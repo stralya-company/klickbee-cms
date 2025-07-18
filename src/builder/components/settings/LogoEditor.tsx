@@ -118,7 +118,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 													textAlign: "center",
 												}}
 											>
-												Cliquer pour choisir
+												{t("ClickToChoose")}
 												<br />
 												{LABELS[format].toLowerCase()}
 											</span>
@@ -138,7 +138,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 									</div>
 									{isLoading && (
 										<div className="mt-2 text-xs text-muted-foreground text-center">
-											Envoi en cours…
+											{t("Uploading")}
 										</div>
 									)}
 								</div>
