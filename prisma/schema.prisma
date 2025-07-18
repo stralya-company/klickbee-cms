@@ -22,6 +22,8 @@ model User {
   role      Role     @relation(fields: [roleId], references: [id])
   roleId    String
   createdAt DateTime @default(now())
+
+  UserSettings UserSettings[]
 }
 
 model Role {
@@ -52,6 +54,7 @@ model Settings {
 model UserSettings {
   key    String
   value  String
+	user User @relation(fields: [userId], references: [id])
   userId String
 
   @@id([key, userId])
