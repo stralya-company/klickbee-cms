@@ -53,7 +53,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 			const next = logos.filter((l) => l.format !== format);
 			onChange([...next, { format, url }]);
 		} catch {
-			window.alert(t("UploadError"));
+			toast(t("UploadError"));
 		} finally {
 			setLoading(null);
 		}
