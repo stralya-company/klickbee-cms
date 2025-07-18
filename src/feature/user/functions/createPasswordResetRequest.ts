@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 
-export async function requestPasswordReset(email: string): Promise<string> {
+export async function createPasswordResetRequest(
+	email: string,
+): Promise<string> {
 	const user = await prisma.user.findUnique({
 		where: { email },
 		select: { id: true, email: true },
@@ -20,7 +22,6 @@ export async function requestPasswordReset(email: string): Promise<string> {
 		select: { token: true },
 	});
 
-	// Here you would typically send the reset token to the user's email.
 	if (!token) {
 		throw new Error("Failed to create password reset token");
 	}

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requestPasswordReset } from "@/feature/user/functions/requestPasswordReset";
+import { createPasswordResetRequest } from "@/feature/user/functions/createPasswordResetRequest";
 
 export async function POST(req: NextRequest) {
 	let email: string;
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 	}
 
 	try {
-		await requestPasswordReset(email);
+		await createPasswordResetRequest(email);
 
 		// Todo: Implement email sending logic here
 
