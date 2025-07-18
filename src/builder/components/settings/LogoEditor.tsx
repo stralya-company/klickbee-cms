@@ -36,7 +36,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 		const file = e.target.files?.[0];
 		if (!file) return;
 		if (!["image/png", "image/jpeg"].includes(file.type)) {
-			window.alert(t("FileTypeError"));
+			toast.error(t("FileTypeError"));
 			return;
 		}
 		setLoading(format);
