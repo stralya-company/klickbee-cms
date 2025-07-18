@@ -9,6 +9,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { useTranslations } from "next-intl";
 import { Label } from "@/components/ui/label";
 import type {
 	FieldArrayWithId,
@@ -37,6 +38,7 @@ const ColorPaletteEditor = React.memo(function ColorPaletteEditor({
 	removeColor,
 	appendColor,
 }: ColorPaletteEditorProps) {
+	const t = useTranslations("ColorEditor");
 	const handleAdd = useCallback(
 		() => appendColor({ hexCode: "#000000", name: "", type: "primary" }),
 		[appendColor],
@@ -49,7 +51,7 @@ const ColorPaletteEditor = React.memo(function ColorPaletteEditor({
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Couleurs</CardTitle>
+				<CardTitle>{t("Title")}</CardTitle>
 			</CardHeader>
 			<CardContent className="space-y-4">
 				{colorFields.map((color, idx) => (
@@ -58,20 +60,20 @@ const ColorPaletteEditor = React.memo(function ColorPaletteEditor({
 							<Input
 								type="color"
 								{...register(`colors.${idx}.hexCode`)}
-								aria-label="Sélecteur de couleur"
+								aria-label={t("ColorPicker")}
 								className="w-10 h-10 p-0 border"
 							/>
 							<Input
 								{...register(`colors.${idx}.name`)}
-								placeholder="Nom de la couleur"
-								aria-label="Nom de la couleur"
+								placeholder={t("ColorName")}
+								aria-label={t("ColorName")}
 							/>
 							{colorFields.length > 1 && (
 								<Button
 									type="button"
 									variant="ghost"
 									size="icon"
-									aria-label="Supprimer la couleur"
+									aria-label={t("DeleteColor")}
 									onClick={() => handleRemove(idx)}
 								>
 									✕
@@ -83,7 +85,7 @@ const ColorPaletteEditor = React.memo(function ColorPaletteEditor({
 								htmlFor={`colors.${idx}.type`}
 								className="w-20"
 							>
-								Type:
+								{t("Type")}
 							</Label>
 							<Select
 								defaultValue={color.type}
@@ -95,7 +97,9 @@ const ColorPaletteEditor = React.memo(function ColorPaletteEditor({
 									id={`colors.${idx}.type`}
 									className="w-full"
 								>
-									<SelectValue placeholder="Sélectionner un type" />
+									<SelectValue
+										placeholder={t("SelectType")}
+									/>
 								</SelectTrigger>
 								<SelectContent>
 									{colorTypes.map((type) => (
@@ -114,9 +118,9 @@ const ColorPaletteEditor = React.memo(function ColorPaletteEditor({
 					variant="outline"
 					size="sm"
 					onClick={handleAdd}
-					aria-label="Ajouter une couleur"
+					aria-label={t("AddColor")}
 				>
-					<span className="w-4 h-4 mr-1">+</span> Ajouter une couleur
+					<span className="w-4 h-4 mr-1">+</span> {t("AddColor")}
 				</Button>
 			</CardContent>
 		</Card>
