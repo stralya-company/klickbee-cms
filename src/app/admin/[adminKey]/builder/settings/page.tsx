@@ -12,6 +12,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import TypographyEditor from "@/builder/components/settings/TypographyEditor";
 import ColorPaletteEditor from "@/builder/components/settings/ColorEditor";
 import SpacingEditor from "@/builder/components/settings/SpacingEditor";
@@ -32,6 +33,7 @@ const defaultValues: FormValues = {
 
 export default function AdminBuilderSettingsPage() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const t = useTranslations("BuilderSettings");
 
 	const {
 		register,
@@ -78,14 +80,13 @@ export default function AdminBuilderSettingsPage() {
 				throw new Error("Failed to save settings");
 			}
 
-			toast("Succès", {
-				description: "Les paramètres ont été sauvegardés avec succès.",
+			toast(t("Success"), {
+				description: t("SuccessMessage"),
 			});
 		} catch (error) {
 			console.error("Error saving settings:", error);
-			toast("Erreur", {
-				description:
-					"Une erreur est survenue lors de la sauvegarde des paramètres.",
+			toast(t("Error"), {
+				description: t("ErrorMessage"),
 			});
 		} finally {
 			setIsSubmitting(false);
@@ -127,28 +128,26 @@ export default function AdminBuilderSettingsPage() {
 
 	return (
 		<div className="container mx-auto py-8">
-			<h1 className="text-3xl font-bold mb-6">Paramètres globaux</h1>
+			<h1 className="text-3xl font-bold mb-6">{t("GlobalSettings")}</h1>
 			<p className="text-gray-500 mb-8">
-				Configurez les paramètres globaux de votre site, comme la
-				typographie, les couleurs, les espacements et les logos.
+				{t("GlobalSettingsDescription")}
 			</p>
 
 			{hasErrors && (
 				<Alert variant="destructive" className="mb-6">
 					<AlertCircle className="h-4 w-4" />
-					<AlertTitle>Erreur</AlertTitle>
-					<AlertDescription>
-						Il y a des erreurs dans le formulaire. Veuillez les
-						corriger avant de soumettre.
-					</AlertDescription>
+					<AlertTitle>{t("Error")}</AlertTitle>
+					<AlertDescription>{t("FormErrors")}</AlertDescription>
 				</Alert>
 			)}
 
 			<form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
 				<section className="mb-8">
-					<h2 className="text-xl font-semibold mb-4">Typographie</h2>
+					<h2 className="text-xl font-semibold mb-4">
+						{t("Typography")}
+					</h2>
 					<p className="text-gray-500 mb-4">
-						Définissez les styles de texte utilisés sur votre site.
+						{t("TypographyDescription")}
 					</p>
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 						<TypographyEditor
@@ -162,9 +161,11 @@ export default function AdminBuilderSettingsPage() {
 				</section>
 
 				<section className="mb-8">
-					<h2 className="text-xl font-semibold mb-4">Couleurs</h2>
+					<h2 className="text-xl font-semibold mb-4">
+						{t("Colors")}
+					</h2>
 					<p className="text-gray-500 mb-4">
-						Définissez la palette de couleurs de votre site.
+						{t("ColorsDescription")}
 					</p>
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 						<ColorPaletteEditor
@@ -179,10 +180,11 @@ export default function AdminBuilderSettingsPage() {
 				</section>
 
 				<section className="mb-8">
-					<h2 className="text-xl font-semibold mb-4">Espacements</h2>
+					<h2 className="text-xl font-semibold mb-4">
+						{t("Spacing")}
+					</h2>
 					<p className="text-gray-500 mb-4">
-						Configurez les espacements et marges utilisés dans la
-						mise en page.
+						{t("SpacingDescription")}
 					</p>
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 						<SpacingEditor
@@ -201,9 +203,9 @@ export default function AdminBuilderSettingsPage() {
 				</section>
 
 				<section className="mb-8">
-					<h2 className="text-xl font-semibold mb-4">Logos</h2>
+					<h2 className="text-xl font-semibold mb-4">{t("Logos")}</h2>
 					<p className="text-gray-500 mb-4">
-						Téléchargez et gérez les logos de votre site.
+						{t("LogosDescription")}
 					</p>
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 						<LogoEditor
@@ -219,9 +221,7 @@ export default function AdminBuilderSettingsPage() {
 						disabled={isSubmitting}
 						className="px-6"
 					>
-						{isSubmitting
-							? "Sauvegarde en cours..."
-							: "Sauvegarder les paramètres"}
+						{isSubmitting ? t("Saving") : t("SaveSettings")}
 					</Button>
 				</div>
 			</form>
