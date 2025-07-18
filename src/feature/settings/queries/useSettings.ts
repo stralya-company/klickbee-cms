@@ -8,7 +8,7 @@ export function useSetting(key: string, userId?: string | null) {
 				key,
 				...(userId ? { userId } : {}),
 			});
-			const res = await fetch(`/api/settings?${params}`);
+			const res = await fetch(`/api/admin/settings?${params}`);
 			if (!res.ok) throw new Error("Erreur de chargement");
 			return res.json() as Promise<{ value: string | null }>;
 		},
@@ -23,7 +23,7 @@ export function useSetSetting() {
 			value: string;
 			userId?: string;
 		}) => {
-			const res = await fetch("/api/settings", {
+			const res = await fetch("/api/admin/settings", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(data),
