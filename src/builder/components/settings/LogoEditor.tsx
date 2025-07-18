@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import type { LogoSettings } from "@/builder/types/LogoSettings";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 type Props = {
 	logos: LogoSettings[];
