@@ -12,8 +12,6 @@ export async function createPasswordResetRequest(
 		throw new Error("User not found");
 	}
 
-	// Todo: Implement rate limiting logic here
-
 	const { token } = await prisma.userPasswordReset.create({
 		data: {
 			userId: user.id,
