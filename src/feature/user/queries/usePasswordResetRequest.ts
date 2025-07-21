@@ -10,7 +10,11 @@ interface PasswordResetRequestError {
 }
 
 export function usePasswordResetRequest() {
-	return useMutation<PasswordResetRequestResponse, Error, UserPasswordResetRequestFormValues>({
+	return useMutation<
+		PasswordResetRequestResponse,
+		Error,
+		UserPasswordResetRequestFormValues
+	>({
 		mutationFn: async (data: UserPasswordResetRequestFormValues) => {
 			const res = await fetch("/api/auth/password-reset-request", {
 				method: "POST",
@@ -20,7 +24,9 @@ export function usePasswordResetRequest() {
 				body: JSON.stringify(data),
 			});
 
-			const result: PasswordResetRequestResponse | PasswordResetRequestError = await res.json();
+			const result:
+				| PasswordResetRequestResponse
+				| PasswordResetRequestError = await res.json();
 
 			if (!res.ok) {
 				throw new Error(
