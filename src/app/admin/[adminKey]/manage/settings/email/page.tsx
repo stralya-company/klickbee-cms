@@ -25,7 +25,7 @@ const emailSettingsSchema = z.object({
 type EmailSettingsSchema = z.infer<typeof emailSettingsSchema>;
 
 const checkConnectionSchema = z.object({
-	to: z.string(),
+	to: z.string().email(),
 	subject: z.string(),
 	text: z.string(),
 });
