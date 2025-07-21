@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -17,38 +16,35 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
+import { usePasswordResetRequest } from "@/feature/user/queries/usePasswordResetRequest";
+import { toast } from "sonner";
 
 export default function ResetPasswordRequestForm() {
-	const [loading, setLoading] = useState(false);
+	const t = useTranslations("ResetPasswordRequest");
+
+	const passwordResetRequestMutation = usePasswordResetRequest();
+
 	const resetPasswordRequestForm = useForm<UserPasswordResetRequestSchema>({
 		resolver: zodResolver(userPasswordResetRequestSchema),
+		defaultValues: {
+			email: "",
+		},
 	});
 
-	function onSubmit(data: UserPasswordResetRequestSchema) {
-		setLoading(true);
-		fetch("/api/auth/reset-password-request", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Failed to send reset password request");
-				}
-				return response.json();
-			})
-			.then(() => {
-				alert("Demande de réinitialisation du mot de passe envoyée avec succès.");
-				resetPasswordRequestForm.reset();
-			})
-			.catch((error) => {
-				alert(`Erreur: ${error.message}`);
-			})
-			.finally(() => {
-				setLoading(false);
-			});
+	async function onSubmit(data: UserPasswordResetRequestSchema) {
+		try {
+			const result = await passwordResetRequestMutation.mutateAsync(data);
+			if (!result.success) {
+				toast.error(t("ErrorMessage"));
+				return;
+			}
+
+			resetPasswordRequestForm.reset();
+			toast.success(t("SuccessMessage"));
+		} catch {
+			toast.error(t("ErrorMessage"));
+		}
 	}
 	return (
 		<Form {...resetPasswordRequestForm}>
@@ -61,11 +57,11 @@ export default function ResetPasswordRequestForm() {
 					name="email"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Email</FormLabel>
+							<FormLabel>{t("EmailLabel")}</FormLabel>
 							<FormControl>
 								<Input
-									placeholder="Entrez votre adresse e-mail"
 									{...field}
+									placeholder={t("EmailPlaceholder")}
 									className="w-full"
 								/>
 							</FormControl>
@@ -73,8 +69,14 @@ export default function ResetPasswordRequestForm() {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" className="w-full mt-4">
-					Envoyer la demande de réinitialisation
+				<Button
+					type="submit"
+					className="w-full mt-4"
+					disabled={passwordResetRequestMutation.isPending}
+				>
+					{passwordResetRequestMutation.isPending
+						? t("Sending")
+						: t("SendResetLink")}
 				</Button>
 			</form>
 		</Form>
