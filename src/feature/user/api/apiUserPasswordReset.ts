@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { userPasswordResetSchema } from "@/feature/user/types/userPasswordResetSchema";
 import resetPassword from "@/feature/user/functions/resetPassword";
 import deletePasswordResetRequest from "@/feature/user/functions/deletePasswordResetRequest";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
 	let token: string;
@@ -31,9 +32,10 @@ export async function POST(req: NextRequest) {
 	}
 
 	try {
-		await resetPassword(token, newPassword);
-
-		await deletePasswordResetRequest(token);
+		await prisma.$transaction(async (tx) => {
+			await resetPassword(token, newPassword, tx);
+			await deletePasswordResetRequest(token, tx);
+		});
 
 		return NextResponse.json(
 			{ message: "Password reset successful" },
