@@ -40,6 +40,25 @@
 		"ConnectionError": "Erreur lors de la connexion.",
 		"ConnectionFailed": "Échec de la connexion. Veuillez réessayer."
 	},
+	"ResetPasswordRequest": {
+		"ResetPasswordRequest": "Réinitialiser le mot de passe",
+		"EmailLabel": "Email",
+		"EmailPlaceholder": "Entrez votre email",
+		"SendResetLink": "Envoyer le lien de réinitialisation",
+		"Sending": "Envoi en cours...",
+		"SuccessMessage": "Un lien de réinitialisation a été envoyé à votre email.",
+		"ErrorMessage": "Une erreur est survenue lors de l'envoi du lien de réinitialisation."
+
+	},
+	"ResetPassword": {
+		"NewPassword": "Nouveau mot de passe",
+		"ConfirmPassword": "Confirmer le mot de passe",
+		"NewPasswordPlaceholder": "Entrez votre nouveau mot de passe",
+		"ResetButton": "Réinitialiser le mot de passe",
+		"Resetting": "Réinitialisation en cours...",
+		"SuccessMessage": "Votre mot de passe a été réinitialisé avec succès.",
+		"ErrorMessage": "Une erreur est survenue lors de la réinitialisation du mot de passe."
+	},
 	"Errors": {
 		"LoadingError": "Erreur de chargement",
 		"SaveError": "Erreur de sauvegarde",
