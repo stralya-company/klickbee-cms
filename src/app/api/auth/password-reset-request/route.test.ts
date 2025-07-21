@@ -1,15 +1,23 @@
 import { POST } from "./route";
 import { NextRequest } from "next/server";
 import { createPasswordResetRequest } from "@/feature/user/functions/createPasswordResetRequest";
+import { getApiTranslation } from "@/lib/apiTranslation";
 
 jest.mock("@/feature/user/functions/createPasswordResetRequest", () => ({
 	createPasswordResetRequest: jest.fn(),
+}));
+
+jest.mock("@/lib/apiTranslation", () => ({
+	getApiTranslation: jest.fn(),
 }));
 
 const mockRequestPasswordReset =
 	createPasswordResetRequest as jest.MockedFunction<
 		typeof createPasswordResetRequest
 	>;
+const mockGetApiTranslation = getApiTranslation as jest.MockedFunction<
+	typeof getApiTranslation
+>;
 
 function createMockRequest(body: object): NextRequest {
 	return {
@@ -28,6 +36,17 @@ function createMockRequestWithError(): NextRequest {
 describe("POST /api/auth/password-reset-request", () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
+		// Setup default mock responses for translations
+		mockGetApiTranslation.mockImplementation((section, key) => {
+			const translations: Record<string, string> = {
+				InvalidJsonFormat: "Invalid JSON format",
+				EmailRequired: "Valid email address is required",
+				Success: "Password reset request successful",
+				EmailNotFound: "Email not found",
+				InternalServerError: "Internal server error",
+			};
+			return Promise.resolve(translations[key] || key);
+		});
 	});
 
 	it("should return 200 for valid email", async () => {
