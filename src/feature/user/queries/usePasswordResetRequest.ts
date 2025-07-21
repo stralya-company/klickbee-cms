@@ -1,9 +1,21 @@
 import { useMutation } from "@tanstack/react-query";
-import { UserPasswordResetRequestSchema } from "@/feature/user/types/userPasswordResetRequestSchema";
+import { UserPasswordResetRequestFormValues } from "@/feature/user/types/userPasswordResetRequestSchema";
+
+interface PasswordResetRequestResponse {
+	message: string;
+}
+
+interface PasswordResetRequestError {
+	error: string;
+}
 
 export function usePasswordResetRequest() {
-	return useMutation({
-		mutationFn: async (data: UserPasswordResetRequestSchema) => {
+	return useMutation<
+		PasswordResetRequestResponse,
+		Error,
+		UserPasswordResetRequestFormValues
+	>({
+		mutationFn: async (data: UserPasswordResetRequestFormValues) => {
 			const res = await fetch("/api/auth/password-reset-request", {
 				method: "POST",
 				headers: {
@@ -12,13 +24,18 @@ export function usePasswordResetRequest() {
 				body: JSON.stringify(data),
 			});
 
-			const result = await res.json();
+			const result:
+				| PasswordResetRequestResponse
+				| PasswordResetRequestError = await res.json();
 
 			if (!res.ok) {
-				throw new Error(result.error || "An error occurred");
+				throw new Error(
+					(result as PasswordResetRequestError).error ||
+						"An error occurred",
+				);
 			}
 
-			return result;
+			return result as PasswordResetRequestResponse;
 		},
 	});
 }
