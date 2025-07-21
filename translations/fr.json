@@ -95,5 +95,22 @@
 		"Type": "Type :",
 		"SelectType": "Sélectionner un type",
 		"AddColor": "Ajouter une couleur"
+	},
+	"API": {
+		"PasswordResetRequest": {
+			"Success": "Demande de réinitialisation envoyée avec succès",
+			"InvalidJsonFormat": "Format JSON invalide",
+			"EmailRequired": "Une adresse email valide est requise",
+			"EmailNotFound": "Email non trouvé",
+			"InternalServerError": "Erreur interne du serveur"
+		},
+		"PasswordReset": {
+			"Success": "Mot de passe réinitialisé avec succès",
+			"InvalidJsonFormat": "Format JSON invalide",
+			"TokenAndPasswordRequired": "Token et nouveau mot de passe valides requis",
+			"InvalidToken": "Token invalide",
+			"TokenExpired": "Token expiré",
+			"InternalServerError": "Erreur interne du serveur"
+		}
 	}
 }
