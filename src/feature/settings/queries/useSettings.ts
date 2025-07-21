@@ -9,7 +9,7 @@ export function useSetting(key: string, userId?: string | null) {
 				...(userId ? { userId } : {}),
 			});
 			const res = await fetch(`/api/admin/settings?${params}`);
-			if (!res.ok) throw new Error("Erreur de chargement");
+			if (!res.ok) throw new Error("Loading error");
 			return res.json() as Promise<{ value: string | null }>;
 		},
 	});
@@ -28,7 +28,7 @@ export function useSetSetting() {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(data),
 			});
-			if (!res.ok) throw new Error("Erreur de sauvegarde");
+			if (!res.ok) throw new Error("Save error");
 			return res.json();
 		},
 		onSuccess: (_data, variables) => {

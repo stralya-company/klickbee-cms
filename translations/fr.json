@@ -3,6 +3,79 @@
 		"Content": "Contenu",
 		"Contact": "Contact",
 		"Pages": "Pages",
-		"Settings": "Paramètres"
+		"Settings": "Paramètres",
+		"Title": "Klickbee CMS",
+		"Copyright": "© Klickbee CMS",
+		"Email": "admin@klickbee.io"
+	},
+	"AdminLayout": {
+		"Logout": "Déconnexion"
+	},
+	"BuilderSettings": {
+		"GlobalSettings": "Paramètres globaux",
+		"GlobalSettingsDescription": "Configurez les paramètres globaux de votre site, comme la typographie, les couleurs, les espacements et les logos.",
+		"Error": "Erreur",
+		"FormErrors": "Il y a des erreurs dans le formulaire. Veuillez les corriger avant de soumettre.",
+		"Typography": "Typographie",
+		"TypographyDescription": "Définissez les styles de texte utilisés sur votre site.",
+		"Colors": "Couleurs",
+		"ColorsDescription": "Définissez la palette de couleurs de votre site.",
+		"Spacing": "Espacements",
+		"SpacingDescription": "Configurez les espacements et marges utilisés dans la mise en page.",
+		"Logos": "Logos",
+		"LogosDescription": "Téléchargez et gérez les logos de votre site.",
+		"Saving": "Sauvegarde en cours...",
+		"SaveSettings": "Sauvegarder les paramètres",
+		"Success": "Succès",
+		"SuccessMessage": "Les paramètres ont été sauvegardés avec succès.",
+		"ErrorMessage": "Une erreur est survenue lors de la sauvegarde des paramètres."
+	},
+	"Login": {
+		"AdminLogin": "Connexion admin",
+		"Email": "Email",
+		"Password": "Mot de passe",
+		"PasswordPlaceholder": "Votre mot de passe",
+		"LoginButton": "Se connecter",
+		"LoggingIn": "Connexion...",
+		"ConnectionError": "Erreur lors de la connexion.",
+		"ConnectionFailed": "Échec de la connexion. Veuillez réessayer."
+	},
+	"Errors": {
+		"LoadingError": "Erreur de chargement",
+		"SaveError": "Erreur de sauvegarde",
+		"UploadError": "Erreur upload",
+		"GoogleFontsError": "Erreur lors de la récupération des Google Fonts",
+		"UserFetchError": "Erreur lors de la récupération de l'utilisateur"
+	},
+	"LogoEditor": {
+		"Title": "Logos",
+		"SquareLogo": "Logo carré",
+		"RectangleLogo": "Logo rectangulaire",
+		"FileTypeError": "Seuls les fichiers PNG ou JPEG sont acceptés.",
+		"SelectLogo": "Sélectionner un logo",
+		"ClickToChoose": "Cliquer pour choisir",
+		"Uploading": "Envoi en cours…"
+	},
+	"SpacingEditor": {
+		"Title": "Espacements",
+		"Padding": "Padding",
+		"Gap": "Gap",
+		"MaxWidth": "Largeur maximale",
+		"Key": "Clé :",
+		"PaddingName": "Nom du padding",
+		"GapName": "Nom du gap",
+		"DeletePadding": "Supprimer le padding",
+		"AddPadding": "Ajouter un padding",
+		"DeleteGap": "Supprimer le gap",
+		"AddGap": "Ajouter un gap"
+	},
+	"ColorEditor": {
+		"Title": "Couleurs",
+		"ColorPicker": "Sélecteur de couleur",
+		"ColorName": "Nom de la couleur",
+		"DeleteColor": "Supprimer la couleur",
+		"Type": "Type :",
+		"SelectType": "Sélectionner un type",
+		"AddColor": "Ajouter une couleur"
 	}
 }
