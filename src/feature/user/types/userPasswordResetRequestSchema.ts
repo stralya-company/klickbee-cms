@@ -7,6 +7,6 @@ export const userPasswordResetRequestSchema = z.object({
 		.min(1, { message: "Email is required" }),
 });
 
-export type UserPasswordResetRequestSchema = z.infer<
+export type UserPasswordResetRequestFormValues = z.infer<
 	typeof userPasswordResetRequestSchema
 >;
