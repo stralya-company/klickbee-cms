@@ -2,6 +2,15 @@ import { POST } from "./route";
 import { NextRequest } from "next/server";
 import resetPassword from "@/feature/user/functions/resetPassword";
 import deletePasswordResetRequest from "@/feature/user/functions/deletePasswordResetRequest";
+import prisma from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
+
+jest.mock("@/lib/prisma", () => ({
+	__esModule: true,
+	default: {
+		$transaction: jest.fn(),
+	},
+}));
 
 jest.mock("@/feature/user/functions/resetPassword", () => ({
 	__esModule: true,
@@ -13,6 +22,7 @@ jest.mock("@/feature/user/functions/deletePasswordResetRequest", () => ({
 	default: jest.fn(),
 }));
 
+const mockPrisma = prisma as jest.Mocked<typeof prisma>;
 const mockResetPassword = resetPassword as jest.MockedFunction<
 	typeof resetPassword
 >;
@@ -63,18 +73,31 @@ function expectServerError(
 }
 
 describe("POST /api/auth/password-reset", () => {
+	const mockTx = {
+		user: {
+			findUnique: jest.fn(),
+			update: jest.fn(),
+		},
+		userPasswordReset: {
+			findUnique: jest.fn(),
+			delete: jest.fn(),
+		},
+	} as unknown as Prisma.TransactionClient;
+
 	beforeEach(() => {
 		jest.clearAllMocks();
+		mockPrisma.$transaction.mockImplementation(async (callback) => {
+			return await callback(mockTx);
+		});
 	});
 
 	it("should return 200 for valid token and password", async () => {
 		mockResetPassword.mockResolvedValue();
 		mockDeletePasswordResetRequest.mockResolvedValue();
 
-		const validToken = "123e4567-e89b-12d3-a456-426614174000";
 		const req = createMockRequest({
-			token: validToken,
-			newPassword: "newPassword123!",
+			token: VALID_TOKEN,
+			newPassword: VALID_PASSWORD,
 		});
 
 		const res = await POST(req);
@@ -82,11 +105,16 @@ describe("POST /api/auth/password-reset", () => {
 
 		expect(res.status).toBe(200);
 		expect(json.message).toBe("Password reset successful");
+		expect(mockPrisma.$transaction).toHaveBeenCalled();
 		expect(mockResetPassword).toHaveBeenCalledWith(
-			validToken,
-			"newPassword123!",
+			VALID_TOKEN,
+			VALID_PASSWORD,
+			mockTx,
 		);
-		expect(mockDeletePasswordResetRequest).toHaveBeenCalledWith(validToken);
+		expect(mockDeletePasswordResetRequest).toHaveBeenCalledWith(
+			VALID_TOKEN,
+			mockTx,
+		);
 	});
 
 	it("should return 400 for invalid JSON", async () => {
@@ -155,6 +183,7 @@ describe("POST /api/auth/password-reset", () => {
 		expect(mockResetPassword).toHaveBeenCalledWith(
 			VALID_TOKEN,
 			VALID_PASSWORD,
+			mockTx,
 		);
 		expect(mockDeletePasswordResetRequest).not.toHaveBeenCalled();
 	});
@@ -175,6 +204,7 @@ describe("POST /api/auth/password-reset", () => {
 		expect(mockResetPassword).toHaveBeenCalledWith(
 			VALID_TOKEN,
 			VALID_PASSWORD,
+			mockTx,
 		);
 		expect(mockDeletePasswordResetRequest).not.toHaveBeenCalled();
 	});
@@ -192,6 +222,7 @@ describe("POST /api/auth/password-reset", () => {
 		expect(mockResetPassword).toHaveBeenCalledWith(
 			VALID_TOKEN,
 			VALID_PASSWORD,
+			mockTx,
 		);
 		expect(mockDeletePasswordResetRequest).not.toHaveBeenCalled();
 	});
@@ -212,9 +243,11 @@ describe("POST /api/auth/password-reset", () => {
 		expect(mockResetPassword).toHaveBeenCalledWith(
 			VALID_TOKEN,
 			VALID_PASSWORD,
+			mockTx,
 		);
 		expect(mockDeletePasswordResetRequest).toHaveBeenCalledWith(
 			VALID_TOKEN,
+			mockTx,
 		);
 	});
 
