@@ -42,12 +42,11 @@ model Permission {
 }
 
 model UserPasswordReset {
-  id        String    @id @default(uuid())
-  userId    String    @unique
-  token     String    @unique @default(uuid()) @db.VarChar(255)
-  createdAt DateTime  @default(now())
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  token     String   @unique @default(uuid()) @db.VarChar(255)
+  createdAt DateTime @default(now())
   expiresAt DateTime
-  usedAt    DateTime?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -67,7 +66,7 @@ model UserSettings {
   key    String
   value  String
   userId String
-  user   User @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
 
   @@id([key, userId])
 }
