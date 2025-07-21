@@ -1,11 +1,11 @@
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import { TransactionClient } from "@/lib/types/prisma";
+import { Prisma } from "@prisma/client";
 
 export default async function resetPassword(
 	token: string,
 	newPassword: string,
-	tx?: TransactionClient,
+	tx?: Prisma.TransactionClient,
 ): Promise<void> {
 	const client = tx || prisma;
 

@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
-import { TransactionClient } from "@/lib/types/prisma";
+import { Prisma } from "@prisma/client";
 
 export default async function deletePasswordResetRequest(
 	token: string,
-	tx?: TransactionClient,
+	tx?: Prisma.TransactionClient,
 ): Promise<void> {
 	const client = tx || prisma;
 
