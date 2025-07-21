@@ -3,6 +3,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import type { LogoSettings } from "@/builder/types/LogoSettings";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 type Props = {
 	logos: LogoSettings[];
@@ -10,18 +12,20 @@ type Props = {
 };
 
 const FORMATS: Array<LogoSettings["format"]> = ["square", "rectangle"];
-const LABELS = {
-	square: "Logo carré",
-	rectangle: "Logo rectangulaire",
-} as const;
 const SIZES = {
 	square: { w: 120, h: 120 },
 	rectangle: { w: 180, h: 80 },
 } as const;
 
 export default function LogoEditor({ logos, onChange }: Props) {
+	const t = useTranslations("LogoEditor");
 	const [loading, setLoading] = useState<LogoSettings["format"] | null>(null);
 	const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
+
+	const LABELS = {
+		square: t("SquareLogo"),
+		rectangle: t("RectangleLogo"),
+	} as const;
 
 	const getLogoUrl = (format: LogoSettings["format"]) =>
 		logos.find((l) => l.format === format)?.url;
@@ -33,7 +37,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 		const file = e.target.files?.[0];
 		if (!file) return;
 		if (!["image/png", "image/jpeg"].includes(file.type)) {
-			window.alert("Seuls les fichiers PNG ou JPEG sont acceptés.");
+			toast.error(t("FileTypeError"));
 			return;
 		}
 		setLoading(format);
@@ -50,7 +54,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 			const next = logos.filter((l) => l.format !== format);
 			onChange([...next, { format, url }]);
 		} catch {
-			window.alert("Erreur upload");
+			toast(t("UploadError"));
 		} finally {
 			setLoading(null);
 		}
@@ -59,7 +63,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Logos</CardTitle>
+				<CardTitle>{t("Title")}</CardTitle>
 			</CardHeader>
 			<CardContent>
 				<div className="grid grid-cols-2 gap-6">
@@ -93,7 +97,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 											!isLoading &&
 											inputRefs.current[format]?.click()
 										}
-										aria-label={`Sélectionner un ${LABELS[format].toLowerCase()}`}
+										aria-label={t("SelectLogo")}
 									>
 										{url ? (
 											<Image
@@ -115,7 +119,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 													textAlign: "center",
 												}}
 											>
-												Cliquer pour choisir
+												{t("ClickToChoose")}
 												<br />
 												{LABELS[format].toLowerCase()}
 											</span>
@@ -135,7 +139,7 @@ export default function LogoEditor({ logos, onChange }: Props) {
 									</div>
 									{isLoading && (
 										<div className="mt-2 text-xs text-muted-foreground text-center">
-											Envoi en cours…
+											{t("Uploading")}
 										</div>
 									)}
 								</div>
