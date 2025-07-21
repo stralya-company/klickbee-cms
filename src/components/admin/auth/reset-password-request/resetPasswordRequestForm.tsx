@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-	UserPasswordResetRequestSchema,
+	UserPasswordResetRequestFormValues,
 	userPasswordResetRequestSchema,
 } from "@/feature/user/types/userPasswordResetRequestSchema";
 import {
@@ -25,21 +25,17 @@ export default function ResetPasswordRequestForm() {
 
 	const passwordResetRequestMutation = usePasswordResetRequest();
 
-	const resetPasswordRequestForm = useForm<UserPasswordResetRequestSchema>({
-		resolver: zodResolver(userPasswordResetRequestSchema),
-		defaultValues: {
-			email: "",
-		},
-	});
+	const resetPasswordRequestForm =
+		useForm<UserPasswordResetRequestFormValues>({
+			resolver: zodResolver(userPasswordResetRequestSchema),
+			defaultValues: {
+				email: "",
+			},
+		});
 
-	async function onSubmit(data: UserPasswordResetRequestSchema) {
+	async function onSubmit(data: UserPasswordResetRequestFormValues) {
 		try {
-			const result = await passwordResetRequestMutation.mutateAsync(data);
-			if (!result.success) {
-				toast.error(t("ErrorMessage"));
-				return;
-			}
-
+			await passwordResetRequestMutation.mutateAsync(data);
 			resetPasswordRequestForm.reset();
 			toast.success(t("SuccessMessage"));
 		} catch {
