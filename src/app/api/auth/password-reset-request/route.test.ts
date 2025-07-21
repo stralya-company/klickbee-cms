@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import { createPasswordResetRequest } from "@/feature/user/functions/createPasswordResetRequest";
 
 jest.mock("@/feature/user/functions/createPasswordResetRequest", () => ({
-	requestPasswordReset: jest.fn(),
+	createPasswordResetRequest: jest.fn(),
 }));
 
 const mockRequestPasswordReset =
