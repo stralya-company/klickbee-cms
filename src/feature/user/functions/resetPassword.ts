@@ -1,11 +1,15 @@
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import { TransactionClient } from "@/lib/types/prisma";
 
 export default async function resetPassword(
 	token: string,
 	newPassword: string,
+	tx?: TransactionClient,
 ): Promise<void> {
-	const resetRequest = await prisma.userPasswordReset.findUnique({
+	const client = tx || prisma;
+
+	const resetRequest = await client.userPasswordReset.findUnique({
 		where: { token },
 	});
 
@@ -17,7 +21,7 @@ export default async function resetPassword(
 		throw new Error("Password reset token has expired");
 	}
 
-	const user = await prisma.user.findUnique({
+	const user = await client.user.findUnique({
 		where: { id: resetRequest.userId },
 		select: { id: true, email: true },
 	});
@@ -28,7 +32,7 @@ export default async function resetPassword(
 
 	const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-	await prisma.user.update({
+	await client.user.update({
 		where: { id: user.id },
 		data: { password: hashedPassword },
 	});
