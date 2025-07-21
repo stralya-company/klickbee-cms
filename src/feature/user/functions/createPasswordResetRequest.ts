@@ -22,9 +22,5 @@ export async function createPasswordResetRequest(
 		select: { token: true },
 	});
 
-	if (!token) {
-		throw new Error("Failed to create password reset token");
-	}
-
 	return token;
 }
