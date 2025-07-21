@@ -3,6 +3,79 @@
 		"Content": "Content",
 		"Contact": "Contact",
 		"Pages": "Pages",
-		"Settings": "Settings"
+		"Settings": "Settings",
+		"Title": "Klickbee CMS",
+		"Copyright": "© Klickbee CMS",
+		"Email": "admin@klickbee.io"
+	},
+	"AdminLayout": {
+		"Logout": "Logout"
+	},
+	"BuilderSettings": {
+		"GlobalSettings": "Global Settings",
+		"GlobalSettingsDescription": "Configure the global settings of your site, such as typography, colors, spacing, and logos.",
+		"Error": "Error",
+		"FormErrors": "There are errors in the form. Please correct them before submitting.",
+		"Typography": "Typography",
+		"TypographyDescription": "Define the text styles used on your site.",
+		"Colors": "Colors",
+		"ColorsDescription": "Define the color palette of your site.",
+		"Spacing": "Spacing",
+		"SpacingDescription": "Configure the spacing and margins used in the layout.",
+		"Logos": "Logos",
+		"LogosDescription": "Upload and manage your site's logos.",
+		"Saving": "Saving...",
+		"SaveSettings": "Save Settings",
+		"Success": "Success",
+		"SuccessMessage": "Settings have been saved successfully.",
+		"ErrorMessage": "An error occurred while saving the settings."
+	},
+	"Login": {
+		"AdminLogin": "Admin Login",
+		"Email": "Email",
+		"Password": "Password",
+		"PasswordPlaceholder": "Your password",
+		"LoginButton": "Login",
+		"LoggingIn": "Logging in...",
+		"ConnectionError": "Connection error.",
+		"ConnectionFailed": "Connection failed. Please try again."
+	},
+	"Errors": {
+		"LoadingError": "Loading error",
+		"SaveError": "Save error",
+		"UploadError": "Upload error",
+		"GoogleFontsError": "Error retrieving Google Fonts",
+		"UserFetchError": "Error retrieving user"
+	},
+	"LogoEditor": {
+		"Title": "Logos",
+		"SquareLogo": "Square Logo",
+		"RectangleLogo": "Rectangle Logo",
+		"FileTypeError": "Only PNG or JPEG files are accepted.",
+		"SelectLogo": "Select a logo",
+		"ClickToChoose": "Click to choose",
+		"Uploading": "Uploading..."
+	},
+	"SpacingEditor": {
+		"Title": "Spacings",
+		"Padding": "Padding",
+		"Gap": "Gap",
+		"MaxWidth": "Max Width",
+		"Key": "Key:",
+		"PaddingName": "Padding name",
+		"GapName": "Gap name",
+		"DeletePadding": "Delete padding",
+		"AddPadding": "Add padding",
+		"DeleteGap": "Delete gap",
+		"AddGap": "Add gap"
+	},
+	"ColorEditor": {
+		"Title": "Colors",
+		"ColorPicker": "Color picker",
+		"ColorName": "Color name",
+		"DeleteColor": "Delete color",
+		"Type": "Type:",
+		"SelectType": "Select a type",
+		"AddColor": "Add color"
 	}
 }
