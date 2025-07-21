@@ -82,7 +82,7 @@ export default function EmailSettingsPage() {
 		emailSender.isLoading ||
 		emailUsername.isLoading
 	) {
-		return <p className="p-4">Chargement...</p>;
+		return <p className="p-4">Loading...</p>;
 	}
 
 	const onEmailSettingsSubmit = (data: EmailSettingsSchema) => {
