@@ -15,9 +15,14 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const emailSettingsSchema = z.object({
-	emailHost: z.string(),
-	emailPort: z.string(),
-	emailSender: z.string(),
+	emailHost: z
+		.string()
+		.regex(
+			/^(?!:\/\/)([a-zA-Z0-9-_]+(\.[a-zA-Z0-9-_]+)+|(\d{1,3}\.){3}\d{1,3})$/,
+			"Invalid hostname or IP address",
+		),
+	emailPort: z.number().int().min(1).max(65535),
+	emailSender: z.string().email("Invalid email format"),
 	emailUsername: z.string(),
 	emailPassword: z.string().optional(),
 });
@@ -57,13 +62,13 @@ export default function EmailSettingsPage() {
 		) {
 			setEmailSettings({
 				emailHost: emailHost.data.value ?? "",
-				emailPort: emailPort.data.value ?? "",
+				emailPort: Number(emailPort.data.value ?? ""),
 				emailSender: emailSender.data.value ?? "",
 				emailUsername: emailUsername.data.value ?? "",
 			});
 			emailSettingsForm.reset({
 				emailHost: emailHost.data.value ?? "",
-				emailPort: emailPort.data.value ?? "",
+				emailPort: Number(emailPort.data.value ?? ""),
 				emailSender: emailSender.data.value ?? "",
 				emailUsername: emailUsername.data.value ?? "",
 			});
@@ -93,7 +98,7 @@ export default function EmailSettingsPage() {
 			if (data[key] && data[key] !== currentValue) {
 				setSetting.mutate({
 					key,
-					value: data[key] as string,
+					value: String(data[key]),
 				});
 			}
 		});
@@ -133,9 +138,11 @@ export default function EmailSettingsPage() {
 					)}
 					<Label htmlFor="emailPort">Email Port</Label>
 					<Input
-						type="text"
+						type="number"
 						id="emailPort"
-						{...emailSettingsForm.register("emailPort")}
+						{...emailSettingsForm.register("emailPort", {
+							valueAsNumber: true,
+						})}
 					/>
 					{emailSettingsForm.formState.errors.emailPort && (
 						<p className="text-red-500">
@@ -147,7 +154,7 @@ export default function EmailSettingsPage() {
 					)}
 					<Label htmlFor="emailSender">Email Sender</Label>
 					<Input
-						type="text"
+						type="email"
 						id="emailSender"
 						{...emailSettingsForm.register("emailSender")}
 					/>
