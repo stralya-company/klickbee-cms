@@ -29,13 +29,21 @@ export async function getApiTranslation(
 		const translations: ApiTranslations = await import(
 			`../../translations/${locale}.json`
 		);
-		
-		return translations.API[section][key as keyof typeof translations.API[typeof section]] || key;
+
+		return (
+			translations.API[section][
+				key as keyof (typeof translations.API)[typeof section]
+			] || key
+		);
 	} catch {
 		// Fallback to English if translation fails
 		const fallbackTranslations: ApiTranslations = await import(
 			`../../translations/en.json`
 		);
-		return fallbackTranslations.API[section][key as keyof typeof fallbackTranslations.API[typeof section]] || key;
+		return (
+			fallbackTranslations.API[section][
+				key as keyof (typeof fallbackTranslations.API)[typeof section]
+			] || key
+		);
 	}
 }
