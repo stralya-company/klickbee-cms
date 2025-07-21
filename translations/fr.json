@@ -48,7 +48,6 @@
 		"Sending": "Envoi en cours...",
 		"SuccessMessage": "Un lien de réinitialisation a été envoyé à votre email.",
 		"ErrorMessage": "Une erreur est survenue lors de l'envoi du lien de réinitialisation."
-
 	},
 	"ResetPassword": {
 		"NewPassword": "Nouveau mot de passe",
