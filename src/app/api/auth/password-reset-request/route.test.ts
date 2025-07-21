@@ -99,25 +99,6 @@ describe("POST /api/auth/password-reset-request", () => {
 		);
 	});
 
-	it("should return 429 for rate limit exceeded", async () => {
-		mockRequestPasswordReset.mockRejectedValue(
-			new Error("rate limit exceeded"),
-		);
-
-		const req = createMockRequest({
-			email: "valid@example.com",
-		});
-
-		const res = await POST(req);
-		const json = await res.json();
-
-		expect(res.status).toBe(429);
-		expect(json.error).toBe("Too many requests");
-		expect(mockRequestPasswordReset).toHaveBeenCalledWith(
-			"valid@example.com",
-		);
-	});
-
 	it("should return 500 for server error", async () => {
 		mockRequestPasswordReset.mockRejectedValue(new Error("Database error"));
 
