@@ -31,23 +31,9 @@ export async function POST(req: NextRequest) {
 	}
 
 	try {
-		const result = await resetPassword(token, newPassword);
+		await resetPassword(token, newPassword);
 
-		if (!result) {
-			return NextResponse.json(
-				{ error: "Failed to reset password" },
-				{ status: 500 },
-			);
-		}
-
-		const success = await deletePasswordResetRequest(token);
-
-		if (!success) {
-			return NextResponse.json(
-				{ error: "Failed to delete password reset request" },
-				{ status: 500 },
-			);
-		}
+		await deletePasswordResetRequest(token);
 
 		return NextResponse.json(
 			{ message: "Password reset successful" },
