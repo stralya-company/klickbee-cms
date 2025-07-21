@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createPasswordResetRequest } from "@/feature/user/functions/createPasswordResetRequest";
+import { userPasswordResetRequestSchema } from "@/feature/user/types/userPasswordResetRequestSchema";
 
 export async function POST(req: NextRequest) {
 	let email: string;
@@ -14,9 +15,9 @@ export async function POST(req: NextRequest) {
 		);
 	}
 
-	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	const { success } = userPasswordResetRequestSchema.safeParse({ email });
 
-	if (!email || !emailRegex.test(email)) {
+	if (!email || !success) {
 		return NextResponse.json(
 			{ error: "Valid email address is required" },
 			{ status: 400 },
@@ -38,13 +39,6 @@ export async function POST(req: NextRequest) {
 				return NextResponse.json(
 					{ error: "Email not found" },
 					{ status: 404 },
-				);
-			}
-
-			if (err.message.includes("rate limit")) {
-				return NextResponse.json(
-					{ error: "Too many requests" },
-					{ status: 429 },
 				);
 			}
 		}
