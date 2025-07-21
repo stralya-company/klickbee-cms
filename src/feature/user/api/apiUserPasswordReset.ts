@@ -3,6 +3,7 @@ import { userPasswordResetSchema } from "@/feature/user/types/userPasswordResetS
 import resetPassword from "@/feature/user/functions/resetPassword";
 import deletePasswordResetRequest from "@/feature/user/functions/deletePasswordResetRequest";
 import prisma from "@/lib/prisma";
+import { getApiTranslation } from "@/lib/apiTranslation";
 
 export async function POST(req: NextRequest) {
 	let token: string;
@@ -13,10 +14,11 @@ export async function POST(req: NextRequest) {
 		newPassword = body.newPassword;
 		token = body.token;
 	} catch {
-		return NextResponse.json(
-			{ error: "Invalid JSON format" },
-			{ status: 400 },
+		const errorMessage = await getApiTranslation(
+			"PasswordReset",
+			"InvalidJsonFormat",
 		);
+		return NextResponse.json({ error: errorMessage }, { status: 400 });
 	}
 
 	const { success } = userPasswordResetSchema.safeParse({
@@ -25,10 +27,11 @@ export async function POST(req: NextRequest) {
 	});
 
 	if (!token || !newPassword || !success) {
-		return NextResponse.json(
-			{ error: "Valid token and new password are required" },
-			{ status: 400 },
+		const errorMessage = await getApiTranslation(
+			"PasswordReset",
+			"TokenAndPasswordRequired",
 		);
+		return NextResponse.json({ error: errorMessage }, { status: 400 });
 	}
 
 	try {
@@ -37,31 +40,41 @@ export async function POST(req: NextRequest) {
 			await deletePasswordResetRequest(token, tx);
 		});
 
-		return NextResponse.json(
-			{ message: "Password reset successful" },
-			{ status: 200 },
+		const successMessage = await getApiTranslation(
+			"PasswordReset",
+			"Success",
 		);
+		return NextResponse.json({ message: successMessage }, { status: 200 });
 	} catch (err: unknown) {
 		if (err instanceof Error) {
 			if (err.message.includes("not found")) {
+				const errorMessage = await getApiTranslation(
+					"PasswordReset",
+					"InvalidToken",
+				);
 				return NextResponse.json(
-					{ error: "Invalid token" },
+					{ error: errorMessage },
 					{ status: 404 },
 				);
 			}
 
 			if (err.message.includes("expired")) {
+				const errorMessage = await getApiTranslation(
+					"PasswordReset",
+					"TokenExpired",
+				);
 				return NextResponse.json(
-					{ error: "Token expired" },
+					{ error: errorMessage },
 					{ status: 410 },
 				);
 			}
 		}
 
 		console.error("Unhandled error during password reset:", err);
-		return NextResponse.json(
-			{ error: "Internal server error" },
-			{ status: 500 },
+		const errorMessage = await getApiTranslation(
+			"PasswordReset",
+			"InternalServerError",
 		);
+		return NextResponse.json({ error: errorMessage }, { status: 500 });
 	}
 }
