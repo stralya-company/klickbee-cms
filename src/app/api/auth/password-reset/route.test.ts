@@ -4,6 +4,7 @@ import resetPassword from "@/feature/user/functions/resetPassword";
 import deletePasswordResetRequest from "@/feature/user/functions/deletePasswordResetRequest";
 import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
+import { getApiTranslation } from "@/lib/apiTranslation";
 
 jest.mock("@/lib/prisma", () => ({
 	__esModule: true,
@@ -22,6 +23,10 @@ jest.mock("@/feature/user/functions/deletePasswordResetRequest", () => ({
 	default: jest.fn(),
 }));
 
+jest.mock("@/lib/apiTranslation", () => ({
+	getApiTranslation: jest.fn(),
+}));
+
 const mockPrisma = prisma as jest.Mocked<typeof prisma>;
 const mockResetPassword = resetPassword as jest.MockedFunction<
 	typeof resetPassword
@@ -30,6 +35,9 @@ const mockDeletePasswordResetRequest =
 	deletePasswordResetRequest as jest.MockedFunction<
 		typeof deletePasswordResetRequest
 	>;
+const mockGetApiTranslation = getApiTranslation as jest.MockedFunction<
+	typeof getApiTranslation
+>;
 
 const VALID_TOKEN = "123e4567-e89b-12d3-a456-426614174000";
 const VALID_PASSWORD = "newPassword123!";
@@ -88,6 +96,19 @@ describe("POST /api/auth/password-reset", () => {
 		jest.clearAllMocks();
 		mockPrisma.$transaction.mockImplementation(async (callback) => {
 			return await callback(mockTx);
+		});
+		// Setup default mock responses for translations
+		mockGetApiTranslation.mockImplementation((section, key) => {
+			const translations: Record<string, string> = {
+				InvalidJsonFormat: "Invalid JSON format",
+				TokenAndPasswordRequired:
+					"Valid token and new password are required",
+				Success: "Password reset successful",
+				InvalidToken: "Invalid token",
+				TokenExpired: "Token expired",
+				InternalServerError: "Internal server error",
+			};
+			return Promise.resolve(translations[key] || key);
 		});
 	});
 
