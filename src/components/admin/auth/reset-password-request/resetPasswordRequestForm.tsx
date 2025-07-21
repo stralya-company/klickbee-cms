@@ -35,11 +35,13 @@ export default function ResetPasswordRequestForm() {
 
 	async function onSubmit(data: UserPasswordResetRequestFormValues) {
 		try {
-			await passwordResetRequestMutation.mutateAsync(data);
+			const result = await passwordResetRequestMutation.mutateAsync(data);
 			resetPasswordRequestForm.reset();
-			toast.success(t("SuccessMessage"));
-		} catch {
-			toast.error(t("ErrorMessage"));
+			toast.success(result.message);
+		} catch (error) {
+			const errorMessage =
+				error instanceof Error ? error.message : t("ErrorMessage");
+			toast.error(errorMessage);
 		}
 	}
 	return (
