@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 export default async function resetPassword(
 	token: string,
 	newPassword: string,
-): Promise<boolean> {
+): Promise<void> {
 	const resetRequest = await prisma.userPasswordReset.findUnique({
 		where: { token },
 	});
@@ -32,6 +32,4 @@ export default async function resetPassword(
 		where: { id: user.id },
 		data: { password: hashedPassword },
 	});
-
-	return true;
 }
