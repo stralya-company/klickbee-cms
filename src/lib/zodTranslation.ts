@@ -50,7 +50,9 @@ export function createZodErrorMap(t: (_key: string) => string): ZodErrorMap {
 			);
 		}
 
-		return { message: t(translationKey) };
+		const translatedMessage = t(translationKey);
+
+		return { message: translatedMessage || "Translation not available" };
 	};
 }
 
@@ -58,7 +60,7 @@ export function initializeGlobalZodErrorMap(
 	validationTranslations: Record<string, string>,
 ) {
 	const errorMap = createZodErrorMap(
-		(key: string) => validationTranslations[key] || key,
+		(key: string) => validationTranslations[key] || "An error occurred",
 	);
 	z.setErrorMap(errorMap);
 }
