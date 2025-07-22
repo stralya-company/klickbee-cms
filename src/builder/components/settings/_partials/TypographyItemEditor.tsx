@@ -22,7 +22,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { InputWithUnit } from "@/builder/components/settings/_partials/InputWithUnit";
-import { sizeUnits } from "@/builder/types/FluidSize";
+import { sizeUnits } from "@/builder/types/settings/FluidSize";
 import {
 	typographyUsages,
 	typographyFontStyles,
@@ -30,7 +30,7 @@ import {
 	TypographyFontWeight,
 	TypographyFontStyle,
 	TypographyUsage,
-} from "@/builder/types/TypographySettings";
+} from "@/builder/types/settings/TypographySettings";
 import {
 	Control,
 	useController,

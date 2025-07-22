@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import type { LogoSettings } from "@/builder/types/LogoSettings";
+import type { LogoSettings } from "@/builder/types/settings/LogoSettings";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
