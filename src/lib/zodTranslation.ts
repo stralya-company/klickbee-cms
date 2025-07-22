@@ -53,8 +53,6 @@ export function createZodErrorMap(t: (_key: string) => string): ZodErrorMap {
 	return (issue) => {
 		const path = issue.path?.[issue.path.length - 1]?.toString() || "";
 
-		// Debug: console.error("Issue code:", issue.code, "Path:", path);
-
 		let translationKey = "RequiredField";
 
 		if (issue.code === "invalid_string") {
