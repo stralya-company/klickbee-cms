@@ -1,4 +1,4 @@
-import ResetPasswordRequestForm from "@/components/admin/auth/reset-password-request/resetPasswordRequestForm";
+import ResetPasswordRequestForm from "@/components/admin/auth/password-reset-request/resetPasswordRequestForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 
