@@ -90,15 +90,19 @@ describe("POST /api/auth/password-reset", () => {
 		});
 		// Setup default mock responses for translations
 		mockGetApiTranslation.mockImplementation((section, key) => {
-			const translations: Record<string, string> = {
-				InvalidJsonFormat: "Invalid JSON format",
-				InvalidFormValidation: "Form validation failed",
-				Success: "Password reset successful",
-				InvalidToken: "Invalid token",
-				TokenExpired: "Token expired",
-				InternalServerError: "Internal server error",
+			const translations: Record<string, Record<string, string>> = {
+				Common: {
+					InvalidJsonFormat: "Invalid JSON format",
+					InternalServerError: "Internal server error",
+				},
+				PasswordReset: {
+					InvalidFormValidation: "Form validation failed",
+					Success: "Password reset successful",
+					InvalidToken: "Invalid token",
+					TokenExpired: "Token expired",
+				},
 			};
-			return Promise.resolve(translations[key] || key);
+			return Promise.resolve(translations[section]?.[key] || key);
 		});
 	});
 
