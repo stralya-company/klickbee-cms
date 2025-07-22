@@ -21,14 +21,21 @@ export async function POST(req: NextRequest) {
 
 		const resetToken = await createPasswordResetRequest(email);
 
-		const baseUrl =
-			process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+		const baseUrl = (() => {
+			if (
+				process.env.NODE_ENV === "production" &&
+				!process.env.NEXT_PUBLIC_APP_URL
+			) {
+				throw new Error("MISSING_APP_URL");
+			}
+			return process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+		})();
+
 		const adminKey = process.env.ADMIN_GENERATED_KEY;
 		if (!adminKey) {
-			throw new Error(
-				"ADMIN_GENERATED_KEY environment variable is not set.",
-			);
+			throw new Error("MISSING_ADMIN_KEY");
 		}
+
 		const resetUrl = `${baseUrl}/admin/${adminKey}/auth/password-reset?token=${resetToken}`;
 
 		const emailSubject = await getApiTranslation(
@@ -54,13 +61,14 @@ export async function POST(req: NextRequest) {
 	} catch (err: unknown) {
 		if (err instanceof SyntaxError) {
 			const errorMessage = await getApiTranslation(
-				"PasswordResetRequest",
+				"Common",
 				"InvalidJsonFormat",
 			);
 			return NextResponse.json({ error: errorMessage }, { status: 400 });
 		}
 
 		if (err instanceof Error) {
+			// Handle user not found errors
 			if (err.message.includes("not found")) {
 				const errorMessage = await getApiTranslation(
 					"PasswordResetRequest",
@@ -71,11 +79,46 @@ export async function POST(req: NextRequest) {
 					{ status: 404 },
 				);
 			}
+
+			// Handle configuration errors
+			if (err.message === "MISSING_APP_URL") {
+				const errorMessage = await getApiTranslation(
+					"Common",
+					"MissingAppUrl",
+				);
+				return NextResponse.json(
+					{ error: errorMessage },
+					{ status: 500 },
+				);
+			}
+
+			if (err.message === "MISSING_ADMIN_KEY") {
+				const errorMessage = await getApiTranslation(
+					"Common",
+					"MissingAdminKey",
+				);
+				return NextResponse.json(
+					{ error: errorMessage },
+					{ status: 500 },
+				);
+			}
+
+			// Handle email sending errors
+			if (err.message.includes("SMTP") || err.message.includes("mail")) {
+				const errorMessage = await getApiTranslation(
+					"Common",
+					"EmailSendError",
+				);
+				return NextResponse.json(
+					{ error: errorMessage },
+					{ status: 500 },
+				);
+			}
 		}
 
 		console.error("Unhandled error during password reset request:", err);
 		const errorMessage = await getApiTranslation(
-			"PasswordResetRequest",
+			"Common",
 			"InternalServerError",
 		);
 		return NextResponse.json({ error: errorMessage }, { status: 500 });
