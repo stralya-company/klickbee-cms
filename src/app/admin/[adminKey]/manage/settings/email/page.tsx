@@ -22,6 +22,7 @@ const emailSettingsSchema = z.object({
 			"Invalid hostname or IP address",
 		),
 	emailPort: z.number().int().min(1).max(65535),
+	emailSecure: z.boolean(),
 	emailSender: z.string().email("Invalid email format"),
 	emailUsername: z.string(),
 	emailPassword: z.string().optional(),
@@ -40,6 +41,7 @@ type CheckConnectionSchema = z.infer<typeof checkConnectionSchema>;
 export default function EmailSettingsPage() {
 	const emailHost = useSetting("emailHost");
 	const emailPort = useSetting("emailPort");
+	const emailSecure = useSetting("emailSecure");
 	const emailSender = useSetting("emailSender");
 	const emailUsername = useSetting("emailUsername");
 	const setSetting = useSetSetting();
@@ -57,18 +59,21 @@ export default function EmailSettingsPage() {
 		if (
 			emailHost.data &&
 			emailPort.data &&
+			emailSecure.data &&
 			emailSender.data &&
 			emailUsername.data
 		) {
 			setEmailSettings({
 				emailHost: emailHost.data.value ?? "",
 				emailPort: Number(emailPort.data.value ?? ""),
+				emailSecure: emailSecure.data.value === "true",
 				emailSender: emailSender.data.value ?? "",
 				emailUsername: emailUsername.data.value ?? "",
 			});
 			emailSettingsForm.reset({
 				emailHost: emailHost.data.value ?? "",
 				emailPort: Number(emailPort.data.value ?? ""),
+				emailSecure: emailSecure.data.value === "true",
 				emailSender: emailSender.data.value ?? "",
 				emailUsername: emailUsername.data.value ?? "",
 			});
@@ -76,6 +81,7 @@ export default function EmailSettingsPage() {
 	}, [
 		emailHost.data,
 		emailPort.data,
+		emailSecure.data,
 		emailSender.data,
 		emailUsername.data,
 		emailSettingsForm,
@@ -84,6 +90,7 @@ export default function EmailSettingsPage() {
 	if (
 		emailHost.isLoading ||
 		emailPort.isLoading ||
+		emailSecure.isLoading ||
 		emailSender.isLoading ||
 		emailUsername.isLoading
 	) {
@@ -95,7 +102,7 @@ export default function EmailSettingsPage() {
 
 		keys.forEach((key) => {
 			const currentValue = emailSettings?.[key];
-			if (data[key] && data[key] !== currentValue) {
+			if (data[key] !== "" && data[key] !== currentValue) {
 				setSetting.mutate({
 					key,
 					value: String(data[key]),
@@ -148,6 +155,20 @@ export default function EmailSettingsPage() {
 						<p className="text-red-500">
 							{
 								emailSettingsForm.formState.errors.emailPort
+									.message
+							}
+						</p>
+					)}
+					<Label htmlFor="emailSecure">SSL/TLS</Label>
+					<Input
+						type="checkbox"
+						id="emailSecure"
+						{...emailSettingsForm.register("emailSecure")}
+					/>
+					{emailSettingsForm.formState.errors.emailSecure && (
+						<p className="text-red-500">
+							{
+								emailSettingsForm.formState.errors.emailSecure
 									.message
 							}
 						</p>
