@@ -24,6 +24,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
+import { encryptString } from "@/lib/crypto";
 
 export default function EmailSettingsForm() {
 	const emailHost = useSetting("emailHost");
@@ -89,7 +90,10 @@ export default function EmailSettingsForm() {
 				if (data[key] !== "" && data[key] !== currentValue) {
 					const result = await setSetting.mutateAsync({
 						key,
-						value: String(data[key]),
+						value:
+							key === "emailPassword"
+								? await encryptString(data[key] ?? "")
+								: String(data[key]),
 					});
 					toast.success(result.message);
 				}
@@ -209,6 +213,7 @@ export default function EmailSettingsForm() {
 									{...field}
 									placeholder="Email Password"
 									className="w-full"
+									type="password"
 								/>
 							</FormControl>
 							<FormMessage />
