@@ -1,6 +1,3 @@
-// Types for all unique content properties used by components in the builder
-// Generated from Components.xlsx on 2025-07-22
-
 export type ListType = "bulleted" | "numbered";
 export type FieldType = "text" | "email" | "password";
 

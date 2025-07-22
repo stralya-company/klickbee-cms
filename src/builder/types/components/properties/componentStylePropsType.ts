@@ -77,12 +77,12 @@ export type LayoutStyle = {
 };
 
 export type SizeSpacingStyle = {
-	width?: number;
-	height?: number;
-	minWidth?: number;
-	maxWidth?: number;
-	minHeight?: number;
-	maxHeight?: number;
+	width?: SpacingValue;
+	height?: SpacingValue;
+	minWidth?: SpacingValue;
+	maxWidth?: SpacingValue;
+	minHeight?: SpacingValue;
+	maxHeight?: SpacingValue;
 	padding?: SectionPadding;
 	margin?: SectionPadding;
 };
@@ -92,7 +92,7 @@ export type TypographyStyle = {
 	fontFamily?: TypographySettings["fontFamily"];
 	fontSize?: TypographySettings["fontSize"];
 	fontWeight?: TypographySettings["fontWeight"];
-	lineHeight?: number | string;
+	lineHeight?: SpacingValue | string;
 	fontStyle?: TypographySettings["fontStyle"];
 	letterSpacing?: TypographySettings["letterSpacing"];
 	color?: ColorSettings;
@@ -107,7 +107,7 @@ export type BackgroundStyle = {
 	color?: ColorSettings;
 	gradient?: {
 		type: GradientType;
-		angle?: number;
+		angle?: { number: number; unit: "deg" | "rad" };
 		colors: [ColorSettings, ColorSettings];
 	};
 	image?: {
