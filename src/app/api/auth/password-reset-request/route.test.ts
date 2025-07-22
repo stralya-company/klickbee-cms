@@ -3,6 +3,7 @@ import { POST } from "./route";
 import { NextRequest } from "next/server";
 import { createPasswordResetRequest } from "@/feature/user/functions/createPasswordResetRequest";
 import { getApiTranslation } from "@/lib/apiTranslation";
+import { sendEmail } from "@/lib/sendEmail";
 
 vi.mock("@/feature/user/functions/createPasswordResetRequest", () => ({
 	createPasswordResetRequest: vi.fn(),
@@ -12,8 +13,13 @@ vi.mock("@/lib/apiTranslation", () => ({
 	getApiTranslation: vi.fn(),
 }));
 
+vi.mock("@/lib/sendEmail", () => ({
+	sendEmail: vi.fn(),
+}));
+
 const mockRequestPasswordReset = createPasswordResetRequest as Mock;
 const mockGetApiTranslation = getApiTranslation as Mock;
+const mockSendEmail = sendEmail as Mock;
 
 function createMockRequest(body: object): NextRequest {
 	return {
@@ -30,7 +36,6 @@ function createMockRequestWithError(): NextRequest {
 }
 
 describe("POST /api/auth/password-reset-request", () => {
-	// Simplified translation mock setup
 	const setupTranslationMocks = () => {
 		const translations: Record<string, string> = {
 			InvalidJsonFormat: "Invalid JSON format",
@@ -38,6 +43,8 @@ describe("POST /api/auth/password-reset-request", () => {
 			Success: "Password reset request successful",
 			EmailNotFound: "Email not found",
 			InternalServerError: "Internal server error",
+			EmailSubject: "Password Reset Request",
+			EmailContent: "Please use this link to reset your password",
 		};
 		mockGetApiTranslation.mockImplementation((section, key) =>
 			Promise.resolve(translations[key] || key),
@@ -51,6 +58,7 @@ describe("POST /api/auth/password-reset-request", () => {
 
 	it("should return 200 for valid email", async () => {
 		mockRequestPasswordReset.mockResolvedValue("reset-token");
+		mockSendEmail.mockResolvedValue(undefined);
 
 		const req = createMockRequest({
 			email: "valid@example.com",
@@ -64,6 +72,11 @@ describe("POST /api/auth/password-reset-request", () => {
 		expect(mockRequestPasswordReset).toHaveBeenCalledWith(
 			"valid@example.com",
 		);
+		expect(mockSendEmail).toHaveBeenCalledWith({
+			to: "valid@example.com",
+			subject: "Password Reset Request",
+			text: "Please use this link to reset your password: http://localhost:3000/admin/admin/auth/password-reset?token=reset-token",
+		});
 	});
 
 	it("should return 400 for invalid JSON", async () => {
