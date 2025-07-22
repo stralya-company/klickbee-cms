@@ -18,7 +18,6 @@ export type FluidSize = {
 	max: number;
 	sizeUnit: SizeUnit;
 	maxWidth?: number;
-	widthUnit?: SizeUnit;
 };
 
 /**

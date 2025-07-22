@@ -2,7 +2,6 @@ export type ListType = "bulleted" | "numbered";
 export type FieldType = "text" | "email" | "password";
 
 export interface ContentProps {
-	// Original properties
 	text?: string; // General text content (buttons, links, labels, etc.)
 	content?: string; // Formatted text (rich text blocks)
 	level?: 1 | 2 | 3 | 4 | 5 | 6; // Heading level (H1–H6)

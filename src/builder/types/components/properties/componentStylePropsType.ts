@@ -92,7 +92,7 @@ export type TypographyStyle = {
 	fontFamily?: TypographySettings["fontFamily"];
 	fontSize?: TypographySettings["fontSize"];
 	fontWeight?: TypographySettings["fontWeight"];
-	lineHeight?: SpacingValue | string;
+	lineHeight?: SpacingValue | "normal" | "inherit" | "initial" | "unset";
 	fontStyle?: TypographySettings["fontStyle"];
 	letterSpacing?: TypographySettings["letterSpacing"];
 	color?: ColorSettings;
