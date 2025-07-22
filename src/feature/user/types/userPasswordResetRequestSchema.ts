@@ -1,10 +1,7 @@
 import z from "zod";
 
 export const userPasswordResetRequestSchema = z.object({
-	email: z
-		.string()
-		.email({ message: "Invalid email address" })
-		.min(1, { message: "Email is required" }),
+	email: z.string().email().min(1),
 });
 
 export type UserPasswordResetRequestFormValues = z.infer<

@@ -22,15 +22,15 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { InputWithUnit } from "@/builder/components/settings/_partials/InputWithUnit";
-import { sizeUnits } from "@/builder/types/FluidSize";
+import { sizeUnits } from "@/builder/types/settings/FluidSize";
 import {
-	typographyUsages,
 	typographyFontStyles,
 	typographyFontWeights,
 	TypographyFontWeight,
 	TypographyFontStyle,
-	TypographyUsage,
-} from "@/builder/types/TypographySettings";
+	TypographyTextTransform,
+	typographyTextTransforms,
+} from "@/builder/types/settings/TypographySettings";
 import {
 	Control,
 	useController,
@@ -429,23 +429,23 @@ const TypographyItemEditor = ({
 					</Label>
 					<Select
 						defaultValue={
-							typography?.typographies?.[idx]?.typographyUsage
+							typography?.typographies?.[idx]?.textTransform
 						}
-						onValueChange={(value: TypographyUsage) =>
+						onValueChange={(value: TypographyTextTransform) =>
 							setValue(
-								`typography.typographies.${idx}.typographyUsage`,
+								`typography.typographies.${idx}.textTransform`,
 								value,
 							)
 						}
 					>
 						<SelectTrigger className="w-full">
-							<SelectValue placeholder="Select usage context" />
+							<SelectValue placeholder="Select text transform" />
 						</SelectTrigger>
 						<SelectContent>
-							{typographyUsages.map((usage) => (
-								<SelectItem key={usage} value={usage}>
-									{usage.charAt(0).toUpperCase() +
-										usage.slice(1)}
+							{typographyTextTransforms.map((transform) => (
+								<SelectItem key={transform} value={transform}>
+									{transform.charAt(0).toUpperCase() +
+										transform.slice(1)}
 								</SelectItem>
 							))}
 						</SelectContent>
