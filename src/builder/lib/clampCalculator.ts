@@ -1,4 +1,4 @@
-import { FluidSize } from "@/builder/types/FluidSize";
+import { FluidSize } from "@/builder/types/settings/FluidSize";
 
 export function toClamp(
 	size: FluidSize,

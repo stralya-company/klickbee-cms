@@ -42,6 +42,7 @@ export default function TypographyPreview({
 							fontWeight: typo.fontWeight,
 							fontStyle: typo.fontStyle,
 							letterSpacing: `${typo.letterSpacing}${typo.letterSpacingUnits}`,
+							textTransform: typo.textTransform,
 						}}
 					>
 						<b>{typo.key as string}</b> : I love Klickbee CMS! Woaw.
