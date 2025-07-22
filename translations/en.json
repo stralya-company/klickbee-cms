@@ -112,5 +112,14 @@
 			"TokenExpired": "Token expired",
 			"InternalServerError": "Internal server error"
 		}
+	},
+	"Validation": {
+		"RequiredField": "This field is required.",
+		"InvalidEmail": "Please enter a valid email address.",
+		"EmailRequired": "Email is required",
+		"InvalidToken": "Invalid token",
+		"TokenRequired": "Token is required",
+		"PasswordRequired": "Password is required",
+		"PasswordTooShort": "Password must be at least 8 characters"
 	}
 }
