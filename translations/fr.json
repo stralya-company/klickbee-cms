@@ -107,7 +107,7 @@
 		"PasswordReset": {
 			"Success": "Mot de passe réinitialisé avec succès",
 			"InvalidJsonFormat": "Format JSON invalide",
-			"TokenAndPasswordRequired": "Token et nouveau mot de passe valides requis",
+			"InvalidFormValidation": "Validation du formulaire invalide",
 			"InvalidToken": "Token invalide",
 			"TokenExpired": "Token expiré",
 			"InternalServerError": "Erreur interne du serveur"
