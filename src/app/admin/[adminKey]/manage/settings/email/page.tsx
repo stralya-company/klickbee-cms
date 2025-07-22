@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import z from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,30 +12,12 @@ import {
 	useSetting,
 } from "@/feature/settings/queries/useSettings";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const emailSettingsSchema = z.object({
-	emailHost: z
-		.string()
-		.regex(
-			/^(?!:\/\/)([a-zA-Z0-9-_]+(\.[a-zA-Z0-9-_]+)+|(\d{1,3}\.){3}\d{1,3})$/,
-			"Invalid hostname or IP address",
-		),
-	emailPort: z.number().int().min(1).max(65535),
-	emailSecure: z.boolean(),
-	emailSender: z.string().email("Invalid email format"),
-	emailUsername: z.string(),
-	emailPassword: z.string().optional(),
-});
-
-type EmailSettingsSchema = z.infer<typeof emailSettingsSchema>;
-
-const checkConnectionSchema = z.object({
-	to: z.string().email(),
-	subject: z.string(),
-	text: z.string(),
-});
-
-type CheckConnectionSchema = z.infer<typeof checkConnectionSchema>;
+import {
+	checkConnectionSchema,
+	CheckConnectionSchema,
+	emailSettingsSchema,
+	EmailSettingsSchema,
+} from "@/feature/settings/types/emailSettingsSchema";
 
 export default function EmailSettingsPage() {
 	const emailHost = useSetting("emailHost");
