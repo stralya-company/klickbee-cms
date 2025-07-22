@@ -18,7 +18,8 @@
 		"prepare": "husky",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
-		"test": "jest"
+		"test": "vitest",
+		"test:ui": "vitest --ui"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.1.1",
