@@ -4,7 +4,7 @@ import {
 	fluidSizeSchema,
 	SizeUnit,
 	sizeUnits,
-} from "@/builder/types/FluidSize";
+} from "@/builder/types/settings/FluidSize";
 
 /**
  * Valid font style values for typography settings

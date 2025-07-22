@@ -7,7 +7,7 @@ import {
 	DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import React, { useState } from "react";
-import { SizeUnit } from "@/builder/types/FluidSize";
+import { SizeUnit } from "@/builder/types/settings/FluidSize";
 
 export function InputWithUnit({
 	value,
