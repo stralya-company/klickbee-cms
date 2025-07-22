@@ -32,7 +32,6 @@ export type AlignItems = "start" | "center" | "end" | "stretch";
 export type FlexDirection = "row" | "column";
 export type FlexWrap = "wrap" | "nowrap";
 export type GridAuto = number | `${number}fr`;
-export type Unit = "px" | "rem" | "%" | "vw" | "vh" | "auto";
 export type Side = "top" | "right" | "bottom" | "left";
 export type TextAlign = "left" | "center" | "right" | "justify";
 export type TextTransform = "none" | "uppercase" | "lowercase" | "capitalize";
