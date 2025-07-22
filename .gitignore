@@ -43,6 +43,7 @@ next-env.d.ts
 
 .idea
 .idea/*
+.vscode
 
 src/generated
 public/builder/uploads/logo/*
