@@ -31,11 +31,29 @@ const ERROR_CODE_MAP = {
 		const sizeMap = minSizeMap[issue.minimum];
 		return sizeMap?.[path] || sizeMap?.default || "RequiredField";
 	},
+
+	invalid_type: (_issue: ZodIssue, path: string) => {
+		if (path === "confirmNewPassword") {
+			return "PasswordMismatch";
+		}
+
+		return "InvalidType";
+	},
+
+	custom: (_issue: ZodIssue, path: string) => {
+		if (path === "confirmNewPassword") {
+			return "PasswordMismatch";
+		}
+
+		return "RequiredField";
+	},
 };
 
 export function createZodErrorMap(t: (_key: string) => string): ZodErrorMap {
 	return (issue) => {
 		const path = issue.path?.[issue.path.length - 1]?.toString() || "";
+
+		// Debug: console.error("Issue code:", issue.code, "Path:", path);
 
 		let translationKey = "RequiredField";
 
@@ -48,6 +66,13 @@ export function createZodErrorMap(t: (_key: string) => string): ZodErrorMap {
 				issue as ZodTooSmallIssue,
 				path,
 			);
+		} else if (issue.code === "invalid_type") {
+			translationKey = ERROR_CODE_MAP.invalid_type(
+				issue as ZodIssue,
+				path,
+			);
+		} else if (issue.code === "custom") {
+			translationKey = ERROR_CODE_MAP.custom(issue as ZodIssue, path);
 		}
 
 		const translatedMessage = t(translationKey);
