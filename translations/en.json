@@ -102,7 +102,9 @@
 			"InvalidJsonFormat": "Invalid JSON format",
 			"EmailRequired": "Valid email address is required",
 			"EmailNotFound": "Email not found",
-			"InternalServerError": "Internal server error"
+			"InternalServerError": "Internal server error",
+			"EmailSubject": "Password Reset Request",
+			"EmailContent": "Please use this link to reset your password"
 		},
 		"PasswordReset": {
 			"Success": "Password reset successfully",

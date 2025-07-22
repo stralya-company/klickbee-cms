@@ -102,7 +102,9 @@
 			"InvalidJsonFormat": "Format JSON invalide",
 			"EmailRequired": "Une adresse email valide est requise",
 			"EmailNotFound": "Email non trouvé",
-			"InternalServerError": "Erreur interne du serveur"
+			"InternalServerError": "Erreur interne du serveur",
+			"EmailSubject": "Demande de réinitialisation de mot de passe",
+			"EmailContent": "Veuillez utiliser ce lien pour réinitialiser votre mot de passe"
 		},
 		"PasswordReset": {
 			"Success": "Mot de passe réinitialisé avec succès",
