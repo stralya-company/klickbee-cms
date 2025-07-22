@@ -19,7 +19,7 @@ export async function sendEmail(options: EmailOptions): Promise<void> {
 	const emailPassword = await getSetting("emailPassword");
 	const emailSender = await getSetting("emailSender");
 
-	const transporter = nodemailer.createTransporter({
+	const transporter = nodemailer.createTransport({
 		host: emailHost || "",
 		port: Number(emailPort || ""),
 		secure:
