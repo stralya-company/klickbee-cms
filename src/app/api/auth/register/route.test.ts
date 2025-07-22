@@ -1,7 +1,8 @@
+import { describe, it, expect, vi } from "vitest";
 import { POST } from "./route";
 import { NextRequest } from "next/server";
 
-jest.mock("@stralya/auth");
+vi.mock("@stralya/auth");
 
 function createMockRequest(body: object): NextRequest {
 	return {

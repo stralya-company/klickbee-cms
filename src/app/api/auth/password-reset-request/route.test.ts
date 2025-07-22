@@ -1,23 +1,19 @@
+import { describe, it, expect, beforeEach, vi, type Mock } from "vitest";
 import { POST } from "./route";
 import { NextRequest } from "next/server";
 import { createPasswordResetRequest } from "@/feature/user/functions/createPasswordResetRequest";
 import { getApiTranslation } from "@/lib/apiTranslation";
 
-jest.mock("@/feature/user/functions/createPasswordResetRequest", () => ({
-	createPasswordResetRequest: jest.fn(),
+vi.mock("@/feature/user/functions/createPasswordResetRequest", () => ({
+	createPasswordResetRequest: vi.fn(),
 }));
 
-jest.mock("@/lib/apiTranslation", () => ({
-	getApiTranslation: jest.fn(),
+vi.mock("@/lib/apiTranslation", () => ({
+	getApiTranslation: vi.fn(),
 }));
 
-const mockRequestPasswordReset =
-	createPasswordResetRequest as jest.MockedFunction<
-		typeof createPasswordResetRequest
-	>;
-const mockGetApiTranslation = getApiTranslation as jest.MockedFunction<
-	typeof getApiTranslation
->;
+const mockRequestPasswordReset = createPasswordResetRequest as Mock;
+const mockGetApiTranslation = getApiTranslation as Mock;
 
 function createMockRequest(body: object): NextRequest {
 	return {
@@ -34,19 +30,23 @@ function createMockRequestWithError(): NextRequest {
 }
 
 describe("POST /api/auth/password-reset-request", () => {
+	// Simplified translation mock setup
+	const setupTranslationMocks = () => {
+		const translations: Record<string, string> = {
+			InvalidJsonFormat: "Invalid JSON format",
+			EmailRequired: "Valid email address is required",
+			Success: "Password reset request successful",
+			EmailNotFound: "Email not found",
+			InternalServerError: "Internal server error",
+		};
+		mockGetApiTranslation.mockImplementation((section, key) =>
+			Promise.resolve(translations[key] || key),
+		);
+	};
+
 	beforeEach(() => {
-		jest.clearAllMocks();
-		// Setup default mock responses for translations
-		mockGetApiTranslation.mockImplementation((section, key) => {
-			const translations: Record<string, string> = {
-				InvalidJsonFormat: "Invalid JSON format",
-				EmailRequired: "Valid email address is required",
-				Success: "Password reset request successful",
-				EmailNotFound: "Email not found",
-				InternalServerError: "Internal server error",
-			};
-			return Promise.resolve(translations[key] || key);
-		});
+		vi.clearAllMocks();
+		setupTranslationMocks();
 	});
 
 	it("should return 200 for valid email", async () => {
