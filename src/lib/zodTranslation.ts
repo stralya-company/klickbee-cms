@@ -32,14 +32,6 @@ const ERROR_CODE_MAP = {
 		return sizeMap?.[path] || sizeMap?.default || "RequiredField";
 	},
 
-	invalid_type: (_issue: ZodIssue, path: string) => {
-		if (path === "confirmNewPassword") {
-			return "PasswordMismatch";
-		}
-
-		return "InvalidType";
-	},
-
 	custom: (_issue: ZodIssue, path: string) => {
 		if (path === "confirmNewPassword") {
 			return "PasswordMismatch";
@@ -62,11 +54,6 @@ export function createZodErrorMap(t: (_key: string) => string): ZodErrorMap {
 		} else if (issue.code === "too_small") {
 			translationKey = ERROR_CODE_MAP.too_small(
 				issue as ZodTooSmallIssue,
-				path,
-			);
-		} else if (issue.code === "invalid_type") {
-			translationKey = ERROR_CODE_MAP.invalid_type(
-				issue as ZodIssue,
 				path,
 			);
 		} else if (issue.code === "custom") {
