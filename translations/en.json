@@ -40,6 +40,24 @@
 		"ConnectionError": "Connection error.",
 		"ConnectionFailed": "Connection failed. Please try again."
 	},
+	"ResetPasswordRequest": {
+		"ResetPasswordRequest": "Reset password request",
+		"EmailLabel": "Email",
+		"EmailPlaceholder": "Enter your email",
+		"SendResetLink": "Send reset link",
+		"Sending": "Sending...",
+		"SuccessMessage": "A reset link has been sent to your email.",
+		"ErrorMessage": "An error occurred while sending the reset link."
+	},
+	"ResetPassword": {
+		"NewPassword": "New Password",
+		"ConfirmPassword": "Confirm Password",
+		"NewPasswordPlaceholder": "Enter your new password",
+		"ResetButton": "Reset Password",
+		"Resetting": "Resetting...",
+		"SuccessMessage": "Your password has been reset successfully.",
+		"ErrorMessage": "An error occurred while resetting the password."
+	},
 	"Errors": {
 		"LoadingError": "Loading error",
 		"SaveError": "Save error",
@@ -77,5 +95,22 @@
 		"Type": "Type:",
 		"SelectType": "Select a type",
 		"AddColor": "Add color"
+	},
+	"API": {
+		"PasswordResetRequest": {
+			"Success": "Password reset request successful",
+			"InvalidJsonFormat": "Invalid JSON format",
+			"EmailRequired": "Valid email address is required",
+			"EmailNotFound": "Email not found",
+			"InternalServerError": "Internal server error"
+		},
+		"PasswordReset": {
+			"Success": "Password reset successful",
+			"InvalidJsonFormat": "Invalid JSON format",
+			"TokenAndPasswordRequired": "Valid token and new password are required",
+			"InvalidToken": "Invalid token",
+			"TokenExpired": "Token expired",
+			"InternalServerError": "Internal server error"
+		}
 	}
 }

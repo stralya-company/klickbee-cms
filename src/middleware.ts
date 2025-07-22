@@ -3,6 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 const ADMIN_KEY = process.env.ADMIN_GENERATED_KEY || "admin";
 const AUTH_COOKIE_NAME = "session";
 
+const publicPages = [
+	`/admin/${ADMIN_KEY}/auth/login`,
+	`/admin/${ADMIN_KEY}/auth/password-reset-request`,
+	`/admin/${ADMIN_KEY}/auth/password-reset`,
+];
+
 export function middleware(req: NextRequest) {
 	const { pathname } = req.nextUrl;
 
@@ -17,10 +23,10 @@ export function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL("/", req.url));
 	}
 
-	const isLoginPage = pathname.startsWith(`/admin/${ADMIN_KEY}/auth/login`);
+	const isPublicPage = publicPages.some((page) => pathname.startsWith(page));
 	const isAuthenticated = Boolean(req.cookies.get(AUTH_COOKIE_NAME));
 
-	if (!isAuthenticated && !isLoginPage) {
+	if (!isAuthenticated && !isPublicPage) {
 		return NextResponse.redirect(
 			new URL(`/admin/${ADMIN_KEY}/auth/login`, req.url),
 		);
