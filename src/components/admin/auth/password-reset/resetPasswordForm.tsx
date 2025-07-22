@@ -19,16 +19,20 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function ResetPasswordForm() {
-	const t = useTranslations("ResetPassword");
+	const router = useRouter();
 
-	const passwordResetMutation = usePasswordReset();
+	const { adminKey } = useParams<{ adminKey: string }>();
 
 	const searchParams = useSearchParams();
 	const token = searchParams.get("token");
+
+	const t = useTranslations("ResetPassword");
+
+	const passwordResetMutation = usePasswordReset();
 
 	const resetPasswordForm = useForm<UserPasswordResetFormValues>({
 		resolver: zodResolver(userPasswordResetSchema),
@@ -44,6 +48,7 @@ export default function ResetPasswordForm() {
 			const result = await passwordResetMutation.mutateAsync(data);
 			resetPasswordForm.reset();
 			toast.success(result.message);
+			router.push(`/admin/${adminKey}/auth/login`);
 		} catch (error) {
 			const errorMessage =
 				error instanceof Error ? error.message : t("ErrorMessage");
