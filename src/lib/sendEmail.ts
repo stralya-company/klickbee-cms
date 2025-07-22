@@ -18,14 +18,15 @@ export async function sendEmail(options: EmailOptions): Promise<void> {
 	const emailUsername = await getSetting("emailUsername");
 	const emailPassword = await getSetting("emailPassword");
 	const emailSender = await getSetting("emailSender");
+	const validPort = parseInt(emailPort || "587", 10);
 
 	const transporter = nodemailer.createTransport({
 		host: emailHost || "",
-		port: Number(emailPort || ""),
+		port: validPort,
 		secure:
 			emailSecure !== undefined
 				? emailSecure === "true"
-				: Number(emailPort) === 465,
+				: validPort === 465,
 		auth: {
 			user: emailUsername || "",
 			pass: await decryptString(emailPassword || ""),
