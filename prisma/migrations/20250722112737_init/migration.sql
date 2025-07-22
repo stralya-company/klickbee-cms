@@ -27,6 +27,17 @@ CREATE TABLE "Permission" (
 );
 
 -- CreateTable
+CREATE TABLE "UserPasswordReset" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "token" VARCHAR(255) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "UserPasswordReset_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Settings" (
     "key" TEXT NOT NULL,
     "value" TEXT NOT NULL,
@@ -66,6 +77,15 @@ CREATE UNIQUE INDEX "Role_name_key" ON "Role"("name");
 CREATE UNIQUE INDEX "Permission_roleId_action_key" ON "Permission"("roleId", "action");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "UserPasswordReset_userId_key" ON "UserPasswordReset"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "UserPasswordReset_token_key" ON "UserPasswordReset"("token");
+
+-- CreateIndex
+CREATE INDEX "UserPasswordReset_userId_idx" ON "UserPasswordReset"("userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Settings_key_key" ON "Settings"("key");
 
 -- AddForeignKey
@@ -73,3 +93,9 @@ ALTER TABLE "User" ADD CONSTRAINT "User_roleId_fkey" FOREIGN KEY ("roleId") REFE
 
 -- AddForeignKey
 ALTER TABLE "Permission" ADD CONSTRAINT "Permission_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserPasswordReset" ADD CONSTRAINT "UserPasswordReset_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserSettings" ADD CONSTRAINT "UserSettings_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
