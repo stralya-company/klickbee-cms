@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
 	} catch (err: unknown) {
 		if (err instanceof SyntaxError) {
 			const errorMessage = await getApiTranslation(
-				"PasswordReset",
+				"Common",
 				"InvalidJsonFormat",
 			);
 			return NextResponse.json({ error: errorMessage }, { status: 400 });
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
 
 		console.error("Unhandled error during password reset:", err);
 		const errorMessage = await getApiTranslation(
-			"PasswordReset",
+			"Common",
 			"InternalServerError",
 		);
 		return NextResponse.json({ error: errorMessage }, { status: 500 });
