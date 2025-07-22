@@ -97,22 +97,25 @@
 		"AddColor": "Add color"
 	},
 	"API": {
+		"Common": {
+			"InternalServerError": "Internal server error",
+			"InvalidJsonFormat": "Invalid JSON format",
+			"MissingAppUrl": "Application URL is not configured",
+			"MissingAdminKey": "Admin key is not configured",
+			"EmailSendError": "Failed to send email"
+		},
 		"PasswordResetRequest": {
 			"Success": "Password reset request sent successfully",
-			"InvalidJsonFormat": "Invalid JSON format",
 			"EmailRequired": "Valid email address is required",
 			"EmailNotFound": "Email not found",
-			"InternalServerError": "Internal server error",
 			"EmailSubject": "Password Reset Request",
 			"EmailContent": "Please use this link to reset your password"
 		},
 		"PasswordReset": {
 			"Success": "Password reset successfully",
-			"InvalidJsonFormat": "Invalid JSON format",
 			"InvalidFormValidation": "Form validation failed",
 			"InvalidToken": "Invalid token",
-			"TokenExpired": "Token expired",
-			"InternalServerError": "Internal server error"
+			"TokenExpired": "Token expired"
 		}
 	},
 	"Validation": {
