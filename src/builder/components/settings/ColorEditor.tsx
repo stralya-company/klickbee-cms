@@ -17,7 +17,7 @@ import type {
 	UseFormSetValue,
 } from "react-hook-form";
 import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
-import { ColorType, colorTypes } from "@/builder/types/ColorSettings";
+import { ColorType, colorTypes } from "@/builder/types/settings/ColorSettings";
 
 type ColorPaletteEditorProps = {
 	colorFields: FieldArrayWithId<FormValues, "colors", "id">[];
