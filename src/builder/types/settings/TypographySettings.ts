@@ -60,7 +60,7 @@ export type TypographyTextTransform = (typeof typographyTextTransforms)[number];
  * @property fontStyle - Font style (normal, italic, oblique) or text transform (uppercase, lowercase, capitalize)
  * @property letterSpacing - Letter spacing value
  * @property letterSpacingUnits - Unit for letter spacing (px, em, rem)
- * @property textTransform - Text transform for additional styling (uppercase, lowercase, capitalize)
+ * @property textTransform - Text transform for additional styling (uppercase, lowercase, capitalize, unset)
  */
 export type TypographySettings = {
 	key: string;
