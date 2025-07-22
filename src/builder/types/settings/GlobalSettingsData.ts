@@ -2,23 +2,23 @@ import {
 	defaultSpacingSettings,
 	SpacingSettings,
 	spacingSettingsSchema,
-} from "@/builder/types/SpacingSettings";
+} from "@/builder/types/settings/SpacingSettings";
 import {
 	defaultFluidTypographySettings,
 	FluidTypographySettings,
 	fluidTypographySettingsSchema,
-} from "@/builder/types/TypographySettings";
+} from "@/builder/types/settings/TypographySettings";
 import {
 	colorSchema,
 	ColorSettings,
 	defaultColorSettings,
-} from "@/builder/types/ColorSettings";
+} from "@/builder/types/settings/ColorSettings";
 import { z } from "zod";
 import {
 	defaultLogoSettings,
 	LogoSettings,
 	logoSettingsSchema,
-} from "@/builder/types/LogoSettings";
+} from "@/builder/types/settings/LogoSettings";
 
 export type GlobalSettingsData = {
 	typography: FluidTypographySettings;

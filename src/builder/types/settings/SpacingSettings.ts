@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { FluidSize, fluidSizeSchema } from "@/builder/types/FluidSize";
+import { FluidSize, fluidSizeSchema } from "@/builder/types/settings/FluidSize";
 
 export type SectionPadding = {
 	top: FluidSize;
