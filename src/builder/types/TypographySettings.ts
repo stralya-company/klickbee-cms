@@ -72,7 +72,7 @@ export type TypographySettings = {
 	fontStyle: TypographyFontStyle;
 	letterSpacing: number;
 	letterSpacingUnits: SizeUnit;
-	textTransform: TypographyTextTransform; // Optional text transform for additional styling
+	textTransform: TypographyTextTransform; // Text transform for additional styling
 };
 
 /**
