@@ -35,19 +35,18 @@ export const typographyFontWeights = [
 export type TypographyFontWeight = (typeof typographyFontWeights)[number];
 
 /**
- * Valid typography usage contexts
- * These represent the semantic purpose of the typography style
+ * Valid text transform values for typography settings
+ * Used to control text casing and capitalization
  */
-export const typographyUsages = [
-	"body",
-	"heading",
-	"subheading",
-	"caption",
-	"button",
-	"link",
+
+export const typographyTextTransforms = [
+	"uppercase",
+	"lowercase",
+	"capitalize",
+	"unset",
 ] as const;
 
-export type TypographyUsage = (typeof typographyUsages)[number];
+export type TypographyTextTransform = (typeof typographyTextTransforms)[number];
 
 /**
  * Typography settings for a specific text style
@@ -61,7 +60,7 @@ export type TypographyUsage = (typeof typographyUsages)[number];
  * @property fontStyle - Font style (normal, italic, oblique) or text transform (uppercase, lowercase, capitalize)
  * @property letterSpacing - Letter spacing value
  * @property letterSpacingUnits - Unit for letter spacing (px, em, rem)
- * @property typographyUsage - Semantic usage context (optional)
+ * @property textTransform - Optional text transform for additional styling (uppercase, lowercase, capitalize)
  */
 export type TypographySettings = {
 	key: string;
@@ -73,7 +72,7 @@ export type TypographySettings = {
 	fontStyle: TypographyFontStyle;
 	letterSpacing: number;
 	letterSpacingUnits: SizeUnit;
-	typographyUsage?: TypographyUsage;
+	textTransform: TypographyTextTransform; // Optional text transform for additional styling
 };
 
 /**
@@ -113,11 +112,9 @@ export const typographySettingsSchema = z.object({
 			message: "Letter spacing unit must be one of: px, em, rem",
 		}),
 	}),
-	typographyUsage: z
-		.enum(typographyUsages, {
-			errorMap: () => ({ message: "Invalid typography usage" }),
-		})
-		.optional(),
+	textTransform: z
+		.enum(typographyTextTransforms)
+		.describe("Optional text transform for additional styling"),
 });
 
 /**
@@ -148,7 +145,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			fontStyle: "normal",
 			letterSpacing: -0.5,
 			letterSpacingUnits: "px",
-			typographyUsage: "heading",
+			textTransform: "uppercase",
 		},
 		{
 			key: "Heading 2",
@@ -160,7 +157,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			fontStyle: "normal",
 			letterSpacing: -0.25,
 			letterSpacingUnits: "px",
-			typographyUsage: "heading",
+			textTransform: "uppercase",
 		},
 		{
 			key: "Heading 3",
@@ -172,7 +169,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			fontStyle: "normal",
 			letterSpacing: 0,
 			letterSpacingUnits: "px",
-			typographyUsage: "subheading",
+			textTransform: "capitalize",
 		},
 
 		// Body text
@@ -186,7 +183,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			fontStyle: "normal",
 			letterSpacing: 0,
 			letterSpacingUnits: "px",
-			typographyUsage: "body",
+			textTransform: "unset",
 		},
 		{
 			key: "Body",
@@ -198,7 +195,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			fontStyle: "normal",
 			letterSpacing: 0,
 			letterSpacingUnits: "px",
-			typographyUsage: "body",
+			textTransform: "unset",
 		},
 		{
 			key: "Body Small",
@@ -210,7 +207,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			fontStyle: "normal",
 			letterSpacing: 0.1,
 			letterSpacingUnits: "px",
-			typographyUsage: "body",
+			textTransform: "lowercase",
 		},
 
 		// UI elements
@@ -224,7 +221,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			fontStyle: "normal",
 			letterSpacing: 0.5,
 			letterSpacingUnits: "px",
-			typographyUsage: "button",
+			textTransform: "unset",
 		},
 		{
 			key: "Caption",
@@ -233,10 +230,10 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			lineHeight: 1.4,
 			lineHeightUnits: "em",
 			fontWeight: "400",
-			fontStyle: "normal",
+			fontStyle: "italic",
 			letterSpacing: 0.25,
 			letterSpacingUnits: "px",
-			typographyUsage: "caption",
+			textTransform: "lowercase",
 		},
 		{
 			key: "Link",
@@ -248,7 +245,7 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 			fontStyle: "normal",
 			letterSpacing: 0,
 			letterSpacingUnits: "px",
-			typographyUsage: "link",
+			textTransform: "unset",
 		},
 	],
 };
