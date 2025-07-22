@@ -51,9 +51,9 @@
 	"ResetPassword": {
 		"ResetPassword": "Reset Password",
 		"NewPasswordLabel": "New Password",
-		"ConfirmPasswordLabel": "Confirm Password",
+		"NewConfirmPasswordLabel": "Confirm Password",
 		"NewPasswordPlaceholder": "Enter your new password",
-		"ConfirmPasswordPlaceholder": "Confirm your new password",
+		"NewConfirmPasswordPlaceholder": "Confirm your new password",
 		"ResetButton": "Reset Password",
 		"Resetting": "Resetting...",
 		"ErrorMessage": "An error occurred while resetting the password."
@@ -120,6 +120,7 @@
 		"InvalidToken": "Invalid token",
 		"TokenRequired": "Token is required",
 		"PasswordRequired": "Password is required",
-		"PasswordTooShort": "Password must be at least 8 characters"
+		"PasswordTooShort": "Password must be at least 8 characters",
+		"PasswordMismatch": "Passwords do not match"
 	}
 }
