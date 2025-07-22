@@ -1,3 +1,12 @@
+import {
+	describe,
+	it,
+	expect,
+	beforeEach,
+	vi,
+	type Mock,
+	type MockedObject,
+} from "vitest";
 import { POST } from "./route";
 import { NextRequest } from "next/server";
 import resetPassword from "@/feature/user/functions/resetPassword";
@@ -6,38 +15,28 @@ import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import { getApiTranslation } from "@/lib/apiTranslation";
 
-jest.mock("@/lib/prisma", () => ({
-	__esModule: true,
+vi.mock("@/lib/prisma", () => ({
 	default: {
-		$transaction: jest.fn(),
+		$transaction: vi.fn(),
 	},
 }));
 
-jest.mock("@/feature/user/functions/resetPassword", () => ({
-	__esModule: true,
-	default: jest.fn(),
+vi.mock("@/feature/user/functions/resetPassword", () => ({
+	default: vi.fn(),
 }));
 
-jest.mock("@/feature/user/functions/deletePasswordResetRequest", () => ({
-	__esModule: true,
-	default: jest.fn(),
+vi.mock("@/feature/user/functions/deletePasswordResetRequest", () => ({
+	default: vi.fn(),
 }));
 
-jest.mock("@/lib/apiTranslation", () => ({
-	getApiTranslation: jest.fn(),
+vi.mock("@/lib/apiTranslation", () => ({
+	getApiTranslation: vi.fn(),
 }));
 
-const mockPrisma = prisma as jest.Mocked<typeof prisma>;
-const mockResetPassword = resetPassword as jest.MockedFunction<
-	typeof resetPassword
->;
-const mockDeletePasswordResetRequest =
-	deletePasswordResetRequest as jest.MockedFunction<
-		typeof deletePasswordResetRequest
-	>;
-const mockGetApiTranslation = getApiTranslation as jest.MockedFunction<
-	typeof getApiTranslation
->;
+const mockPrisma = prisma as MockedObject<typeof prisma>;
+const mockResetPassword = resetPassword as Mock;
+const mockDeletePasswordResetRequest = deletePasswordResetRequest as Mock;
+const mockGetApiTranslation = getApiTranslation as Mock;
 
 const VALID_TOKEN = "123e4567-e89b-12d3-a456-426614174000";
 const VALID_PASSWORD = "newPassword123!";
@@ -51,7 +50,7 @@ function createMockRequest(body: object): NextRequest {
 function createMockRequestWithError(): NextRequest {
 	return {
 		json: async () => {
-			throw new Error("Invalid JSON");
+			throw new SyntaxError("Invalid JSON");
 		},
 	} as unknown as NextRequest;
 }
@@ -83,38 +82,42 @@ function expectServerError(
 describe("POST /api/auth/password-reset", () => {
 	const mockTx = {
 		user: {
-			findUnique: jest.fn(),
-			update: jest.fn(),
+			findUnique: vi.fn(),
+			update: vi.fn(),
 		},
 		userPasswordReset: {
-			findUnique: jest.fn(),
-			delete: jest.fn(),
+			findUnique: vi.fn(),
+			delete: vi.fn(),
 		},
 	} as unknown as Prisma.TransactionClient;
 
+	// Simplified translation mock setup
+	const setupTranslationMocks = () => {
+		const translations: Record<string, string> = {
+			InvalidJsonFormat: "Invalid JSON format",
+			TokenAndPasswordRequired:
+				"Valid token and new password are required",
+			Success: "Password reset successful",
+			InvalidToken: "Invalid token",
+			TokenExpired: "Token expired",
+			InternalServerError: "Internal server error",
+		};
+		mockGetApiTranslation.mockImplementation((section, key) =>
+			Promise.resolve(translations[key] || key),
+		);
+	};
+
 	beforeEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 		mockPrisma.$transaction.mockImplementation(async (callback) => {
 			return await callback(mockTx);
 		});
-		// Setup default mock responses for translations
-		mockGetApiTranslation.mockImplementation((section, key) => {
-			const translations: Record<string, string> = {
-				InvalidJsonFormat: "Invalid JSON format",
-				TokenAndPasswordRequired:
-					"Valid token and new password are required",
-				Success: "Password reset successful",
-				InvalidToken: "Invalid token",
-				TokenExpired: "Token expired",
-				InternalServerError: "Internal server error",
-			};
-			return Promise.resolve(translations[key] || key);
-		});
+		setupTranslationMocks();
 	});
 
 	it("should return 200 for valid token and password", async () => {
-		mockResetPassword.mockResolvedValue();
-		mockDeletePasswordResetRequest.mockResolvedValue();
+		mockResetPassword.mockResolvedValue(undefined);
+		mockDeletePasswordResetRequest.mockResolvedValue(undefined);
 
 		const req = createMockRequest({
 			token: VALID_TOKEN,
@@ -249,7 +252,7 @@ describe("POST /api/auth/password-reset", () => {
 	});
 
 	it("should handle error from deletePasswordResetRequest", async () => {
-		mockResetPassword.mockResolvedValue();
+		mockResetPassword.mockResolvedValue(undefined);
 		mockDeletePasswordResetRequest.mockRejectedValue(
 			new Error("Database error"),
 		);
