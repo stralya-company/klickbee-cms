@@ -28,7 +28,7 @@ function createMockRequest(body: object): NextRequest {
 function createMockRequestWithError(): NextRequest {
 	return {
 		json: async () => {
-			throw new Error("Invalid JSON");
+			throw new SyntaxError("Invalid JSON");
 		},
 	} as unknown as NextRequest;
 }
