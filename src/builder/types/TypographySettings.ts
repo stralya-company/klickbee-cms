@@ -10,14 +10,7 @@ import {
  * Valid font style values for typography settings
  * Includes both font-style and text-transform CSS properties
  */
-export const typographyFontStyles = [
-	"normal",
-	"italic",
-	"oblique",
-	"uppercase",
-	"lowercase",
-	"capitalize",
-] as const;
+export const typographyFontStyles = ["normal", "italic", "oblique"] as const;
 export type TypographyFontStyle = (typeof typographyFontStyles)[number];
 
 /**
