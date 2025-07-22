@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { vi } from "vitest";
 
 export const login = vi.fn((email: string, password: string) => {
 	if (email === "valid@example.com" && password === "validpassword") {
