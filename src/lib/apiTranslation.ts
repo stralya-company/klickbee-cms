@@ -2,20 +2,8 @@ import { getSetting } from "@/lib/settings";
 
 interface ApiTranslations {
 	API: {
-		PasswordResetRequest: {
-			Success: string;
-			InvalidJsonFormat: string;
-			EmailRequired: string;
-			EmailNotFound: string;
-			InternalServerError: string;
-		};
-		PasswordReset: {
-			Success: string;
-			InvalidJsonFormat: string;
-			TokenAndPasswordRequired: string;
-			InvalidToken: string;
-			TokenExpired: string;
-			InternalServerError: string;
+		[key: string]: {
+			[key: string]: string;
 		};
 	};
 }
