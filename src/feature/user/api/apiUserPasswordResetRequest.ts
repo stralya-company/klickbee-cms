@@ -23,7 +23,12 @@ export async function POST(req: NextRequest) {
 
 		const baseUrl =
 			process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-		const adminKey = process.env.ADMIN_GENERATED_KEY || "admin";
+		const adminKey = process.env.ADMIN_GENERATED_KEY;
+		if (!adminKey) {
+			throw new Error(
+				"ADMIN_GENERATED_KEY environment variable is not set.",
+			);
+		}
 		const resetUrl = `${baseUrl}/admin/${adminKey}/auth/password-reset?token=${resetToken}`;
 
 		const emailSubject = await getApiTranslation(
