@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createPasswordResetRequest } from "@/feature/user/functions/createPasswordResetRequest";
 import { userPasswordResetRequestSchema } from "@/feature/user/types/userPasswordResetRequestSchema";
 import { getApiTranslation } from "@/lib/apiTranslation";
+import { sendEmail } from "@/lib/sendEmail";
 
 export async function POST(req: NextRequest) {
 	try {
@@ -18,9 +19,27 @@ export async function POST(req: NextRequest) {
 
 		const { email } = result.data;
 
-		await createPasswordResetRequest(email);
+		const resetToken = await createPasswordResetRequest(email);
 
-		// Todo: Implement email sending logic here
+		const baseUrl =
+			process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+		const adminKey = process.env.ADMIN_GENERATED_KEY || "admin";
+		const resetUrl = `${baseUrl}/admin/${adminKey}/auth/password-reset?token=${resetToken}`;
+
+		const emailSubject = await getApiTranslation(
+			"PasswordResetRequest",
+			"EmailSubject",
+		);
+		const emailContent = await getApiTranslation(
+			"PasswordResetRequest",
+			"EmailContent",
+		);
+
+		await sendEmail({
+			to: email,
+			subject: emailSubject,
+			text: `${emailContent}: ${resetUrl}`,
+		});
 
 		const successMessage = await getApiTranslation(
 			"PasswordResetRequest",
