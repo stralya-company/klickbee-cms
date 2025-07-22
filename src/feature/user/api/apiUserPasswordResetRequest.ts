@@ -4,30 +4,20 @@ import { userPasswordResetRequestSchema } from "@/feature/user/types/userPasswor
 import { getApiTranslation } from "@/lib/apiTranslation";
 
 export async function POST(req: NextRequest) {
-	let email: string;
-
 	try {
 		const body = await req.json();
-		email = body.email;
-	} catch {
-		const errorMessage = await getApiTranslation(
-			"PasswordResetRequest",
-			"InvalidJsonFormat",
-		);
-		return NextResponse.json({ error: errorMessage }, { status: 400 });
-	}
+		const result = userPasswordResetRequestSchema.safeParse(body);
 
-	const { success } = userPasswordResetRequestSchema.safeParse({ email });
+		if (!result.success) {
+			const errorMessage = await getApiTranslation(
+				"PasswordResetRequest",
+				"EmailRequired",
+			);
+			return NextResponse.json({ error: errorMessage }, { status: 400 });
+		}
 
-	if (!email || !success) {
-		const errorMessage = await getApiTranslation(
-			"PasswordResetRequest",
-			"EmailRequired",
-		);
-		return NextResponse.json({ error: errorMessage }, { status: 400 });
-	}
+		const { email } = result.data;
 
-	try {
 		await createPasswordResetRequest(email);
 
 		// Todo: Implement email sending logic here
@@ -38,6 +28,14 @@ export async function POST(req: NextRequest) {
 		);
 		return NextResponse.json({ message: successMessage }, { status: 200 });
 	} catch (err: unknown) {
+		if (err instanceof SyntaxError) {
+			const errorMessage = await getApiTranslation(
+				"PasswordResetRequest",
+				"InvalidJsonFormat",
+			);
+			return NextResponse.json({ error: errorMessage }, { status: 400 });
+		}
+
 		if (err instanceof Error) {
 			if (err.message.includes("not found")) {
 				const errorMessage = await getApiTranslation(

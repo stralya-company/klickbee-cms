@@ -6,35 +6,20 @@ import prisma from "@/lib/prisma";
 import { getApiTranslation } from "@/lib/apiTranslation";
 
 export async function POST(req: NextRequest) {
-	let token: string;
-	let newPassword: string;
-
 	try {
 		const body = await req.json();
-		newPassword = body.newPassword;
-		token = body.token;
-	} catch {
-		const errorMessage = await getApiTranslation(
-			"PasswordReset",
-			"InvalidJsonFormat",
-		);
-		return NextResponse.json({ error: errorMessage }, { status: 400 });
-	}
+		const result = userPasswordResetSchema.safeParse(body);
 
-	const { success } = userPasswordResetSchema.safeParse({
-		newPassword,
-		token,
-	});
+		if (!result.success) {
+			const errorMessage = await getApiTranslation(
+				"PasswordReset",
+				"InvalidFormValidation",
+			);
+			return NextResponse.json({ error: errorMessage }, { status: 400 });
+		}
 
-	if (!token || !newPassword || !success) {
-		const errorMessage = await getApiTranslation(
-			"PasswordReset",
-			"TokenAndPasswordRequired",
-		);
-		return NextResponse.json({ error: errorMessage }, { status: 400 });
-	}
+		const { token, newPassword } = result.data;
 
-	try {
 		await prisma.$transaction(async (tx) => {
 			await resetPassword(token, newPassword, tx);
 			await deletePasswordResetRequest(token, tx);
@@ -46,6 +31,14 @@ export async function POST(req: NextRequest) {
 		);
 		return NextResponse.json({ message: successMessage }, { status: 200 });
 	} catch (err: unknown) {
+		if (err instanceof SyntaxError) {
+			const errorMessage = await getApiTranslation(
+				"PasswordReset",
+				"InvalidJsonFormat",
+			);
+			return NextResponse.json({ error: errorMessage }, { status: 400 });
+		}
+
 		if (err instanceof Error) {
 			if (err.message.includes("not found")) {
 				const errorMessage = await getApiTranslation(
