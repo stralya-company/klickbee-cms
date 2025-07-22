@@ -42,5 +42,6 @@ export async function POST(req: NextRequest) {
 		await setSetting(key, value);
 	}
 
-	return NextResponse.json({ success: true });
+	const successMessage = `Setting ${key} updated successfully`;
+	return NextResponse.json({ message: successMessage }, { status: 200 });
 }
