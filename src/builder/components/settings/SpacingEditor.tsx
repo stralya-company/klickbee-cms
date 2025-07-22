@@ -7,7 +7,10 @@ import { Plus } from "lucide-react";
 import { FieldArrayWithId, useForm, UseFormRegister } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
-import { SectionGap, SectionPadding } from "@/builder/types/SpacingSettings";
+import {
+	SectionGap,
+	SectionPadding,
+} from "@/builder/types/settings/SpacingSettings";
 
 type SpacingEditorProps = {
 	paddingFields: FieldArrayWithId<

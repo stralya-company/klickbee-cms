@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	globalSettingsSchema,
 	defaultGlobalSettings,
-} from "@/builder/types/GlobalSettingsData";
+} from "@/builder/types/settings/GlobalSettingsData";
 import type { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
