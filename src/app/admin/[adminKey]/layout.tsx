@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { useUserStore } from "@/feature/user/stores/storeUser";
 import { Sidebar } from "@/components/admin/_partials/sidebar";
 import { Toaster } from "@/components/ui/sonner";
+import { initializeGlobalZodErrorMap } from "@/lib/zodTranslation";
+import { useEffect } from "react";
 
 export default function AdminLayout({
 	children,
@@ -20,6 +22,12 @@ export default function AdminLayout({
 	const messages = useMessages();
 	const locale = useLocale();
 	const t = useTranslations("AdminLayout");
+
+	// Initialize global Zod error map with current translations
+	useEffect(() => {
+		const validationMessages = messages?.Validation || {};
+		initializeGlobalZodErrorMap(validationMessages);
+	}, [messages]);
 
 	return (
 		<UserProvider>
