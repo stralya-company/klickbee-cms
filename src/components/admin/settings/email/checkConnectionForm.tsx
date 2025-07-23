@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
@@ -12,19 +12,19 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { useSendEmail } from '@/feature/send-email/queries/useSendEmail'
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useSendEmail } from "@/feature/send-email/queries/useSendEmail";
 import {
 	CheckConnectionSchema,
 	checkConnectionSchema,
-} from '@/feature/settings/types/emailSettingsSchema'
+} from "@/feature/settings/types/emailSettingsSchema";
 
 export default function CheckConnectionForm() {
 	const checkConnectionForm = useForm<CheckConnectionSchema>({
 		resolver: zodResolver(checkConnectionSchema),
-	})
-	const sendEmail = useSendEmail()
+	});
+	const sendEmail = useSendEmail();
 
 	const onCheckConnectionSubmit = async (data: CheckConnectionSchema) => {
 		try {
@@ -32,14 +32,14 @@ export default function CheckConnectionForm() {
 				subject: data.subject,
 				text: data.text,
 				to: data.to,
-			})
-			toast.success(result.message)
+			});
+			toast.success(result.message);
 		} catch (error) {
 			const errorMessage =
-				error instanceof Error ? error.message : 'Error'
-			toast.error(errorMessage)
+				error instanceof Error ? error.message : "Error";
+			toast.error(errorMessage);
 		}
-	}
+	};
 
 	return (
 		<Form {...checkConnectionForm}>
@@ -101,9 +101,9 @@ export default function CheckConnectionForm() {
 					)}
 				/>
 				<Button disabled={sendEmail.isPending} type="submit">
-					{sendEmail.isPending ? 'Sending...' : 'Check connection'}
+					{sendEmail.isPending ? "Sending..." : "Check connection"}
 				</Button>
 			</form>
 		</Form>
-	)
+	);
 }

@@ -1,9 +1,9 @@
-import type { FormValues } from '@/app/admin/[adminKey]/builder/settings/page'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type ColorPreviewProps = {
-	colors: FormValues['colors']
-}
+	colors: FormValues["colors"];
+};
 
 export default function ColorPreview({ colors }: ColorPreviewProps) {
 	return (
@@ -23,5 +23,5 @@ export default function ColorPreview({ colors }: ColorPreviewProps) {
 				))}
 			</CardContent>
 		</Card>
-	)
+	);
 }

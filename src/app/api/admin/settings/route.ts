@@ -1,1 +1,1 @@
-export { GET, POST } from '@/feature/settings/api/apiSettings'
+export { GET, POST } from "@/feature/settings/api/apiSettings";

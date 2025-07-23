@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+import prisma from "@/lib/prisma";
 
 export async function createPasswordResetRequest(
 	email: string,
@@ -6,10 +6,10 @@ export async function createPasswordResetRequest(
 	const user = await prisma.user.findUnique({
 		select: { email: true, id: true },
 		where: { email },
-	})
+	});
 
 	if (!user) {
-		throw new Error('User not found')
+		throw new Error("User not found");
 	}
 
 	const { token } = await prisma.userPasswordReset.create({
@@ -18,7 +18,7 @@ export async function createPasswordResetRequest(
 			userId: user.id,
 		},
 		select: { token: true },
-	})
+	});
 
-	return token
+	return token;
 }

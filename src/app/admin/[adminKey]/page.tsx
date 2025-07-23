@@ -1,11 +1,11 @@
-'use client'
-import React from 'react'
-import { useAdminKeyStore } from '@/feature/admin-key/stores/storeAdminKey'
-import { useUserStore } from '@/feature/user/stores/storeUser'
+"use client";
+import React from "react";
+import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import { useUserStore } from "@/feature/user/stores/storeUser";
 
 export default function AdminPage() {
-	const adminKey = useAdminKeyStore((state) => state.adminKey)
-	const currentUser = useUserStore((state) => state.user)
+	const adminKey = useAdminKeyStore((state) => state.adminKey);
+	const currentUser = useUserStore((state) => state.user);
 
 	return (
 		<div className="flex flex-col min-h-screen items-center justify-center bg-muted">
@@ -14,5 +14,5 @@ export default function AdminPage() {
 			</h1>
 			{currentUser && <p>Current user id is : {currentUser.id}</p>}
 		</div>
-	)
+	);
 }

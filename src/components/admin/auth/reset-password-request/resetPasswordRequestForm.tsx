@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useTranslations } from 'next-intl'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { Button } from '@/components/ui/button'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
@@ -12,36 +12,36 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { usePasswordResetRequest } from '@/feature/user/queries/usePasswordResetRequest'
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { usePasswordResetRequest } from "@/feature/user/queries/usePasswordResetRequest";
 import {
 	UserPasswordResetRequestFormValues,
 	userPasswordResetRequestSchema,
-} from '@/feature/user/types/userPasswordResetRequestSchema'
+} from "@/feature/user/types/userPasswordResetRequestSchema";
 
 export default function ResetPasswordRequestForm() {
-	const t = useTranslations('ResetPasswordRequest')
+	const t = useTranslations("ResetPasswordRequest");
 
-	const passwordResetRequestMutation = usePasswordResetRequest()
+	const passwordResetRequestMutation = usePasswordResetRequest();
 
 	const resetPasswordRequestForm =
 		useForm<UserPasswordResetRequestFormValues>({
 			defaultValues: {
-				email: '',
+				email: "",
 			},
 			resolver: zodResolver(userPasswordResetRequestSchema),
-		})
+		});
 
 	async function onSubmit(data: UserPasswordResetRequestFormValues) {
 		try {
-			const result = await passwordResetRequestMutation.mutateAsync(data)
-			resetPasswordRequestForm.reset()
-			toast.success(result.message)
+			const result = await passwordResetRequestMutation.mutateAsync(data);
+			resetPasswordRequestForm.reset();
+			toast.success(result.message);
 		} catch (error) {
 			const errorMessage =
-				error instanceof Error ? error.message : t('ErrorMessage')
-			toast.error(errorMessage)
+				error instanceof Error ? error.message : t("ErrorMessage");
+			toast.error(errorMessage);
 		}
 	}
 	return (
@@ -55,12 +55,12 @@ export default function ResetPasswordRequestForm() {
 					name="email"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>{t('EmailLabel')}</FormLabel>
+							<FormLabel>{t("EmailLabel")}</FormLabel>
 							<FormControl>
 								<Input
 									{...field}
 									className="w-full"
-									placeholder={t('EmailPlaceholder')}
+									placeholder={t("EmailPlaceholder")}
 								/>
 							</FormControl>
 							<FormMessage />
@@ -73,10 +73,10 @@ export default function ResetPasswordRequestForm() {
 					type="submit"
 				>
 					{passwordResetRequestMutation.isPending
-						? t('Sending')
-						: t('SendResetLink')}
+						? t("Sending")
+						: t("SendResetLink")}
 				</Button>
 			</form>
 		</Form>
-	)
+	);
 }

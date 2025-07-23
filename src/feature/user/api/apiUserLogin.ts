@@ -1,23 +1,23 @@
-import { login } from '@stralya/auth'
-import { NextRequest, NextResponse } from 'next/server'
-import '../../../lib/initSetPrismaClient'
+import { login } from "@stralya/auth";
+import { NextRequest, NextResponse } from "next/server";
+import "../../../lib/initSetPrismaClient";
 
 export async function POST(req: NextRequest) {
-	const { email, password } = await req.json()
+	const { email, password } = await req.json();
 	try {
-		const data = await login(email, password)
+		const data = await login(email, password);
 		if (!data) {
 			return NextResponse.json(
-				{ error: 'Invalid credentials' },
+				{ error: "Invalid credentials" },
 				{ status: 401 },
-			)
+			);
 		}
 
-		return NextResponse.json({ data }, { status: 200 })
+		return NextResponse.json({ data }, { status: 200 });
 	} catch (err: unknown) {
 		const message =
-			err instanceof Error ? err.message : 'An unknown error occurred'
+			err instanceof Error ? err.message : "An unknown error occurred";
 
-		return NextResponse.json({ error: message }, { status: 401 })
+		return NextResponse.json({ error: message }, { status: 401 });
 	}
 }

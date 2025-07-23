@@ -1,40 +1,40 @@
-'use client'
+"use client";
 
-import { FileText, Home, Mail, Settings as SettingsIcon } from 'lucide-react'
-import Link from 'next/link'
-import { useTranslations } from 'next-intl'
-import { useAdminKeyStore } from '@/feature/admin-key/stores/storeAdminKey'
+import { FileText, Home, Mail, Settings as SettingsIcon } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
 
 export function Sidebar() {
-	const t = useTranslations('AdminSidebar')
-	const adminKey = useAdminKeyStore((state) => state.adminKey)
+	const t = useTranslations("AdminSidebar");
+	const adminKey = useAdminKeyStore((state) => state.adminKey);
 	const menu = [
 		{
 			href: `/admin/${adminKey}/manage/content`,
 			icon: Home,
-			label: t('Content'),
+			label: t("Content"),
 		},
 		{
 			href: `/admin/${adminKey}/manage/contact`,
 			icon: Mail,
-			label: t('Contact'),
+			label: t("Contact"),
 		},
 		{
 			href: `/admin/${adminKey}/manage/pages`,
 			icon: FileText,
-			label: t('Pages'),
+			label: t("Pages"),
 		},
 		{
 			href: `/admin/${adminKey}/manage/settings`,
 			icon: SettingsIcon,
-			label: t('Settings'),
+			label: t("Settings"),
 		},
-	]
+	];
 
 	return (
 		<aside className="w-64 h-screen border-r bg-white p-4 flex flex-col justify-between">
 			<div>
-				<h1 className="text-lg font-semibold mb-6">{t('Title')}</h1>
+				<h1 className="text-lg font-semibold mb-6">{t("Title")}</h1>
 				<nav className="space-y-2">
 					{menu.map((item) => (
 						<Link
@@ -50,9 +50,9 @@ export function Sidebar() {
 			</div>
 
 			<div className="text-xs text-muted-foreground">
-				<p className="mb-1">{t('Copyright')}</p>
-				<p className="text-[10px]">{t('Email')}</p>
+				<p className="mb-1">{t("Copyright")}</p>
+				<p className="text-[10px]">{t("Email")}</p>
 			</div>
 		</aside>
-	)
+	);
 }

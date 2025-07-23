@@ -1,46 +1,46 @@
-import { writeFile } from 'fs/promises'
-import { NextResponse } from 'next/server'
-import { join } from 'path'
+import { writeFile } from "fs/promises";
+import { NextResponse } from "next/server";
+import { join } from "path";
 
 export async function POST(request: Request) {
-	const formData = await request.formData()
-	const file = formData.get('logo') as File | null
+	const formData = await request.formData();
+	const file = formData.get("logo") as File | null;
 
 	if (!file) {
 		return NextResponse.json(
-			{ error: 'Aucun fichier envoyé' },
+			{ error: "Aucun fichier envoyé" },
 			{ status: 400 },
-		)
+		);
 	}
 
-	if (!['image/png', 'image/jpeg'].includes(file.type)) {
+	if (!["image/png", "image/jpeg"].includes(file.type)) {
 		return NextResponse.json(
-			{ error: 'Type de fichier non supporté' },
+			{ error: "Type de fichier non supporté" },
 			{ status: 415 },
-		)
+		);
 	}
 
-	const arrayBuffer = await file.arrayBuffer()
-	const buffer = Buffer.from(arrayBuffer)
+	const arrayBuffer = await file.arrayBuffer();
+	const buffer = Buffer.from(arrayBuffer);
 
-	const fileName = `logo_${Date.now()}.${file.type.split('/')[1]}`
+	const fileName = `logo_${Date.now()}.${file.type.split("/")[1]}`;
 	const filePath = join(
 		process.cwd(),
-		'public',
-		'builder',
-		'uploads',
-		'logo',
+		"public",
+		"builder",
+		"uploads",
+		"logo",
 		fileName,
-	)
+	);
 
-	await writeFile(filePath, buffer)
+	await writeFile(filePath, buffer);
 
-	const url = `/builder/uploads/logo/${fileName}`
+	const url = `/builder/uploads/logo/${fileName}`;
 	return NextResponse.json(
 		{ url },
 		{
-			headers: { 'Content-Type': 'application/json' },
+			headers: { "Content-Type": "application/json" },
 			status: 200,
 		},
-	)
+	);
 }

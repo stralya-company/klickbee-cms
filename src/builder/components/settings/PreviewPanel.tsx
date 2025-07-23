@@ -1,15 +1,15 @@
 // PreviewPanel.tsx
 
-import type { FormValues } from '@/app/admin/[adminKey]/builder/settings/page'
-import ColorPreview from './ColorPreview'
-import SpacingPreview from './SpacingPreview'
-import TypographyPreview from './TypographyPreview'
+import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
+import ColorPreview from "./ColorPreview";
+import SpacingPreview from "./SpacingPreview";
+import TypographyPreview from "./TypographyPreview";
 
 type PreviewPanelProps = {
-	typography: FormValues['typography']
-	colors: FormValues['colors']
-	spacing: FormValues['spacing']
-}
+	typography: FormValues["typography"];
+	colors: FormValues["colors"];
+	spacing: FormValues["spacing"];
+};
 
 export default function PreviewPanel({
 	typography,
@@ -22,5 +22,5 @@ export default function PreviewPanel({
 			<ColorPreview colors={colors} />
 			<SpacingPreview spacing={spacing} />
 		</div>
-	)
+	);
 }

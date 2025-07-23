@@ -1,17 +1,17 @@
-import { Plus } from 'lucide-react'
-import React, { RefObject, useCallback, useRef, useState } from 'react'
+import { Plus } from "lucide-react";
+import React, { RefObject, useCallback, useRef, useState } from "react";
 import {
 	Control,
 	UseFormRegister,
 	UseFormSetValue,
 	UseFormWatch,
 	useFieldArray,
-} from 'react-hook-form'
-import type { FormValues } from '@/app/admin/[adminKey]/builder/settings/page'
-import TypographyItemEditor from '@/builder/components/settings/_partials/TypographyItemEditor'
-import { useGoogleFonts } from '@/builder/utils/query/useGoogleFonts'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+} from "react-hook-form";
+import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
+import TypographyItemEditor from "@/builder/components/settings/_partials/TypographyItemEditor";
+import { useGoogleFonts } from "@/builder/utils/query/useGoogleFonts";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const TypographyEditor = React.memo(function TypographyEditor({
 	control,
@@ -19,49 +19,49 @@ const TypographyEditor = React.memo(function TypographyEditor({
 	setValue,
 	watch,
 }: {
-	control: Control<FormValues>
-	register: UseFormRegister<FormValues>
-	setValue: UseFormSetValue<FormValues>
-	watch: UseFormWatch<FormValues>
+	control: Control<FormValues>;
+	register: UseFormRegister<FormValues>;
+	setValue: UseFormSetValue<FormValues>;
+	watch: UseFormWatch<FormValues>;
 }) {
 	const {
 		fields: typoFields,
 		append,
 		remove,
-	} = useFieldArray({ control, name: 'typography.typographies' })
-	const typography = watch('typography')
-	const [openIdx, setOpenIdx] = useState<number | null>(null)
-	const [dropdownOpenIdx, setDropdownOpenIdx] = useState<number | null>(null)
-	const [search, setSearch] = useState('')
-	const searchInputRef = useRef<HTMLInputElement>(null)
-	const { data: allFonts = [], isLoading } = useGoogleFonts()
+	} = useFieldArray({ control, name: "typography.typographies" });
+	const typography = watch("typography");
+	const [openIdx, setOpenIdx] = useState<number | null>(null);
+	const [dropdownOpenIdx, setDropdownOpenIdx] = useState<number | null>(null);
+	const [search, setSearch] = useState("");
+	const searchInputRef = useRef<HTMLInputElement>(null);
+	const { data: allFonts = [], isLoading } = useGoogleFonts();
 
 	const filteredFonts = search
 		? allFonts.filter((f) =>
 				f.label.toLowerCase().includes(search.toLowerCase()),
 			)
-		: allFonts.slice(0, 20)
+		: allFonts.slice(0, 20);
 
 	const handleAdd = useCallback(() => {
 		append({
-			fontFamily: filteredFonts[0]?.value ?? '',
+			fontFamily: filteredFonts[0]?.value ?? "",
 			fontSize: {
 				max: 2,
 				maxWidth: 1440,
 				min: 1,
-				sizeUnit: 'rem',
-				widthUnit: 'px',
+				sizeUnit: "rem",
+				widthUnit: "px",
 			},
-			fontStyle: 'normal',
-			fontWeight: '400',
-			key: 'new',
+			fontStyle: "normal",
+			fontWeight: "400",
+			key: "new",
 			letterSpacing: 0,
-			letterSpacingUnits: 'px',
+			letterSpacingUnits: "px",
 			lineHeight: 1,
-			lineHeightUnits: 'em',
-			textTransform: 'unset',
-		})
-	}, [append, filteredFonts])
+			lineHeightUnits: "em",
+			textTransform: "unset",
+		});
+	}, [append, filteredFonts]);
 
 	return (
 		<Card>
@@ -103,7 +103,7 @@ const TypographyEditor = React.memo(function TypographyEditor({
 				</Button>
 			</CardContent>
 		</Card>
-	)
-})
+	);
+});
 
-export default TypographyEditor
+export default TypographyEditor;

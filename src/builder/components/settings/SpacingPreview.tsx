@@ -1,11 +1,11 @@
 // SpacingPreview.tsx
 
-import type { FormValues } from '@/app/admin/[adminKey]/builder/settings/page'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type SpacingPreviewProps = {
-	spacing: FormValues['spacing']
-}
+	spacing: FormValues["spacing"];
+};
 
 export default function SpacingPreview({ spacing }: SpacingPreviewProps) {
 	return (
@@ -19,8 +19,8 @@ export default function SpacingPreview({ spacing }: SpacingPreviewProps) {
 					</CardHeader>
 					<CardContent
 						style={{
-							background: '#000',
-							color: '#fff',
+							background: "#000",
+							color: "#fff",
 							maxWidth: spacing.maxWidth,
 							paddingBottom: space.bottom.min,
 							paddingLeft: space.left.min,
@@ -33,5 +33,5 @@ export default function SpacingPreview({ spacing }: SpacingPreviewProps) {
 				</Card>
 			))}
 		</>
-	)
+	);
 }

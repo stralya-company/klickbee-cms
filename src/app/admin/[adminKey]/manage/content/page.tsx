@@ -4,5 +4,5 @@ export default function AdminContentPage() {
 			<h1 className="text-2xl font-bold">Admin Content Management</h1>
 			<p className="mt-4">Manage your content here.</p>
 		</div>
-	)
+	);
 }
