@@ -82,9 +82,9 @@
 	},
 	"scripts": {
 		"build": "next build",
-		"check": "biome check .",
+		"check": "biome check --write .",
 		"dev": "next dev --turbopack",
-		"format": "biome check --write .",
+		"format": "biome format --write .",
 		"format:check": "biome format .",
 		"lint": "biome lint --write .",
 		"prebuild": "node scripts/generateAdminKey.js",

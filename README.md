@@ -142,19 +142,21 @@ This project uses [**Biome**](https://biomejs.dev/) for linting, formatting, and
 
 ```json
 "scripts": {
-  "format": "biome format --write .",
-  "lint": "biome lint --write .",
   "check": "biome check --write .",
+  "format": "biome format --write .",
+	"format:check": "biome format .",
+  "lint": "biome lint --write .",
   "typecheck": "tsc --noEmit"
 }
 ```
 
-| Script             | Description                                                                  |
-|--------------------|------------------------------------------------------------------------------|
-| `npm run format`   | Formats all files according to Biome rules                                   |
-| `npm run lint`     | Applies Biome linting rules                                                  |
-| `npm run check`    | Performs linting, formatting, and applies assist actions like import sorting |
-| `npm run typecheck`| Type-checks the codebase using TypeScript without emitting files             |
+| Script                 | Description                                                                          |
+|------------------------|--------------------------------------------------------------------------------------|
+| `npm run check`        | Performs linting, formatting, and applies assist actions like import sorting (write) |
+| `npm run format`       | Formats all files according to Biome rules (write)                                   |
+| `npm run format:check` | Formats all files according to Biome rules (check)                                   |
+| `npm run lint`         | Applies Biome linting rules (write)                                                  |
+| `npm run typecheck`    | Type-checks the codebase using TypeScript without emitting files                     |
 
 > ⚠️ The assist rules defined in `biome.json` (such as `organizeImports`, `useSortedKeys`, etc.) under the `assist.actions.source` section **are only applied when running** `npm run check`.
 
@@ -170,7 +172,7 @@ Triggered before every `git commit`, it runs the following checks:
 
 | Task            | Command Executed                                                                 |
 |-----------------|----------------------------------------------------------------------------------|
-| ✅ Biome Check  | `biome check --write` on staged files                                            |
+| ✅ Biome Check  | `biome check` on staged files                                                    |
 | 🧠 Type Check   | `tsc --noEmit` on `.ts` and `.tsx` files                                         |
 | 🧪 Unit Tests   | `vitest run`                                                                     |
 
