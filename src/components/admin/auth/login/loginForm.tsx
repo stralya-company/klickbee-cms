@@ -22,13 +22,15 @@ import {
 } from "@/feature/user/types/userLoginSchema";
 import { authClient } from "@/lib/authClient";
 import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function LoginForm() {
 	const router = useRouter();
 	const { adminKey } = useParams<{ adminKey: string }>();
 	const { setAdminKey } = useAdminKeyStore();
+	const queryClient = useQueryClient();
 
-	const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	useEffect(() => {
 		setAdminKey(adminKey);
@@ -54,12 +56,13 @@ export default function LoginForm() {
 			password,
 		});
 
-		if (error) toast.error(t("ConnexionError"));
+		if (error) toast.error(t("ConnectionError"));
 
 		setLoading(false);
 
 		if (data) {
-			router.push(`/admin/${adminKey}/dashboard`);
+			await queryClient.refetchQueries({ queryKey: ["current_user"] });
+			router.push(`/admin/${adminKey}`);
 		} else {
 			toast.error(t("ConnectionFailed"));
 		}
