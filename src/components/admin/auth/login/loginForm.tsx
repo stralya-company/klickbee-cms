@@ -19,7 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	UserLoginFormValues,
 	userLoginSchema,
-} from "@/feature/user/types/userLoginSchema";
+} from "@/feature/auth/types/userLoginSchema";
 import { authClient } from "@/lib/authClient";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";

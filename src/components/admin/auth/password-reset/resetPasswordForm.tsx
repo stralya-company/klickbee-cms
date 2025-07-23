@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import {
 	UserPasswordResetFormValues,
 	userPasswordResetSchema,
-} from "@/feature/user/types/userPasswordResetSchema";
+} from "@/feature/auth/types/userPasswordResetSchema";
 import {
 	Form,
 	FormControl,

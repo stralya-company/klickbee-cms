@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	UserPasswordResetRequestFormValues,
 	userPasswordResetRequestSchema,
-} from "@/feature/user/types/userPasswordResetRequestSchema";
+} from "@/feature/auth/types/userPasswordResetRequestSchema";
 import {
 	Form,
 	FormControl,
