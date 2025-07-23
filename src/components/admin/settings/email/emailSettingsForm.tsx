@@ -93,19 +93,19 @@ export default function EmailSettingsForm() {
 		const keys = Object.keys(data) as (keyof EmailSettingsSchema)[];
 
 		try {
-			for (const key of keys) {
+			await keys.forEach(async (key) => {
 				const currentValue = emailSettings?.[key];
 				if (data[key] !== "" && data[key] !== currentValue) {
-					await setSetting.mutateAsync({
+					const result = await setSetting.mutateAsync({
 						key,
 						value:
 							key === "emailPassword"
 								? await encryptString(data[key] ?? "")
 								: String(data[key]),
 					});
+					toast.success(result.message);
 				}
-			}
-			toast.success("Email settings updated successfully");
+			});
 		} catch (error) {
 			const errorMessage =
 				error instanceof Error ? error.message : "Error";
