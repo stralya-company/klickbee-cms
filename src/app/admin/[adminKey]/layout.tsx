@@ -11,7 +11,7 @@ import { useUserStore } from "@/feature/user/stores/storeUser";
 import { Sidebar } from "@/components/admin/_partials/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { initializeGlobalZodErrorMap } from "@/lib/zodTranslation";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { authClient } from "@/lib/authClient";
 import { useRouter } from "next/navigation";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
@@ -36,7 +36,7 @@ export default function AdminLayout({
 		initializeGlobalZodErrorMap(validationMessages);
 	}, [messages]);
 
-	async function logout() {
+	const logout = useCallback(async () => {
 		const { logout: clearUserStore } = useUserStore.getState();
 		await authClient.signOut({
 			fetchOptions: {
@@ -49,7 +49,7 @@ export default function AdminLayout({
 				},
 			},
 		});
-	}
+	}, [queryClient, router, adminKey]);
 
 	return (
 		<UserProvider>
