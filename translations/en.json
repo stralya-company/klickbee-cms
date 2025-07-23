@@ -46,6 +46,7 @@
 		"EmailPlaceholder": "Enter your email",
 		"SendResetLink": "Send reset link",
 		"Sending": "Sending...",
+		"SuccessMessage": "A reset link has been sent to your email address.",
 		"ErrorMessage": "An error occurred while sending the reset link."
 	},
 	"ResetPassword": {
@@ -56,6 +57,7 @@
 		"NewConfirmPasswordPlaceholder": "Confirm your new password",
 		"ResetButton": "Reset Password",
 		"Resetting": "Resetting...",
+		"SuccessMessage": "Your password has been reset successfully.",
 		"ErrorMessage": "An error occurred while resetting the password."
 	},
 	"Errors": {

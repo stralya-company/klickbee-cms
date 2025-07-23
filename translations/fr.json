@@ -46,6 +46,7 @@
 		"EmailPlaceholder": "Entrez votre email",
 		"SendResetLink": "Envoyer le lien de réinitialisation",
 		"Sending": "Envoi en cours...",
+		"SuccessMessage": "Un lien de réinitialisation a été envoyé à votre adresse email.",
 		"ErrorMessage": "Une erreur est survenue lors de l'envoi du lien de réinitialisation."
 	},
 	"ResetPassword": {
@@ -56,6 +57,7 @@
 		"NewConfirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
 		"ResetButton": "Réinitialiser le mot de passe",
 		"Resetting": "Réinitialisation en cours...",
+		"SuccessMessage": "Votre mot de passe a été réinitialisé avec succès.",
 		"ErrorMessage": "Une erreur est survenue lors de la réinitialisation du mot de passe."
 	},
 	"Errors": {
