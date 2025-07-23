@@ -12,6 +12,7 @@ datasource db {
 }
 
 // === Auth Models ===
+
 model User {
   id            String    @id @default(uuid())
   email         String    @unique
@@ -26,7 +27,11 @@ model User {
   createdAt     DateTime  @default(now())
 
   // Relations
-  UserSettings      UserSettings[]
+  UserSettings UserSettings[]
+
+  banned     Boolean?
+  banReason  String?
+  banExpires DateTime?
 
   @@map("user")
 }
@@ -41,6 +46,8 @@ model Session {
   userAgent String?
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  impersonatedBy String?
 
   @@unique([token])
   @@map("session")

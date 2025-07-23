@@ -8,6 +8,9 @@ CREATE TABLE "user" (
     "image" TEXT,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "banned" BOOLEAN,
+    "banReason" TEXT,
+    "banExpires" TIMESTAMP(3),
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -22,6 +25,7 @@ CREATE TABLE "session" (
     "ipAddress" TEXT,
     "userAgent" TEXT,
     "userId" TEXT NOT NULL,
+    "impersonatedBy" TEXT,
 
     CONSTRAINT "session_pkey" PRIMARY KEY ("id")
 );
