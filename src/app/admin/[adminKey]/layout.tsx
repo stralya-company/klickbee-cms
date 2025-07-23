@@ -28,7 +28,7 @@ export default function AdminLayout({
 	const messages = useMessages();
 	const locale = useLocale();
 	const t = useTranslations("AdminLayout");
-	const { adminKey } = useAdminKeyStore();
+	const adminKey = useAdminKeyStore((state) => state.adminKey);
 
 	// Initialize global Zod error map with current translations
 	useEffect(() => {
