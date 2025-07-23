@@ -12,20 +12,25 @@
 		"Title": "Klickbee CMS"
 	},
 	"API": {
-		"PasswordReset": {
+		"Common": {
+			"EmailSendError": "Failed to send email",
 			"InternalServerError": "Internal server error",
 			"InvalidJsonFormat": "Invalid JSON format",
+			"MissingAdminKey": "Admin key is not configured",
+			"MissingAppUrl": "Application URL is not configured"
+		},
+		"PasswordReset": {
+			"InvalidFormValidation": "Form validation failed",
 			"InvalidToken": "Invalid token",
-			"Success": "Password reset successful",
-			"TokenAndPasswordRequired": "Valid token and new password are required",
+			"Success": "Password reset successfully",
 			"TokenExpired": "Token expired"
 		},
 		"PasswordResetRequest": {
+			"EmailContent": "Please use this link to reset your password",
 			"EmailNotFound": "Email not found",
 			"EmailRequired": "Valid email address is required",
-			"InternalServerError": "Internal server error",
-			"InvalidJsonFormat": "Invalid JSON format",
-			"Success": "Password reset request successful"
+			"EmailSubject": "Password Reset Request",
+			"Success": "Password reset request sent successfully"
 		}
 	},
 	"BuilderSettings": {
@@ -83,22 +88,22 @@
 		"Uploading": "Uploading..."
 	},
 	"ResetPassword": {
-		"ConfirmPassword": "Confirm Password",
 		"ErrorMessage": "An error occurred while resetting the password.",
-		"NewPassword": "New Password",
+		"NewConfirmPasswordLabel": "Confirm Password",
+		"NewConfirmPasswordPlaceholder": "Confirm your new password",
+		"NewPasswordLabel": "New Password",
 		"NewPasswordPlaceholder": "Enter your new password",
 		"ResetButton": "Reset Password",
-		"Resetting": "Resetting...",
-		"SuccessMessage": "Your password has been reset successfully."
+		"ResetPassword": "Reset Password",
+		"Resetting": "Resetting..."
 	},
 	"ResetPasswordRequest": {
 		"EmailLabel": "Email",
 		"EmailPlaceholder": "Enter your email",
 		"ErrorMessage": "An error occurred while sending the reset link.",
-		"ResetPasswordRequest": "Reset password request",
+		"ResetPasswordRequest": "Password Reset Request",
 		"Sending": "Sending...",
-		"SendResetLink": "Send reset link",
-		"SuccessMessage": "A reset link has been sent to your email."
+		"SendResetLink": "Send reset link"
 	},
 	"SpacingEditor": {
 		"AddGap": "Add gap",
@@ -117,6 +122,7 @@
 		"EmailRequired": "Email is required",
 		"InvalidEmail": "Please enter a valid email address.",
 		"InvalidToken": "Invalid token",
+		"PasswordMismatch": "Passwords do not match",
 		"PasswordRequired": "Password is required",
 		"PasswordTooShort": "Password must be at least 8 characters",
 		"RequiredField": "This field is required.",

@@ -12,19 +12,24 @@
 		"Title": "Klickbee CMS"
 	},
 	"API": {
-		"PasswordReset": {
+		"Common": {
+			"EmailSendError": "Échec de l'envoi de l'email",
 			"InternalServerError": "Erreur interne du serveur",
 			"InvalidJsonFormat": "Format JSON invalide",
+			"MissingAdminKey": "La clé admin n'est pas configurée",
+			"MissingAppUrl": "L'URL de l'application n'est pas configurée"
+		},
+		"PasswordReset": {
+			"InvalidFormValidation": "Validation du formulaire invalide",
 			"InvalidToken": "Token invalide",
 			"Success": "Mot de passe réinitialisé avec succès",
-			"TokenAndPasswordRequired": "Token et nouveau mot de passe valides requis",
 			"TokenExpired": "Token expiré"
 		},
 		"PasswordResetRequest": {
+			"EmailContent": "Veuillez utiliser ce lien pour réinitialiser votre mot de passe",
 			"EmailNotFound": "Email non trouvé",
 			"EmailRequired": "Une adresse email valide est requise",
-			"InternalServerError": "Erreur interne du serveur",
-			"InvalidJsonFormat": "Format JSON invalide",
+			"EmailSubject": "Demande de réinitialisation de mot de passe",
 			"Success": "Demande de réinitialisation envoyée avec succès"
 		}
 	},
@@ -83,22 +88,22 @@
 		"Uploading": "Envoi en cours…"
 	},
 	"ResetPassword": {
-		"ConfirmPassword": "Confirmer le mot de passe",
 		"ErrorMessage": "Une erreur est survenue lors de la réinitialisation du mot de passe.",
-		"NewPassword": "Nouveau mot de passe",
+		"NewConfirmPasswordLabel": "Confirmer le mot de passe",
+		"NewConfirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
+		"NewPasswordLabel": "Nouveau mot de passe",
 		"NewPasswordPlaceholder": "Entrez votre nouveau mot de passe",
 		"ResetButton": "Réinitialiser le mot de passe",
-		"Resetting": "Réinitialisation en cours...",
-		"SuccessMessage": "Votre mot de passe a été réinitialisé avec succès."
+		"ResetPassword": "Réinitialiser le mot de passe",
+		"Resetting": "Réinitialisation en cours..."
 	},
 	"ResetPasswordRequest": {
 		"EmailLabel": "Email",
 		"EmailPlaceholder": "Entrez votre email",
 		"ErrorMessage": "Une erreur est survenue lors de l'envoi du lien de réinitialisation.",
-		"ResetPasswordRequest": "Réinitialiser le mot de passe",
+		"ResetPasswordRequest": "Demande de réinitialisation du mot de passe",
 		"Sending": "Envoi en cours...",
-		"SendResetLink": "Envoyer le lien de réinitialisation",
-		"SuccessMessage": "Un lien de réinitialisation a été envoyé à votre email."
+		"SendResetLink": "Envoyer le lien de réinitialisation"
 	},
 	"SpacingEditor": {
 		"AddGap": "Ajouter un gap",
@@ -117,6 +122,7 @@
 		"EmailRequired": "L'email est requis",
 		"InvalidEmail": "Adresse email invalide",
 		"InvalidToken": "Token invalide",
+		"PasswordMismatch": "Les mots de passe ne correspondent pas",
 		"PasswordRequired": "Le mot de passe est requis",
 		"PasswordTooShort": "Le mot de passe doit contenir au moins 8 caractères",
 		"RequiredField": "Ce champ est requis",
