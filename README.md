@@ -110,10 +110,7 @@ front/
 **Option 1: With npm**
 
 ```sh
-npm i
-npx prisma migrate dev
-npx prisma generate
-npm run dev
+npm run setup:dev
 ```
 
 **Option 2: With Docker Compose**

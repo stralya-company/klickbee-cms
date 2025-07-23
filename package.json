@@ -19,7 +19,8 @@
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"test": "vitest",
-		"test:ui": "vitest --ui"
+		"test:ui": "vitest --ui",
+		"setup:dev": "npm i && npx prisma migrate dev && npx prisma generate && npx prisma db seed && npm run dev"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.1.1",
