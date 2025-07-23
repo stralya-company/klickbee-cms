@@ -82,7 +82,7 @@
 	},
 	"scripts": {
 		"build": "next build",
-		"check": "biome check .",
+		"check": "biome check --write .",
 		"dev": "next dev --turbopack",
 		"format": "biome format --write .",
 		"lint": "biome lint --write .",

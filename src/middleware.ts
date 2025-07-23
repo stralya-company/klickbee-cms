@@ -1,40 +1,40 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server'
 
-const ADMIN_KEY = process.env.ADMIN_GENERATED_KEY || "admin";
-const AUTH_COOKIE_NAME = "session";
+const ADMIN_KEY = process.env.ADMIN_GENERATED_KEY || 'admin'
+const AUTH_COOKIE_NAME = 'session'
 
 const publicPages = [
 	`/admin/${ADMIN_KEY}/auth/login`,
 	`/admin/${ADMIN_KEY}/auth/password-reset-request`,
 	`/admin/${ADMIN_KEY}/auth/password-reset`,
-];
+]
 
 export function middleware(req: NextRequest) {
-	const { pathname } = req.nextUrl;
+	const { pathname } = req.nextUrl
 
-	const response = NextResponse.next();
+	const response = NextResponse.next()
 
-	const match = pathname.match(/^\/admin\/([^/]+)/);
-	if (!match) return response;
+	const match = pathname.match(/^\/admin\/([^/]+)/)
+	if (!match) return response
 
-	const key = match[1];
+	const key = match[1]
 
 	if (key !== ADMIN_KEY) {
-		return NextResponse.redirect(new URL("/", req.url));
+		return NextResponse.redirect(new URL('/', req.url))
 	}
 
-	const isPublicPage = publicPages.some((page) => pathname.startsWith(page));
-	const isAuthenticated = Boolean(req.cookies.get(AUTH_COOKIE_NAME));
+	const isPublicPage = publicPages.some((page) => pathname.startsWith(page))
+	const isAuthenticated = Boolean(req.cookies.get(AUTH_COOKIE_NAME))
 
 	if (!isAuthenticated && !isPublicPage) {
 		return NextResponse.redirect(
 			new URL(`/admin/${ADMIN_KEY}/auth/login`, req.url),
-		);
+		)
 	}
 
-	return response;
+	return response
 }
 
 export const config = {
-	matcher: ["/:path*", "/admin/:adminKey/:path*"],
-};
+	matcher: ['/:path*', '/admin/:adminKey/:path*'],
+}

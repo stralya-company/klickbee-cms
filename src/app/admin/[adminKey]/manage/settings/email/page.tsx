@@ -1,5 +1,5 @@
-import EmailSettingsForm from "@/components/admin/settings/email/emailSettingsForm";
-import CheckConnectionForm from "@/components/admin/settings/email/checkConnectionForm";
+import CheckConnectionForm from '@/components/admin/settings/email/checkConnectionForm'
+import EmailSettingsForm from '@/components/admin/settings/email/emailSettingsForm'
 
 export default function EmailSettingsPage() {
 	return (
@@ -10,5 +10,5 @@ export default function EmailSettingsPage() {
 				<CheckConnectionForm />
 			</div>
 		</div>
-	);
+	)
 }

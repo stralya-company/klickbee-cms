@@ -1,13 +1,13 @@
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react'
+import { SizeUnit } from '@/builder/types/settings/FluidSize'
+import { Button } from '@/components/ui/button'
 import {
 	DropdownMenu,
-	DropdownMenuTrigger,
 	DropdownMenuContent,
 	DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import React, { useState } from "react";
-import { SizeUnit } from "@/builder/types/settings/FluidSize";
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
 
 export function InputWithUnit({
 	value,
@@ -16,34 +16,34 @@ export function InputWithUnit({
 	onUnitChange,
 	units,
 	inputProps,
-	buttonClassName = "",
+	buttonClassName = '',
 }: {
-	value: number;
-	onChange: (_v: number) => void;
-	unit: string;
-	onUnitChange: (_u: SizeUnit) => void;
-	units: readonly string[];
-	inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-	buttonClassName?: string;
+	value: number
+	onChange: (_v: number) => void
+	unit: string
+	onUnitChange: (_u: SizeUnit) => void
+	units: readonly string[]
+	inputProps?: React.InputHTMLAttributes<HTMLInputElement>
+	buttonClassName?: string
 }) {
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(false)
 
 	return (
 		<div className="flex items-center gap-1">
 			<Input
-				type="number"
-				step="any"
-				value={value}
-				onChange={(e) => onChange(Number(e.target.value))}
 				className="w-20"
+				onChange={(e) => onChange(Number(e.target.value))}
+				step="any"
+				type="number"
+				value={value}
 				{...inputProps}
 			/>
-			<DropdownMenu open={open} onOpenChange={setOpen}>
+			<DropdownMenu onOpenChange={setOpen} open={open}>
 				<DropdownMenuTrigger asChild>
 					<Button
-						variant="outline"
+						className={buttonClassName + ' px-2 min-w-8'}
 						size="sm"
-						className={buttonClassName + " px-2 min-w-8"}
+						variant="outline"
 					>
 						{unit}
 					</Button>
@@ -53,8 +53,8 @@ export function InputWithUnit({
 						<DropdownMenuItem
 							key={u}
 							onClick={() => {
-								onUnitChange(u as SizeUnit);
-								setOpen(false);
+								onUnitChange(u as SizeUnit)
+								setOpen(false)
 							}}
 						>
 							{u}
@@ -63,5 +63,5 @@ export function InputWithUnit({
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</div>
-	);
+	)
 }

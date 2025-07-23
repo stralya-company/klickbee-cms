@@ -1,1 +1,1 @@
-export { GET } from "@/feature/user/api/apiUserMe";
+export { GET } from '@/feature/user/api/apiUserMe'

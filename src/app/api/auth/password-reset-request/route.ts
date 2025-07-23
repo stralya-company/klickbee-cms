@@ -1,1 +1,1 @@
-export { POST } from "@/feature/user/api/apiUserPasswordResetRequest";
+export { POST } from '@/feature/user/api/apiUserPasswordResetRequest'

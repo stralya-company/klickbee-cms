@@ -1,24 +1,24 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git",
-		"useIgnoreFile": true,
-		"defaultBranch": "main"
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on",
+				"useSortedAttributes": "on",
+				"useSortedKeys": "on",
+				"useSortedProperties": "on"
+			}
+		},
+		"enabled": true
 	},
 	"files": { "ignoreUnknown": false },
 	"formatter": {
-		"enabled": true,
-		"formatWithErrors": false,
-		"indentStyle": "tab",
-		"indentWidth": 4,
-		"lineEnding": "lf",
-		"lineWidth": 80,
 		"attributePosition": "auto",
 		"bracketSameLine": false,
 		"bracketSpacing": true,
+		"enabled": true,
 		"expand": "auto",
-		"useEditorconfig": true,
+		"formatWithErrors": false,
 		"includes": [
 			"**",
 			"!**/node_modules",
@@ -34,12 +34,42 @@
 			"!**/.prettierignore",
 			"!./*.*",
 			"!**/Dockerfile"
-		]
+		],
+		"indentStyle": "tab",
+		"indentWidth": 4,
+		"lineEnding": "lf",
+		"lineWidth": 80,
+		"useEditorconfig": true
+	},
+	"html": { "formatter": { "selfCloseVoidElements": "always" } },
+	"javascript": {
+		"formatter": {
+			"arrowParentheses": "always",
+			"attributePosition": "auto",
+			"bracketSameLine": false,
+			"bracketSpacing": true,
+			"jsxQuoteStyle": "double",
+			"quoteProperties": "asNeeded",
+			"quoteStyle": "single",
+			"semicolons": "asNeeded",
+			"trailingCommas": "all"
+		}
 	},
 	"linter": {
 		"enabled": true,
+		"includes": [
+			"**",
+			"**/prisma/",
+			"**/node_modules/",
+			"**/.next/",
+			"**/.idea/",
+			"**",
+			"**/prisma/",
+			"**/node_modules/",
+			"**/.next/",
+			"**/.idea/"
+		],
 		"rules": {
-			"recommended": false,
 			"complexity": {
 				"noAdjacentSpacesInRegex": "error",
 				"noExtraBooleanCast": "error",
@@ -77,6 +107,7 @@
 				"useValidTypeof": "error",
 				"useYield": "error"
 			},
+			"recommended": false,
 			"security": {
 				"noBlankTarget": "error",
 				"noDangerouslySetInnerHtmlWithChildren": "error"
@@ -127,34 +158,8 @@
 				"useGetterReturn": "error",
 				"useNamespaceKeyword": "error"
 			}
-		},
-		"includes": [
-			"**",
-			"**/prisma/",
-			"**/node_modules/",
-			"**/.next/",
-			"**/.idea/",
-			"**",
-			"**/prisma/",
-			"**/node_modules/",
-			"**/.next/",
-			"**/.idea/"
-		]
-	},
-	"javascript": {
-		"formatter": {
-			"jsxQuoteStyle": "double",
-			"quoteProperties": "asNeeded",
-			"trailingCommas": "all",
-			"semicolons": "asNeeded",
-			"arrowParentheses": "always",
-			"bracketSameLine": false,
-			"quoteStyle": "single",
-			"attributePosition": "auto",
-			"bracketSpacing": true
 		}
 	},
-	"html": { "formatter": { "selfCloseVoidElements": "always" } },
 	"overrides": [
 		{
 			"includes": ["*.ts", "*.tsx", "*.mts", "*.cts"],
@@ -221,15 +226,10 @@
 			}
 		}
 	],
-	"assist": {
+	"vcs": {
+		"clientKind": "git",
+		"defaultBranch": "main",
 		"enabled": true,
-		"actions": {
-			"source": {
-				"organizeImports": "on",
-				"useSortedAttributes": "on",
-				"useSortedKeys": "on",
-				"useSortedProperties": "on"
-			}
-		}
+		"useIgnoreFile": true
 	}
 }

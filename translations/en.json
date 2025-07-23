@@ -1,125 +1,125 @@
 {
-	"AdminSidebar": {
-		"Content": "Content",
-		"Contact": "Contact",
-		"Pages": "Pages",
-		"Settings": "Settings",
-		"Title": "Klickbee CMS",
-		"Copyright": "© Klickbee CMS",
-		"Email": "admin@klickbee.io"
-	},
 	"AdminLayout": {
 		"Logout": "Logout"
 	},
+	"AdminSidebar": {
+		"Contact": "Contact",
+		"Content": "Content",
+		"Copyright": "© Klickbee CMS",
+		"Email": "admin@klickbee.io",
+		"Pages": "Pages",
+		"Settings": "Settings",
+		"Title": "Klickbee CMS"
+	},
+	"API": {
+		"PasswordReset": {
+			"InternalServerError": "Internal server error",
+			"InvalidJsonFormat": "Invalid JSON format",
+			"InvalidToken": "Invalid token",
+			"Success": "Password reset successful",
+			"TokenAndPasswordRequired": "Valid token and new password are required",
+			"TokenExpired": "Token expired"
+		},
+		"PasswordResetRequest": {
+			"EmailNotFound": "Email not found",
+			"EmailRequired": "Valid email address is required",
+			"InternalServerError": "Internal server error",
+			"InvalidJsonFormat": "Invalid JSON format",
+			"Success": "Password reset request successful"
+		}
+	},
 	"BuilderSettings": {
-		"GlobalSettings": "Global Settings",
-		"GlobalSettingsDescription": "Configure the global settings of your site, such as typography, colors, spacing, and logos.",
-		"Error": "Error",
-		"FormErrors": "There are errors in the form. Please correct them before submitting.",
-		"Typography": "Typography",
-		"TypographyDescription": "Define the text styles used on your site.",
 		"Colors": "Colors",
 		"ColorsDescription": "Define the color palette of your site.",
-		"Spacing": "Spacing",
-		"SpacingDescription": "Configure the spacing and margins used in the layout.",
+		"Error": "Error",
+		"ErrorMessage": "An error occurred while saving the settings.",
+		"FormErrors": "There are errors in the form. Please correct them before submitting.",
+		"GlobalSettings": "Global Settings",
+		"GlobalSettingsDescription": "Configure the global settings of your site, such as typography, colors, spacing, and logos.",
 		"Logos": "Logos",
 		"LogosDescription": "Upload and manage your site's logos.",
-		"Saving": "Saving...",
 		"SaveSettings": "Save Settings",
+		"Saving": "Saving...",
+		"Spacing": "Spacing",
+		"SpacingDescription": "Configure the spacing and margins used in the layout.",
 		"Success": "Success",
 		"SuccessMessage": "Settings have been saved successfully.",
-		"ErrorMessage": "An error occurred while saving the settings."
+		"Typography": "Typography",
+		"TypographyDescription": "Define the text styles used on your site."
 	},
-	"Login": {
-		"AdminLogin": "Admin Login",
-		"Email": "Email",
-		"Password": "Password",
-		"PasswordPlaceholder": "Your password",
-		"LoginButton": "Login",
-		"LoggingIn": "Logging in...",
-		"ConnectionError": "Connection error.",
-		"ConnectionFailed": "Connection failed. Please try again."
-	},
-	"ResetPasswordRequest": {
-		"ResetPasswordRequest": "Reset password request",
-		"EmailLabel": "Email",
-		"EmailPlaceholder": "Enter your email",
-		"SendResetLink": "Send reset link",
-		"Sending": "Sending...",
-		"SuccessMessage": "A reset link has been sent to your email.",
-		"ErrorMessage": "An error occurred while sending the reset link."
-	},
-	"ResetPassword": {
-		"NewPassword": "New Password",
-		"ConfirmPassword": "Confirm Password",
-		"NewPasswordPlaceholder": "Enter your new password",
-		"ResetButton": "Reset Password",
-		"Resetting": "Resetting...",
-		"SuccessMessage": "Your password has been reset successfully.",
-		"ErrorMessage": "An error occurred while resetting the password."
+	"ColorEditor": {
+		"AddColor": "Add color",
+		"ColorName": "Color name",
+		"ColorPicker": "Color picker",
+		"DeleteColor": "Delete color",
+		"SelectType": "Select a type",
+		"Title": "Colors",
+		"Type": "Type:"
 	},
 	"Errors": {
+		"GoogleFontsError": "Error retrieving Google Fonts",
 		"LoadingError": "Loading error",
 		"SaveError": "Save error",
 		"UploadError": "Upload error",
-		"GoogleFontsError": "Error retrieving Google Fonts",
 		"UserFetchError": "Error retrieving user"
 	},
+	"Login": {
+		"AdminLogin": "Admin Login",
+		"ConnectionError": "Connection error.",
+		"ConnectionFailed": "Connection failed. Please try again.",
+		"Email": "Email",
+		"LoggingIn": "Logging in...",
+		"LoginButton": "Login",
+		"Password": "Password",
+		"PasswordPlaceholder": "Your password"
+	},
 	"LogoEditor": {
-		"Title": "Logos",
-		"SquareLogo": "Square Logo",
-		"RectangleLogo": "Rectangle Logo",
-		"FileTypeError": "Only PNG or JPEG files are accepted.",
-		"SelectLogo": "Select a logo",
 		"ClickToChoose": "Click to choose",
+		"FileTypeError": "Only PNG or JPEG files are accepted.",
+		"RectangleLogo": "Rectangle Logo",
+		"SelectLogo": "Select a logo",
+		"SquareLogo": "Square Logo",
+		"Title": "Logos",
 		"Uploading": "Uploading..."
 	},
+	"ResetPassword": {
+		"ConfirmPassword": "Confirm Password",
+		"ErrorMessage": "An error occurred while resetting the password.",
+		"NewPassword": "New Password",
+		"NewPasswordPlaceholder": "Enter your new password",
+		"ResetButton": "Reset Password",
+		"Resetting": "Resetting...",
+		"SuccessMessage": "Your password has been reset successfully."
+	},
+	"ResetPasswordRequest": {
+		"EmailLabel": "Email",
+		"EmailPlaceholder": "Enter your email",
+		"ErrorMessage": "An error occurred while sending the reset link.",
+		"ResetPasswordRequest": "Reset password request",
+		"Sending": "Sending...",
+		"SendResetLink": "Send reset link",
+		"SuccessMessage": "A reset link has been sent to your email."
+	},
 	"SpacingEditor": {
-		"Title": "Spacings",
-		"Padding": "Padding",
-		"Gap": "Gap",
-		"MaxWidth": "Max Width",
-		"Key": "Key:",
-		"PaddingName": "Padding name",
-		"GapName": "Gap name",
-		"DeletePadding": "Delete padding",
+		"AddGap": "Add gap",
 		"AddPadding": "Add padding",
 		"DeleteGap": "Delete gap",
-		"AddGap": "Add gap"
-	},
-	"ColorEditor": {
-		"Title": "Colors",
-		"ColorPicker": "Color picker",
-		"ColorName": "Color name",
-		"DeleteColor": "Delete color",
-		"Type": "Type:",
-		"SelectType": "Select a type",
-		"AddColor": "Add color"
-	},
-	"API": {
-		"PasswordResetRequest": {
-			"Success": "Password reset request successful",
-			"InvalidJsonFormat": "Invalid JSON format",
-			"EmailRequired": "Valid email address is required",
-			"EmailNotFound": "Email not found",
-			"InternalServerError": "Internal server error"
-		},
-		"PasswordReset": {
-			"Success": "Password reset successful",
-			"InvalidJsonFormat": "Invalid JSON format",
-			"TokenAndPasswordRequired": "Valid token and new password are required",
-			"InvalidToken": "Invalid token",
-			"TokenExpired": "Token expired",
-			"InternalServerError": "Internal server error"
-		}
+		"DeletePadding": "Delete padding",
+		"Gap": "Gap",
+		"GapName": "Gap name",
+		"Key": "Key:",
+		"MaxWidth": "Max Width",
+		"Padding": "Padding",
+		"PaddingName": "Padding name",
+		"Title": "Spacings"
 	},
 	"Validation": {
-		"RequiredField": "This field is required.",
-		"InvalidEmail": "Please enter a valid email address.",
 		"EmailRequired": "Email is required",
+		"InvalidEmail": "Please enter a valid email address.",
 		"InvalidToken": "Invalid token",
-		"TokenRequired": "Token is required",
 		"PasswordRequired": "Password is required",
-		"PasswordTooShort": "Password must be at least 8 characters"
+		"PasswordTooShort": "Password must be at least 8 characters",
+		"RequiredField": "This field is required.",
+		"TokenRequired": "Token is required"
 	}
 }

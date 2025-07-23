@@ -1,49 +1,49 @@
-import React from "react";
-import { Input } from "@/components/ui/input";
-import { Pencil, HelpCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { HelpCircle, Pencil } from 'lucide-react'
+import React from 'react'
+import {
+	Control,
+	UseFormRegister,
+	UseFormSetValue,
+	useController,
+} from 'react-hook-form'
+import type { FormValues } from '@/app/admin/[adminKey]/builder/settings/page'
+import { InputWithUnit } from '@/builder/components/settings/_partials/InputWithUnit'
+import { sizeUnits } from '@/builder/types/settings/FluidSize'
+import {
+	TypographyFontStyle,
+	TypographyFontWeight,
+	TypographyTextTransform,
+	typographyFontStyles,
+	typographyFontWeights,
+	typographyTextTransforms,
+} from '@/builder/types/settings/TypographySettings'
+import { Button } from '@/components/ui/button'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover'
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
-import { InputWithUnit } from "@/builder/components/settings/_partials/InputWithUnit";
-import { sizeUnits } from "@/builder/types/settings/FluidSize";
-import {
-	typographyFontStyles,
-	typographyFontWeights,
-	TypographyFontWeight,
-	TypographyFontStyle,
-	TypographyTextTransform,
-	typographyTextTransforms,
-} from "@/builder/types/settings/TypographySettings";
-import {
-	Control,
-	useController,
-	UseFormRegister,
-	UseFormSetValue,
-} from "react-hook-form";
-import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
+} from '@/components/ui/select'
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip'
 
 const TypographyItemEditor = ({
 	idx,
@@ -63,47 +63,47 @@ const TypographyItemEditor = ({
 	filteredFonts,
 	typography,
 }: {
-	idx: number;
-	control: Control<FormValues>;
-	register: UseFormRegister<FormValues>;
-	setValue: UseFormSetValue<FormValues>;
-	remove: (_index: number) => void;
-	openIdx: number | null;
-	setOpenIdx: (_idx: number | null) => void;
-	dropdownOpenIdx: number | null;
-	setDropdownOpenIdx: (_idx: number | null) => void;
-	search: string;
-	setSearch: (_val: string) => void;
-	searchInputRef: React.RefObject<HTMLInputElement>;
-	allFonts: { label: string; value: string }[];
-	isLoading: boolean;
-	filteredFonts: { label: string; value: string }[];
-	typography: FormValues["typography"];
+	idx: number
+	control: Control<FormValues>
+	register: UseFormRegister<FormValues>
+	setValue: UseFormSetValue<FormValues>
+	remove: (_index: number) => void
+	openIdx: number | null
+	setOpenIdx: (_idx: number | null) => void
+	dropdownOpenIdx: number | null
+	setDropdownOpenIdx: (_idx: number | null) => void
+	search: string
+	setSearch: (_val: string) => void
+	searchInputRef: React.RefObject<HTMLInputElement>
+	allFonts: { label: string; value: string }[]
+	isLoading: boolean
+	filteredFonts: { label: string; value: string }[]
+	typography: FormValues['typography']
 }) => {
 	const { field: lineHeightField } = useController({
+		control,
 		name: `typography.typographies.${idx}.lineHeight`,
-		control,
-	});
+	})
 	const { field: fontSizeMinField } = useController({
+		control,
 		name: `typography.typographies.${idx}.fontSize.min`,
-		control,
-	});
+	})
 	const { field: fontSizeMaxField } = useController({
+		control,
 		name: `typography.typographies.${idx}.fontSize.max`,
-		control,
-	});
+	})
 	const { field: fontSizeUnitField } = useController({
+		control,
 		name: `typography.typographies.${idx}.fontSize.sizeUnit`,
-		control,
-	});
+	})
 	const { field: letterSpacingField } = useController({
+		control,
 		name: `typography.typographies.${idx}.letterSpacing`,
-		control,
-	});
+	})
 	const { field: letterSpacingUnitField } = useController({
-		name: `typography.typographies.${idx}.letterSpacingUnits`,
 		control,
-	});
+		name: `typography.typographies.${idx}.letterSpacingUnits`,
+	})
 
 	return (
 		<div className="flex items-start gap-2">
@@ -113,11 +113,11 @@ const TypographyItemEditor = ({
 				placeholder="Nom"
 			/>
 			<Popover
-				open={openIdx === idx}
 				onOpenChange={(open) => setOpenIdx(open ? idx : null)}
+				open={openIdx === idx}
 			>
 				<PopoverTrigger asChild>
-					<Button variant="ghost" size="icon" className="mt-1">
+					<Button className="mt-1" size="icon" variant="ghost">
 						<Pencil className="w-4 h-4" />
 					</Button>
 				</PopoverTrigger>
@@ -139,42 +139,42 @@ const TypographyItemEditor = ({
 					</Label>
 					<div className="col-span-2">
 						<DropdownMenu
-							open={dropdownOpenIdx === idx}
 							onOpenChange={(open) => {
-								setDropdownOpenIdx(open ? idx : null);
+								setDropdownOpenIdx(open ? idx : null)
 								if (open)
 									setTimeout(
 										() => searchInputRef.current?.focus(),
 										10,
-									);
-								if (!open) setSearch("");
+									)
+								if (!open) setSearch('')
 							}}
+							open={dropdownOpenIdx === idx}
 						>
 							<DropdownMenuTrigger asChild>
 								<Button
-									variant="outline"
-									size="sm"
 									className="w-full justify-between"
+									size="sm"
+									variant="outline"
 								>
 									{allFonts.find(
 										(opt) =>
 											opt.value ===
 											typography?.typographies?.[idx]
 												?.fontFamily,
-									)?.label || "Select a font"}
+									)?.label || 'Select a font'}
 								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
 								<div className="px-2 py-1">
 									<Input
-										ref={searchInputRef}
-										placeholder="Search fonts..."
-										value={search}
+										className="mb-2"
 										onChange={(e) =>
 											setSearch(e.target.value)
 										}
-										className="mb-2"
 										onKeyDown={(e) => e.stopPropagation()}
+										placeholder="Search fonts..."
+										ref={searchInputRef}
+										value={search}
 									/>
 								</div>
 								{isLoading && (
@@ -194,8 +194,8 @@ const TypographyItemEditor = ({
 											setValue(
 												`typography.typographies.${idx}.fontFamily`,
 												opt.value,
-											);
-											setDropdownOpenIdx(null);
+											)
+											setDropdownOpenIdx(null)
 										}}
 									>
 										{opt.label}
@@ -222,11 +222,11 @@ const TypographyItemEditor = ({
 						</TooltipProvider>
 					</Label>
 					<InputWithUnit
-						value={fontSizeMinField.value}
 						onChange={(v) => fontSizeMinField.onChange(Number(v))}
-						unit={fontSizeUnitField.value ?? "rem"}
 						onUnitChange={(u) => fontSizeUnitField.onChange(u)}
+						unit={fontSizeUnitField.value ?? 'rem'}
 						units={sizeUnits}
+						value={fontSizeMinField.value}
 					/>
 
 					<Label className="flex items-center gap-1">
@@ -245,11 +245,11 @@ const TypographyItemEditor = ({
 						</TooltipProvider>
 					</Label>
 					<InputWithUnit
-						value={fontSizeMaxField.value}
 						onChange={(v) => fontSizeMaxField.onChange(Number(v))}
-						unit={fontSizeUnitField.value ?? "rem"}
 						onUnitChange={(u) => fontSizeUnitField.onChange(u)}
+						unit={fontSizeUnitField.value ?? 'rem'}
 						units={sizeUnits}
+						value={fontSizeMaxField.value}
 					/>
 
 					<Label className="flex items-center gap-1">
@@ -295,19 +295,19 @@ const TypographyItemEditor = ({
 						</TooltipProvider>
 					</Label>
 					<InputWithUnit
-						value={lineHeightField.value}
 						onChange={(v) => lineHeightField.onChange(Number(v))}
-						unit={
-							typography?.typographies?.[idx]?.lineHeightUnits ??
-							"em"
-						}
 						onUnitChange={(u) =>
 							setValue(
 								`typography.typographies.${idx}.lineHeightUnits`,
 								u,
 							)
 						}
+						unit={
+							typography?.typographies?.[idx]?.lineHeightUnits ??
+							'em'
+						}
 						units={sizeUnits}
+						value={lineHeightField.value}
 					/>
 					<Label className="flex items-center gap-1">
 						Font Weight
@@ -404,11 +404,11 @@ const TypographyItemEditor = ({
 						</TooltipProvider>
 					</Label>
 					<InputWithUnit
-						value={letterSpacingField.value}
 						onChange={(v) => letterSpacingField.onChange(Number(v))}
-						unit={letterSpacingUnitField.value ?? "px"}
 						onUnitChange={(u) => letterSpacingUnitField.onChange(u)}
+						unit={letterSpacingUnitField.value ?? 'px'}
 						units={sizeUnits}
+						value={letterSpacingField.value}
 					/>
 
 					<Label className="flex items-center gap-1">
@@ -453,16 +453,16 @@ const TypographyItemEditor = ({
 				</PopoverContent>
 			</Popover>
 			<Button
+				className="ml-1"
+				onClick={() => remove(idx)}
+				size="icon"
 				type="button"
 				variant="ghost"
-				size="icon"
-				onClick={() => remove(idx)}
-				className="ml-1"
 			>
 				✕
 			</Button>
 		</div>
-	);
-};
+	)
+}
 
-export default TypographyItemEditor;
+export default TypographyItemEditor

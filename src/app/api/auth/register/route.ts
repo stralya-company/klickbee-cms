@@ -1,1 +1,1 @@
-export { POST } from "@/feature/user/api/apiUserRegister";
+export { POST } from '@/feature/user/api/apiUserRegister'

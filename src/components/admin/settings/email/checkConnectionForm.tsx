@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
 	Form,
 	FormControl,
@@ -12,42 +12,42 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useSendEmail } from "@/feature/send-email/queries/useSendEmail";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { useSendEmail } from '@/feature/send-email/queries/useSendEmail'
 import {
-	checkConnectionSchema,
 	CheckConnectionSchema,
-} from "@/feature/settings/types/emailSettingsSchema";
+	checkConnectionSchema,
+} from '@/feature/settings/types/emailSettingsSchema'
 
 export default function CheckConnectionForm() {
 	const checkConnectionForm = useForm<CheckConnectionSchema>({
 		resolver: zodResolver(checkConnectionSchema),
-	});
-	const sendEmail = useSendEmail();
+	})
+	const sendEmail = useSendEmail()
 
 	const onCheckConnectionSubmit = async (data: CheckConnectionSchema) => {
 		try {
 			const result = await sendEmail.mutateAsync({
-				to: data.to,
 				subject: data.subject,
 				text: data.text,
-			});
-			toast.success(result.message);
+				to: data.to,
+			})
+			toast.success(result.message)
 		} catch (error) {
 			const errorMessage =
-				error instanceof Error ? error.message : "Error";
-			toast.error(errorMessage);
+				error instanceof Error ? error.message : 'Error'
+			toast.error(errorMessage)
 		}
-	};
+	}
 
 	return (
 		<Form {...checkConnectionForm}>
 			<form
+				className="p-4 w-1/2 space-y-4"
 				onSubmit={checkConnectionForm.handleSubmit(
 					onCheckConnectionSubmit,
 				)}
-				className="p-4 w-1/2 space-y-4"
 			>
 				<FormField
 					control={checkConnectionForm.control}
@@ -58,8 +58,8 @@ export default function CheckConnectionForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="To"
 									className="w-full"
+									placeholder="To"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -75,8 +75,8 @@ export default function CheckConnectionForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="Subject"
 									className="w-full"
+									placeholder="Subject"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -92,18 +92,18 @@ export default function CheckConnectionForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="Text"
 									className="w-full"
+									placeholder="Text"
 								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" disabled={sendEmail.isPending}>
-					{sendEmail.isPending ? "Sending..." : "Check connection"}
+				<Button disabled={sendEmail.isPending} type="submit">
+					{sendEmail.isPending ? 'Sending...' : 'Check connection'}
 				</Button>
 			</form>
 		</Form>
-	);
+	)
 }

@@ -6,5 +6,5 @@ export default function AdminContactPage() {
 				This is the contact management page for the admin.
 			</p>
 		</div>
-	);
+	)
 }

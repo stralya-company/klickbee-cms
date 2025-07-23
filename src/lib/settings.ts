@@ -1,15 +1,15 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from '@/lib/prisma'
 
 export const getSetting = async (key: string, userId?: string | null) => {
 	if (userId) {
 		const userSetting = await prisma.userSettings.findUnique({
 			where: { key_userId: { key, userId } },
-		});
-		if (userSetting) return userSetting.value;
+		})
+		if (userSetting) return userSetting.value
 	}
-	const setting = await prisma.settings.findUnique({ where: { key } });
-	return setting?.value ?? null;
-};
+	const setting = await prisma.settings.findUnique({ where: { key } })
+	return setting?.value ?? null
+}
 
 export const setUserSetting = async (
 	key: string,
@@ -17,16 +17,16 @@ export const setUserSetting = async (
 	userId: string,
 ) => {
 	return prisma.userSettings.upsert({
-		where: { key_userId: { key, userId } },
+		create: { key, userId, value },
 		update: { value },
-		create: { key, value, userId },
-	});
-};
+		where: { key_userId: { key, userId } },
+	})
+}
 
 export const setSetting = async (key: string, value: string) => {
 	return prisma.settings.upsert({
-		where: { key },
-		update: { value },
 		create: { key, value },
-	});
-};
+		update: { value },
+		where: { key },
+	})
+}

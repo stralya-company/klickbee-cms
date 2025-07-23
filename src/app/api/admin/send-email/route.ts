@@ -1,1 +1,1 @@
-export { POST } from "@/feature/send-email/api/apiSendEmail";
+export { POST } from '@/feature/send-email/api/apiSendEmail'

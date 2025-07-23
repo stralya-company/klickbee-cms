@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from 'zod'
 
-export const sizeUnits = ["px", "em", "rem"] as const;
-export type SizeUnit = (typeof sizeUnits)[number];
+export const sizeUnits = ['px', 'em', 'rem'] as const
+export type SizeUnit = (typeof sizeUnits)[number]
 
 /**
  * FluidSize represents a responsive size value that scales between minimum and maximum values
@@ -14,31 +14,31 @@ export type SizeUnit = (typeof sizeUnits)[number];
  * @property widthUnit - The unit for the maxWidth value (px, em, rem)
  */
 export type FluidSize = {
-	min: number;
-	max: number;
-	sizeUnit: SizeUnit;
-	maxWidth?: number;
-	widthUnit?: SizeUnit;
-};
+	min: number
+	max: number
+	sizeUnit: SizeUnit
+	maxWidth?: number
+	widthUnit?: SizeUnit
+}
 
 /**
  * Zod schema for validating FluidSize objects
  */
 export const fluidSizeSchema = z.object({
-	min: z.number().min(0, "Minimum size must be a positive number"),
-	max: z.number().min(0, "Maximum size must be a positive number"),
-	sizeUnit: z.enum(sizeUnits, {
-		errorMap: () => ({ message: "Size unit must be one of: px, em, rem" }),
-	}),
+	max: z.number().min(0, 'Maximum size must be a positive number'),
 	maxWidth: z
 		.number()
-		.positive("Max width must be a positive number")
+		.positive('Max width must be a positive number')
 		.optional(),
+	min: z.number().min(0, 'Minimum size must be a positive number'),
+	sizeUnit: z.enum(sizeUnits, {
+		errorMap: () => ({ message: 'Size unit must be one of: px, em, rem' }),
+	}),
 	widthUnit: z
 		.enum(sizeUnits, {
 			errorMap: () => ({
-				message: "Width unit must be one of: px, em, rem",
+				message: 'Width unit must be one of: px, em, rem',
 			}),
 		})
 		.optional(),
-});
+})

@@ -1,38 +1,38 @@
-import { z } from "zod";
+import { z } from 'zod'
 import {
 	FluidSize,
 	fluidSizeSchema,
 	SizeUnit,
 	sizeUnits,
-} from "@/builder/types/settings/FluidSize";
+} from '@/builder/types/settings/FluidSize'
 
 /**
  * Valid font style values for typography settings
  * Includes both font-style and text-transform CSS properties
  */
-export const typographyFontStyles = ["normal", "italic", "oblique"] as const;
-export type TypographyFontStyle = (typeof typographyFontStyles)[number];
+export const typographyFontStyles = ['normal', 'italic', 'oblique'] as const
+export type TypographyFontStyle = (typeof typographyFontStyles)[number]
 
 /**
  * Valid font weight values for typography settings
  * Includes both numeric and named weights
  */
 export const typographyFontWeights = [
-	"100",
-	"200",
-	"300",
-	"400",
-	"500",
-	"600",
-	"700",
-	"800",
-	"900",
-	"normal",
-	"bold",
-	"bolder",
-] as const;
+	'100',
+	'200',
+	'300',
+	'400',
+	'500',
+	'600',
+	'700',
+	'800',
+	'900',
+	'normal',
+	'bold',
+	'bolder',
+] as const
 
-export type TypographyFontWeight = (typeof typographyFontWeights)[number];
+export type TypographyFontWeight = (typeof typographyFontWeights)[number]
 
 /**
  * Valid text transform values for typography settings
@@ -40,13 +40,13 @@ export type TypographyFontWeight = (typeof typographyFontWeights)[number];
  */
 
 export const typographyTextTransforms = [
-	"uppercase",
-	"lowercase",
-	"capitalize",
-	"unset",
-] as const;
+	'uppercase',
+	'lowercase',
+	'capitalize',
+	'unset',
+] as const
 
-export type TypographyTextTransform = (typeof typographyTextTransforms)[number];
+export type TypographyTextTransform = (typeof typographyTextTransforms)[number]
 
 /**
  * Typography settings for a specific text style
@@ -63,17 +63,17 @@ export type TypographyTextTransform = (typeof typographyTextTransforms)[number];
  * @property textTransform - Text transform for additional styling (uppercase, lowercase, capitalize, unset)
  */
 export type TypographySettings = {
-	key: string;
-	fontFamily: string;
-	fontSize: FluidSize;
-	lineHeight: number;
-	lineHeightUnits: SizeUnit;
-	fontWeight: TypographyFontWeight;
-	fontStyle: TypographyFontStyle;
-	letterSpacing: number;
-	letterSpacingUnits: SizeUnit;
-	textTransform: TypographyTextTransform; // Text transform for additional styling
-};
+	key: string
+	fontFamily: string
+	fontSize: FluidSize
+	lineHeight: number
+	lineHeightUnits: SizeUnit
+	fontWeight: TypographyFontWeight
+	fontStyle: TypographyFontStyle
+	letterSpacing: number
+	letterSpacingUnits: SizeUnit
+	textTransform: TypographyTextTransform // Text transform for additional styling
+}
 
 /**
  * Collection of typography settings with responsive configuration
@@ -83,49 +83,49 @@ export type TypographySettings = {
  * @property typographies - Array of typography settings
  */
 export type FluidTypographySettings = {
-	typographies: TypographySettings[];
-	maxWidth: number;
-};
+	typographies: TypographySettings[]
+	maxWidth: number
+}
 
 /**
  * Zod schema for validating typography settings
  */
 export const typographySettingsSchema = z.object({
-	key: z.string().min(1, "Typography key is required"),
-	fontFamily: z.string().min(1, "Font family is required"),
+	fontFamily: z.string().min(1, 'Font family is required'),
 	fontSize: fluidSizeSchema,
-	lineHeight: z.number().positive("Line height must be a positive number"),
-	lineHeightUnits: z.enum(sizeUnits, {
-		errorMap: () => ({
-			message: "Line height unit must be one of: px, em, rem",
-		}),
+	fontStyle: z.enum(typographyFontStyles, {
+		errorMap: () => ({ message: 'Invalid font style' }),
 	}),
 	fontWeight: z.enum(typographyFontWeights, {
-		errorMap: () => ({ message: "Invalid font weight" }),
+		errorMap: () => ({ message: 'Invalid font weight' }),
 	}),
-	fontStyle: z.enum(typographyFontStyles, {
-		errorMap: () => ({ message: "Invalid font style" }),
-	}),
+	key: z.string().min(1, 'Typography key is required'),
 	letterSpacing: z.number(),
 	letterSpacingUnits: z.enum(sizeUnits, {
 		errorMap: () => ({
-			message: "Letter spacing unit must be one of: px, em, rem",
+			message: 'Letter spacing unit must be one of: px, em, rem',
+		}),
+	}),
+	lineHeight: z.number().positive('Line height must be a positive number'),
+	lineHeightUnits: z.enum(sizeUnits, {
+		errorMap: () => ({
+			message: 'Line height unit must be one of: px, em, rem',
 		}),
 	}),
 	textTransform: z
 		.enum(typographyTextTransforms)
-		.describe("Optional text transform for additional styling"),
-});
+		.describe('Optional text transform for additional styling'),
+})
 
 /**
  * Zod schema for validating fluid typography settings
  */
 export const fluidTypographySettingsSchema = z.object({
-	maxWidth: z.number().positive("Max width must be a positive number"),
+	maxWidth: z.number().positive('Max width must be a positive number'),
 	typographies: z
 		.array(typographySettingsSchema)
-		.min(1, "At least one typography style is required"),
-});
+		.min(1, 'At least one typography style is required'),
+})
 
 /**
  * Default fluid typography settings with comprehensive presets
@@ -136,116 +136,116 @@ export const defaultFluidTypographySettings: FluidTypographySettings = {
 	typographies: [
 		// Headings
 		{
-			key: "Heading 1",
-			fontFamily: "Inter",
-			fontSize: { min: 2.5, max: 3.5, sizeUnit: "rem" },
-			lineHeight: 1.2,
-			lineHeightUnits: "em",
-			fontWeight: "700",
-			fontStyle: "normal",
+			fontFamily: 'Inter',
+			fontSize: { max: 3.5, min: 2.5, sizeUnit: 'rem' },
+			fontStyle: 'normal',
+			fontWeight: '700',
+			key: 'Heading 1',
 			letterSpacing: -0.5,
-			letterSpacingUnits: "px",
-			textTransform: "uppercase",
+			letterSpacingUnits: 'px',
+			lineHeight: 1.2,
+			lineHeightUnits: 'em',
+			textTransform: 'uppercase',
 		},
 		{
-			key: "Heading 2",
-			fontFamily: "Inter",
-			fontSize: { min: 2, max: 3, sizeUnit: "rem" },
-			lineHeight: 1.3,
-			lineHeightUnits: "em",
-			fontWeight: "600",
-			fontStyle: "normal",
+			fontFamily: 'Inter',
+			fontSize: { max: 3, min: 2, sizeUnit: 'rem' },
+			fontStyle: 'normal',
+			fontWeight: '600',
+			key: 'Heading 2',
 			letterSpacing: -0.25,
-			letterSpacingUnits: "px",
-			textTransform: "uppercase",
+			letterSpacingUnits: 'px',
+			lineHeight: 1.3,
+			lineHeightUnits: 'em',
+			textTransform: 'uppercase',
 		},
 		{
-			key: "Heading 3",
-			fontFamily: "Inter",
-			fontSize: { min: 1.5, max: 2, sizeUnit: "rem" },
-			lineHeight: 1.4,
-			lineHeightUnits: "em",
-			fontWeight: "600",
-			fontStyle: "normal",
+			fontFamily: 'Inter',
+			fontSize: { max: 2, min: 1.5, sizeUnit: 'rem' },
+			fontStyle: 'normal',
+			fontWeight: '600',
+			key: 'Heading 3',
 			letterSpacing: 0,
-			letterSpacingUnits: "px",
-			textTransform: "capitalize",
+			letterSpacingUnits: 'px',
+			lineHeight: 1.4,
+			lineHeightUnits: 'em',
+			textTransform: 'capitalize',
 		},
 
 		// Body text
 		{
-			key: "Body Large",
-			fontFamily: "Poppins",
-			fontSize: { min: 1.125, max: 1.25, sizeUnit: "rem" },
-			lineHeight: 1.6,
-			lineHeightUnits: "em",
-			fontWeight: "400",
-			fontStyle: "normal",
+			fontFamily: 'Poppins',
+			fontSize: { max: 1.25, min: 1.125, sizeUnit: 'rem' },
+			fontStyle: 'normal',
+			fontWeight: '400',
+			key: 'Body Large',
 			letterSpacing: 0,
-			letterSpacingUnits: "px",
-			textTransform: "unset",
+			letterSpacingUnits: 'px',
+			lineHeight: 1.6,
+			lineHeightUnits: 'em',
+			textTransform: 'unset',
 		},
 		{
-			key: "Body",
-			fontFamily: "Poppins",
-			fontSize: { min: 1, max: 1.125, sizeUnit: "rem" },
-			lineHeight: 1.6,
-			lineHeightUnits: "em",
-			fontWeight: "400",
-			fontStyle: "normal",
+			fontFamily: 'Poppins',
+			fontSize: { max: 1.125, min: 1, sizeUnit: 'rem' },
+			fontStyle: 'normal',
+			fontWeight: '400',
+			key: 'Body',
 			letterSpacing: 0,
-			letterSpacingUnits: "px",
-			textTransform: "unset",
+			letterSpacingUnits: 'px',
+			lineHeight: 1.6,
+			lineHeightUnits: 'em',
+			textTransform: 'unset',
 		},
 		{
-			key: "Body Small",
-			fontFamily: "Poppins",
-			fontSize: { min: 0.875, max: 1, sizeUnit: "rem" },
-			lineHeight: 1.5,
-			lineHeightUnits: "em",
-			fontWeight: "400",
-			fontStyle: "normal",
+			fontFamily: 'Poppins',
+			fontSize: { max: 1, min: 0.875, sizeUnit: 'rem' },
+			fontStyle: 'normal',
+			fontWeight: '400',
+			key: 'Body Small',
 			letterSpacing: 0.1,
-			letterSpacingUnits: "px",
-			textTransform: "lowercase",
+			letterSpacingUnits: 'px',
+			lineHeight: 1.5,
+			lineHeightUnits: 'em',
+			textTransform: 'lowercase',
 		},
 
 		// UI elements
 		{
-			key: "Button",
-			fontFamily: "Inter",
-			fontSize: { min: 0.875, max: 1, sizeUnit: "rem" },
-			lineHeight: 1.5,
-			lineHeightUnits: "em",
-			fontWeight: "500",
-			fontStyle: "normal",
+			fontFamily: 'Inter',
+			fontSize: { max: 1, min: 0.875, sizeUnit: 'rem' },
+			fontStyle: 'normal',
+			fontWeight: '500',
+			key: 'Button',
 			letterSpacing: 0.5,
-			letterSpacingUnits: "px",
-			textTransform: "unset",
+			letterSpacingUnits: 'px',
+			lineHeight: 1.5,
+			lineHeightUnits: 'em',
+			textTransform: 'unset',
 		},
 		{
-			key: "Caption",
-			fontFamily: "Poppins",
-			fontSize: { min: 0.75, max: 0.875, sizeUnit: "rem" },
-			lineHeight: 1.4,
-			lineHeightUnits: "em",
-			fontWeight: "400",
-			fontStyle: "italic",
+			fontFamily: 'Poppins',
+			fontSize: { max: 0.875, min: 0.75, sizeUnit: 'rem' },
+			fontStyle: 'italic',
+			fontWeight: '400',
+			key: 'Caption',
 			letterSpacing: 0.25,
-			letterSpacingUnits: "px",
-			textTransform: "lowercase",
+			letterSpacingUnits: 'px',
+			lineHeight: 1.4,
+			lineHeightUnits: 'em',
+			textTransform: 'lowercase',
 		},
 		{
-			key: "Link",
-			fontFamily: "Poppins",
-			fontSize: { min: 1, max: 1.125, sizeUnit: "rem" },
-			lineHeight: 1.6,
-			lineHeightUnits: "em",
-			fontWeight: "500",
-			fontStyle: "normal",
+			fontFamily: 'Poppins',
+			fontSize: { max: 1.125, min: 1, sizeUnit: 'rem' },
+			fontStyle: 'normal',
+			fontWeight: '500',
+			key: 'Link',
 			letterSpacing: 0,
-			letterSpacingUnits: "px",
-			textTransform: "unset",
+			letterSpacingUnits: 'px',
+			lineHeight: 1.6,
+			lineHeightUnits: 'em',
+			textTransform: 'unset',
 		},
 	],
-};
+}

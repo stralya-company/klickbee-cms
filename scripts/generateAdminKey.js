@@ -1,20 +1,17 @@
-const fs = require("fs");
-const path = require("path");
-const { randomUUID } = require("crypto");
+import { randomUUID } from 'crypto'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { resolve } from 'path'
 
-const envPath = path.resolve(__dirname, "../.env");
-const keyName = "ADMIN_GENERATED_KEY";
+const envPath = resolve(__dirname, '../.env')
+const keyName = 'ADMIN_GENERATED_KEY'
 
-let env = "";
-if (fs.existsSync(envPath)) {
-	env = fs.readFileSync(envPath, "utf-8");
+let env = ''
+if (existsSync(envPath)) {
+	env = readFileSync(envPath, 'utf-8')
 }
 
 if (!env.includes(keyName)) {
-	const newKey = randomUUID();
-	env += `\n${keyName}=admin_${newKey}\n`;
-	fs.writeFileSync(envPath, env);
-	console.log(`Clé admin générée et ajoutée à .env : ${newKey}`);
-} else {
-	console.log("Clé admin déjà présente dans .env");
+	const newKey = randomUUID()
+	env += `\n${keyName}=admin_${newKey}\n`
+	writeFileSync(envPath, env)
 }

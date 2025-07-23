@@ -1,9 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
+import type { FormValues } from '@/app/admin/[adminKey]/builder/settings/page'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 type ColorPreviewProps = {
-	colors: FormValues["colors"];
-};
+	colors: FormValues['colors']
+}
 
 export default function ColorPreview({ colors }: ColorPreviewProps) {
 	return (
@@ -13,7 +13,7 @@ export default function ColorPreview({ colors }: ColorPreviewProps) {
 			</CardHeader>
 			<CardContent className="grid grid-cols-2 gap-2">
 				{colors.map((color, idx) => (
-					<div key={idx} className="flex flex-col items-center">
+					<div className="flex flex-col items-center" key={idx}>
 						<div
 							className="w-full h-10 rounded"
 							style={{ backgroundColor: color.hexCode }}
@@ -23,5 +23,5 @@ export default function ColorPreview({ colors }: ColorPreviewProps) {
 				))}
 			</CardContent>
 		</Card>
-	);
+	)
 }

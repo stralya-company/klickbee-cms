@@ -1,42 +1,42 @@
+import { z } from 'zod'
 import {
-	defaultSpacingSettings,
-	SpacingSettings,
-	spacingSettingsSchema,
-} from "@/builder/types/settings/SpacingSettings";
-import {
-	defaultFluidTypographySettings,
-	FluidTypographySettings,
-	fluidTypographySettingsSchema,
-} from "@/builder/types/settings/TypographySettings";
-import {
-	colorSchema,
 	ColorSettings,
+	colorSchema,
 	defaultColorSettings,
-} from "@/builder/types/settings/ColorSettings";
-import { z } from "zod";
+} from '@/builder/types/settings/ColorSettings'
 import {
 	defaultLogoSettings,
 	LogoSettings,
 	logoSettingsSchema,
-} from "@/builder/types/settings/LogoSettings";
+} from '@/builder/types/settings/LogoSettings'
+import {
+	defaultSpacingSettings,
+	SpacingSettings,
+	spacingSettingsSchema,
+} from '@/builder/types/settings/SpacingSettings'
+import {
+	defaultFluidTypographySettings,
+	FluidTypographySettings,
+	fluidTypographySettingsSchema,
+} from '@/builder/types/settings/TypographySettings'
 
 export type GlobalSettingsData = {
-	typography: FluidTypographySettings;
-	colors: ColorSettings[];
-	spacing: SpacingSettings;
-	logos: LogoSettings[];
-};
+	typography: FluidTypographySettings
+	colors: ColorSettings[]
+	spacing: SpacingSettings
+	logos: LogoSettings[]
+}
 
 export const globalSettingsSchema = z.object({
-	typography: fluidTypographySettingsSchema,
 	colors: colorSchema.array(),
-	spacing: spacingSettingsSchema,
 	logos: logoSettingsSchema.array(),
-});
+	spacing: spacingSettingsSchema,
+	typography: fluidTypographySettingsSchema,
+})
 
 export const defaultGlobalSettings: GlobalSettingsData = {
-	typography: defaultFluidTypographySettings,
 	colors: defaultColorSettings,
-	spacing: defaultSpacingSettings,
 	logos: defaultLogoSettings,
-};
+	spacing: defaultSpacingSettings,
+	typography: defaultFluidTypographySettings,
+}
