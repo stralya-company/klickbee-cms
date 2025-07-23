@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	UserLoginFormValues,
@@ -29,8 +29,6 @@ export default function LoginForm() {
 	const { adminKey } = useParams<{ adminKey: string }>();
 	const { setAdminKey } = useAdminKeyStore();
 	const queryClient = useQueryClient();
-
-	const [loading, setLoading] = useState<boolean>(false);
 
 	useEffect(() => {
 		setAdminKey(adminKey);
@@ -47,8 +45,6 @@ export default function LoginForm() {
 	});
 
 	async function onSubmit(loginFormValues: UserLoginFormValues) {
-		setLoading(true);
-
 		const { email, password } = loginFormValues;
 
 		const { data, error } = await authClient.signIn.email({
@@ -56,9 +52,10 @@ export default function LoginForm() {
 			password,
 		});
 
-		if (error) toast.error(t("ConnectionError"));
-
-		setLoading(false);
+		if (error) {
+			toast.error(t("ConnectionError"));
+			return;
+		}
 
 		if (data) {
 			await queryClient.refetchQueries({ queryKey: ["current_user"] });
@@ -112,8 +109,14 @@ export default function LoginForm() {
 					)}
 				/>
 
-				<Button type="submit" className="w-full" disabled={loading}>
-					{loading ? t("LoggingIn") : t("LoginButton")}
+				<Button
+					type="submit"
+					className="w-full"
+					disabled={!loginForm.formState.isValid}
+				>
+					{loginForm.formState.isSubmitted
+						? t("LoggingIn")
+						: t("LoginButton")}
 				</Button>
 			</form>
 		</Form>
