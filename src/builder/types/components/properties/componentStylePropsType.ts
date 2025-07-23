@@ -131,16 +131,16 @@ export type BorderCornerStyle = {
 export type EffectsStyle = {
 	boxShadow?: {
 		color: ColorSettings;
-		x: { number: number; unit: "%" };
-		y: { number: number; unit: "%" };
-		blur: { number: number; unit: "%" };
-		spread: { number: number; unit: "%" };
+		x: SpacingValue;
+		y: SpacingValue;
+		blur: SpacingValue;
+		spread: SpacingValue;
 	};
 	textShadow?: {
 		color: ColorSettings;
-		x: { number: number; unit: "px" };
-		y: { number: number; unit: "px" };
-		blur: { number: number; unit: "%" };
+		x: SpacingValue;
+		y: SpacingValue;
+		blur: SpacingValue;
 	};
 	opacity?: number;
 	backdropFilter?: BackdropFilter[];
