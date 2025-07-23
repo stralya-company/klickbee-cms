@@ -37,7 +37,7 @@
 		"PasswordPlaceholder": "Votre mot de passe",
 		"LoginButton": "Se connecter",
 		"LoggingIn": "Connexion...",
-		"ConnectionError": "Mauvais email ou mot de passe.",
+		"ConnectionError": "Identifiants invalides.",
 		"ConnectionFailed": "Échec de la connexion. Veuillez réessayer."
 	},
 	"ResetPasswordRequest": {

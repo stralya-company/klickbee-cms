@@ -37,7 +37,7 @@
 		"PasswordPlaceholder": "Your password",
 		"LoginButton": "Login",
 		"LoggingIn": "Logging in...",
-		"ConnectionError": "Bad email or password. Please try again.",
+		"ConnectionError": "Bad credentials.",
 		"ConnectionFailed": "Connection failed. Please try again."
 	},
 	"ResetPasswordRequest": {
