@@ -35,6 +35,14 @@ export default function EmailSettingsForm() {
 	const setSetting = useSetSetting();
 	const emailSettingsForm = useForm<EmailSettingsSchema>({
 		resolver: zodResolver(emailSettingsSchema),
+		defaultValues: {
+			emailHost: "",
+			emailPort: 0,
+			emailSecure: false,
+			emailSender: "",
+			emailUsername: "",
+			emailPassword: "",
+		},
 	});
 	const [emailSettings, setEmailSettings] =
 		useState<EmailSettingsSchema | null>(null);
@@ -85,19 +93,19 @@ export default function EmailSettingsForm() {
 		const keys = Object.keys(data) as (keyof EmailSettingsSchema)[];
 
 		try {
-			await keys.forEach(async (key) => {
+			for (const key of keys) {
 				const currentValue = emailSettings?.[key];
 				if (data[key] !== "" && data[key] !== currentValue) {
-					const result = await setSetting.mutateAsync({
+					await setSetting.mutateAsync({
 						key,
 						value:
 							key === "emailPassword"
 								? await encryptString(data[key] ?? "")
 								: String(data[key]),
 					});
-					toast.success(result.message);
 				}
-			});
+			}
+			toast.success("Email settings updated successfully");
 		} catch (error) {
 			const errorMessage =
 				error instanceof Error ? error.message : "Error";
