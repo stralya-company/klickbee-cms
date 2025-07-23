@@ -84,7 +84,7 @@
 		"build": "next build",
 		"check": "biome check .",
 		"dev": "next dev --turbopack",
-		"format": "biome format --write .",
+		"format": "biome check --write .",
 		"format:check": "biome format .",
 		"lint": "biome lint --write .",
 		"prebuild": "node scripts/generateAdminKey.js",
