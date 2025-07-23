@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSetting, setUserSetting, setSetting } from "@/lib/settings";
-import { isAuthenticatedGuard } from "@stralya/auth";
+import { isAuthenticatedGuard } from "@/lib/betterAuthGuard";
 
 export async function GET(req: NextRequest) {
 	// Vérification de l'authentification
