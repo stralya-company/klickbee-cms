@@ -49,28 +49,24 @@ const SpacingEditor = React.memo(function SpacingEditor({
 	// 			max: 2,
 	// 			maxWidth: 1440,
 	// 			sizeUnit: "rem",
-	// 			widthUnit: "px",
 	// 		},
 	// 		right: {
 	// 			min: 1,
 	// 			max: 2,
 	// 			maxWidth: 1440,
 	// 			sizeUnit: "rem",
-	// 			widthUnit: "px",
 	// 		},
 	// 		bottom: {
 	// 			min: 1,
 	// 			max: 2,
 	// 			maxWidth: 1440,
 	// 			sizeUnit: "rem",
-	// 			widthUnit: "px",
 	// 		},
 	// 		left: {
 	// 			min: 1,
 	// 			max: 2,
 	// 			maxWidth: 1440,
 	// 			sizeUnit: "rem",
-	// 			widthUnit: "px",
 	// 		},
 	// 	});
 	// }, [appendPadding]);
@@ -84,14 +80,12 @@ const SpacingEditor = React.memo(function SpacingEditor({
 	// 			max: 2,
 	// 			maxWidth: 1440,
 	// 			sizeUnit: "rem",
-	// 			widthUnit: "px",
 	// 		},
 	// 		column: {
 	// 			min: 1,
 	// 			max: 2,
 	// 			maxWidth: 1440,
 	// 			sizeUnit: "rem",
-	// 			widthUnit: "px",
 	// 		},
 	// 	});
 	// }, [appendGap]);
@@ -148,9 +142,6 @@ const SpacingEditor = React.memo(function SpacingEditor({
 											className="w-16"
 											aria-label={`${t("Padding")} ${side}`}
 										/>
-										<span className="text-xs text-muted-foreground">
-											{pad?.[side]?.widthUnit}
-										</span>
 									</div>
 								))}
 							</div>
@@ -179,28 +170,24 @@ const SpacingEditor = React.memo(function SpacingEditor({
 									max: 2,
 									maxWidth: 1440,
 									sizeUnit: "rem",
-									widthUnit: "px",
 								},
 								right: {
 									min: 1,
 									max: 2,
 									maxWidth: 1440,
 									sizeUnit: "rem",
-									widthUnit: "px",
 								},
 								bottom: {
 									min: 1,
 									max: 2,
 									maxWidth: 1440,
 									sizeUnit: "rem",
-									widthUnit: "px",
 								},
 								left: {
 									min: 1,
 									max: 2,
 									maxWidth: 1440,
 									sizeUnit: "rem",
-									widthUnit: "px",
 								},
 								key: "",
 							})
@@ -241,9 +228,6 @@ const SpacingEditor = React.memo(function SpacingEditor({
 											className="w-16"
 											aria-label={`${t("Gap")} ${type}`}
 										/>
-										<span className="text-xs text-muted-foreground">
-											{gap?.[type]?.widthUnit}
-										</span>
 									</div>
 								))}
 							</div>
@@ -272,14 +256,12 @@ const SpacingEditor = React.memo(function SpacingEditor({
 									max: 2,
 									maxWidth: 1440,
 									sizeUnit: "rem",
-									widthUnit: "px",
 								},
 								column: {
 									min: 1,
 									max: 2,
 									maxWidth: 1440,
 									sizeUnit: "rem",
-									widthUnit: "px",
 								},
 								key: "",
 							})
