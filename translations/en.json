@@ -41,21 +41,21 @@
 		"ConnectionFailed": "Connection failed. Please try again."
 	},
 	"ResetPasswordRequest": {
-		"ResetPasswordRequest": "Reset password request",
+		"ResetPasswordRequest": "Password Reset Request",
 		"EmailLabel": "Email",
 		"EmailPlaceholder": "Enter your email",
 		"SendResetLink": "Send reset link",
 		"Sending": "Sending...",
-		"SuccessMessage": "A reset link has been sent to your email.",
 		"ErrorMessage": "An error occurred while sending the reset link."
 	},
 	"ResetPassword": {
-		"NewPassword": "New Password",
-		"ConfirmPassword": "Confirm Password",
+		"ResetPassword": "Reset Password",
+		"NewPasswordLabel": "New Password",
+		"NewConfirmPasswordLabel": "Confirm Password",
 		"NewPasswordPlaceholder": "Enter your new password",
+		"NewConfirmPasswordPlaceholder": "Confirm your new password",
 		"ResetButton": "Reset Password",
 		"Resetting": "Resetting...",
-		"SuccessMessage": "Your password has been reset successfully.",
 		"ErrorMessage": "An error occurred while resetting the password."
 	},
 	"Errors": {
@@ -97,20 +97,25 @@
 		"AddColor": "Add color"
 	},
 	"API": {
-		"PasswordResetRequest": {
-			"Success": "Password reset request successful",
+		"Common": {
+			"InternalServerError": "Internal server error",
 			"InvalidJsonFormat": "Invalid JSON format",
+			"MissingAppUrl": "Application URL is not configured",
+			"MissingAdminKey": "Admin key is not configured",
+			"EmailSendError": "Failed to send email"
+		},
+		"PasswordResetRequest": {
+			"Success": "Password reset request sent successfully",
 			"EmailRequired": "Valid email address is required",
 			"EmailNotFound": "Email not found",
-			"InternalServerError": "Internal server error"
+			"EmailSubject": "Password Reset Request",
+			"EmailContent": "Please use this link to reset your password"
 		},
 		"PasswordReset": {
-			"Success": "Password reset successful",
-			"InvalidJsonFormat": "Invalid JSON format",
-			"TokenAndPasswordRequired": "Valid token and new password are required",
+			"Success": "Password reset successfully",
+			"InvalidFormValidation": "Form validation failed",
 			"InvalidToken": "Invalid token",
-			"TokenExpired": "Token expired",
-			"InternalServerError": "Internal server error"
+			"TokenExpired": "Token expired"
 		}
 	},
 	"Validation": {
@@ -120,6 +125,7 @@
 		"InvalidToken": "Invalid token",
 		"TokenRequired": "Token is required",
 		"PasswordRequired": "Password is required",
-		"PasswordTooShort": "Password must be at least 8 characters"
+		"PasswordTooShort": "Password must be at least 8 characters",
+		"PasswordMismatch": "Passwords do not match"
 	}
 }

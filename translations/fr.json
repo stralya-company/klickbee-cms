@@ -41,21 +41,21 @@
 		"ConnectionFailed": "Échec de la connexion. Veuillez réessayer."
 	},
 	"ResetPasswordRequest": {
-		"ResetPasswordRequest": "Réinitialiser le mot de passe",
+		"ResetPasswordRequest": "Demande de réinitialisation du mot de passe",
 		"EmailLabel": "Email",
 		"EmailPlaceholder": "Entrez votre email",
 		"SendResetLink": "Envoyer le lien de réinitialisation",
 		"Sending": "Envoi en cours...",
-		"SuccessMessage": "Un lien de réinitialisation a été envoyé à votre email.",
 		"ErrorMessage": "Une erreur est survenue lors de l'envoi du lien de réinitialisation."
 	},
 	"ResetPassword": {
-		"NewPassword": "Nouveau mot de passe",
-		"ConfirmPassword": "Confirmer le mot de passe",
+		"ResetPassword": "Réinitialiser le mot de passe",
+		"NewPasswordLabel": "Nouveau mot de passe",
+		"NewConfirmPasswordLabel": "Confirmer le mot de passe",
 		"NewPasswordPlaceholder": "Entrez votre nouveau mot de passe",
+		"NewConfirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
 		"ResetButton": "Réinitialiser le mot de passe",
 		"Resetting": "Réinitialisation en cours...",
-		"SuccessMessage": "Votre mot de passe a été réinitialisé avec succès.",
 		"ErrorMessage": "Une erreur est survenue lors de la réinitialisation du mot de passe."
 	},
 	"Errors": {
@@ -97,20 +97,25 @@
 		"AddColor": "Ajouter une couleur"
 	},
 	"API": {
+		"Common": {
+			"InternalServerError": "Erreur interne du serveur",
+			"InvalidJsonFormat": "Format JSON invalide",
+			"MissingAppUrl": "L'URL de l'application n'est pas configurée",
+			"MissingAdminKey": "La clé admin n'est pas configurée",
+			"EmailSendError": "Échec de l'envoi de l'email"
+		},
 		"PasswordResetRequest": {
 			"Success": "Demande de réinitialisation envoyée avec succès",
-			"InvalidJsonFormat": "Format JSON invalide",
 			"EmailRequired": "Une adresse email valide est requise",
 			"EmailNotFound": "Email non trouvé",
-			"InternalServerError": "Erreur interne du serveur"
+			"EmailSubject": "Demande de réinitialisation de mot de passe",
+			"EmailContent": "Veuillez utiliser ce lien pour réinitialiser votre mot de passe"
 		},
 		"PasswordReset": {
 			"Success": "Mot de passe réinitialisé avec succès",
-			"InvalidJsonFormat": "Format JSON invalide",
-			"TokenAndPasswordRequired": "Token et nouveau mot de passe valides requis",
+			"InvalidFormValidation": "Validation du formulaire invalide",
 			"InvalidToken": "Token invalide",
-			"TokenExpired": "Token expiré",
-			"InternalServerError": "Erreur interne du serveur"
+			"TokenExpired": "Token expiré"
 		}
 	},
 	"Validation": {
@@ -120,6 +125,7 @@
 		"InvalidToken": "Token invalide",
 		"TokenRequired": "Le token est requis",
 		"PasswordRequired": "Le mot de passe est requis",
-		"PasswordTooShort": "Le mot de passe doit contenir au moins 8 caractères"
+		"PasswordTooShort": "Le mot de passe doit contenir au moins 8 caractères",
+		"PasswordMismatch": "Les mots de passe ne correspondent pas"
 	}
 }
