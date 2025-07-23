@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { usePasswordReset } from "@/feature/user/queries/usePasswordReset";
 import {
 	UserPasswordResetFormValues,
 	userPasswordResetSchema,
@@ -21,6 +20,7 @@ import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { authClient } from "@/lib/authClient";
 
 export default function ResetPasswordForm() {
 	const router = useRouter();
@@ -32,8 +32,6 @@ export default function ResetPasswordForm() {
 
 	const t = useTranslations("ResetPassword");
 
-	const passwordResetMutation = usePasswordReset();
-
 	const resetPasswordForm = useForm<UserPasswordResetFormValues>({
 		resolver: zodResolver(userPasswordResetSchema),
 		defaultValues: {
@@ -43,11 +41,16 @@ export default function ResetPasswordForm() {
 		},
 	});
 
-	async function onSubmit(data: UserPasswordResetFormValues) {
+	async function onSubmit(
+		userPasswordResetFormValues: UserPasswordResetFormValues,
+	) {
 		try {
-			const result = await passwordResetMutation.mutateAsync(data);
+			await authClient.resetPassword({
+				newPassword: userPasswordResetFormValues.newPassword,
+				token: userPasswordResetFormValues.token,
+			});
 			resetPasswordForm.reset();
-			toast.success(result.message);
+			toast.success(t("SuccessMessage"));
 			router.push(`/admin/${adminKey}/auth/login`);
 		} catch (error) {
 			const errorMessage =
@@ -111,9 +114,9 @@ export default function ResetPasswordForm() {
 				<Button
 					type="submit"
 					className="w-full mt-4"
-					disabled={passwordResetMutation.isPending}
+					disabled={!resetPasswordForm.formState.isValid}
 				>
-					{passwordResetMutation.isPending
+					{resetPasswordForm.formState.isSubmitting
 						? t("Resetting")
 						: t("ResetButton")}
 				</Button>

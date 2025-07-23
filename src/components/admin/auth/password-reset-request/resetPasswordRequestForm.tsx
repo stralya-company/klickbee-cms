@@ -17,13 +17,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
-import { usePasswordResetRequest } from "@/feature/user/queries/usePasswordResetRequest";
 import { toast } from "sonner";
+import { authClient } from "@/lib/authClient";
+import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
 
 export default function ResetPasswordRequestForm() {
 	const t = useTranslations("ResetPasswordRequest");
-
-	const passwordResetRequestMutation = usePasswordResetRequest();
+	const adminKey = useAdminKeyStore((state) => state.adminKey);
 
 	const resetPasswordRequestForm =
 		useForm<UserPasswordResetRequestFormValues>({
@@ -33,11 +33,16 @@ export default function ResetPasswordRequestForm() {
 			},
 		});
 
-	async function onSubmit(data: UserPasswordResetRequestFormValues) {
+	async function onSubmit(
+		userPasswordResetRequestFormValues: UserPasswordResetRequestFormValues,
+	) {
 		try {
-			const result = await passwordResetRequestMutation.mutateAsync(data);
+			await authClient.requestPasswordReset({
+				email: userPasswordResetRequestFormValues.email,
+				redirectTo: `/admin/${adminKey}/auth/password-reset`,
+			});
 			resetPasswordRequestForm.reset();
-			toast.success(result.message);
+			toast.success(t("SuccessMessage"));
 		} catch (error) {
 			const errorMessage =
 				error instanceof Error ? error.message : t("ErrorMessage");
@@ -70,9 +75,9 @@ export default function ResetPasswordRequestForm() {
 				<Button
 					type="submit"
 					className="w-full mt-4"
-					disabled={passwordResetRequestMutation.isPending}
+					disabled={!resetPasswordRequestForm.formState.isValid}
 				>
-					{passwordResetRequestMutation.isPending
+					{resetPasswordRequestForm.formState.isSubmitting
 						? t("Sending")
 						: t("SendResetLink")}
 				</Button>
