@@ -1,7 +1,7 @@
 export type ListType = "bulleted" | "numbered";
 export type FieldType = "text" | "email" | "password";
 
-export interface ContentProps {
+export interface ComponentContentProps {
 	text?: string; // General text content (buttons, links, labels, etc.)
 	content?: string; // Formatted text (rich text blocks)
 	level?: 1 | 2 | 3 | 4 | 5 | 6; // Heading level (H1–H6)
@@ -27,4 +27,5 @@ export interface ContentProps {
 	defaultText?: string; // Placeholder option for dropdown
 	mimeTypes?: string[]; // Array of mime types (e.g., ["image/png", "image/jpeg"])
 	maxFileSize?: number; // Numeric size limit (MB)
+	label?: string; // Label for the input
 }
