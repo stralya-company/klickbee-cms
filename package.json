@@ -37,6 +37,7 @@
 		"@radix-ui/react-tooltip": "^1.2.7",
 		"@stralya/auth": "^1.1.3",
 		"@tanstack/react-query": "^5.80.7",
+		"better-auth": "^1.3.3",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"crypto-js": "^4.2.0",
