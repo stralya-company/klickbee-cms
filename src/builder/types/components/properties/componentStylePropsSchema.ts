@@ -5,6 +5,7 @@ import {
 	sectionPaddingSchema,
 } from "@/builder/types/settings/SpacingSettings";
 import { typographySettingsSchema } from "@/builder/types/settings/TypographySettings";
+import { sizeUnits } from "@/builder/types/settings/FluidSize";
 
 /**
  * Zod schemas for component style properties
@@ -157,7 +158,7 @@ export type AnimationType = z.infer<typeof animationTypeSchema>;
 // Spacing value schema
 export const spacingValueSchema = z.object({
 	number: z.number(),
-	unit: z.string(), // Using string instead of SizeUnit enum for simplicity
+	unit: z.enum(sizeUnits),
 });
 export type SpacingValue = z.infer<typeof spacingValueSchema>;
 
@@ -293,19 +294,19 @@ export const effectsStyleSchema = z
 				color: colorSchema,
 				x: z.object({
 					number: z.number(),
-					unit: z.literal("%"),
+					unit: z.enum(sizeUnits),
 				}),
 				y: z.object({
 					number: z.number(),
-					unit: z.literal("%"),
+					unit: z.enum(sizeUnits),
 				}),
 				blur: z.object({
 					number: z.number(),
-					unit: z.literal("%"),
+					unit: z.enum(sizeUnits),
 				}),
 				spread: z.object({
 					number: z.number(),
-					unit: z.literal("%"),
+					unit: z.enum(sizeUnits),
 				}),
 			})
 			.optional(),
@@ -322,7 +323,7 @@ export const effectsStyleSchema = z
 				}),
 				blur: z.object({
 					number: z.number(),
-					unit: z.literal("%"),
+					unit: z.enum(sizeUnits),
 				}),
 			})
 			.optional(),
