@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const ADMIN_KEY = process.env.ADMIN_GENERATED_KEY || "admin";
-const AUTH_COOKIE_NAME = "session";
+const AUTH_COOKIE_NAME = "better-auth.session_token";
 
 const publicPages = [
 	`/admin/${ADMIN_KEY}/auth/login`,
