@@ -1,12 +1,4 @@
-import {
-	describe,
-	it,
-	expect,
-	beforeEach,
-	vi,
-	type Mock,
-	type MockedObject,
-} from "vitest";
+import { describe, it, expect, beforeEach, vi, type Mock } from "vitest";
 import { POST } from "./route";
 import { NextRequest } from "next/server";
 import resetPassword from "@/feature/user/functions/resetPassword";
@@ -33,7 +25,7 @@ vi.mock("@/lib/apiTranslation", () => ({
 	getApiTranslation: vi.fn(),
 }));
 
-const mockPrisma = prisma as MockedObject<typeof prisma>;
+const mockPrisma = prisma as unknown as { $transaction: Mock };
 const mockResetPassword = resetPassword as Mock;
 const mockDeletePasswordResetRequest = deletePasswordResetRequest as Mock;
 const mockGetApiTranslation = getApiTranslation as Mock;
@@ -66,7 +58,7 @@ function expectValidationError(
 	json: { error?: string; message?: string },
 ) {
 	expect(res.status).toBe(400);
-	expect(json.error).toBe("Valid token and new password are required");
+	expect(json.error).toBe("Form validation failed");
 	expect(mockResetPassword).not.toHaveBeenCalled();
 	expect(mockDeletePasswordResetRequest).not.toHaveBeenCalled();
 }
@@ -91,28 +83,27 @@ describe("POST /api/auth/password-reset", () => {
 		},
 	} as unknown as Prisma.TransactionClient;
 
-	// Simplified translation mock setup
-	const setupTranslationMocks = () => {
-		const translations: Record<string, string> = {
-			InvalidJsonFormat: "Invalid JSON format",
-			TokenAndPasswordRequired:
-				"Valid token and new password are required",
-			Success: "Password reset successful",
-			InvalidToken: "Invalid token",
-			TokenExpired: "Token expired",
-			InternalServerError: "Internal server error",
-		};
-		mockGetApiTranslation.mockImplementation((section, key) =>
-			Promise.resolve(translations[key] || key),
-		);
-	};
-
 	beforeEach(() => {
 		vi.clearAllMocks();
 		mockPrisma.$transaction.mockImplementation(async (callback) => {
 			return await callback(mockTx);
 		});
-		setupTranslationMocks();
+		// Setup default mock responses for translations
+		mockGetApiTranslation.mockImplementation((section, key) => {
+			const translations: Record<string, Record<string, string>> = {
+				Common: {
+					InvalidJsonFormat: "Invalid JSON format",
+					InternalServerError: "Internal server error",
+				},
+				PasswordReset: {
+					InvalidFormValidation: "Form validation failed",
+					Success: "Password reset successful",
+					InvalidToken: "Invalid token",
+					TokenExpired: "Token expired",
+				},
+			};
+			return Promise.resolve(translations[section]?.[key] || key);
+		});
 	});
 
 	it("should return 200 for valid token and password", async () => {
@@ -122,6 +113,7 @@ describe("POST /api/auth/password-reset", () => {
 		const req = createMockRequest({
 			token: VALID_TOKEN,
 			newPassword: VALID_PASSWORD,
+			confirmNewPassword: VALID_PASSWORD,
 		});
 
 		const res = await POST(req);
@@ -185,6 +177,7 @@ describe("POST /api/auth/password-reset", () => {
 		const req = createMockRequest({
 			token: VALID_TOKEN,
 			newPassword: "",
+			confirmNewPassword: "",
 		});
 
 		const { res, json } = await executeTest(req);
@@ -197,6 +190,7 @@ describe("POST /api/auth/password-reset", () => {
 		const req = createMockRequest({
 			token: VALID_TOKEN,
 			newPassword: VALID_PASSWORD,
+			confirmNewPassword: VALID_PASSWORD,
 		});
 
 		const res = await POST(req);
@@ -218,6 +212,7 @@ describe("POST /api/auth/password-reset", () => {
 		const req = createMockRequest({
 			token: VALID_TOKEN,
 			newPassword: VALID_PASSWORD,
+			confirmNewPassword: VALID_PASSWORD,
 		});
 
 		const res = await POST(req);
@@ -239,6 +234,7 @@ describe("POST /api/auth/password-reset", () => {
 		const req = createMockRequest({
 			token: VALID_TOKEN,
 			newPassword: VALID_PASSWORD,
+			confirmNewPassword: VALID_PASSWORD,
 		});
 
 		const { res, json } = await executeTest(req);
@@ -260,6 +256,7 @@ describe("POST /api/auth/password-reset", () => {
 		const req = createMockRequest({
 			token: VALID_TOKEN,
 			newPassword: VALID_PASSWORD,
+			confirmNewPassword: VALID_PASSWORD,
 		});
 
 		const { res, json } = await executeTest(req);
@@ -279,6 +276,7 @@ describe("POST /api/auth/password-reset", () => {
 		const req = createMockRequest({
 			token: "invalid-uuid",
 			newPassword: "short",
+			confirmNewPassword: "short",
 		});
 
 		const { res, json } = await executeTest(req);
