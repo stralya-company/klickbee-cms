@@ -112,7 +112,10 @@ export default function LoginForm() {
 				<Button
 					type="submit"
 					className="w-full"
-					disabled={!loginForm.formState.isValid}
+					disabled={
+						!loginForm.formState.isValid ||
+						loginForm.formState.isSubmitting
+					}
 				>
 					{loginForm.formState.isSubmitted
 						? t("LoggingIn")

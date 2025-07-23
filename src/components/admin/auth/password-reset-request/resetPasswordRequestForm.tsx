@@ -75,7 +75,10 @@ export default function ResetPasswordRequestForm() {
 				<Button
 					type="submit"
 					className="w-full mt-4"
-					disabled={!resetPasswordRequestForm.formState.isValid}
+					disabled={
+						!resetPasswordRequestForm.formState.isValid ||
+						resetPasswordRequestForm.formState.isSubmitting
+					}
 				>
 					{resetPasswordRequestForm.formState.isSubmitting
 						? t("Sending")
