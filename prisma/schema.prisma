@@ -15,7 +15,6 @@ datasource db {
 model User {
   id            String    @id @default(uuid())
   email         String    @unique
-  password      String
   role          Role      @relation(fields: [roleId], references: [id])
   roleId        String
   name          String
@@ -27,7 +26,6 @@ model User {
   createdAt     DateTime  @default(now())
 
   // Relations
-  UserPasswordReset UserPasswordReset?
   UserSettings      UserSettings[]
 
   @@map("user")
@@ -92,18 +90,6 @@ model Permission {
   role   Role   @relation(fields: [roleId], references: [id])
 
   @@unique([roleId, action])
-}
-
-model UserPasswordReset {
-  id        String   @id @default(uuid())
-  userId    String   @unique
-  token     String   @unique @default(uuid()) @db.VarChar(255)
-  createdAt DateTime @default(now())
-  expiresAt DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
 }
 
 // === Settings Models ===
