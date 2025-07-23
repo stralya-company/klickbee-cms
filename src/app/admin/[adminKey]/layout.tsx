@@ -1,8 +1,8 @@
 "use client";
 import {
 	NextIntlClientProvider,
-	useMessages,
 	useLocale,
+	useMessages,
 	useTranslations,
 } from "next-intl";
 import { UserProvider } from "@/providers/UserProvider";
@@ -12,22 +12,44 @@ import { Sidebar } from "@/components/admin/_partials/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { initializeGlobalZodErrorMap } from "@/lib/zodTranslation";
 import { useEffect } from "react";
+import { authClient } from "@/lib/authClient";
+import { useRouter } from "next/navigation";
+import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function AdminLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const router = useRouter();
 	const currentUser = useUserStore((state) => state.user);
+	const queryClient = useQueryClient();
 	const messages = useMessages();
 	const locale = useLocale();
 	const t = useTranslations("AdminLayout");
+	const { adminKey } = useAdminKeyStore();
 
 	// Initialize global Zod error map with current translations
 	useEffect(() => {
 		const validationMessages = messages?.Validation || {};
 		initializeGlobalZodErrorMap(validationMessages);
 	}, [messages]);
+
+	async function logout() {
+		const { logout: clearUserStore } = useUserStore.getState();
+		await authClient.signOut({
+			fetchOptions: {
+				onSuccess: () => {
+					clearUserStore();
+					queryClient.invalidateQueries({
+						queryKey: ["current_user"],
+					});
+					router.push(`/admin/${adminKey}/auth/login`);
+				},
+			},
+		});
+	}
 
 	return (
 		<UserProvider>
@@ -40,8 +62,12 @@ export default function AdminLayout({
 					)}
 					<main className="flex-1">
 						{currentUser && (
-							<Button variant="ghost" className="mb-4" asChild>
-								<a href="/api/auth/logout">{t("Logout")}</a>
+							<Button
+								variant="ghost"
+								className="mb-4"
+								onClick={logout}
+							>
+								{t("Logout")}
 							</Button>
 						)}
 						{children}
