@@ -131,16 +131,16 @@ export type BorderCornerStyle = {
 export type EffectsStyle = {
 	boxShadow?: {
 		color: ColorSettings;
-		x: SpacingValue;
-		y: SpacingValue;
-		blur: SpacingValue;
-		spread: SpacingValue;
+		x: { number: number; unit: "%" };
+		y: { number: number; unit: "%" };
+		blur: { number: number; unit: "%" };
+		spread: { number: number; unit: "%" };
 	};
 	textShadow?: {
 		color: ColorSettings;
-		x: SpacingValue;
-		y: SpacingValue;
-		blur: SpacingValue;
+		x: { number: number; unit: "px" };
+		y: { number: number; unit: "px" };
+		blur: { number: number; unit: "%" };
 	};
 	opacity?: number;
 	backdropFilter?: BackdropFilter[];
@@ -149,13 +149,13 @@ export type EffectsStyle = {
 		boxShadow?: boolean;
 		scale?: number;
 		transition?: {
-			duration: number;
+			duration: { number: number; unit: "ms" | "s" };
 			timingFunction: TimingFunction;
 		};
 	};
 	animation?: {
 		type: AnimationType;
-		duration: number;
+		duration: { number: number; unit: "ms" | "s" };
 	};
 };
 
