@@ -64,6 +64,16 @@
 		"Title": "Colors",
 		"Type": "Type:"
 	},
+	"Common": {
+		"CreatedAt": "Created At",
+		"Delete": "Delete",
+		"DeleteSelected": "Delete Selected",
+		"Edit": "Edit",
+		"Next": "Next",
+		"Of": "of",
+		"Page": "Page",
+		"Previous": "Previous"
+	},
 	"Errors": {
 		"GoogleFontsError": "Error retrieving Google Fonts",
 		"LoadingError": "Loading error",
@@ -109,6 +119,16 @@
 		"Sending": "Sending...",
 		"SendResetLink": "Send reset link",
 		"SuccessMessage": "A password reset link has been sent to your email address."
+	},
+	"SettingsUsers": {
+		"AddUser": "Add User",
+		"ManageUsers": "Manage Users",
+		"ManageUsersSubtitle": "Manage user accounts and permissions",
+		"Name": "Name",
+		"NameNotAvailable": "Name not available",
+		"NoUsersFound": "No users found",
+		"Profile": "Profile",
+		"SearchUsers": "Search users..."
 	},
 	"SpacingEditor": {
 		"AddGap": "Add gap",

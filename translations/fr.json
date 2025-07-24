@@ -64,6 +64,16 @@
 		"Title": "Couleurs",
 		"Type": "Type :"
 	},
+	"Common": {
+		"CreatedAt": "Date de création",
+		"Delete": "Supprimer",
+		"DeleteSelected": "Supprimer la sélection",
+		"Edit": "Modifier",
+		"Next": "Suivant",
+		"Of": "sur",
+		"Page": "Page",
+		"Previous": "Précédent"
+	},
 	"Errors": {
 		"GoogleFontsError": "Erreur lors de la récupération des Google Fonts",
 		"LoadingError": "Erreur de chargement",
@@ -109,6 +119,16 @@
 		"Sending": "Envoi en cours...",
 		"SendResetLink": "Envoyer le lien de réinitialisation",
 		"SuccessMessage": "Un lien de réinitialisation a été envoyé à votre adresse email."
+	},
+	"SettingsUsers": {
+		"AddUser": "Ajouter un utilisateur",
+		"ManageUsers": "Gérer les utilisateurs",
+		"ManageUsersSubtitle": "Gérer les comptes utilisateurs et les permissions",
+		"Name": "Nom",
+		"NameNotAvailable": "Nom non disponible",
+		"NoUsersFound": "Aucun utilisateur trouvé",
+		"Profile": "Profil",
+		"SearchUsers": "Rechercher des utilisateurs..."
 	},
 	"SpacingEditor": {
 		"AddGap": "Ajouter un gap",
