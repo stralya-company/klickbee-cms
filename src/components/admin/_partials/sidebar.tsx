@@ -5,11 +5,9 @@ import {
 	ChevronsUpDown,
 	FileText,
 	Home,
-	LogOut,
 	Mail,
 	Settings as SettingsIcon,
 	User,
-	Zap,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,7 +30,6 @@ import {
 	Sidebar as ShadcnSidebar,
 	SidebarContent,
 	SidebarFooter,
-	SidebarGroup,
 	SidebarHeader,
 	SidebarMenu,
 	SidebarMenuButton,
