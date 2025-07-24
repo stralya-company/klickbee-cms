@@ -1,81 +1,85 @@
-import prisma from "../src/lib/prisma";
 import bcrypt from "bcrypt";
+import prisma from "../src/lib/prisma";
 
 const rolePermissions: Record<string, string[]> = {
-    admin: ['read', 'write', 'delete', 'manage_users'],
-    user: ['read', 'write'],
+	admin: ["read", "write", "delete", "manage_users"],
+	user: ["read", "write"],
 };
 
 async function main() {
-    // Create roles and permissions
-    for (const [roleName, actions] of Object.entries(rolePermissions)) {
-        const role = await prisma.role.upsert({
-            where: { name: roleName },
-            update: {},
-            create: { name: roleName },
-        });
+	// Create roles and permissions
+	for (const [roleName, actions] of Object.entries(rolePermissions)) {
+		const role = await prisma.role.upsert({
+			create: { name: roleName },
+			update: {},
+			where: { name: roleName },
+		});
 
-        for (const action of actions) {
-            await prisma.permission.upsert({
-                where: { roleId_action: { roleId: role.id, action } },
-                update: {},
-                create: { action, roleId: role.id },
-            });
-        }
-    }
-    console.log('✅ Rôles et permissions initialisés');
+		for (const action of actions) {
+			await prisma.permission.upsert({
+				create: { action, roleId: role.id },
+				update: {},
+				where: { roleId_action: { action, roleId: role.id } },
+			});
+		}
+	}
+	console.warn("✅ Rôles et permissions initialisés");
 
-    // Create admin user (only in development)
-    if (process.env.NODE_ENV === 'development') {
-        const adminRole = await prisma.role.findUnique({ where: { name: 'admin' } });
-        if (adminRole) {
-            const existingUser = await prisma.user.findUnique({
-                where: { email: 'admin@klickbee.com' }
-            });
+	// Create admin user (only in development)
+	if (process.env.NODE_ENV === "development") {
+		const adminRole = await prisma.role.findUnique({
+			where: { name: "admin" },
+		});
+		if (adminRole) {
+			const existingUser = await prisma.user.findUnique({
+				where: { email: "admin@klickbee.com" },
+			});
 
-            if (!existingUser) {
-                const hashedPassword = await bcrypt.hash('admin123', 10);
+			if (!existingUser) {
+				const hashedPassword = await bcrypt.hash("admin123", 10);
 
-                // Create user and associated account (better-auth compatible)
-                const user = await prisma.user.create({
-                    data: {
-                        email: 'admin@klickbee.com',
-                        name: 'Admin User',
-                        roleId: adminRole.id,
-                        emailVerified: true,
-                        updatedAt: new Date(),
-                        createdAt: new Date(),
-                    },
-                });
+				// Create user and associated account (better-auth compatible)
+				const user = await prisma.user.create({
+					data: {
+						createdAt: new Date(),
+						email: "admin@klickbee.com",
+						emailVerified: true,
+						name: "Admin User",
+						roleId: adminRole.id,
+						updatedAt: new Date(),
+					},
+				});
 
-                // Create associated account with password
-                await prisma.account.create({
-                    data: {
-                        id: `${user.id}-credential`,
-                        accountId: user.id,
-                        providerId: 'credential',
-                        userId: user.id,
-                        password: hashedPassword,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                    },
-                });
+				// Create associated account with password
+				await prisma.account.create({
+					data: {
+						accountId: user.id,
+						createdAt: new Date(),
+						id: `${user.id}-credential`,
+						password: hashedPassword,
+						providerId: "credential",
+						updatedAt: new Date(),
+						userId: user.id,
+					},
+				});
 
-                console.log('✅ Utilisateur admin créé (admin@klickbee.com / admin123)');
-            } else {
-                console.log('ℹ️ Utilisateur admin existe déjà');
-            }
-        }
-    } else {
-        console.log('ℹ️ Création d\'admin ignorée (pas en développement)');
-    }
+				console.warn(
+					"✅ Utilisateur admin créé (admin@klickbee.com / admin123)",
+				);
+			} else {
+				console.warn("ℹ️ Utilisateur admin existe déjà");
+			}
+		}
+	} else {
+		console.warn("ℹ️ Création d'admin ignorée (pas en développement)");
+	}
 }
 
 main()
-    .catch(e => {
-        console.error(e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+	.catch((e) => {
+		console.error(e);
+		process.exit(1);
+	})
+	.finally(async () => {
+		await prisma.$disconnect();
+	});

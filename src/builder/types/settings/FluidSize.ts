@@ -25,15 +25,15 @@ export type FluidSize = {
  * Zod schema for validating FluidSize objects
  */
 export const fluidSizeSchema = z.object({
-	min: z.number().min(0, "Minimum size must be a positive number"),
 	max: z.number().min(0, "Maximum size must be a positive number"),
-	sizeUnit: z.enum(sizeUnits, {
-		errorMap: () => ({ message: "Size unit must be one of: px, em, rem" }),
-	}),
 	maxWidth: z
 		.number()
 		.positive("Max width must be a positive number")
 		.optional(),
+	min: z.number().min(0, "Minimum size must be a positive number"),
+	sizeUnit: z.enum(sizeUnits, {
+		errorMap: () => ({ message: "Size unit must be one of: px, em, rem" }),
+	}),
 	widthUnit: z
 		.enum(sizeUnits, {
 			errorMap: () => ({

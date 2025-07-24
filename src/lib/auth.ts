@@ -1,18 +1,18 @@
+import bcrypt from "bcrypt";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import prisma from "@/lib/prisma";
-import bcrypt from "bcrypt";
 import { admin } from "better-auth/plugins";
-import { sendEmail } from "@/lib/sendEmail";
 import { getApiTranslation } from "@/lib/apiTranslation";
+import prisma from "@/lib/prisma";
+import { sendEmail } from "@/lib/sendEmail";
 
 export const auth = betterAuth({
 	database: prismaAdapter(prisma, {
 		provider: "postgresql",
 	}),
 	emailAndPassword: {
-		enabled: true,
 		autoSignIn: false,
+		enabled: true,
 		password: {
 			hash: async (password: string) => {
 				const saltRounds = 10;
@@ -40,9 +40,9 @@ export const auth = betterAuth({
 
 			try {
 				await sendEmail({
-					to: user.email,
 					subject: emailSubject,
 					text: `${emailContent}: ${url}?token=${token}`,
+					to: user.email,
 				});
 			} catch (error) {
 				console.error("Error sending reset password email:", error);

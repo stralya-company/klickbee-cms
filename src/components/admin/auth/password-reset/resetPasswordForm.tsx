@@ -1,11 +1,12 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {
-	UserPasswordResetFormValues,
-	userPasswordResetSchema,
-} from "@/feature/auth/types/userPasswordResetSchema";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
@@ -15,11 +16,10 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import {
+	UserPasswordResetFormValues,
+	userPasswordResetSchema,
+} from "@/feature/auth/types/userPasswordResetSchema";
 import { authClient } from "@/lib/authClient";
 
 export default function ResetPasswordForm() {
@@ -33,12 +33,12 @@ export default function ResetPasswordForm() {
 	const t = useTranslations("ResetPassword");
 
 	const resetPasswordForm = useForm<UserPasswordResetFormValues>({
-		resolver: zodResolver(userPasswordResetSchema),
 		defaultValues: {
-			token: "",
-			newPassword: "",
 			confirmNewPassword: "",
+			newPassword: "",
+			token: "",
 		},
+		resolver: zodResolver(userPasswordResetSchema),
 	});
 
 	async function onSubmit(
@@ -77,8 +77,8 @@ export default function ResetPasswordForm() {
 							<FormLabel>{t("NewPasswordLabel")}</FormLabel>
 							<FormControl>
 								<Input
-									type="password"
 									placeholder={t("NewPasswordPlaceholder")}
+									type="password"
 									{...field}
 									className="w-full"
 								/>
@@ -98,10 +98,10 @@ export default function ResetPasswordForm() {
 							</FormLabel>
 							<FormControl>
 								<Input
-									type="password"
 									placeholder={t(
 										"NewConfirmPasswordPlaceholder",
 									)}
+									type="password"
 									{...field}
 									className="w-full"
 								/>
@@ -112,12 +112,12 @@ export default function ResetPasswordForm() {
 				/>
 
 				<Button
-					type="submit"
 					className="w-full mt-4"
 					disabled={
 						!resetPasswordForm.formState.isValid ||
 						resetPasswordForm.formState.isSubmitting
 					}
+					type="submit"
 				>
 					{resetPasswordForm.formState.isSubmitting
 						? t("Resetting")

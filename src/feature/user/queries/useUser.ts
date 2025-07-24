@@ -3,11 +3,11 @@ import { authClient } from "@/lib/authClient";
 
 export function useCurrentUser() {
 	return useQuery({
-		queryKey: ["current_user"],
 		queryFn: async () => {
 			const { data: session } = await authClient.getSession();
 			return session?.user || null;
 		},
+		queryKey: ["current_user"],
 		retry: false,
 	});
 }

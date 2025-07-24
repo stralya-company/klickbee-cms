@@ -1,5 +1,13 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
@@ -8,21 +16,13 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	UserLoginFormValues,
 	userLoginSchema,
 } from "@/feature/auth/types/userLoginSchema";
 import { authClient } from "@/lib/authClient";
-import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
 
 export default function LoginForm() {
 	const router = useRouter();
@@ -37,11 +37,11 @@ export default function LoginForm() {
 	const t = useTranslations("Login");
 
 	const loginForm = useForm<UserLoginFormValues>({
-		resolver: zodResolver(userLoginSchema),
 		defaultValues: {
 			email: "",
 			password: "",
 		},
+		resolver: zodResolver(userLoginSchema),
 	});
 
 	async function onSubmit(loginFormValues: UserLoginFormValues) {
@@ -79,8 +79,8 @@ export default function LoginForm() {
 							<FormLabel>{t("Email")}</FormLabel>
 							<FormControl>
 								<Input
-									type="email"
 									placeholder="Enter your email"
+									type="email"
 									{...field}
 									className="w-full"
 								/>
@@ -98,8 +98,8 @@ export default function LoginForm() {
 							<FormLabel>{t("Password")}</FormLabel>
 							<FormControl>
 								<Input
-									type="password"
 									placeholder={t("PasswordPlaceholder")}
+									type="password"
 									{...field}
 									className="w-full"
 								/>
@@ -110,12 +110,12 @@ export default function LoginForm() {
 				/>
 
 				<Button
-					type="submit"
 					className="w-full"
 					disabled={
 						!loginForm.formState.isValid ||
 						loginForm.formState.isSubmitting
 					}
+					type="submit"
 				>
 					{loginForm.formState.isSubmitted
 						? t("LoggingIn")

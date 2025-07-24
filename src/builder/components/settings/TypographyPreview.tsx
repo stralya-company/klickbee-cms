@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
 import { toClamp } from "@/builder/lib/clampCalculator";
 import { useGoogleFontLink } from "@/builder/utils/query/useGoogleFontLink";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type TypographyPreviewProps = {
 	typography: FormValues["typography"];
@@ -27,7 +27,7 @@ export default function TypographyPreview({
 			</CardHeader>
 			<CardContent className={"space-y-4"}>
 				{fontFamilies.map((font) => (
-					<GoogleFontLoader key={font} fontFamily={font} />
+					<GoogleFontLoader fontFamily={font} key={font} />
 				))}
 				{typography.typographies.map((typo, idx) => (
 					<p
@@ -38,10 +38,10 @@ export default function TypographyPreview({
 								typo.fontSize,
 								`${typography.maxWidth}px`,
 							),
-							lineHeight: `${typo.lineHeight}${typo.lineHeightUnits}`,
-							fontWeight: typo.fontWeight,
 							fontStyle: typo.fontStyle,
+							fontWeight: typo.fontWeight,
 							letterSpacing: `${typo.letterSpacing}${typo.letterSpacingUnits}`,
+							lineHeight: `${typo.lineHeight}${typo.lineHeightUnits}`,
 							textTransform: typo.textTransform,
 						}}
 					>

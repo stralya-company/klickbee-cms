@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
 	}
 
 	try {
-		await sendEmail({ to, subject, text, html });
+		await sendEmail({ html, subject, text, to });
 
 		return NextResponse.json(
 			{ message: "Email sent with success" },

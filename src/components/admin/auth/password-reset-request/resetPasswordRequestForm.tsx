@@ -1,11 +1,10 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-	UserPasswordResetRequestFormValues,
-	userPasswordResetRequestSchema,
-} from "@/feature/auth/types/userPasswordResetRequestSchema";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
@@ -15,11 +14,12 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
-import { toast } from "sonner";
-import { authClient } from "@/lib/authClient";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import {
+	UserPasswordResetRequestFormValues,
+	userPasswordResetRequestSchema,
+} from "@/feature/auth/types/userPasswordResetRequestSchema";
+import { authClient } from "@/lib/authClient";
 
 export default function ResetPasswordRequestForm() {
 	const t = useTranslations("ResetPasswordRequest");
@@ -27,10 +27,10 @@ export default function ResetPasswordRequestForm() {
 
 	const resetPasswordRequestForm =
 		useForm<UserPasswordResetRequestFormValues>({
-			resolver: zodResolver(userPasswordResetRequestSchema),
 			defaultValues: {
 				email: "",
 			},
+			resolver: zodResolver(userPasswordResetRequestSchema),
 		});
 
 	async function onSubmit(
@@ -64,8 +64,8 @@ export default function ResetPasswordRequestForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder={t("EmailPlaceholder")}
 									className="w-full"
+									placeholder={t("EmailPlaceholder")}
 								/>
 							</FormControl>
 							<FormMessage />
@@ -73,12 +73,12 @@ export default function ResetPasswordRequestForm() {
 					)}
 				/>
 				<Button
-					type="submit"
 					className="w-full mt-4"
 					disabled={
 						!resetPasswordRequestForm.formState.isValid ||
 						resetPasswordRequestForm.formState.isSubmitting
 					}
+					type="submit"
 				>
 					{resetPasswordRequestForm.formState.isSubmitting
 						? t("Sending")
