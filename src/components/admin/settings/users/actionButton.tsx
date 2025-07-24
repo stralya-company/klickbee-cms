@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ActionButton() {
 	const t = useTranslations("SettingsUsers");
+	const tCommon = useTranslations("Common");
 	const searchParams = useSearchParams();
 	const selectedUsers =
 		searchParams.get("selected")?.split(",").filter(Boolean) || [];
@@ -28,7 +29,7 @@ export default function ActionButton() {
 				variant="destructive"
 			>
 				<Trash className="h-4 w-4" />
-				{t("DeleteSelected")} ({selectedUsers.length})
+				{tCommon("DeleteSelected")} ({selectedUsers.length})
 			</Button>
 		);
 	}
