@@ -1,14 +1,55 @@
 "use client";
 
-import { FileText, Home, Mail, Settings as SettingsIcon } from "lucide-react";
+import {
+	ChevronRight,
+	ChevronsUpDown,
+	FileText,
+	Home,
+	LogOut,
+	Mail,
+	Settings as SettingsIcon,
+	User,
+	Zap,
+} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import LogoutButton from "@/components/admin/_partials/logoutButton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+	Sidebar as ShadcnSidebar,
+	SidebarContent,
+	SidebarFooter,
+	SidebarGroup,
+	SidebarHeader,
+	SidebarMenu,
+	SidebarMenuButton,
+	SidebarMenuItem,
+	SidebarMenuSub,
+	SidebarMenuSubButton,
+	SidebarMenuSubItem,
+} from "@/components/ui/sidebar";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import { useCurrentUser } from "@/feature/user/queries/useUser";
 
 export function Sidebar() {
 	const t = useTranslations("AdminSidebar");
 	const adminKey = useAdminKeyStore((state) => state.adminKey);
-	const menu = [
+	const pathname = usePathname();
+	const { data: user } = useCurrentUser();
+	const items = [
 		{
 			href: `/admin/${adminKey}/manage/content`,
 			icon: Home,
@@ -25,34 +66,167 @@ export function Sidebar() {
 			label: t("Pages"),
 		},
 		{
-			href: `/admin/${adminKey}/manage/settings`,
+			children: [
+				{
+					href: `/admin/${adminKey}/manage/settings/ai`,
+					label: t("AI"),
+				},
+				{
+					href: `/admin/${adminKey}/manage/settings/contact`,
+					label: t("Contact"),
+				},
+				{
+					href: `/admin/${adminKey}/manage/settings/users`,
+					label: t("Users"),
+				},
+				{
+					href: `/admin/${adminKey}/manage/settings/email`,
+					label: t("Email"),
+				},
+				{
+					href: `/admin/${adminKey}/manage/settings/builder`,
+					label: t("Builder"),
+				},
+			],
 			icon: SettingsIcon,
 			label: t("Settings"),
 		},
 	];
 
 	return (
-		<aside className="w-64 h-screen border-r bg-white p-4 flex flex-col justify-between">
-			<div>
-				<h1 className="text-lg font-semibold mb-6">{t("Title")}</h1>
-				<nav className="space-y-2">
-					{menu.map((item) => (
-						<Link
-							className="flex items-center gap-3 px-3 py-2 rounded hover:bg-muted text-sm text-muted-foreground transition-colors"
-							href={item.href}
-							key={item.href}
-						>
-							<item.icon className="h-4 w-4" />
-							{item.label}
-						</Link>
-					))}
-				</nav>
-			</div>
-
-			<div className="text-xs text-muted-foreground">
-				<p className="mb-1">{t("Copyright")}</p>
-				<p className="text-[10px]">{t("Email")}</p>
-			</div>
-		</aside>
+		<ShadcnSidebar>
+			<SidebarHeader className="p-4 border-b">
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<div className="flex items-center gap-3 w-full hover:bg-gray-50 rounded-lg p-2 -m-2 cursor-pointer">
+							<div className="w-8 h-8 rounded-lg flex items-center justify-center">
+								<Image
+									alt="Klickbee Logo"
+									className="w-full h-full rounded-lg"
+									height={32}
+									src="/logo-square-default.png"
+									width={32}
+								/>
+							</div>
+							<div className="flex flex-col min-w-0 flex-1">
+								<p className="text-lg font-bold text-black truncate">
+									Klickbee
+								</p>
+								<p className="text-xs text-gray-600 truncate">
+									KlickBee.com
+								</p>
+							</div>
+							<ChevronsUpDown className="h-4 w-4 text-gray-500" />
+						</div>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align="start" className="w-64">
+						<DropdownMenuItem asChild className="p-0">
+							<LogoutButton />
+						</DropdownMenuItem>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			</SidebarHeader>
+			<SidebarContent>
+				<SidebarMenu className="p-4">
+					{items.map((item) =>
+						item.children ? (
+							<Collapsible
+								className="group/collapsible"
+								defaultOpen
+								key={item.label}
+							>
+								<SidebarMenuItem>
+									<CollapsibleTrigger asChild>
+										<SidebarMenuButton className="text-black">
+											<item.icon className="h-4 w-4" />
+											{item.label}
+											<ChevronRight className="ml-auto h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+										</SidebarMenuButton>
+									</CollapsibleTrigger>
+									<CollapsibleContent className="pt-2">
+										<SidebarMenuSub>
+											{item.children.map((subItem) => (
+												<SidebarMenuSubItem
+													key={subItem.label}
+												>
+													<SidebarMenuSubButton
+														asChild
+														className="text-black data-[active=true]:bg-blue-500 data-[active=true]:text-white"
+														data-active={
+															pathname ===
+															subItem.href
+														}
+													>
+														<Link
+															href={subItem.href}
+														>
+															{subItem.label}
+														</Link>
+													</SidebarMenuSubButton>
+												</SidebarMenuSubItem>
+											))}
+										</SidebarMenuSub>
+									</CollapsibleContent>
+								</SidebarMenuItem>
+							</Collapsible>
+						) : (
+							<SidebarMenuItem key={item.label}>
+								<SidebarMenuButton
+									asChild
+									className="text-black data-[active=true]:bg-blue-500 data-[active=true]:text-white"
+									data-active={pathname === item.href}
+								>
+									<Link href={item.href}>
+										<item.icon className="h-4 w-4" />
+										{item.label}
+									</Link>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+						),
+					)}
+				</SidebarMenu>
+			</SidebarContent>
+			<SidebarFooter className="p-4 border-t">
+				{user && (
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<div className="flex items-center gap-3 w-full hover:bg-gray-50 rounded-lg p-2 -m-2 cursor-pointer">
+								<Avatar className="h-8 w-8">
+									<AvatarImage
+										alt={user.name || ""}
+										src={user.image || undefined}
+									/>
+									<AvatarFallback className="bg-gray-200">
+										{user.name ? (
+											user.name
+												.split(" ")
+												.map((n) => n[0])
+												.join("")
+												.toUpperCase()
+										) : (
+											<User className="h-4 w-4" />
+										)}
+									</AvatarFallback>
+								</Avatar>
+								<div className="flex flex-col min-w-0 flex-1">
+									<p className="text-sm font-medium text-black truncate">
+										{user.name || "Utilisateur"}
+									</p>
+									<p className="text-xs text-gray-600 truncate">
+										{user.email}
+									</p>
+								</div>
+								<SettingsIcon className="h-4 w-4 text-gray-500" />
+							</div>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align="end" className="w-64">
+							<DropdownMenuItem asChild className="p-0">
+								<LogoutButton />
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
+				)}
+			</SidebarFooter>
+		</ShadcnSidebar>
 	);
 }
