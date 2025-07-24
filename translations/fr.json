@@ -3,13 +3,16 @@
 		"Logout": "Déconnexion"
 	},
 	"AdminSidebar": {
+		"AI": "IA",
+		"Builder": "Constructeur",
 		"Contact": "Contact",
 		"Content": "Contenu",
 		"Copyright": "© Klickbee CMS",
-		"Email": "admin@klickbee.io",
+		"Email": "Email",
 		"Pages": "Pages",
 		"Settings": "Paramètres",
-		"Title": "Klickbee CMS"
+		"Title": "Klickbee CMS",
+		"Users": "Utilisateurs"
 	},
 	"API": {
 		"Common": {
