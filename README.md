@@ -45,9 +45,8 @@ front/
 /admin/[generated_key]/
 ├── auth
     ├── login
-    ├── logout
-    ├── me
-    ├── register
+    ├── password-reset
+    ├── password-reset-request
 ├── manage/
 │   ├── content/[cpt-type]
 │   ├── static/[slug]
@@ -93,15 +92,15 @@ front/
 
 ### 🧦 Stack
 
-| Tech          | Description               |
-|---------------|---------------------------|
-| Next.js       | App Router + API routes   |
-| React         | Modern UI interactions    |
-| Prisma ORM    | PostgreSQL/SQLite support |
-| Zustand       | Admin state management    |
-| Tailwind CSS  | Utility styling           |
-| shadcn/ui     | Headless UI components    |
-| @stralya/auth | Stralya Auth Package      |
+| Tech         | Description               |
+|--------------|---------------------------|
+| Next.js      | App Router + API routes   |
+| React        | Modern UI interactions    |
+| Prisma ORM   | PostgreSQL/SQLite support |
+| Zustand      | Admin state management    |
+| Tailwind CSS | Utility styling           |
+| shadcn/ui    | Headless UI components    |
+| better-auth  | Authentication package    |
 
 ---
 
