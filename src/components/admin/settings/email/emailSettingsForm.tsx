@@ -1,20 +1,12 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-	useSetSetting,
-	useSetting,
-} from "@/feature/settings/queries/useSettings";
-import {
-	emailSettingsSchema,
-	EmailSettingsSchema,
-} from "@/feature/settings/types/emailSettingsSchema";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
 	Form,
 	FormControl,
@@ -23,7 +15,15 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import {
+	useSetSetting,
+	useSetting,
+} from "@/feature/settings/queries/useSettings";
+import {
+	EmailSettingsSchema,
+	emailSettingsSchema,
+} from "@/feature/settings/types/emailSettingsSchema";
 import { encryptString } from "@/lib/crypto";
 
 export default function EmailSettingsForm() {
@@ -108,8 +108,8 @@ export default function EmailSettingsForm() {
 	return (
 		<Form {...emailSettingsForm}>
 			<form
-				onSubmit={emailSettingsForm.handleSubmit(onEmailSettingsSubmit)}
 				className="p-4 w-1/2 space-y-4"
+				onSubmit={emailSettingsForm.handleSubmit(onEmailSettingsSubmit)}
 			>
 				<FormField
 					control={emailSettingsForm.control}
@@ -120,8 +120,8 @@ export default function EmailSettingsForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="Email Host"
 									className="w-full"
+									placeholder="Email Host"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -137,13 +137,13 @@ export default function EmailSettingsForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="Email Port"
 									className="w-full"
 									onChange={(value) =>
 										field.onChange(
 											Number(value.target.value),
 										)
 									}
+									placeholder="Email Port"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -177,8 +177,8 @@ export default function EmailSettingsForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="Email Sender"
 									className="w-full"
+									placeholder="Email Sender"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -194,8 +194,8 @@ export default function EmailSettingsForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="Email Username"
 									className="w-full"
+									placeholder="Email Username"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -211,8 +211,8 @@ export default function EmailSettingsForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="Email Password"
 									className="w-full"
+									placeholder="Email Password"
 									type="password"
 								/>
 							</FormControl>
@@ -220,7 +220,7 @@ export default function EmailSettingsForm() {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" disabled={setSetting.isPending}>
+				<Button disabled={setSetting.isPending} type="submit">
 					{setSetting.isPending ? "Saving..." : "Save"}
 				</Button>
 			</form>

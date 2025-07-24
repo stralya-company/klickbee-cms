@@ -12,8 +12,8 @@ export const useAdminKeyStore = create<AdminKeyStore>()(
 	persist(
 		(set) => ({
 			adminKey: null,
-			setAdminKey: (key) => set({ adminKey: key }),
 			clearAdminKey: () => set({ adminKey: null }),
+			setAdminKey: (key) => set({ adminKey: key }),
 		}),
 		{
 			name: "admin-key-storage", // clé dans localStorage

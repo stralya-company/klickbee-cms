@@ -1,12 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
-import { useTranslations } from "next-intl";
 
 export default function LoginPage({
 	params,
@@ -33,9 +33,9 @@ export default function LoginPage({
 
 		try {
 			const res = await fetch("/api/auth/login", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email, password }),
+				headers: { "Content-Type": "application/json" },
+				method: "POST",
 			});
 
 			if (!res.ok) {
@@ -46,7 +46,7 @@ export default function LoginPage({
 			} else {
 				window.location.href = `/admin/${adminKey}`;
 			}
-		} catch (err: Error | unknown) {
+		} catch (err: unknown) {
 			if (err instanceof Error) {
 				setError(`${err.message}`);
 			} else {
@@ -64,27 +64,27 @@ export default function LoginPage({
 					<CardTitle>{t("AdminLogin")}</CardTitle>
 				</CardHeader>
 				<CardContent>
-					<form onSubmit={handleSubmit} className="space-y-4">
+					<form className="space-y-4" onSubmit={handleSubmit}>
 						<div>
 							<Label htmlFor="email">{t("Email")}</Label>
 							<Input
 								id="email"
-								type="email"
-								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								placeholder="admin@example.com"
 								required
+								type="email"
+								value={email}
 							/>
 						</div>
 						<div>
 							<Label htmlFor="password">{t("Password")}</Label>
 							<Input
 								id="password"
-								type="password"
-								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								placeholder={t("PasswordPlaceholder")}
 								required
+								type="password"
+								value={password}
 							/>
 						</div>
 						{error && (
@@ -93,9 +93,9 @@ export default function LoginPage({
 							</div>
 						)}
 						<Button
-							type="submit"
 							className="w-full"
 							disabled={loading}
+							type="submit"
 						>
 							{loading ? t("LoggingIn") : t("LoginButton")}
 						</Button>

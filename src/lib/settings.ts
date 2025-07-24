@@ -17,16 +17,16 @@ export const setUserSetting = async (
 	userId: string,
 ) => {
 	return prisma.userSettings.upsert({
-		where: { key_userId: { key, userId } },
+		create: { key, userId, value },
 		update: { value },
-		create: { key, value, userId },
+		where: { key_userId: { key, userId } },
 	});
 };
 
 export const setSetting = async (key: string, value: string) => {
 	return prisma.settings.upsert({
-		where: { key },
-		update: { value },
 		create: { key, value },
+		update: { value },
+		where: { key },
 	});
 };

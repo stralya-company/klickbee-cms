@@ -1,34 +1,34 @@
 "use client";
 
-import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-	globalSettingsSchema,
-	defaultGlobalSettings,
-} from "@/builder/types/settings/GlobalSettingsData";
-import type { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { toast } from "sonner";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
-import TypographyEditor from "@/builder/components/settings/TypographyEditor";
+import { useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import type { z } from "zod";
 import ColorPaletteEditor from "@/builder/components/settings/ColorEditor";
+import ColorPreview from "@/builder/components/settings/ColorPreview";
+import LogoEditor from "@/builder/components/settings/LogoEditor";
 import SpacingEditor from "@/builder/components/settings/SpacingEditor";
 import SpacingPreview from "@/builder/components/settings/SpacingPreview";
-import ColorPreview from "@/builder/components/settings/ColorPreview";
+import TypographyEditor from "@/builder/components/settings/TypographyEditor";
 import TypographyPreview from "@/builder/components/settings/TypographyPreview";
-import LogoEditor from "@/builder/components/settings/LogoEditor";
+import {
+	defaultGlobalSettings,
+	globalSettingsSchema,
+} from "@/builder/types/settings/GlobalSettingsData";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 
 export type FormValues = z.output<typeof globalSettingsSchema>;
 
 // Create custom defaultValues that match component expectations
 const defaultValues: FormValues = {
-	logos: defaultGlobalSettings.logos,
 	colors: defaultGlobalSettings.colors,
-	typography: defaultGlobalSettings.typography,
+	logos: defaultGlobalSettings.logos,
 	spacing: defaultGlobalSettings.spacing,
+	typography: defaultGlobalSettings.typography,
 };
 
 export default function AdminBuilderSettingsPage() {
@@ -43,9 +43,9 @@ export default function AdminBuilderSettingsPage() {
 		setValue,
 		formState: { errors },
 	} = useForm<FormValues>({
-		resolver: zodResolver(globalSettingsSchema),
 		defaultValues,
 		mode: "onChange",
+		resolver: zodResolver(globalSettingsSchema),
 	});
 
 	// Gestion des erreurs
@@ -61,19 +61,19 @@ export default function AdminBuilderSettingsPage() {
 			// Transform data to match API expectations
 			const transformedData = {
 				...data,
+				spacing: data.spacing, // Take the first spacing object
 				typography: {
 					maxWidth: defaultGlobalSettings.typography.maxWidth,
 					typographies: data.typography,
 				},
-				spacing: data.spacing, // Take the first spacing object
 			};
 
 			const response = await fetch("/api/admin/builder/settings", {
-				method: "POST",
+				body: JSON.stringify(transformedData),
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(transformedData),
+				method: "POST",
 			});
 
 			if (!response.ok) {
@@ -134,7 +134,7 @@ export default function AdminBuilderSettingsPage() {
 			</p>
 
 			{hasErrors && (
-				<Alert variant="destructive" className="mb-6">
+				<Alert className="mb-6" variant="destructive">
 					<AlertCircle className="h-4 w-4" />
 					<AlertTitle>{t("Error")}</AlertTitle>
 					<AlertDescription>{t("FormErrors")}</AlertDescription>
@@ -151,9 +151,9 @@ export default function AdminBuilderSettingsPage() {
 					</p>
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 						<TypographyEditor
+							control={control}
 							register={register}
 							setValue={setValue}
-							control={control}
 							watch={watch}
 						/>
 						<TypographyPreview typography={typography} />
@@ -169,11 +169,11 @@ export default function AdminBuilderSettingsPage() {
 					</p>
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 						<ColorPaletteEditor
+							appendColor={appendColor}
 							colorFields={colorFields}
 							register={register}
-							setValue={setValue}
 							removeColor={removeColor}
-							appendColor={appendColor}
+							setValue={setValue}
 						/>
 						<ColorPreview colors={colors} />
 					</div>
@@ -188,15 +188,15 @@ export default function AdminBuilderSettingsPage() {
 					</p>
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 						<SpacingEditor
-							paddingFields={paddingFields}
-							gapFields={gapFields}
-							removePadding={removePadding}
-							removeGap={removeGap}
-							appendPadding={appendPadding}
 							appendGap={appendGap}
+							appendPadding={appendPadding}
+							gapFields={gapFields}
+							paddingFields={paddingFields}
 							register={register}
-							watch={watch}
+							removeGap={removeGap}
+							removePadding={removePadding}
 							setValue={setValue}
+							watch={watch}
 						/>
 						<SpacingPreview spacing={spacing} />
 					</div>
@@ -217,9 +217,9 @@ export default function AdminBuilderSettingsPage() {
 
 				<div className="flex justify-end">
 					<Button
-						type="submit"
-						disabled={isSubmitting}
 						className="px-6"
+						disabled={isSubmitting}
+						type="submit"
 					>
 						{isSubmitting ? t("Saving") : t("SaveSettings")}
 					</Button>

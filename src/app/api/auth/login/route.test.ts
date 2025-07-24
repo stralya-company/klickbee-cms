@@ -1,6 +1,6 @@
-import { describe, it, expect, vi } from "vitest";
-import { POST } from "./route";
 import { NextRequest } from "next/server";
+import { describe, expect, it, vi } from "vitest";
+import { POST } from "./route";
 
 vi.mock("@stralya/auth");
 

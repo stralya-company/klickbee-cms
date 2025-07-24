@@ -17,11 +17,11 @@ export function usePasswordReset() {
 	>({
 		mutationFn: async (data: UserPasswordResetFormValues) => {
 			const res = await fetch("/api/auth/password-reset", {
-				method: "POST",
+				body: JSON.stringify(data),
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(data),
+				method: "POST",
 			});
 
 			const result: PasswordResetResponse | PasswordResetError =

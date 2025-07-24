@@ -1,7 +1,7 @@
 "use client";
+import { useEffect } from "react";
 import { useCurrentUser } from "@/feature/user/queries/useUser";
 import { useUserStore } from "@/feature/user/stores/storeUser";
-import { useEffect } from "react";
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
 	const { data: user, error, isLoading } = useCurrentUser();

@@ -1,6 +1,6 @@
-import prisma from "@/lib/prisma";
-import bcrypt from "bcrypt";
 import { Prisma } from "@prisma/client";
+import bcrypt from "bcrypt";
+import prisma from "@/lib/prisma";
 
 export default async function resetPassword(
 	token: string,
@@ -22,8 +22,8 @@ export default async function resetPassword(
 	}
 
 	const user = await client.user.findUnique({
+		select: { email: true, id: true },
 		where: { id: resetRequest.userId },
-		select: { id: true, email: true },
 	});
 
 	if (!user) {
@@ -33,7 +33,7 @@ export default async function resetPassword(
 	const hashedPassword = await bcrypt.hash(newPassword, 10);
 
 	await client.user.update({
-		where: { id: user.id },
 		data: { password: hashedPassword },
+		where: { id: user.id },
 	});
 }

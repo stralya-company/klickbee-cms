@@ -1,0 +1,18 @@
+colors: false
+
+pre-commit:
+  parallel: true
+  commands:
+    check:
+      run: npx biome check --no-errors-on-unmatched --files-ignore-unknown=true {staged_files} && git update-index --again
+    type-check:
+      glob: "*.{ts,tsx}"
+      run: npx tsc --noEmit
+    test:
+      run: npx vitest run
+
+# Use this to validate commit messages
+commit-msg:
+  commands:
+    "lint commit message":
+      run: npx commitlint --edit

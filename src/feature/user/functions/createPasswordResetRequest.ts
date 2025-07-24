@@ -4,8 +4,8 @@ export async function createPasswordResetRequest(
 	email: string,
 ): Promise<string> {
 	const user = await prisma.user.findUnique({
+		select: { email: true, id: true },
 		where: { email },
-		select: { id: true, email: true },
 	});
 
 	if (!user) {
@@ -14,8 +14,8 @@ export async function createPasswordResetRequest(
 
 	const { token } = await prisma.userPasswordReset.create({
 		data: {
-			userId: user.id,
 			expiresAt: new Date(Date.now() + 3600000), // Token valid for 1 hour
+			userId: user.id,
 		},
 		select: { token: true },
 	});

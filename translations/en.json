@@ -1,131 +1,131 @@
 {
-	"AdminSidebar": {
-		"Content": "Content",
-		"Contact": "Contact",
-		"Pages": "Pages",
-		"Settings": "Settings",
-		"Title": "Klickbee CMS",
-		"Copyright": "© Klickbee CMS",
-		"Email": "admin@klickbee.io"
-	},
 	"AdminLayout": {
 		"Logout": "Logout"
 	},
-	"BuilderSettings": {
-		"GlobalSettings": "Global Settings",
-		"GlobalSettingsDescription": "Configure the global settings of your site, such as typography, colors, spacing, and logos.",
-		"Error": "Error",
-		"FormErrors": "There are errors in the form. Please correct them before submitting.",
-		"Typography": "Typography",
-		"TypographyDescription": "Define the text styles used on your site.",
-		"Colors": "Colors",
-		"ColorsDescription": "Define the color palette of your site.",
-		"Spacing": "Spacing",
-		"SpacingDescription": "Configure the spacing and margins used in the layout.",
-		"Logos": "Logos",
-		"LogosDescription": "Upload and manage your site's logos.",
-		"Saving": "Saving...",
-		"SaveSettings": "Save Settings",
-		"Success": "Success",
-		"SuccessMessage": "Settings have been saved successfully.",
-		"ErrorMessage": "An error occurred while saving the settings."
-	},
-	"Login": {
-		"AdminLogin": "Admin Login",
-		"Email": "Email",
-		"Password": "Password",
-		"PasswordPlaceholder": "Your password",
-		"LoginButton": "Login",
-		"LoggingIn": "Logging in...",
-		"ConnectionError": "Connection error.",
-		"ConnectionFailed": "Connection failed. Please try again."
-	},
-	"ResetPasswordRequest": {
-		"ResetPasswordRequest": "Password Reset Request",
-		"EmailLabel": "Email",
-		"EmailPlaceholder": "Enter your email",
-		"SendResetLink": "Send reset link",
-		"Sending": "Sending...",
-		"ErrorMessage": "An error occurred while sending the reset link."
-	},
-	"ResetPassword": {
-		"ResetPassword": "Reset Password",
-		"NewPasswordLabel": "New Password",
-		"NewConfirmPasswordLabel": "Confirm Password",
-		"NewPasswordPlaceholder": "Enter your new password",
-		"NewConfirmPasswordPlaceholder": "Confirm your new password",
-		"ResetButton": "Reset Password",
-		"Resetting": "Resetting...",
-		"ErrorMessage": "An error occurred while resetting the password."
-	},
-	"Errors": {
-		"LoadingError": "Loading error",
-		"SaveError": "Save error",
-		"UploadError": "Upload error",
-		"GoogleFontsError": "Error retrieving Google Fonts",
-		"UserFetchError": "Error retrieving user"
-	},
-	"LogoEditor": {
-		"Title": "Logos",
-		"SquareLogo": "Square Logo",
-		"RectangleLogo": "Rectangle Logo",
-		"FileTypeError": "Only PNG or JPEG files are accepted.",
-		"SelectLogo": "Select a logo",
-		"ClickToChoose": "Click to choose",
-		"Uploading": "Uploading..."
-	},
-	"SpacingEditor": {
-		"Title": "Spacings",
-		"Padding": "Padding",
-		"Gap": "Gap",
-		"MaxWidth": "Max Width",
-		"Key": "Key:",
-		"PaddingName": "Padding name",
-		"GapName": "Gap name",
-		"DeletePadding": "Delete padding",
-		"AddPadding": "Add padding",
-		"DeleteGap": "Delete gap",
-		"AddGap": "Add gap"
-	},
-	"ColorEditor": {
-		"Title": "Colors",
-		"ColorPicker": "Color picker",
-		"ColorName": "Color name",
-		"DeleteColor": "Delete color",
-		"Type": "Type:",
-		"SelectType": "Select a type",
-		"AddColor": "Add color"
+	"AdminSidebar": {
+		"Contact": "Contact",
+		"Content": "Content",
+		"Copyright": "© Klickbee CMS",
+		"Email": "admin@klickbee.io",
+		"Pages": "Pages",
+		"Settings": "Settings",
+		"Title": "Klickbee CMS"
 	},
 	"API": {
 		"Common": {
+			"EmailSendError": "Failed to send email",
 			"InternalServerError": "Internal server error",
 			"InvalidJsonFormat": "Invalid JSON format",
-			"MissingAppUrl": "Application URL is not configured",
 			"MissingAdminKey": "Admin key is not configured",
-			"EmailSendError": "Failed to send email"
-		},
-		"PasswordResetRequest": {
-			"Success": "Password reset request sent successfully",
-			"EmailRequired": "Valid email address is required",
-			"EmailNotFound": "Email not found",
-			"EmailSubject": "Password Reset Request",
-			"EmailContent": "Please use this link to reset your password"
+			"MissingAppUrl": "Application URL is not configured"
 		},
 		"PasswordReset": {
-			"Success": "Password reset successfully",
 			"InvalidFormValidation": "Form validation failed",
 			"InvalidToken": "Invalid token",
+			"Success": "Password reset successfully",
 			"TokenExpired": "Token expired"
+		},
+		"PasswordResetRequest": {
+			"EmailContent": "Please use this link to reset your password",
+			"EmailNotFound": "Email not found",
+			"EmailRequired": "Valid email address is required",
+			"EmailSubject": "Password Reset Request",
+			"Success": "Password reset request sent successfully"
 		}
 	},
+	"BuilderSettings": {
+		"Colors": "Colors",
+		"ColorsDescription": "Define the color palette of your site.",
+		"Error": "Error",
+		"ErrorMessage": "An error occurred while saving the settings.",
+		"FormErrors": "There are errors in the form. Please correct them before submitting.",
+		"GlobalSettings": "Global Settings",
+		"GlobalSettingsDescription": "Configure the global settings of your site, such as typography, colors, spacing, and logos.",
+		"Logos": "Logos",
+		"LogosDescription": "Upload and manage your site's logos.",
+		"SaveSettings": "Save Settings",
+		"Saving": "Saving...",
+		"Spacing": "Spacing",
+		"SpacingDescription": "Configure the spacing and margins used in the layout.",
+		"Success": "Success",
+		"SuccessMessage": "Settings have been saved successfully.",
+		"Typography": "Typography",
+		"TypographyDescription": "Define the text styles used on your site."
+	},
+	"ColorEditor": {
+		"AddColor": "Add color",
+		"ColorName": "Color name",
+		"ColorPicker": "Color picker",
+		"DeleteColor": "Delete color",
+		"SelectType": "Select a type",
+		"Title": "Colors",
+		"Type": "Type:"
+	},
+	"Errors": {
+		"GoogleFontsError": "Error retrieving Google Fonts",
+		"LoadingError": "Loading error",
+		"SaveError": "Save error",
+		"UploadError": "Upload error",
+		"UserFetchError": "Error retrieving user"
+	},
+	"Login": {
+		"AdminLogin": "Admin Login",
+		"ConnectionError": "Connection error.",
+		"ConnectionFailed": "Connection failed. Please try again.",
+		"Email": "Email",
+		"LoggingIn": "Logging in...",
+		"LoginButton": "Login",
+		"Password": "Password",
+		"PasswordPlaceholder": "Your password"
+	},
+	"LogoEditor": {
+		"ClickToChoose": "Click to choose",
+		"FileTypeError": "Only PNG or JPEG files are accepted.",
+		"RectangleLogo": "Rectangle Logo",
+		"SelectLogo": "Select a logo",
+		"SquareLogo": "Square Logo",
+		"Title": "Logos",
+		"Uploading": "Uploading..."
+	},
+	"ResetPassword": {
+		"ErrorMessage": "An error occurred while resetting the password.",
+		"NewConfirmPasswordLabel": "Confirm Password",
+		"NewConfirmPasswordPlaceholder": "Confirm your new password",
+		"NewPasswordLabel": "New Password",
+		"NewPasswordPlaceholder": "Enter your new password",
+		"ResetButton": "Reset Password",
+		"ResetPassword": "Reset Password",
+		"Resetting": "Resetting..."
+	},
+	"ResetPasswordRequest": {
+		"EmailLabel": "Email",
+		"EmailPlaceholder": "Enter your email",
+		"ErrorMessage": "An error occurred while sending the reset link.",
+		"ResetPasswordRequest": "Password Reset Request",
+		"Sending": "Sending...",
+		"SendResetLink": "Send reset link"
+	},
+	"SpacingEditor": {
+		"AddGap": "Add gap",
+		"AddPadding": "Add padding",
+		"DeleteGap": "Delete gap",
+		"DeletePadding": "Delete padding",
+		"Gap": "Gap",
+		"GapName": "Gap name",
+		"Key": "Key:",
+		"MaxWidth": "Max Width",
+		"Padding": "Padding",
+		"PaddingName": "Padding name",
+		"Title": "Spacings"
+	},
 	"Validation": {
-		"RequiredField": "This field is required.",
-		"InvalidEmail": "Please enter a valid email address.",
 		"EmailRequired": "Email is required",
+		"InvalidEmail": "Please enter a valid email address.",
 		"InvalidToken": "Invalid token",
-		"TokenRequired": "Token is required",
+		"PasswordMismatch": "Passwords do not match",
 		"PasswordRequired": "Password is required",
 		"PasswordTooShort": "Password must be at least 8 characters",
-		"PasswordMismatch": "Passwords do not match"
+		"RequiredField": "This field is required.",
+		"TokenRequired": "Token is required"
 	}
 }

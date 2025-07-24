@@ -1,6 +1,7 @@
 // SpacingPreview.tsx
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type SpacingPreviewProps = {
 	spacing: FormValues["spacing"];
@@ -18,13 +19,13 @@ export default function SpacingPreview({ spacing }: SpacingPreviewProps) {
 					</CardHeader>
 					<CardContent
 						style={{
-							paddingTop: space.top.min,
-							paddingRight: space.right.min,
-							paddingBottom: space.bottom.min,
-							paddingLeft: space.left.min,
-							maxWidth: spacing.maxWidth,
 							background: "#000",
 							color: "#fff",
+							maxWidth: spacing.maxWidth,
+							paddingBottom: space.bottom.min,
+							paddingLeft: space.left.min,
+							paddingRight: space.right.min,
+							paddingTop: space.top.min,
 						}}
 					>
 						<p>I love Klickbee CMS! Woaw.</p>

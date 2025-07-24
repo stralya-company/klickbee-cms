@@ -48,9 +48,9 @@ export async function POST(req: NextRequest) {
 		);
 
 		await sendEmail({
-			to: email,
 			subject: emailSubject,
 			text: `${emailContent}: ${resetUrl}`,
+			to: email,
 		});
 
 		const successMessage = await getApiTranslation(

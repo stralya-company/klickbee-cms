@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Mail, FileText, Settings as SettingsIcon } from "lucide-react";
+import { FileText, Home, Mail, Settings as SettingsIcon } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
@@ -38,9 +38,9 @@ export function Sidebar() {
 				<nav className="space-y-2">
 					{menu.map((item) => (
 						<Link
-							key={item.href}
-							href={item.href}
 							className="flex items-center gap-3 px-3 py-2 rounded hover:bg-muted text-sm text-muted-foreground transition-colors"
+							href={item.href}
+							key={item.href}
 						>
 							<item.icon className="h-4 w-4" />
 							{item.label}

@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ResetPasswordForm from "@/components/admin/auth/password-reset/resetPasswordForm";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ResetPasswordPage() {
 	const t = useTranslations("ResetPassword");
