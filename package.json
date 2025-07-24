@@ -88,6 +88,7 @@
 		"format:check": "biome format .",
 		"lint": "biome lint --write .",
 		"prebuild": "node scripts/generateAdminKey.js",
+		"setup:dev": "npm i && npx prisma migrate dev && npx prisma generate && npx prisma db seed && npm run dev",
 		"start": "next start",
 		"test": "vitest",
 		"test:ui": "vitest --ui",
