@@ -2,7 +2,7 @@
 
 import { useMessages } from "next-intl";
 import { useEffect } from "react";
-import { initializeGlobalZodErrorMap } from "@/lib/zodTranslation";
+import { initializeGlobalZodErrorMap } from "@/lib/zod/zodTranslation";
 
 interface ZodTranslationProviderProps {
 	children: React.ReactNode;

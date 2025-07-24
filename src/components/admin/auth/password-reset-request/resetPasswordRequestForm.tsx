@@ -19,7 +19,7 @@ import {
 	UserPasswordResetRequestFormValues,
 	userPasswordResetRequestSchema,
 } from "@/feature/auth/types/userPasswordResetRequestSchema";
-import { authClient } from "@/lib/authClient";
+import { authClient } from "@/lib/better-auth/authClient";
 
 export default function ResetPasswordRequestForm() {
 	const t = useTranslations("ResetPasswordRequest");

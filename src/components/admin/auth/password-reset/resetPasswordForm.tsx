@@ -20,7 +20,7 @@ import {
 	UserPasswordResetFormValues,
 	userPasswordResetSchema,
 } from "@/feature/auth/types/userPasswordResetSchema";
-import { authClient } from "@/lib/authClient";
+import { authClient } from "@/lib/better-auth/authClient";
 
 export default function ResetPasswordForm() {
 	const router = useRouter();

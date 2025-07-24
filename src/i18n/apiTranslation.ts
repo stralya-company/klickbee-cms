@@ -1,4 +1,4 @@
-import { getSetting } from "@/lib/settings";
+import { getSetting } from "@/lib/prisma/queries/settings";
 
 interface ApiTranslations {
 	API: {

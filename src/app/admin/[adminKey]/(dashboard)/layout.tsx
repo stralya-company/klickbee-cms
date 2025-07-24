@@ -7,7 +7,7 @@ import { Sidebar } from "@/components/admin/_partials/sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { getQueryClient } from "@/lib/react-query/getQueryClient";
-import { userServerOptions } from "@/lib/react-query/query-options/userServerOptions";
+import { userServerOptions } from "@/lib/react-query/query-options/auth/userServerOptions";
 import { UserProvider } from "@/providers/UserProvider";
 import { ZodTranslationProvider } from "@/providers/ZodTranslationProvider";
 
@@ -39,7 +39,7 @@ export default async function AdminLayout({
 							<SidebarProvider>
 								{currentUser && <Sidebar />}
 								<main className="flex-1">
-									<SidebarTrigger className="m-4 p-4" />
+									<SidebarTrigger className="mx-10 mt-4" />
 									{children}
 									<Toaster />
 								</main>
