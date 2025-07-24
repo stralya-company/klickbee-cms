@@ -146,7 +146,7 @@ function createColumns(
 			),
 		}),
 		columnHelper.display({
-			cell: ({ row }) => {
+			cell: () => {
 				return (
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
