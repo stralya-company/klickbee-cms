@@ -16,11 +16,11 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { usePasswordReset } from "@/feature/user/queries/usePasswordReset";
 import {
 	UserPasswordResetFormValues,
 	userPasswordResetSchema,
-} from "@/feature/user/types/userPasswordResetSchema";
+} from "@/feature/auth/types/userPasswordResetSchema";
+import { authClient } from "@/lib/authClient";
 
 export default function ResetPasswordForm() {
 	const router = useRouter();
@@ -32,8 +32,6 @@ export default function ResetPasswordForm() {
 
 	const t = useTranslations("ResetPassword");
 
-	const passwordResetMutation = usePasswordReset();
-
 	const resetPasswordForm = useForm<UserPasswordResetFormValues>({
 		defaultValues: {
 			confirmNewPassword: "",
@@ -43,11 +41,16 @@ export default function ResetPasswordForm() {
 		resolver: zodResolver(userPasswordResetSchema),
 	});
 
-	async function onSubmit(data: UserPasswordResetFormValues) {
+	async function onSubmit(
+		userPasswordResetFormValues: UserPasswordResetFormValues,
+	) {
 		try {
-			const result = await passwordResetMutation.mutateAsync(data);
+			await authClient.resetPassword({
+				newPassword: userPasswordResetFormValues.newPassword,
+				token: userPasswordResetFormValues.token,
+			});
 			resetPasswordForm.reset();
-			toast.success(result.message);
+			toast.success(t("SuccessMessage"));
 			router.push(`/admin/${adminKey}/auth/login`);
 		} catch (error) {
 			const errorMessage =
@@ -110,10 +113,13 @@ export default function ResetPasswordForm() {
 
 				<Button
 					className="w-full mt-4"
-					disabled={passwordResetMutation.isPending}
+					disabled={
+						!resetPasswordForm.formState.isValid ||
+						resetPasswordForm.formState.isSubmitting
+					}
 					type="submit"
 				>
-					{passwordResetMutation.isPending
+					{resetPasswordForm.formState.isSubmitting
 						? t("Resetting")
 						: t("ResetButton")}
 				</Button>

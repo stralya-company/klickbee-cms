@@ -34,6 +34,14 @@ export default function EmailSettingsForm() {
 	const emailUsername = useSetting("emailUsername");
 	const setSetting = useSetSetting();
 	const emailSettingsForm = useForm<EmailSettingsSchema>({
+		defaultValues: {
+			emailHost: "",
+			emailPassword: "",
+			emailPort: 0,
+			emailSecure: false,
+			emailSender: "",
+			emailUsername: "",
+		},
 		resolver: zodResolver(emailSettingsSchema),
 	});
 	const [emailSettings, setEmailSettings] =
