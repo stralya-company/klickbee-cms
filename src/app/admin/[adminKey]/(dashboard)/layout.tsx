@@ -3,8 +3,8 @@ import { HydrationBoundary } from "@tanstack/react-query";
 import { redirect } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
-import LogoutButton from "@/components/admin/_partials/logoutButton";
 import { Sidebar } from "@/components/admin/_partials/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { getQueryClient } from "@/lib/react-query/getQueryClient";
 import { userServerOptions } from "@/lib/react-query/query-options/userServerOptions";
@@ -36,12 +36,14 @@ export default async function AdminLayout({
 				<NextIntlClientProvider locale={locale} messages={messages}>
 					<ZodTranslationProvider>
 						<div className="flex min-h-screen">
-							{currentUser && <Sidebar />}
-							<main className="flex-1">
-								{currentUser && <LogoutButton />}
-								{children}
-								<Toaster />
-							</main>
+							<SidebarProvider>
+								{currentUser && <Sidebar />}
+								<main className="flex-1">
+									<SidebarTrigger className="m-4 p-4" />
+									{children}
+									<Toaster />
+								</main>
+							</SidebarProvider>
 						</div>
 					</ZodTranslationProvider>
 				</NextIntlClientProvider>
