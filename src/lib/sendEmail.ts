@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
-import { getSetting } from "@/lib/settings";
 import { decryptString } from "@/lib/crypto";
+import { getSetting } from "@/lib/settings";
 
 export interface EmailOptions {
 	to: string;
@@ -21,23 +21,23 @@ export async function sendEmail(options: EmailOptions): Promise<void> {
 	const validPort = parseInt(emailPort || "587", 10);
 
 	const transporter = nodemailer.createTransport({
+		auth: {
+			pass: await decryptString(emailPassword || ""),
+			user: emailUsername || "",
+		},
 		host: emailHost || "",
 		port: validPort,
 		secure:
 			emailSecure !== undefined
 				? emailSecure === "true"
 				: validPort === 465,
-		auth: {
-			user: emailUsername || "",
-			pass: await decryptString(emailPassword || ""),
-		},
 	});
 
 	await transporter.sendMail({
 		from: emailSender || "",
-		to,
+		html,
 		subject,
 		text,
-		html,
+		to,
 	});
 }

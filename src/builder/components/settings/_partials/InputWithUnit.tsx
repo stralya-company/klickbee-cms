@@ -1,13 +1,13 @@
-import { Input } from "@/components/ui/input";
+import React, { useState } from "react";
+import { SizeUnit } from "@/builder/types/settings/FluidSize";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
-	DropdownMenuTrigger,
 	DropdownMenuContent,
 	DropdownMenuItem,
+	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import React, { useState } from "react";
-import { SizeUnit } from "@/builder/types/settings/FluidSize";
+import { Input } from "@/components/ui/input";
 
 export function InputWithUnit({
 	value,
@@ -31,19 +31,19 @@ export function InputWithUnit({
 	return (
 		<div className="flex items-center gap-1">
 			<Input
-				type="number"
-				step="any"
-				value={value}
-				onChange={(e) => onChange(Number(e.target.value))}
 				className="w-20"
+				onChange={(e) => onChange(Number(e.target.value))}
+				step="any"
+				type="number"
+				value={value}
 				{...inputProps}
 			/>
-			<DropdownMenu open={open} onOpenChange={setOpen}>
+			<DropdownMenu onOpenChange={setOpen} open={open}>
 				<DropdownMenuTrigger asChild>
 					<Button
-						variant="outline"
-						size="sm"
 						className={buttonClassName + " px-2 min-w-8"}
+						size="sm"
+						variant="outline"
 					>
 						{unit}
 					</Button>

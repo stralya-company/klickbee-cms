@@ -1,11 +1,11 @@
-import { describe, it, expect, beforeEach, vi, type Mock } from "vitest";
-import { POST } from "./route";
-import { NextRequest } from "next/server";
-import resetPassword from "@/feature/user/functions/resetPassword";
-import deletePasswordResetRequest from "@/feature/user/functions/deletePasswordResetRequest";
-import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
+import { NextRequest } from "next/server";
+import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
+import deletePasswordResetRequest from "@/feature/user/functions/deletePasswordResetRequest";
+import resetPassword from "@/feature/user/functions/resetPassword";
 import { getApiTranslation } from "@/lib/apiTranslation";
+import prisma from "@/lib/prisma";
+import { POST } from "./route";
 
 vi.mock("@/lib/prisma", () => ({
 	default: {
@@ -50,7 +50,7 @@ function createMockRequestWithError(): NextRequest {
 async function executeTest(req: NextRequest) {
 	const res = await POST(req);
 	const json = await res.json();
-	return { res, json };
+	return { json, res };
 }
 
 function expectValidationError(
@@ -78,8 +78,8 @@ describe("POST /api/auth/password-reset", () => {
 			update: vi.fn(),
 		},
 		userPasswordReset: {
-			findUnique: vi.fn(),
 			delete: vi.fn(),
+			findUnique: vi.fn(),
 		},
 	} as unknown as Prisma.TransactionClient;
 
@@ -92,13 +92,13 @@ describe("POST /api/auth/password-reset", () => {
 		mockGetApiTranslation.mockImplementation((section, key) => {
 			const translations: Record<string, Record<string, string>> = {
 				Common: {
-					InvalidJsonFormat: "Invalid JSON format",
 					InternalServerError: "Internal server error",
+					InvalidJsonFormat: "Invalid JSON format",
 				},
 				PasswordReset: {
 					InvalidFormValidation: "Form validation failed",
-					Success: "Password reset successful",
 					InvalidToken: "Invalid token",
+					Success: "Password reset successful",
 					TokenExpired: "Token expired",
 				},
 			};
@@ -111,9 +111,9 @@ describe("POST /api/auth/password-reset", () => {
 		mockDeletePasswordResetRequest.mockResolvedValue(undefined);
 
 		const req = createMockRequest({
-			token: VALID_TOKEN,
-			newPassword: VALID_PASSWORD,
 			confirmNewPassword: VALID_PASSWORD,
+			newPassword: VALID_PASSWORD,
+			token: VALID_TOKEN,
 		});
 
 		const res = await POST(req);
@@ -165,8 +165,8 @@ describe("POST /api/auth/password-reset", () => {
 
 	it("should return 400 for empty token", async () => {
 		const req = createMockRequest({
-			token: "",
 			newPassword: VALID_PASSWORD,
+			token: "",
 		});
 
 		const { res, json } = await executeTest(req);
@@ -175,9 +175,9 @@ describe("POST /api/auth/password-reset", () => {
 
 	it("should return 400 for empty password", async () => {
 		const req = createMockRequest({
-			token: VALID_TOKEN,
-			newPassword: "",
 			confirmNewPassword: "",
+			newPassword: "",
+			token: VALID_TOKEN,
 		});
 
 		const { res, json } = await executeTest(req);
@@ -188,9 +188,9 @@ describe("POST /api/auth/password-reset", () => {
 		mockResetPassword.mockRejectedValue(new Error("Token not found"));
 
 		const req = createMockRequest({
-			token: VALID_TOKEN,
-			newPassword: VALID_PASSWORD,
 			confirmNewPassword: VALID_PASSWORD,
+			newPassword: VALID_PASSWORD,
+			token: VALID_TOKEN,
 		});
 
 		const res = await POST(req);
@@ -210,9 +210,9 @@ describe("POST /api/auth/password-reset", () => {
 		mockResetPassword.mockRejectedValue(new Error("Token expired"));
 
 		const req = createMockRequest({
-			token: VALID_TOKEN,
-			newPassword: VALID_PASSWORD,
 			confirmNewPassword: VALID_PASSWORD,
+			newPassword: VALID_PASSWORD,
+			token: VALID_TOKEN,
 		});
 
 		const res = await POST(req);
@@ -232,9 +232,9 @@ describe("POST /api/auth/password-reset", () => {
 		mockResetPassword.mockRejectedValue(new Error("Database error"));
 
 		const req = createMockRequest({
-			token: VALID_TOKEN,
-			newPassword: VALID_PASSWORD,
 			confirmNewPassword: VALID_PASSWORD,
+			newPassword: VALID_PASSWORD,
+			token: VALID_TOKEN,
 		});
 
 		const { res, json } = await executeTest(req);
@@ -254,9 +254,9 @@ describe("POST /api/auth/password-reset", () => {
 		);
 
 		const req = createMockRequest({
-			token: VALID_TOKEN,
-			newPassword: VALID_PASSWORD,
 			confirmNewPassword: VALID_PASSWORD,
+			newPassword: VALID_PASSWORD,
+			token: VALID_TOKEN,
 		});
 
 		const { res, json } = await executeTest(req);
@@ -274,9 +274,9 @@ describe("POST /api/auth/password-reset", () => {
 
 	it("should handle schema validation failure", async () => {
 		const req = createMockRequest({
-			token: "invalid-uuid",
-			newPassword: "short",
 			confirmNewPassword: "short",
+			newPassword: "short",
+			token: "invalid-uuid",
 		});
 
 		const { res, json } = await executeTest(req);

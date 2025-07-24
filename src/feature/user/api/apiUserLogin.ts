@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { login } from "@stralya/auth";
+import { NextRequest, NextResponse } from "next/server";
 import "../../../lib/initSetPrismaClient";
 
 export async function POST(req: NextRequest) {

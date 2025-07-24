@@ -1,11 +1,10 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-	UserPasswordResetRequestFormValues,
-	userPasswordResetRequestSchema,
-} from "@/feature/user/types/userPasswordResetRequestSchema";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
@@ -15,10 +14,11 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
 import { usePasswordResetRequest } from "@/feature/user/queries/usePasswordResetRequest";
-import { toast } from "sonner";
+import {
+	UserPasswordResetRequestFormValues,
+	userPasswordResetRequestSchema,
+} from "@/feature/user/types/userPasswordResetRequestSchema";
 
 export default function ResetPasswordRequestForm() {
 	const t = useTranslations("ResetPasswordRequest");
@@ -27,10 +27,10 @@ export default function ResetPasswordRequestForm() {
 
 	const resetPasswordRequestForm =
 		useForm<UserPasswordResetRequestFormValues>({
-			resolver: zodResolver(userPasswordResetRequestSchema),
 			defaultValues: {
 				email: "",
 			},
+			resolver: zodResolver(userPasswordResetRequestSchema),
 		});
 
 	async function onSubmit(data: UserPasswordResetRequestFormValues) {
@@ -59,8 +59,8 @@ export default function ResetPasswordRequestForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder={t("EmailPlaceholder")}
 									className="w-full"
+									placeholder={t("EmailPlaceholder")}
 								/>
 							</FormControl>
 							<FormMessage />
@@ -68,9 +68,9 @@ export default function ResetPasswordRequestForm() {
 					)}
 				/>
 				<Button
-					type="submit"
 					className="w-full mt-4"
 					disabled={passwordResetRequestMutation.isPending}
+					type="submit"
 				>
 					{passwordResetRequestMutation.isPending
 						? t("Sending")

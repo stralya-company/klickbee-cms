@@ -1,17 +1,17 @@
-import {
-	describe,
-	it,
-	expect,
-	beforeEach,
-	afterEach,
-	vi,
-	type Mock,
-} from "vitest";
-import { POST } from "./route";
 import { NextRequest } from "next/server";
+import {
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	type Mock,
+	vi,
+} from "vitest";
 import { createPasswordResetRequest } from "@/feature/user/functions/createPasswordResetRequest";
 import { getApiTranslation } from "@/lib/apiTranslation";
 import { sendEmail } from "@/lib/sendEmail";
+import { POST } from "./route";
 
 vi.mock("@/feature/user/functions/createPasswordResetRequest", () => ({
 	createPasswordResetRequest: vi.fn(),
@@ -49,18 +49,18 @@ describe("POST /api/auth/password-reset-request", () => {
 	const setupTranslationMocks = () => {
 		const translations: Record<string, Record<string, string>> = {
 			Common: {
-				InvalidJsonFormat: "Invalid JSON format",
-				InternalServerError: "Internal server error",
-				MissingAppUrl: "Application URL is not configured",
-				MissingAdminKey: "Admin key is not configured",
 				EmailSendError: "Failed to send email",
+				InternalServerError: "Internal server error",
+				InvalidJsonFormat: "Invalid JSON format",
+				MissingAdminKey: "Admin key is not configured",
+				MissingAppUrl: "Application URL is not configured",
 			},
 			PasswordResetRequest: {
-				Success: "Password reset request successful",
-				EmailRequired: "Valid email address is required",
-				EmailNotFound: "Email not found",
-				EmailSubject: "Password Reset Request",
 				EmailContent: "Please use this link to reset your password",
+				EmailNotFound: "Email not found",
+				EmailRequired: "Valid email address is required",
+				EmailSubject: "Password Reset Request",
+				Success: "Password reset request successful",
 			},
 		};
 		mockGetApiTranslation.mockImplementation((section, key) =>
@@ -73,8 +73,8 @@ describe("POST /api/auth/password-reset-request", () => {
 		setupTranslationMocks();
 		process.env = {
 			...originalEnv,
-			NEXT_PUBLIC_APP_URL: "http://localhost:3000",
 			ADMIN_GENERATED_KEY: "test-admin-key-123",
+			NEXT_PUBLIC_APP_URL: "http://localhost:3000",
 		};
 	});
 
@@ -99,9 +99,9 @@ describe("POST /api/auth/password-reset-request", () => {
 			"valid@example.com",
 		);
 		expect(mockSendEmail).toHaveBeenCalledWith({
-			to: "valid@example.com",
 			subject: "Password Reset Request",
 			text: "Please use this link to reset your password: http://localhost:3000/admin/test-admin-key-123/auth/password-reset?token=reset-token",
+			to: "valid@example.com",
 		});
 	});
 

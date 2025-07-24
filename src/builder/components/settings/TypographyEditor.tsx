@@ -1,17 +1,17 @@
-import React, { RefObject, useCallback, useRef, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import React, { RefObject, useCallback, useRef, useState } from "react";
 import {
 	Control,
-	useFieldArray,
 	UseFormRegister,
 	UseFormSetValue,
 	UseFormWatch,
+	useFieldArray,
 } from "react-hook-form";
 import type { FormValues } from "@/app/admin/[adminKey]/builder/settings/page";
-import { useGoogleFonts } from "@/builder/utils/query/useGoogleFonts";
 import TypographyItemEditor from "@/builder/components/settings/_partials/TypographyItemEditor";
+import { useGoogleFonts } from "@/builder/utils/query/useGoogleFonts";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const TypographyEditor = React.memo(function TypographyEditor({
 	control,
@@ -44,21 +44,21 @@ const TypographyEditor = React.memo(function TypographyEditor({
 
 	const handleAdd = useCallback(() => {
 		append({
-			key: "new",
 			fontFamily: filteredFonts[0]?.value ?? "",
 			fontSize: {
+				max: 2,
+				maxWidth: 1440,
 				min: 1,
 				sizeUnit: "rem",
 				widthUnit: "px",
-				max: 2,
-				maxWidth: 1440,
 			},
-			lineHeight: 1,
-			lineHeightUnits: "em",
-			fontWeight: "400",
 			fontStyle: "normal",
+			fontWeight: "400",
+			key: "new",
 			letterSpacing: 0,
 			letterSpacingUnits: "px",
+			lineHeight: 1,
+			lineHeightUnits: "em",
 			textTransform: "unset",
 		});
 	}, [append, filteredFonts]);
@@ -71,33 +71,33 @@ const TypographyEditor = React.memo(function TypographyEditor({
 			<CardContent className="space-y-4">
 				{typoFields.map((typo, idx) => (
 					<TypographyItemEditor
-						key={typo.id}
-						idx={idx}
+						allFonts={allFonts}
 						control={control}
-						register={register}
-						setValue={setValue}
-						remove={remove}
-						openIdx={openIdx}
-						setOpenIdx={setOpenIdx}
 						dropdownOpenIdx={dropdownOpenIdx}
-						setDropdownOpenIdx={setDropdownOpenIdx}
+						filteredFonts={filteredFonts}
+						idx={idx}
+						isLoading={isLoading}
+						key={typo.id}
+						openIdx={openIdx}
+						register={register}
+						remove={remove}
 						search={search}
-						setSearch={setSearch}
 						searchInputRef={
 							searchInputRef as RefObject<HTMLInputElement>
 						}
-						allFonts={allFonts}
-						isLoading={isLoading}
-						filteredFonts={filteredFonts}
+						setDropdownOpenIdx={setDropdownOpenIdx}
+						setOpenIdx={setOpenIdx}
+						setSearch={setSearch}
+						setValue={setValue}
 						typography={typography}
 					/>
 				))}
 				<Button
-					type="button"
-					variant="outline"
-					size="sm"
 					className="mt-4"
 					onClick={handleAdd}
+					size="sm"
+					type="button"
+					variant="outline"
 				>
 					<Plus className="w-4 h-4 mr-1" /> Ajouter une font
 				</Button>

@@ -1,9 +1,16 @@
-import { z, ZodErrorMap, ZodIssue } from "zod";
+import { ZodErrorMap, ZodIssue, z } from "zod";
 
 type ZodInvalidStringIssue = ZodIssue & { validation: string };
 type ZodTooSmallIssue = ZodIssue & { type: string; minimum: number };
 
 const ERROR_CODE_MAP = {
+	custom: (_issue: ZodIssue, path: string) => {
+		if (path === "confirmNewPassword") {
+			return "PasswordMismatch";
+		}
+
+		return "RequiredField";
+	},
 	invalid_string: (issue: ZodInvalidStringIssue) => {
 		const validationMap: Record<string, string> = {
 			email: "InvalidEmail",
@@ -17,11 +24,11 @@ const ERROR_CODE_MAP = {
 
 		const minSizeMap: Record<number, Record<string, string>> = {
 			1: {
-				email: "EmailRequired",
-				token: "TokenRequired",
-				password: "PasswordRequired",
-				newPassword: "PasswordRequired",
 				default: "RequiredField",
+				email: "EmailRequired",
+				newPassword: "PasswordRequired",
+				password: "PasswordRequired",
+				token: "TokenRequired",
 			},
 			8: {
 				default: "PasswordTooShort",
@@ -30,14 +37,6 @@ const ERROR_CODE_MAP = {
 
 		const sizeMap = minSizeMap[issue.minimum];
 		return sizeMap?.[path] || sizeMap?.default || "RequiredField";
-	},
-
-	custom: (_issue: ZodIssue, path: string) => {
-		if (path === "confirmNewPassword") {
-			return "PasswordMismatch";
-		}
-
-		return "RequiredField";
 	},
 };
 

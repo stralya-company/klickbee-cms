@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import type { LogoSettings } from "@/builder/types/settings/LogoSettings";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import React, { useRef, useState } from "react";
 import { toast } from "sonner";
+import type { LogoSettings } from "@/builder/types/settings/LogoSettings";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
 type Props = {
 	logos: LogoSettings[];
@@ -13,8 +13,8 @@ type Props = {
 
 const FORMATS: Array<LogoSettings["format"]> = ["square", "rectangle"];
 const SIZES = {
-	square: { w: 120, h: 120 },
-	rectangle: { w: 180, h: 80 },
+	rectangle: { h: 80, w: 180 },
+	square: { h: 120, w: 120 },
 } as const;
 
 export default function LogoEditor({ logos, onChange }: Props) {
@@ -23,8 +23,8 @@ export default function LogoEditor({ logos, onChange }: Props) {
 	const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
 	const LABELS = {
-		square: t("SquareLogo"),
 		rectangle: t("RectangleLogo"),
+		square: t("SquareLogo"),
 	} as const;
 
 	const getLogoUrl = (format: LogoSettings["format"]) =>
@@ -45,8 +45,8 @@ export default function LogoEditor({ logos, onChange }: Props) {
 		formData.append("logo", file);
 		try {
 			const res = await fetch("/api/admin/builder/logo", {
-				method: "POST",
 				body: formData,
+				method: "POST",
 			});
 			if (!res.ok) throw new Error();
 			const { url } = await res.json();
@@ -73,43 +73,43 @@ export default function LogoEditor({ logos, onChange }: Props) {
 						const isLoading = loading === format;
 						return (
 							<div
-								key={format}
 								className="flex flex-col items-center"
+								key={format}
 							>
 								<Label>{LABELS[format]}</Label>
 								<div className="mt-2" style={{ width: w }}>
 									<div
-										style={{
-											width: w,
-											height: h,
-											borderRadius: 8,
-											display: "flex",
-											alignItems: "center",
-											justifyContent: "center",
-											cursor: isLoading
-												? "not-allowed"
-												: "pointer",
-											overflow: "hidden",
-											position: "relative",
-										}}
+										aria-label={t("SelectLogo")}
 										className="border border-[#ccc] bg-[#fafafa] dark:border-[#444] dark:bg-[#222] transition-colors"
 										onClick={() =>
 											!isLoading &&
 											inputRefs.current[format]?.click()
 										}
-										aria-label={t("SelectLogo")}
+										style={{
+											alignItems: "center",
+											borderRadius: 8,
+											cursor: isLoading
+												? "not-allowed"
+												: "pointer",
+											display: "flex",
+											height: h,
+											justifyContent: "center",
+											overflow: "hidden",
+											position: "relative",
+											width: w,
+										}}
 									>
 										{url ? (
 											<Image
-												src={url}
 												alt={LABELS[format]}
-												width={w}
 												height={h}
+												src={url}
 												style={{
-													maxWidth: "100%",
 													maxHeight: "100%",
+													maxWidth: "100%",
 													objectFit: "contain",
 												}}
+												width={w}
 											/>
 										) : (
 											<span
@@ -125,16 +125,16 @@ export default function LogoEditor({ logos, onChange }: Props) {
 											</span>
 										)}
 										<input
-											ref={(el) => {
-												inputRefs.current[format] = el;
-											}}
-											type="file"
 											accept="image/png,image/jpeg"
-											style={{ display: "none" }}
+											disabled={isLoading}
 											onChange={(e) =>
 												handleFileChange(e, format)
 											}
-											disabled={isLoading}
+											ref={(el) => {
+												inputRefs.current[format] = el;
+											}}
+											style={{ display: "none" }}
+											type="file"
 										/>
 									</div>
 									{isLoading && (

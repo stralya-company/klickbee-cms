@@ -1,9 +1,10 @@
+import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { userPasswordResetSchema } from "@/feature/user/types/userPasswordResetSchema";
-import resetPassword from "@/feature/user/functions/resetPassword";
 import deletePasswordResetRequest from "@/feature/user/functions/deletePasswordResetRequest";
-import prisma from "@/lib/prisma";
+import resetPassword from "@/feature/user/functions/resetPassword";
+import { userPasswordResetSchema } from "@/feature/user/types/userPasswordResetSchema";
 import { getApiTranslation } from "@/lib/apiTranslation";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
 	try {
@@ -21,8 +22,15 @@ export async function POST(req: NextRequest) {
 		const { token, newPassword } = result.data;
 
 		await prisma.$transaction(async (tx) => {
-			await resetPassword(token, newPassword, tx);
-			await deletePasswordResetRequest(token, tx);
+			await resetPassword(
+				token,
+				newPassword,
+				tx as Prisma.TransactionClient,
+			);
+			await deletePasswordResetRequest(
+				token,
+				tx as Prisma.TransactionClient,
+			);
 		});
 
 		const successMessage = await getApiTranslation(

@@ -1,27 +1,4 @@
 {
-	"name": "klickbee-cms",
-	"version": "0.1.0",
-	"private": true,
-	"engines": {
-		"node": ">=20.0.0 <24.0.0"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/stralya-company/klickbee-cms.git"
-	},
-	"scripts": {
-		"dev": "next dev --turbopack",
-		"prebuild": "node scripts/generateAdminKey.js",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint --max-warnings=0",
-		"prepare": "husky",
-		"format": "prettier --write .",
-		"format:check": "prettier --check .",
-		"test": "vitest",
-		"test:ui": "vitest --ui",
-		"setup:dev": "npm i && npx prisma migrate dev && npx prisma generate && npx prisma db seed && npm run dev"
-	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.1.1",
 		"@prisma/client": "^6.9.0",
@@ -58,6 +35,7 @@
 		"zustand": "^5.0.5"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "2.1.2",
 		"@commitlint/cli": "^19.8.1",
 		"@commitlint/config-conventional": "^19.8.1",
 		"@semantic-release/changelog": "^6.0.3",
@@ -73,18 +51,9 @@
 		"@types/nodemailer": "^6.4.17",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
-		"@typescript-eslint/eslint-plugin": "^8.34.0",
-		"@typescript-eslint/parser": "^8.34.0",
 		"add": "^2.0.6",
-		"eslint": "^9.28.0",
-		"eslint-config-next": "15.3.3",
-		"eslint-config-prettier": "^10.1.5",
-		"eslint-plugin-prettier": "^5.4.1",
-		"eslint-plugin-react": "^7.37.5",
-		"eslint-plugin-react-hooks": "^5.2.0",
-		"husky": "^9.1.7",
 		"jest": "^30.0.0",
-		"prettier": "^3.5.3",
+		"lefthook": "^1.12.2",
 		"semantic-release": "^24.2.5",
 		"tailwindcss": "^4",
 		"ts-jest": "^29.4.0",
@@ -93,6 +62,10 @@
 		"typescript": "^5",
 		"vitest": "^3.2.4"
 	},
+	"engines": {
+		"node": ">=20.0.0 <24.0.0"
+	},
+	"name": "klickbee-cms",
 	"overrides": {
 		"glob": "^9.0.0",
 		"some-package": {
@@ -101,5 +74,25 @@
 	},
 	"prisma": {
 		"seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/roles-seed.ts"
-	}
+	},
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stralya-company/klickbee-cms.git"
+	},
+	"scripts": {
+		"build": "next build",
+		"check": "biome check --write .",
+		"dev": "next dev --turbopack",
+		"format": "biome format --write .",
+		"format:check": "biome format .",
+		"lint": "biome lint --write .",
+		"prebuild": "node scripts/generateAdminKey.js",
+		"setup:dev": "npm i && npx prisma migrate dev && npx prisma generate && npx prisma db seed && npm run dev",
+		"start": "next start",
+		"test": "vitest",
+		"test:ui": "vitest --ui",
+		"typecheck": "tsc --noEmit"
+	},
+	"version": "0.1.0"
 }
