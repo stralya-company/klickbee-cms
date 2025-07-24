@@ -1,8 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -25,10 +24,8 @@ import {
 import { authClient } from "@/lib/authClient";
 
 export default function LoginForm() {
-	const router = useRouter();
 	const { adminKey } = useParams<{ adminKey: string }>();
 	const { setAdminKey } = useAdminKeyStore();
-	const queryClient = useQueryClient();
 
 	useEffect(() => {
 		setAdminKey(adminKey);
@@ -58,8 +55,7 @@ export default function LoginForm() {
 		}
 
 		if (data) {
-			await queryClient.refetchQueries({ queryKey: ["current_user"] });
-			router.push(`/admin/${adminKey}`);
+			window.location.href = `/admin/${adminKey}`;
 		} else {
 			toast.error(t("ConnectionFailed"));
 		}
