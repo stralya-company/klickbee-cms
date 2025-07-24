@@ -1,0 +1,51 @@
+import { dehydrate } from "@tanstack/query-core";
+import { HydrationBoundary } from "@tanstack/react-query";
+import { redirect } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
+import LogoutButton from "@/components/admin/_partials/logoutButton";
+import { Sidebar } from "@/components/admin/_partials/sidebar";
+import { Toaster } from "@/components/ui/sonner";
+import { getQueryClient } from "@/lib/react-query/getQueryClient";
+import { userServerOptions } from "@/lib/react-query/query-options/userServerOptions";
+import { UserProvider } from "@/providers/UserProvider";
+import { ZodTranslationProvider } from "@/providers/ZodTranslationProvider";
+
+export default async function AdminLayout({
+	children,
+	params,
+}: {
+	children: React.ReactNode;
+	params: { adminKey: string };
+}) {
+	const messages = await getMessages();
+	const locale = await getLocale();
+
+	const queryClient = getQueryClient();
+	await queryClient.prefetchQuery(userServerOptions);
+
+	const currentUser = queryClient.getQueryData(userServerOptions.queryKey);
+
+	if (!currentUser) {
+		const { adminKey } = params;
+		redirect(`/admin/${adminKey}/auth/login`);
+	}
+	return (
+		<HydrationBoundary state={dehydrate(queryClient)}>
+			<UserProvider>
+				<NextIntlClientProvider locale={locale} messages={messages}>
+					<ZodTranslationProvider>
+						<div className="flex min-h-screen">
+							{currentUser && <Sidebar />}
+							<main className="flex-1">
+								{currentUser && <LogoutButton />}
+								{children}
+								<Toaster />
+							</main>
+						</div>
+					</ZodTranslationProvider>
+				</NextIntlClientProvider>
+			</UserProvider>
+		</HydrationBoundary>
+	);
+}
