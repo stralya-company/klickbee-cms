@@ -117,7 +117,7 @@ export default function LoginForm() {
 					}
 					type="submit"
 				>
-					{loginForm.formState.isSubmitted
+					{loginForm.formState.isSubmitting
 						? t("LoggingIn")
 						: t("LoginButton")}
 				</Button>
