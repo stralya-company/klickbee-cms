@@ -24,7 +24,8 @@ export async function isAuthenticatedGuard(req: NextRequest) {
 		}
 
 		return null;
-	} catch {
+	} catch (error) {
+		console.error("Error in isAuthenticatedGuard:", error);
 		return NextResponse.json(
 			{ error: "Authentication failed" },
 			{ status: 401 },
