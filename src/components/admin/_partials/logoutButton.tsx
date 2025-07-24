@@ -22,7 +22,7 @@ export default function LogoutButton() {
 	}
 
 	return (
-		<Button className="mb-4" onClick={handleLogout} variant="ghost">
+		<Button className="w-full" onClick={handleLogout} variant="ghost">
 			{t("Logout")}
 		</Button>
 	);
