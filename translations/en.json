@@ -70,7 +70,7 @@
 	},
 	"Login": {
 		"AdminLogin": "Admin Login",
-		"ConnectionError": "Connection error.",
+		"ConnectionError": "Bad credentials.",
 		"ConnectionFailed": "Connection failed. Please try again.",
 		"Email": "Email",
 		"LoggingIn": "Logging in...",
@@ -95,7 +95,8 @@
 		"NewPasswordPlaceholder": "Enter your new password",
 		"ResetButton": "Reset Password",
 		"ResetPassword": "Reset Password",
-		"Resetting": "Resetting..."
+		"Resetting": "Resetting...",
+		"SuccessMessage": "Your password has been reset successfully."
 	},
 	"ResetPasswordRequest": {
 		"EmailLabel": "Email",
@@ -103,7 +104,8 @@
 		"ErrorMessage": "An error occurred while sending the reset link.",
 		"ResetPasswordRequest": "Password Reset Request",
 		"Sending": "Sending...",
-		"SendResetLink": "Send reset link"
+		"SendResetLink": "Send reset link",
+		"SuccessMessage": "A password reset link has been sent to your email address."
 	},
 	"SpacingEditor": {
 		"AddGap": "Add gap",

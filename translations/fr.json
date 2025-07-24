@@ -70,7 +70,7 @@
 	},
 	"Login": {
 		"AdminLogin": "Connexion admin",
-		"ConnectionError": "Erreur lors de la connexion.",
+		"ConnectionError": "Identifiants incorrects.",
 		"ConnectionFailed": "Échec de la connexion. Veuillez réessayer.",
 		"Email": "Email",
 		"LoggingIn": "Connexion...",
@@ -95,7 +95,8 @@
 		"NewPasswordPlaceholder": "Entrez votre nouveau mot de passe",
 		"ResetButton": "Réinitialiser le mot de passe",
 		"ResetPassword": "Réinitialiser le mot de passe",
-		"Resetting": "Réinitialisation en cours..."
+		"Resetting": "Réinitialisation en cours...",
+		"SuccessMessage": "Votre mot de passe a été réinitialisé avec succès."
 	},
 	"ResetPasswordRequest": {
 		"EmailLabel": "Email",
@@ -103,7 +104,8 @@
 		"ErrorMessage": "Une erreur est survenue lors de l'envoi du lien de réinitialisation.",
 		"ResetPasswordRequest": "Demande de réinitialisation du mot de passe",
 		"Sending": "Envoi en cours...",
-		"SendResetLink": "Envoyer le lien de réinitialisation"
+		"SendResetLink": "Envoyer le lien de réinitialisation",
+		"SuccessMessage": "Un lien de réinitialisation a été envoyé à votre adresse email."
 	},
 	"SpacingEditor": {
 		"AddGap": "Ajouter un gap",
