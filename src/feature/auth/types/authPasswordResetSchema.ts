@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const userPasswordResetSchema = z
+export const authPasswordResetSchema = z
 	.object({
 		confirmNewPassword: z.string().min(8),
 		newPassword: z.string().min(8),
@@ -11,5 +11,5 @@ export const userPasswordResetSchema = z
 	});
 
 export type UserPasswordResetFormValues = z.infer<
-	typeof userPasswordResetSchema
+	typeof authPasswordResetSchema
 >;

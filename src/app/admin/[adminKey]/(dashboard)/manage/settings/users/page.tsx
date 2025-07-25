@@ -5,7 +5,7 @@ import ActionButton from "@/components/admin/settings/users/actionButton";
 import Pagination from "@/components/admin/settings/users/pagination";
 import SearchBar from "@/components/admin/settings/users/searchBar";
 import UsersTable from "@/components/admin/settings/users/usersTable";
-import { allUsersOptions } from "@/lib/allUsersOptions";
+import { allUsersOptions } from "@/feature/user/options/allUsersOptions";
 import { getQueryClient } from "@/lib/getQueryClient";
 
 export default function Page() {

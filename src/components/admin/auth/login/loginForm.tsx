@@ -17,11 +17,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import { authClient } from "@/feature/auth/client/authClient";
 import {
+	authLoginSchema,
 	UserLoginFormValues,
-	userLoginSchema,
-} from "@/feature/auth/types/userLoginSchema";
-import { authClient } from "@/lib/authClient";
+} from "@/feature/auth/types/authLoginSchema";
 
 export default function LoginForm() {
 	const { adminKey } = useParams<{ adminKey: string }>();
@@ -39,7 +39,7 @@ export default function LoginForm() {
 			email: "",
 			password: "",
 		},
-		resolver: zodResolver(userLoginSchema),
+		resolver: zodResolver(authLoginSchema),
 	});
 
 	async function onSubmit(loginFormValues: UserLoginFormValues) {

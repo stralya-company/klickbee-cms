@@ -1,4 +1,4 @@
-import { getSetting } from "@/lib/settings";
+import { getSetting } from "@/feature/settings/lib/settings";
 
 interface ApiTranslations {
 	API: {
@@ -15,7 +15,7 @@ export async function getApiTranslation(
 	try {
 		const locale = (await getSetting("system_lang")) || "en";
 		const translations: ApiTranslations = await import(
-			`../../translations/${locale}.json`
+			`./../languages/${locale}.json`
 		);
 
 		return (
@@ -26,7 +26,7 @@ export async function getApiTranslation(
 	} catch {
 		// Fallback to English if translation fails
 		const fallbackTranslations: ApiTranslations = await import(
-			`../../translations/en.json`
+			`./../languages/en.json`
 		);
 		return (
 			fallbackTranslations.API[section][

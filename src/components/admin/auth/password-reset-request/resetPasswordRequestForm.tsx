@@ -15,11 +15,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import { authClient } from "@/feature/auth/client/authClient";
 import {
+	authPasswordResetRequestSchema,
 	UserPasswordResetRequestFormValues,
-	userPasswordResetRequestSchema,
-} from "@/feature/auth/types/userPasswordResetRequestSchema";
-import { authClient } from "@/lib/authClient";
+} from "@/feature/auth/types/authPasswordResetRequestSchema";
 
 export default function ResetPasswordRequestForm() {
 	const t = useTranslations("ResetPasswordRequest");
@@ -31,7 +31,7 @@ export default function ResetPasswordRequestForm() {
 			defaultValues: {
 				email: "",
 			},
-			resolver: zodResolver(userPasswordResetRequestSchema),
+			resolver: zodResolver(authPasswordResetRequestSchema),
 		});
 
 	async function onSubmit(

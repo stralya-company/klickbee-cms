@@ -2,9 +2,9 @@ import bcrypt from "bcrypt";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { admin } from "better-auth/plugins";
-import { getApiTranslation } from "@/i18n/apiTranslation";
+import { sendEmail } from "@/feature/send-email/lib/sendEmail";
+import { getApiTranslation } from "@/feature/translations/api/apiTranslation";
 import prisma from "@/lib/prisma";
-import { sendEmail } from "@/lib/sendEmail";
 
 export const auth = betterAuth({
 	advanced: {

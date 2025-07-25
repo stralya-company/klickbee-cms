@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getAllUsers } from "@/lib/users";
+import { getAllUsers } from "@/feature/user/lib/users";
 
 export const allUsersOptions = queryOptions({
 	queryFn: async () => await getAllUsers(),
