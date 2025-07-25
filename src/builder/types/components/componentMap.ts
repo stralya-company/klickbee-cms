@@ -69,16 +69,16 @@ const createLayoutComponent = (
 	additionalStyleProps: Partial<ComponentStyleProps> = {},
 ): ComponentMapEntry => ({
 	category: ComponentCategory.LAYOUT,
-	description,
 	contentProps: {
 		...additionalContentProps,
 	},
+	description,
 	styleProps: {
-		layout: {},
-		sizeAndSpacing: {},
 		background: {},
 		bordersAndCorners: {},
 		effects: {},
+		layout: {},
+		sizeAndSpacing: {},
 		...additionalStyleProps,
 	},
 });
@@ -92,12 +92,12 @@ const createTypographyComponent = (
 	additionalStyleProps: Partial<ComponentStyleProps> = {},
 ): ComponentMapEntry => ({
 	category: ComponentCategory.TYPOGRAPHY,
-	description,
 	contentProps,
+	description,
 	styleProps: {
+		effects: {},
 		sizeAndSpacing: {},
 		typography: {},
-		effects: {},
 		...additionalStyleProps,
 	},
 });
@@ -111,14 +111,14 @@ const createFormElementComponent = (
 	additionalStyleProps: Partial<ComponentStyleProps> = {},
 ): ComponentMapEntry => ({
 	category: ComponentCategory.FORM_ELEMENTS,
-	description,
 	contentProps,
+	description,
 	styleProps: {
-		sizeAndSpacing: {},
-		typography: {},
 		background: {},
 		bordersAndCorners: {},
 		effects: {},
+		sizeAndSpacing: {},
+		typography: {},
 		...additionalStyleProps,
 	},
 });
@@ -128,46 +128,128 @@ const createFormElementComponent = (
  * Organized by component type for better maintainability
  */
 export const componentMap: Record<ComponentName, ComponentMapEntry> = {
-	// ===== LAYOUT COMPONENTS =====
-	Section: createLayoutComponent(
-		"A top-level container for organizing content sections",
+	// ===== INTERACTIVE COMPONENTS =====
+	Button: {
+		category: ComponentCategory.INTERACTIVE,
+		contentProps: { href: "", icon: "", text: "" },
+		description:
+			"A clickable button that can trigger an action or navigation",
+		styleProps: {
+			background: {},
+			bordersAndCorners: {},
+			effects: {},
+			sizeAndSpacing: {},
+			typography: {},
+		},
+	},
+
+	Checkbox: createFormElementComponent(
+		"A checkbox input with a label",
+		{ defaultChecked: false, label: "" },
+		{ layout: {} },
 	),
 
 	Container: createLayoutComponent(
 		"A general-purpose container for grouping related elements",
 	),
 
+	Divider: {
+		category: ComponentCategory.LAYOUT,
+		contentProps: {},
+		description: "A horizontal or vertical line that separates content",
+		styleProps: {
+			bordersAndCorners: {},
+			effects: {},
+			sizeAndSpacing: {},
+		},
+	},
+
+	Dropdown: createFormElementComponent(
+		"A dropdown select menu with options",
+		{ defaultText: "", name: "", options: [] },
+	),
+
+	Embed: {
+		category: ComponentCategory.MEDIA,
+		contentProps: { code: "" },
+		description: "An embedded iframe or custom HTML code",
+		styleProps: {
+			layout: {},
+			sizeAndSpacing: {},
+		},
+	},
+
+	FileUpload: createFormElementComponent(
+		"A file upload input with configurable file types and size limits",
+		{ maxFileSize: 0, mimeTypes: [], name: "" },
+	),
+
+	// ===== FORM COMPONENTS =====
+	FormBlock: {
+		category: ComponentCategory.FORM,
+		contentProps: { errorMessage: "", successMessage: "" },
+		description:
+			"A container for form elements with success/error messages",
+		styleProps: {
+			background: {},
+			bordersAndCorners: {},
+			effects: {},
+			layout: {},
+			sizeAndSpacing: {},
+		},
+	},
+
 	Grid: createLayoutComponent(
 		"A container that arranges child elements in a grid layout",
 	),
 
-	Spacer: {
-		category: ComponentCategory.LAYOUT,
-		description: "Creates vertical or horizontal space between elements",
-		contentProps: {},
-		styleProps: {
-			sizeAndSpacing: {},
-		},
-	},
-
-	Divider: {
-		category: ComponentCategory.LAYOUT,
-		description: "A horizontal or vertical line that separates content",
-		contentProps: {},
-		styleProps: {
-			sizeAndSpacing: {},
-			bordersAndCorners: {},
-			effects: {},
-		},
-	},
-
 	// ===== TYPOGRAPHY COMPONENTS =====
 	Heading: createTypographyComponent(
 		"A heading element (H1-H6) for titles and subtitles",
-		{ text: "", level: 1 },
+		{ level: 1, text: "" },
+	),
+
+	// ===== MEDIA COMPONENTS =====
+	Image: {
+		category: ComponentCategory.MEDIA,
+		contentProps: { alt: "", src: "" },
+		description: "An image element with alt text for accessibility",
+		styleProps: {
+			bordersAndCorners: {},
+			effects: {},
+			layout: {},
+			sizeAndSpacing: {},
+		},
+	},
+
+	Link: {
+		category: ComponentCategory.TYPOGRAPHY,
+		contentProps: { href: "", openInNewTab: false, text: "" },
+		description: "A text link to another page or resource",
+		styleProps: {
+			background: {},
+			bordersAndCorners: {},
+			effects: {},
+			typography: {},
+		},
+	},
+
+	List: createTypographyComponent(
+		"A bulleted or numbered list of items",
+		{ items: [], listType: "bulleted" },
+		{
+			background: {},
+			bordersAndCorners: {},
+		},
 	),
 
 	Paragraph: createTypographyComponent("A paragraph of text", { text: "" }),
+
+	RadioGroup: createFormElementComponent(
+		"A group of radio button options",
+		{ options: [], question: "" },
+		{ layout: {} },
+	),
 
 	RichText: createTypographyComponent(
 		"Formatted text with rich styling options",
@@ -177,92 +259,29 @@ export const componentMap: Record<ComponentName, ComponentMapEntry> = {
 			bordersAndCorners: {},
 		},
 	),
-
-	List: createTypographyComponent(
-		"A bulleted or numbered list of items",
-		{ listType: "bulleted", items: [] },
-		{
-			background: {},
-			bordersAndCorners: {},
-		},
+	// ===== LAYOUT COMPONENTS =====
+	Section: createLayoutComponent(
+		"A top-level container for organizing content sections",
 	),
 
-	Link: {
-		category: ComponentCategory.TYPOGRAPHY,
-		description: "A text link to another page or resource",
-		contentProps: { text: "", href: "", openInNewTab: false },
+	Spacer: {
+		category: ComponentCategory.LAYOUT,
+		contentProps: {},
+		description: "Creates vertical or horizontal space between elements",
 		styleProps: {
-			typography: {},
-			background: {},
-			bordersAndCorners: {},
-			effects: {},
-		},
-	},
-
-	// ===== INTERACTIVE COMPONENTS =====
-	Button: {
-		category: ComponentCategory.INTERACTIVE,
-		description:
-			"A clickable button that can trigger an action or navigation",
-		contentProps: { text: "", href: "", icon: "" },
-		styleProps: {
-			sizeAndSpacing: {},
-			typography: {},
-			background: {},
-			bordersAndCorners: {},
-			effects: {},
-		},
-	},
-
-	// ===== MEDIA COMPONENTS =====
-	Image: {
-		category: ComponentCategory.MEDIA,
-		description: "An image element with alt text for accessibility",
-		contentProps: { src: "", alt: "" },
-		styleProps: {
-			layout: {},
-			sizeAndSpacing: {},
-			bordersAndCorners: {},
-			effects: {},
-		},
-	},
-
-	Video: {
-		category: ComponentCategory.MEDIA,
-		description: "A video player with configurable controls",
-		contentProps: { src: "", autoplay: false, controls: false },
-		styleProps: {
-			layout: {},
-			sizeAndSpacing: {},
-			bordersAndCorners: {},
-			effects: {},
-		},
-	},
-
-	Embed: {
-		category: ComponentCategory.MEDIA,
-		description: "An embedded iframe or custom HTML code",
-		contentProps: { code: "" },
-		styleProps: {
-			layout: {},
 			sizeAndSpacing: {},
 		},
 	},
 
-	// ===== FORM COMPONENTS =====
-	FormBlock: {
-		category: ComponentCategory.FORM,
-		description:
-			"A container for form elements with success/error messages",
-		contentProps: { successMessage: "", errorMessage: "" },
-		styleProps: {
-			layout: {},
-			sizeAndSpacing: {},
-			background: {},
-			bordersAndCorners: {},
-			effects: {},
-		},
-	},
+	SubmitButton: createFormElementComponent("A submit button for forms", {
+		text: "",
+	}),
+
+	TextArea: createFormElementComponent("A multi-line text input field", {
+		name: "",
+		placeholder: "",
+		required: false,
+	}),
 
 	// ===== FORM ELEMENT COMPONENTS =====
 	TextField: createFormElementComponent("A single-line text input field", {
@@ -272,37 +291,17 @@ export const componentMap: Record<ComponentName, ComponentMapEntry> = {
 		type: "text",
 	}),
 
-	TextArea: createFormElementComponent("A multi-line text input field", {
-		name: "",
-		placeholder: "",
-		required: false,
-	}),
-
-	Checkbox: createFormElementComponent(
-		"A checkbox input with a label",
-		{ label: "", defaultChecked: false },
-		{ layout: {} },
-	),
-
-	RadioGroup: createFormElementComponent(
-		"A group of radio button options",
-		{ question: "", options: [] },
-		{ layout: {} },
-	),
-
-	Dropdown: createFormElementComponent(
-		"A dropdown select menu with options",
-		{ name: "", options: [], defaultText: "" },
-	),
-
-	FileUpload: createFormElementComponent(
-		"A file upload input with configurable file types and size limits",
-		{ name: "", mimeTypes: [], maxFileSize: 0 },
-	),
-
-	SubmitButton: createFormElementComponent("A submit button for forms", {
-		text: "",
-	}),
+	Video: {
+		category: ComponentCategory.MEDIA,
+		contentProps: { autoplay: false, controls: false, src: "" },
+		description: "A video player with configurable controls",
+		styleProps: {
+			bordersAndCorners: {},
+			effects: {},
+			layout: {},
+			sizeAndSpacing: {},
+		},
+	},
 };
 
 /**

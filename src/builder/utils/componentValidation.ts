@@ -63,23 +63,23 @@ export const validateComponentProps = (
 	// If both validations succeed, return success with the validated data
 	if (contentResult.success && styleResult.success) {
 		return {
-			success: true,
 			data: {
 				contentProps: contentResult.data,
 				styleProps: styleResult.data,
 			},
+			success: true,
 		};
 	}
 
 	// If either validation fails, return error with the combined errors
 	return {
-		success: false,
 		error: {
 			contentProps: contentResult.success
 				? undefined
 				: contentResult.error,
 			styleProps: styleResult.success ? undefined : styleResult.error,
 		},
+		success: false,
 	};
 };
 

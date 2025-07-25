@@ -15,11 +15,41 @@ export type FieldType = z.infer<typeof fieldTypeSchema>;
 
 // Component content props schema
 export const componentContentPropsSchema = z.object({
-	// General text content (buttons, links, labels, etc.)
-	text: z.string().optional(),
+	// Alternative text for accessibility
+	alt: z.string().optional(),
+
+	// Autoplay for video
+	autoplay: z.boolean().optional(),
+
+	// Custom embed HTML or iframe
+	code: z.string().optional(),
 
 	// Formatted text (rich text blocks)
 	content: z.string().optional(),
+
+	// Video controls
+	controls: z.boolean().optional(),
+
+	// Default checked for checkbox
+	defaultChecked: z.boolean().optional(),
+
+	// Placeholder option for dropdown
+	defaultText: z.string().optional(),
+
+	// Text after failed submission
+	errorMessage: z.string().optional(),
+
+	// Link or action URL
+	href: z.string().url("Invalid URL format").optional(),
+
+	// Icon reference
+	icon: z.string().optional(),
+
+	// Array of text items
+	items: z.array(z.string()).optional(),
+
+	// Label for the input
+	label: z.string().optional(),
 
 	// Heading level (H1–H6)
 	level: z
@@ -33,68 +63,8 @@ export const componentContentPropsSchema = z.object({
 		])
 		.optional(),
 
-	// Link or action URL
-	href: z.string().url("Invalid URL format").optional(),
-
-	// Open link in new tab
-	openInNewTab: z.boolean().optional(),
-
-	// Icon reference
-	icon: z.string().optional(),
-
-	// Media source (image/video)
-	src: z.string().optional(),
-
-	// Alternative text for accessibility
-	alt: z.string().optional(),
-
-	// Autoplay for video
-	autoplay: z.boolean().optional(),
-
-	// Video controls
-	controls: z.boolean().optional(),
-
-	// Custom embed HTML or iframe
-	code: z.string().optional(),
-
 	// List type (bulleted or numbered)
 	listType: listTypeSchema.optional(),
-
-	// Array of text items
-	items: z.array(z.string()).optional(),
-
-	// Text after successful form submission
-	successMessage: z.string().optional(),
-
-	// Text after failed submission
-	errorMessage: z.string().optional(),
-
-	// Field identifier
-	name: z.string().optional(),
-
-	// Input placeholder
-	placeholder: z.string().optional(),
-
-	// Required field
-	required: z.boolean().optional(),
-
-	// Field type (text, email, password)
-	type: fieldTypeSchema.optional(),
-
-	// Default checked for checkbox
-	defaultChecked: z.boolean().optional(),
-
-	// Label for radio group
-	question: z.string().optional(),
-
-	// List of selectable options
-	options: z.array(z.string()).optional(),
-
-	// Placeholder option for dropdown
-	defaultText: z.string().optional(),
-
-	// Array of mime types (e.g., ["image/png", "image/jpeg"])
-	mimeTypes: z.array(z.string()).optional(),
 
 	// Numeric size limit (MB)
 	maxFileSize: z
@@ -102,8 +72,37 @@ export const componentContentPropsSchema = z.object({
 		.nonnegative("File size must be a positive number")
 		.optional(),
 
-	// Label for the input
-	label: z.string().optional(),
+	// Array of mime types (e.g., ["image/png", "image/jpeg"])
+	mimeTypes: z.array(z.string()).optional(),
+
+	// Field identifier
+	name: z.string().optional(),
+
+	// Open link in new tab
+	openInNewTab: z.boolean().optional(),
+
+	// List of selectable options
+	options: z.array(z.string()).optional(),
+
+	// Input placeholder
+	placeholder: z.string().optional(),
+
+	// Label for radio group
+	question: z.string().optional(),
+
+	// Required field
+	required: z.boolean().optional(),
+
+	// Media source (image/video)
+	src: z.string().optional(),
+
+	// Text after successful form submission
+	successMessage: z.string().optional(),
+	// General text content (buttons, links, labels, etc.)
+	text: z.string().optional(),
+
+	// Field type (text, email, password)
+	type: fieldTypeSchema.optional(),
 });
 
 export type ComponentContentProps = z.infer<typeof componentContentPropsSchema>;

@@ -8,9 +8,9 @@ export function useSendEmail() {
 			text: string;
 		}) => {
 			const res = await fetch("/api/admin/send-email", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(data),
+				headers: { "Content-Type": "application/json" },
+				method: "POST",
 			});
 			if (!res.ok) throw new Error("Error sending email");
 			return res.json();

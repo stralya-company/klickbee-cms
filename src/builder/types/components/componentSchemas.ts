@@ -1,10 +1,10 @@
 import { z } from "zod";
+import {
+	ComponentName,
+	componentMap,
+} from "@/builder/types/components/componentMap";
 import { componentContentPropsSchema } from "@/builder/types/components/properties/componentContentPropsSchema";
 import { componentStylePropsSchema } from "@/builder/types/components/properties/componentStylePropsSchema";
-import {
-	componentMap,
-	ComponentName,
-} from "@/builder/types/components/componentMap";
 
 /**
  * Component-specific Zod schemas
@@ -90,26 +90,26 @@ export const componentSchemas: Record<
 	ComponentName,
 	ReturnType<typeof createComponentSchema>
 > = {
-	Section: sectionSchema,
-	Container: containerSchema,
-	Grid: gridSchema,
-	Spacer: spacerSchema,
-	Divider: dividerSchema,
-	Heading: headingSchema,
-	Paragraph: paragraphSchema,
-	RichText: richTextSchema,
-	List: listSchema,
-	Link: linkSchema,
 	Button: buttonSchema,
-	Image: imageSchema,
-	Video: videoSchema,
-	Embed: embedSchema,
-	FormBlock: formBlockSchema,
-	TextField: textFieldSchema,
-	TextArea: textAreaSchema,
 	Checkbox: checkboxSchema,
-	RadioGroup: radioGroupSchema,
+	Container: containerSchema,
+	Divider: dividerSchema,
 	Dropdown: dropdownSchema,
+	Embed: embedSchema,
 	FileUpload: fileUploadSchema,
+	FormBlock: formBlockSchema,
+	Grid: gridSchema,
+	Heading: headingSchema,
+	Image: imageSchema,
+	Link: linkSchema,
+	List: listSchema,
+	Paragraph: paragraphSchema,
+	RadioGroup: radioGroupSchema,
+	RichText: richTextSchema,
+	Section: sectionSchema,
+	Spacer: spacerSchema,
 	SubmitButton: submitButtonSchema,
+	TextArea: textAreaSchema,
+	TextField: textFieldSchema,
+	Video: videoSchema,
 };

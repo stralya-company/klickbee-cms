@@ -21,41 +21,41 @@ export type SpacingSettings = {
 };
 
 export const sectionPaddingSchema = z.object({
-	top: fluidSizeSchema,
-	right: fluidSizeSchema,
-	left: fluidSizeSchema,
 	bottom: fluidSizeSchema,
 	key: z.string().min(1, "Key is required"),
+	left: fluidSizeSchema,
+	right: fluidSizeSchema,
+	top: fluidSizeSchema,
 });
 
 export const gapSchema = z.object({
-	row: fluidSizeSchema,
 	column: fluidSizeSchema,
 	key: z.string().min(1, "Key is required"),
+	row: fluidSizeSchema,
 });
 
 export const spacingSettingsSchema = z.object({
-	sectionPadding: sectionPaddingSchema.array(),
 	gap: gapSchema.array(),
 	maxWidth: z.number(),
+	sectionPadding: sectionPaddingSchema.array(),
 });
 
 export const defaultSpacingSettings: SpacingSettings = {
-	sectionPadding: [
-		{
-			top: { min: 1, max: 2, sizeUnit: "rem" },
-			right: { min: 1, max: 2, sizeUnit: "rem" },
-			left: { min: 1, max: 2, sizeUnit: "rem" },
-			bottom: { min: 1, max: 2, sizeUnit: "rem" },
-			key: "default-padding",
-		},
-	],
 	gap: [
 		{
-			row: { min: 0.5, max: 1, sizeUnit: "rem" },
-			column: { min: 0.5, max: 1, sizeUnit: "rem" },
+			column: { max: 1, min: 0.5, sizeUnit: "rem" },
 			key: "default-gap",
+			row: { max: 1, min: 0.5, sizeUnit: "rem" },
 		},
 	],
 	maxWidth: 1440,
+	sectionPadding: [
+		{
+			bottom: { max: 2, min: 1, sizeUnit: "rem" },
+			key: "default-padding",
+			left: { max: 2, min: 1, sizeUnit: "rem" },
+			right: { max: 2, min: 1, sizeUnit: "rem" },
+			top: { max: 2, min: 1, sizeUnit: "rem" },
+		},
+	],
 };

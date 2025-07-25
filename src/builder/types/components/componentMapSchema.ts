@@ -55,8 +55,8 @@ export type ComponentName = z.infer<typeof componentNameSchema>;
 export const componentMapEntrySchema = z.object({
 	category: componentCategorySchema,
 	contentProps: componentContentPropsSchema.partial(),
-	styleProps: componentStylePropsSchema.partial(),
 	description: z.string().optional(),
+	styleProps: componentStylePropsSchema.partial(),
 });
 export type ComponentMapEntry = z.infer<typeof componentMapEntrySchema>;
 

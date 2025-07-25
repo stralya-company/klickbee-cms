@@ -1,9 +1,9 @@
+import { ColorSettings } from "@/builder/types/settings/ColorSettings";
+import { SizeUnit } from "@/builder/types/settings/FluidSize";
 import {
 	SectionGap,
 	SectionPadding,
 } from "@/builder/types/settings/SpacingSettings";
-import { SizeUnit } from "@/builder/types/settings/FluidSize";
-import { ColorSettings } from "@/builder/types/settings/ColorSettings";
 import { TypographySettings } from "@/builder/types/settings/TypographySettings";
 
 export type DisplayType =

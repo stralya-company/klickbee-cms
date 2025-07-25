@@ -1,14 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+import { authClient } from "@/lib/authClient";
 
 export function useCurrentUser() {
 	return useQuery({
-		queryKey: ["current_user"],
 		queryFn: async () => {
-			const res = await fetch("/api/auth/me");
-			const data = await res.json();
-			if (!res.ok) throw new Error(data.error || "Error retrieving user");
-			return data.user;
+			const { data: session } = await authClient.getSession();
+			return session?.user || null;
 		},
+		queryKey: ["current_user"],
 		retry: false,
 	});
 }

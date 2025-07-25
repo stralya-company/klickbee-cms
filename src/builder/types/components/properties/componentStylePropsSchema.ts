@@ -1,11 +1,11 @@
 import { z } from "zod";
 import { colorSchema } from "@/builder/types/settings/ColorSettings";
+import { sizeUnits } from "@/builder/types/settings/FluidSize";
 import {
 	gapSchema as sectionGapSchema,
 	sectionPaddingSchema,
 } from "@/builder/types/settings/SpacingSettings";
 import { typographySettingsSchema } from "@/builder/types/settings/TypographySettings";
-import { sizeUnits } from "@/builder/types/settings/FluidSize";
 
 /**
  * Zod schemas for component style properties
@@ -165,33 +165,33 @@ export type SpacingValue = z.infer<typeof spacingValueSchema>;
 // Layout style schema
 export const layoutStyleSchema = z
 	.object({
+		bottom: spacingValueSchema.optional(),
 		display: displayTypeSchema.optional(),
 		flex: z
 			.object({
-				direction: flexDirectionSchema.optional(),
-				justifyContent: justifyContentSchema.optional(),
 				alignItems: alignItemsSchema.optional(),
-				wrap: flexWrapSchema.optional(),
-				grow: z.number().optional(),
-				shrink: z.number().optional(),
+				direction: flexDirectionSchema.optional(),
 				gap: sectionGapSchema.optional(),
+				grow: z.number().optional(),
+				justifyContent: justifyContentSchema.optional(),
+				shrink: z.number().optional(),
+				wrap: flexWrapSchema.optional(),
 			})
 			.optional(),
 		grid: z
 			.object({
 				columns: gridAutoSchema.optional(),
-				rows: gridAutoSchema.optional(),
 				gap: sectionGapSchema.optional(),
+				rows: gridAutoSchema.optional(),
 			})
 			.optional(),
-		position: positionTypeSchema.optional(),
-		top: spacingValueSchema.optional(),
-		right: spacingValueSchema.optional(),
-		bottom: spacingValueSchema.optional(),
 		left: spacingValueSchema.optional(),
-		zIndex: z.number().optional(),
-		overflow: overflowTypeSchema.optional(),
 		objectFit: objectFitTypeSchema.optional(),
+		overflow: overflowTypeSchema.optional(),
+		position: positionTypeSchema.optional(),
+		right: spacingValueSchema.optional(),
+		top: spacingValueSchema.optional(),
+		zIndex: z.number().optional(),
 	})
 	.optional();
 export type LayoutStyle = z.infer<typeof layoutStyleSchema>;
@@ -199,14 +199,14 @@ export type LayoutStyle = z.infer<typeof layoutStyleSchema>;
 // Size and spacing style schema
 export const sizeSpacingStyleSchema = z
 	.object({
-		width: spacingValueSchema.optional(),
 		height: spacingValueSchema.optional(),
-		minWidth: spacingValueSchema.optional(),
+		margin: sectionPaddingSchema.optional(),
+		maxHeight: spacingValueSchema.optional(),
 		maxWidth: spacingValueSchema.optional(),
 		minHeight: spacingValueSchema.optional(),
-		maxHeight: spacingValueSchema.optional(),
+		minWidth: spacingValueSchema.optional(),
 		padding: sectionPaddingSchema.optional(),
-		margin: sectionPaddingSchema.optional(),
+		width: spacingValueSchema.optional(),
 	})
 	.optional();
 export type SizeSpacingStyle = z.infer<typeof sizeSpacingStyleSchema>;
@@ -214,24 +214,24 @@ export type SizeSpacingStyle = z.infer<typeof sizeSpacingStyleSchema>;
 // Typography style schema
 export const typographyStyleSchema = z
 	.object({
+		color: colorSchema.optional(),
 		font: typographySettingsSchema.optional(),
 		fontFamily: z.string().optional(),
 		fontSize: z.number().optional(),
+		fontStyle: z.string().optional(),
 		fontWeight: z.number().optional(),
+		letterSpacing: z.number().optional(),
 		lineHeight: z
 			.union([
 				spacingValueSchema,
 				z.enum(["normal", "inherit", "initial", "unset"]),
 			])
 			.optional(),
-		fontStyle: z.string().optional(),
-		letterSpacing: z.number().optional(),
-		color: colorSchema.optional(),
-		textAlign: textAlignSchema.optional(),
-		textTransform: textTransformSchema.optional(),
-		textDecoration: textDecorationSchema.optional(),
-		whiteSpace: whiteSpaceSchema.optional(),
 		listStyle: listStyleSchema.optional(),
+		textAlign: textAlignSchema.optional(),
+		textDecoration: textDecorationSchema.optional(),
+		textTransform: textTransformSchema.optional(),
+		whiteSpace: whiteSpaceSchema.optional(),
 	})
 	.optional();
 export type TypographyStyle = z.infer<typeof typographyStyleSchema>;
@@ -242,7 +242,6 @@ export const backgroundStyleSchema = z
 		color: colorSchema.optional(),
 		gradient: z
 			.object({
-				type: gradientTypeSchema,
 				angle: z
 					.object({
 						number: z.number(),
@@ -250,12 +249,12 @@ export const backgroundStyleSchema = z
 					})
 					.optional(),
 				colors: z.tuple([colorSchema, colorSchema]),
+				type: gradientTypeSchema,
 			})
 			.optional(),
 		image: z
 			.object({
-				src: z.string(),
-				size: imageSizeSchema.optional(),
+				attachment: backgroundAttachmentSchema.optional(),
 				position: z
 					.union([
 						imagePositionSchema,
@@ -266,7 +265,8 @@ export const backgroundStyleSchema = z
 					])
 					.optional(),
 				repeat: imageRepeatSchema.optional(),
-				attachment: backgroundAttachmentSchema.optional(),
+				size: imageSizeSchema.optional(),
+				src: z.string(),
 			})
 			.optional(),
 	})
@@ -276,10 +276,10 @@ export type BackgroundStyle = z.infer<typeof backgroundStyleSchema>;
 // Border and corner style schema
 export const borderCornerStyleSchema = z
 	.object({
-		borderWidth: z.record(sideSchema, spacingValueSchema).optional(),
 		borderColor: colorSchema.optional(),
-		borderStyle: borderStyleSchema.optional(),
 		borderRadius: z.record(sideSchema, spacingValueSchema).optional(),
+		borderStyle: borderStyleSchema.optional(),
+		borderWidth: z.record(sideSchema, spacingValueSchema).optional(),
 		outlineColor: colorSchema.optional(),
 		outlineWidth: spacingValueSchema.optional(),
 	})
@@ -289,46 +289,37 @@ export type BorderCornerStyle = z.infer<typeof borderCornerStyleSchema>;
 // Effects style schema
 export const effectsStyleSchema = z
 	.object({
+		animation: z
+			.object({
+				duration: z.object({
+					number: z.number(),
+					unit: z.enum(["ms", "s"]),
+				}),
+				type: animationTypeSchema,
+			})
+			.optional(),
+		backdropFilter: z.array(backdropFilterSchema).optional(),
 		boxShadow: z
 			.object({
-				color: colorSchema,
-				x: z.object({
-					number: z.number(),
-					unit: z.enum(sizeUnits),
-				}),
-				y: z.object({
-					number: z.number(),
-					unit: z.enum(sizeUnits),
-				}),
 				blur: z.object({
 					number: z.number(),
 					unit: z.enum(sizeUnits),
 				}),
+				color: colorSchema,
 				spread: z.object({
 					number: z.number(),
 					unit: z.enum(sizeUnits),
 				}),
-			})
-			.optional(),
-		textShadow: z
-			.object({
-				color: colorSchema,
 				x: z.object({
 					number: z.number(),
-					unit: z.literal("px"),
+					unit: z.enum(sizeUnits),
 				}),
 				y: z.object({
-					number: z.number(),
-					unit: z.literal("px"),
-				}),
-				blur: z.object({
 					number: z.number(),
 					unit: z.enum(sizeUnits),
 				}),
 			})
 			.optional(),
-		opacity: z.number().min(0).max(1).optional(),
-		backdropFilter: z.array(backdropFilterSchema).optional(),
 		hover: z
 			.object({
 				backgroundColor: colorSchema.optional(),
@@ -345,12 +336,21 @@ export const effectsStyleSchema = z
 					.optional(),
 			})
 			.optional(),
-		animation: z
+		opacity: z.number().min(0).max(1).optional(),
+		textShadow: z
 			.object({
-				type: animationTypeSchema,
-				duration: z.object({
+				blur: z.object({
 					number: z.number(),
-					unit: z.enum(["ms", "s"]),
+					unit: z.enum(sizeUnits),
+				}),
+				color: colorSchema,
+				x: z.object({
+					number: z.number(),
+					unit: z.literal("px"),
+				}),
+				y: z.object({
+					number: z.number(),
+					unit: z.literal("px"),
 				}),
 			})
 			.optional(),
@@ -360,11 +360,11 @@ export type EffectsStyle = z.infer<typeof effectsStyleSchema>;
 
 // Component style props schema
 export const componentStylePropsSchema = z.object({
-	layout: layoutStyleSchema,
-	sizeAndSpacing: sizeSpacingStyleSchema,
-	typography: typographyStyleSchema,
 	background: backgroundStyleSchema,
 	bordersAndCorners: borderCornerStyleSchema,
 	effects: effectsStyleSchema,
+	layout: layoutStyleSchema,
+	sizeAndSpacing: sizeSpacingStyleSchema,
+	typography: typographyStyleSchema,
 });
 export type ComponentStyleProps = z.infer<typeof componentStylePropsSchema>;

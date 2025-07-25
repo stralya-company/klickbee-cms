@@ -1,7 +1,7 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -16,8 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { useSendEmail } from "@/feature/send-email/queries/useSendEmail";
 import {
-	checkConnectionSchema,
 	CheckConnectionSchema,
+	checkConnectionSchema,
 } from "@/feature/settings/types/emailSettingsSchema";
 
 export default function CheckConnectionForm() {
@@ -29,9 +29,9 @@ export default function CheckConnectionForm() {
 	const onCheckConnectionSubmit = async (data: CheckConnectionSchema) => {
 		try {
 			const result = await sendEmail.mutateAsync({
-				to: data.to,
 				subject: data.subject,
 				text: data.text,
+				to: data.to,
 			});
 			toast.success(result.message);
 		} catch (error) {
@@ -44,10 +44,10 @@ export default function CheckConnectionForm() {
 	return (
 		<Form {...checkConnectionForm}>
 			<form
+				className="p-4 w-1/2 space-y-4"
 				onSubmit={checkConnectionForm.handleSubmit(
 					onCheckConnectionSubmit,
 				)}
-				className="p-4 w-1/2 space-y-4"
 			>
 				<FormField
 					control={checkConnectionForm.control}
@@ -58,8 +58,8 @@ export default function CheckConnectionForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="To"
 									className="w-full"
+									placeholder="To"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -75,8 +75,8 @@ export default function CheckConnectionForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="Subject"
 									className="w-full"
+									placeholder="Subject"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -92,15 +92,15 @@ export default function CheckConnectionForm() {
 							<FormControl>
 								<Input
 									{...field}
-									placeholder="Text"
 									className="w-full"
+									placeholder="Text"
 								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" disabled={sendEmail.isPending}>
+				<Button disabled={sendEmail.isPending} type="submit">
 					{sendEmail.isPending ? "Sending..." : "Check connection"}
 				</Button>
 			</form>

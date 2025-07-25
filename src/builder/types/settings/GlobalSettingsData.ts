@@ -1,3 +1,14 @@
+import { z } from "zod";
+import {
+	ColorSettings,
+	colorSchema,
+	defaultColorSettings,
+} from "@/builder/types/settings/ColorSettings";
+import {
+	defaultLogoSettings,
+	LogoSettings,
+	logoSettingsSchema,
+} from "@/builder/types/settings/LogoSettings";
 import {
 	defaultSpacingSettings,
 	SpacingSettings,
@@ -8,17 +19,6 @@ import {
 	FluidTypographySettings,
 	fluidTypographySettingsSchema,
 } from "@/builder/types/settings/TypographySettings";
-import {
-	colorSchema,
-	ColorSettings,
-	defaultColorSettings,
-} from "@/builder/types/settings/ColorSettings";
-import { z } from "zod";
-import {
-	defaultLogoSettings,
-	LogoSettings,
-	logoSettingsSchema,
-} from "@/builder/types/settings/LogoSettings";
 
 export type GlobalSettingsData = {
 	typography: FluidTypographySettings;
@@ -28,15 +28,15 @@ export type GlobalSettingsData = {
 };
 
 export const globalSettingsSchema = z.object({
-	typography: fluidTypographySettingsSchema,
 	colors: colorSchema.array(),
-	spacing: spacingSettingsSchema,
 	logos: logoSettingsSchema.array(),
+	spacing: spacingSettingsSchema,
+	typography: fluidTypographySettingsSchema,
 });
 
 export const defaultGlobalSettings: GlobalSettingsData = {
-	typography: defaultFluidTypographySettings,
 	colors: defaultColorSettings,
-	spacing: defaultSpacingSettings,
 	logos: defaultLogoSettings,
+	spacing: defaultSpacingSettings,
+	typography: defaultFluidTypographySettings,
 };

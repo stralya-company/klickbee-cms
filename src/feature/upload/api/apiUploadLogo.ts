@@ -1,6 +1,6 @@
 import { writeFile } from "fs/promises";
-import { join } from "path";
 import { NextResponse } from "next/server";
+import { join } from "path";
 
 export async function POST(request: Request) {
 	const formData = await request.formData();
@@ -39,8 +39,8 @@ export async function POST(request: Request) {
 	return NextResponse.json(
 		{ url },
 		{
-			status: 200,
 			headers: { "Content-Type": "application/json" },
+			status: 200,
 		},
 	);
 }

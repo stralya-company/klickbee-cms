@@ -12,17 +12,75 @@ datasource db {
 }
 
 // === Auth Models ===
+
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  role      Role     @relation(fields: [roleId], references: [id])
-  roleId    String
-  createdAt DateTime @default(now())
+  id            String    @id @default(uuid())
+  email         String    @unique
+  role          Role      @relation(fields: [roleId], references: [id])
+  roleId        String
+  name          String
+  emailVerified Boolean
+  image         String?
+  updatedAt     DateTime
+  sessions      Session[]
+  accounts      Account[]
+  createdAt     DateTime  @default(now())
 
   // Relations
-  UserPasswordReset UserPasswordReset?
-  UserSettings      UserSettings[]
+  UserSettings UserSettings[]
+
+  banned     Boolean?
+  banReason  String?
+  banExpires DateTime?
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  impersonatedBy String?
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
 }
 
 model Role {
@@ -39,18 +97,6 @@ model Permission {
   role   Role   @relation(fields: [roleId], references: [id])
 
   @@unique([roleId, action])
-}
-
-model UserPasswordReset {
-  id        String   @id @default(uuid())
-  userId    String   @unique
-  token     String   @unique @default(uuid()) @db.VarChar(255)
-  createdAt DateTime @default(now())
-  expiresAt DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
 }
 
 // === Settings Models ===

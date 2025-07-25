@@ -1,38 +1,37 @@
-import { describe, it, expect } from "vitest";
-import {
-	validateComponentContentProps,
-	validateComponentStyleProps,
-	validateComponentProps,
-	isValidationSuccess,
-	getValidationErrorMessages,
-} from "./componentValidation";
+import { describe, expect, it } from "vitest";
 import {
 	DisplayType,
 	TextAlign,
-} from "@/builder/types/components/properties/componentStylePropsSchema";
+} from "../types/components/properties/componentStylePropsType";
+import {
+	getValidationErrorMessages,
+	isValidationSuccess,
+	validateComponentContentProps,
+	validateComponentProps,
+	validateComponentStyleProps,
+} from "./componentValidation";
 
 describe("Component Validation", () => {
 	describe("validateComponentContentProps", () => {
 		it("should validate valid content props for a Heading component", () => {
 			const result = validateComponentContentProps("Heading", {
-				text: "Hello World",
 				level: 1,
+				text: "Hello World",
 			});
 
 			expect(result.success).toBe(true);
 			if (result.success) {
 				expect(result.data).toEqual({
-					text: "Hello World",
 					level: 1,
+					text: "Hello World",
 				});
 			}
 		});
 
 		it("should reject invalid content props for a Heading component", () => {
-			// @ts-expect-error - Testing invalid props
 			const result = validateComponentContentProps("Heading", {
-				text: "Hello World",
 				level: 7, // Invalid level (should be 1-6)
+				text: "Hello World",
 			});
 
 			expect(result.success).toBe(false);
@@ -40,26 +39,26 @@ describe("Component Validation", () => {
 
 		it("should validate valid content props for a Button component", () => {
 			const result = validateComponentContentProps("Button", {
-				text: "Click Me",
 				href: "https://example.com",
 				icon: "arrow-right",
+				text: "Click Me",
 			});
 
 			expect(result.success).toBe(true);
 			if (result.success) {
 				expect(result.data).toEqual({
-					text: "Click Me",
 					href: "https://example.com",
 					icon: "arrow-right",
+					text: "Click Me",
 				});
 			}
 		});
 
 		it("should reject invalid content props for a Button component", () => {
 			const result = validateComponentContentProps("Button", {
-				text: "Click Me",
 				href: "invalid-url", // Invalid URL format
 				icon: "arrow-right",
+				text: "Click Me",
 			});
 
 			expect(result.success).toBe(false);
@@ -69,28 +68,28 @@ describe("Component Validation", () => {
 	describe("validateComponentStyleProps", () => {
 		it("should validate valid style props for a Section component", () => {
 			const result = validateComponentStyleProps("Section", {
-				layout: {
-					display: "flex",
-					flex: {
-						direction: "column",
-						justifyContent: "center",
-						alignItems: "center",
-					},
-				},
-				sizeAndSpacing: {
-					padding: {
-						top: { min: 1, max: 2, sizeUnit: "rem" },
-						right: { min: 1, max: 2, sizeUnit: "rem" },
-						bottom: { min: 1, max: 2, sizeUnit: "rem" },
-						left: { min: 1, max: 2, sizeUnit: "rem" },
-						key: "test-padding",
-					},
-				},
 				background: {
 					color: {
 						hexCode: "#f5f5f5",
 						name: "Light Gray",
 						type: "primary",
+					},
+				},
+				layout: {
+					display: "flex",
+					flex: {
+						alignItems: "center",
+						direction: "column",
+						justifyContent: "center",
+					},
+				},
+				sizeAndSpacing: {
+					padding: {
+						bottom: { max: 2, min: 1, sizeUnit: "rem" },
+						key: "test-padding",
+						left: { max: 2, min: 1, sizeUnit: "rem" },
+						right: { max: 2, min: 1, sizeUnit: "rem" },
+						top: { max: 2, min: 1, sizeUnit: "rem" },
 					},
 				},
 			});
@@ -117,12 +116,12 @@ describe("Component Validation", () => {
 				},
 				styleProps: {
 					typography: {
-						textAlign: "left",
 						color: {
 							hexCode: "#333333",
 							name: "Dark Gray",
 							type: "primary",
 						},
+						textAlign: "left",
 					},
 				},
 			});
@@ -133,7 +132,6 @@ describe("Component Validation", () => {
 		it("should reject props with invalid content for a Paragraph component", () => {
 			const result = validateComponentProps("Paragraph", {
 				contentProps: {
-					// @ts-expect-error - Testing invalid props
 					level: 2, // Paragraph doesn't have a level property
 				},
 				styleProps: {
@@ -165,18 +163,17 @@ describe("Component Validation", () => {
 	describe("isValidationSuccess", () => {
 		it("should return true for successful validation results", () => {
 			const result = validateComponentContentProps("Heading", {
-				text: "Hello World",
 				level: 1,
+				text: "Hello World",
 			});
 
 			expect(isValidationSuccess(result)).toBe(true);
 		});
 
 		it("should return false for failed validation results", () => {
-			// @ts-expect-error - Testing invalid props
 			const result = validateComponentContentProps("Heading", {
-				text: "Hello World",
 				level: 7, // Invalid level (should be 1-6)
+				text: "Hello World",
 			});
 
 			expect(isValidationSuccess(result)).toBe(false);
@@ -185,10 +182,9 @@ describe("Component Validation", () => {
 
 	describe("getValidationErrorMessages", () => {
 		it("should format error messages from validation errors", () => {
-			// @ts-expect-error - Testing invalid props
 			const result = validateComponentContentProps("Heading", {
-				text: "Hello World",
 				level: 7, // Invalid level (should be 1-6)
+				text: "Hello World",
 			});
 
 			if (!result.success) {

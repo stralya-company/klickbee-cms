@@ -45,9 +45,8 @@ front/
 /admin/[generated_key]/
 ├── auth
     ├── login
-    ├── logout
-    ├── me
-    ├── register
+    ├── password-reset
+    ├── password-reset-request
 ├── manage/
 │   ├── content/[cpt-type]
 │   ├── static/[slug]
@@ -93,15 +92,15 @@ front/
 
 ### 🧦 Stack
 
-| Tech          | Description               |
-|---------------|---------------------------|
-| Next.js       | App Router + API routes   |
-| React         | Modern UI interactions    |
-| Prisma ORM    | PostgreSQL/SQLite support |
-| Zustand       | Admin state management    |
-| Tailwind CSS  | Utility styling           |
-| shadcn/ui     | Headless UI components    |
-| @stralya/auth | Stralya Auth Package      |
+| Tech         | Description               |
+|--------------|---------------------------|
+| Next.js      | App Router + API routes   |
+| React        | Modern UI interactions    |
+| Prisma ORM   | PostgreSQL/SQLite support |
+| Zustand      | Admin state management    |
+| Tailwind CSS | Utility styling           |
+| shadcn/ui    | Headless UI components    |
+| better-auth  | Authentication package    |
 
 ---
 
@@ -110,10 +109,7 @@ front/
 **Option 1: With npm**
 
 ```sh
-npm i
-npx prisma migrate dev
-npx prisma generate
-npm run dev
+npm run setup:dev
 ```
 
 **Option 2: With Docker Compose**
@@ -123,6 +119,74 @@ docker compose up -d
 ```
 
 Then open [localhost:3000](http://localhost:3000), and enjoy!
+
+---
+
+### 🧹 Code Quality & Git Hooks
+
+This project uses [**Biome**](https://biomejs.dev/) for linting, formatting, and code assist features, combined with [**Lefthook**](https://github.com/evilmartians/lefthook) to automate checks at Git commit time.
+
+#### 📦 Main Tools
+
+- [`biome`](https://biomejs.dev/): All-in-one linter, formatter, and static checker for JavaScript/TypeScript.
+- [`lefthook`](https://github.com/evilmartians/lefthook): Fast and powerful Git hooks manager.
+- [`commitlint`](https://commitlint.js.org/): Ensures commit messages follow a consistent convention.
+
+---
+
+#### 🔧 Available Scripts
+
+```json
+"scripts": {
+  "check": "biome check --write .",
+  "format": "biome format --write .",
+	"format:check": "biome format .",
+  "lint": "biome lint --write .",
+  "typecheck": "tsc --noEmit"
+}
+```
+
+| Script                 | Description                                                                          |
+|------------------------|--------------------------------------------------------------------------------------|
+| `npm run check`        | Performs linting, formatting, and applies assist actions like import sorting (write) |
+| `npm run format`       | Formats all files according to Biome rules (write)                                   |
+| `npm run format:check` | Formats all files according to Biome rules (check)                                   |
+| `npm run lint`         | Applies Biome linting rules (write)                                                  |
+| `npm run typecheck`    | Type-checks the codebase using TypeScript without emitting files                     |
+
+> ⚠️ The assist rules defined in `biome.json` (such as `organizeImports`, `useSortedKeys`, etc.) under the `assist.actions.source` section **are only applied when running** `npm run check`.
+
+---
+
+#### 🪝 Git Hooks with Lefthook
+
+[Lefthook](https://github.com/evilmartians/lefthook) is used to run automated checks before each commit and after writing a commit message.
+
+##### 🔁 Pre-commit Hook
+
+Triggered before every `git commit`, it runs the following checks:
+
+| Task            | Command Executed                                                                 |
+|-----------------|----------------------------------------------------------------------------------|
+| ✅ Biome Check  | `biome check` on staged files                                                    |
+| 🧠 Type Check   | `tsc --noEmit` on `.ts` and `.tsx` files                                         |
+| 🧪 Unit Tests   | `vitest run`                                                                     |
+
+##### 📝 Commit Message Hook
+
+Triggered after the commit message is written:
+
+```bash
+npx commitlint --edit
+```
+
+This ensures that your commit messages follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+
+---
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=stralya-company/klickbee-cms&type=Date)](https://www.star-history.com/#stralya-company/klickbee-cms&Date)
 
 ---
 
