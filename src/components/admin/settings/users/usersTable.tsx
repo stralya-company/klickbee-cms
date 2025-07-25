@@ -2,7 +2,6 @@
 
 import {
 	type ColumnFiltersState,
-	createColumnHelper,
 	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
@@ -13,25 +12,10 @@ import {
 	type SortingState,
 	useReactTable,
 } from "@tanstack/react-table";
-import {
-	ChevronDownIcon,
-	ChevronUpIcon,
-	Edit,
-	MoreHorizontal,
-	Trash,
-} from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 import {
 	Table,
 	TableBody,
@@ -40,142 +24,22 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { useAllUsers } from "@/feature/settings/queries/useAllUsers";
-
-type User = {
-	id: string;
-	name: string | null;
-	image: string | null;
-	createdAt: Date;
-};
-
-const columnHelper = createColumnHelper<User>();
-
-function createColumns(
-	t: (key: string) => string,
-	tCommon: (key: string) => string,
-	locale: string,
-) {
-	return [
-		columnHelper.display({
-			cell: ({ row }) => (
-				<Checkbox
-					aria-label="Select row"
-					checked={row.getIsSelected()}
-					onCheckedChange={(value) => row.toggleSelected(!!value)}
-				/>
-			),
-			enableHiding: false,
-			enableSorting: false,
-			header: ({ table }) => (
-				<Checkbox
-					aria-label="Select all"
-					checked={
-						table.getIsAllPageRowsSelected() ||
-						(table.getIsSomePageRowsSelected() && "indeterminate")
-					}
-					onCheckedChange={(value) =>
-						table.toggleAllPageRowsSelected(!!value)
-					}
-				/>
-			),
-			id: "select",
-		}),
-		columnHelper.accessor("image", {
-			cell: ({ row, getValue }) => (
-				<Avatar className="h-8 w-8">
-					<AvatarImage
-						alt={row.original.name || ""}
-						src={getValue() || ""}
-					/>
-					<AvatarFallback>
-						{row.original.name?.charAt(0)?.toUpperCase() || "U"}
-					</AvatarFallback>
-				</Avatar>
-			),
-			enableSorting: false,
-			header: t("Profile"),
-		}),
-		columnHelper.accessor("name", {
-			cell: ({ getValue }) => (
-				<span>{getValue() || t("NameNotAvailable")}</span>
-			),
-			header: ({ column }) => (
-				<Button
-					className="p-0 h-auto font-semibold"
-					onClick={() =>
-						column.toggleSorting(column.getIsSorted() === "asc")
-					}
-					variant="ghost"
-				>
-					{t("Name")}
-					{column.getIsSorted() === "asc" ? (
-						<ChevronUpIcon className="ml-2 h-4 w-4" />
-					) : column.getIsSorted() === "desc" ? (
-						<ChevronDownIcon className="ml-2 h-4 w-4" />
-					) : null}
-				</Button>
-			),
-		}),
-		columnHelper.accessor("createdAt", {
-			cell: ({ getValue }) => {
-				const date = getValue();
-				return new Intl.DateTimeFormat(locale, {
-					day: "2-digit",
-					hour: "2-digit",
-					minute: "2-digit",
-					month: "2-digit",
-					year: "numeric",
-				}).format(new Date(date));
-			},
-			header: ({ column }) => (
-				<Button
-					className="p-0 h-auto font-semibold"
-					onClick={() =>
-						column.toggleSorting(column.getIsSorted() === "asc")
-					}
-					variant="ghost"
-				>
-					{tCommon("CreatedAt")}
-					{column.getIsSorted() === "asc" ? (
-						<ChevronUpIcon className="ml-2 h-4 w-4" />
-					) : column.getIsSorted() === "desc" ? (
-						<ChevronDownIcon className="ml-2 h-4 w-4" />
-					) : null}
-				</Button>
-			),
-		}),
-		columnHelper.display({
-			cell: () => {
-				return (
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button className="h-8 w-8 p-0" variant="ghost">
-								<span className="sr-only">Open menu</span>
-								<MoreHorizontal className="h-4 w-4" />
-							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent align="end">
-							<DropdownMenuItem>
-								<Edit className="mr-2 h-4 w-4" />
-								{tCommon("Edit")}
-							</DropdownMenuItem>
-							<DropdownMenuItem className="text-destructive">
-								<Trash className="mr-2 h-4 w-4" />
-								{tCommon("Delete")}
-							</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
-				);
-			},
-			header: "",
-			id: "actions",
-		}),
-	];
-}
+import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import { useAllUsers } from "@/feature/user/queries/useAllUsers";
+import { useDeleteUser } from "@/feature/user/queries/useDeleteUser";
+import { useUserSelectionStore } from "@/feature/user/stores/storeUserSelection";
+import { getQueryClient } from "@/lib/react-query/getQueryClient";
+import { allUsersOptions } from "@/lib/react-query/query-options/users/allUsersOptions";
+import { createColumns } from "./usersTableColumns";
 
 export default function UsersTable() {
 	const { data: users } = useAllUsers();
+	const deleteUserMutation = useDeleteUser();
+	const queryClient = getQueryClient();
+	const setClearSelection = useUserSelectionStore(
+		(state) => state.setClearSelection,
+	);
+	const adminKey = useAdminKeyStore((state) => state.adminKey);
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -192,8 +56,44 @@ export default function UsersTable() {
 	const tCommon = useTranslations("Common");
 	const locale = useLocale();
 
+	const handleDeleteUser = (userId: string) => {
+		deleteUserMutation.mutate(userId, {
+			onError: () => {
+				toast.error(t("DeleteUserError"));
+			},
+			onSuccess: async (result) => {
+				if (result) {
+					await queryClient.invalidateQueries({
+						queryKey: allUsersOptions.queryKey,
+					});
+					setRowSelection((prev) => {
+						const newSelection = { ...prev };
+						delete newSelection[userId];
+						return newSelection;
+					});
+					toast.success(t("DeleteUserSuccess"));
+				}
+			},
+		});
+	};
+
+	const clearTableSelection = () => {
+		setRowSelection({});
+	};
+
+	// Register clear function in store
+	useEffect(() => {
+		setClearSelection(clearTableSelection);
+	}, [setClearSelection]);
+
 	const userData = Array.isArray(users) ? users : [];
-	const columns = createColumns(t, tCommon, locale);
+	const columns = createColumns(
+		t,
+		tCommon,
+		locale,
+		adminKey ?? "",
+		handleDeleteUser,
+	);
 
 	// Sync rowSelection with URL
 	useEffect(() => {
@@ -231,6 +131,7 @@ export default function UsersTable() {
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
+		getRowId: (row) => row.id,
 		getSortedRowModel: getSortedRowModel(),
 		globalFilterFn: "includesString",
 		manualPagination: false,
