@@ -170,6 +170,7 @@ export function createColumns(
 											{tCommon("Cancel")}
 										</AlertDialogCancel>
 										<AlertDialogAction
+											aria-label={`Confirm deletion of user ${row.original.name}`}
 											className="bg-destructive text-white hover:bg-destructive/90"
 											onClick={() =>
 												onDeleteUser(row.original.id)
