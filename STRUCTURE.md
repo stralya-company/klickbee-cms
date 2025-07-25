@@ -31,7 +31,6 @@ src/feature/user/
 |   ├── apiUserLogout.ts
 |   ├── apiUserRegister.ts
 |   ├── apiUserMe.ts
-└── components/UserForm.tsx
 ```
 
 ---
