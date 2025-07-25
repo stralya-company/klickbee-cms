@@ -59,14 +59,13 @@
 		"enabled": true,
 		"includes": [
 			"**",
-			"**/prisma/",
-			"**/node_modules/",
-			"**/.next/",
-			"**/.idea/",
-			"**/*.test.ts",
-			"**/*.test.tsx",
-			"**/*.spec.ts",
-			"**/*.spec.tsx"
+			"!**/*.test.ts",
+			"!**/*.test.tsx",
+			"!**/*.spec.ts",
+			"!**/*.spec.tsx",
+			"!**/node_modules",
+			"!**/.next",
+			"!**/.idea"
 		],
 		"rules": {
 			"complexity": {
