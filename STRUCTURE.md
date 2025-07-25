@@ -26,11 +26,6 @@ src/feature/<feature-name>/
 src/feature/user/
 ├── stores/storeUser.ts
 ├── queries/useUser.ts
-├── api/
-|   ├── apiUserLogin.ts
-|   ├── apiUserLogout.ts
-|   ├── apiUserRegister.ts
-|   ├── apiUserMe.ts
 ```
 
 ---
