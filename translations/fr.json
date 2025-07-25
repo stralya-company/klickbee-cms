@@ -65,13 +65,20 @@
 		"Type": "Type :"
 	},
 	"Common": {
+		"Cancel": "Annuler",
 		"CreatedAt": "Date de création",
 		"Delete": "Supprimer",
 		"DeleteSelected": "Supprimer la sélection",
 		"Edit": "Modifier",
+		"Email": "Email",
+		"EmailPlaceholder": "Entrez votre email",
+		"Name": "Nom",
+		"NamePlaceholder": "Saisir le nom complet",
 		"Next": "Suivant",
 		"Of": "sur",
 		"Page": "Page",
+		"Password": "Mot de passe",
+		"PasswordPlaceholder": "Votre mot de passe",
 		"Previous": "Précédent"
 	},
 	"Errors": {
@@ -85,11 +92,8 @@
 		"AdminLogin": "Connexion admin",
 		"ConnectionError": "Identifiants incorrects.",
 		"ConnectionFailed": "Échec de la connexion. Veuillez réessayer.",
-		"Email": "Email",
 		"LoggingIn": "Connexion...",
-		"LoginButton": "Se connecter",
-		"Password": "Mot de passe",
-		"PasswordPlaceholder": "Votre mot de passe"
+		"LoginButton": "Se connecter"
 	},
 	"LogoEditor": {
 		"ClickToChoose": "Cliquer pour choisir",
@@ -112,8 +116,6 @@
 		"SuccessMessage": "Votre mot de passe a été réinitialisé avec succès."
 	},
 	"ResetPasswordRequest": {
-		"EmailLabel": "Email",
-		"EmailPlaceholder": "Entrez votre email",
 		"ErrorMessage": "Une erreur est survenue lors de l'envoi du lien de réinitialisation.",
 		"ResetPasswordRequest": "Demande de réinitialisation du mot de passe",
 		"Sending": "Envoi en cours...",
@@ -122,13 +124,31 @@
 	},
 	"SettingsUsers": {
 		"AddUser": "Ajouter un utilisateur",
+		"CreateUser": "Créer un utilisateur",
+		"CreateUserError": "Erreur lors de la création de l'utilisateur",
+		"CreateUserSubtitle": "Ajouter un nouveau compte utilisateur",
+		"CreateUserSuccess": "Utilisateur créé avec succès et invitation envoyée",
+		"DeleteUserDescription": "Cette action ne peut pas être annulée. Cela supprimera définitivement le compte de l'utilisateur et toutes ses données.",
+		"DeleteUserError": "Erreur lors de la suppression de l'utilisateur",
+		"DeleteUserSuccess": "Utilisateur supprimé avec succès",
+		"DeleteUsersDescription": "Cette action ne peut pas être annulée. Cela supprimera définitivement {count, plural, =1 {# compte utilisateur} other {# comptes utilisateurs}} et toutes leurs données.",
+		"DeleteUsersError": "Erreur lors de la suppression des utilisateurs",
+		"DeleteUsersSuccess": "{count, plural, =1 {# utilisateur supprimé} other {# utilisateurs supprimés}} avec succès",
+		"DeleteUsersTitle": "Supprimer les utilisateurs",
+		"DeleteUserTitle": "Supprimer l'utilisateur",
 		"ManageUsers": "Gérer les utilisateurs",
 		"ManageUsersSubtitle": "Gérer les comptes utilisateurs et les permissions",
-		"Name": "Nom",
 		"NameNotAvailable": "Nom non disponible",
 		"NoUsersFound": "Aucun utilisateur trouvé",
 		"Profile": "Profil",
-		"SearchUsers": "Rechercher des utilisateurs..."
+		"SearchUsers": "Rechercher des utilisateurs...",
+		"SendInvite": "Envoyer une invitation",
+		"SendingInvitation": "Envoi de l'invitation en cours...",
+		"UpdateUser": "Modifier l'utilisateur",
+		"UpdateUserError": "Erreur lors de la modification de l'utilisateur",
+		"UpdateUserSubtitle": "Modifier les informations de l'utilisateur",
+		"UpdateUserSuccess": "Utilisateur modifié avec succès",
+		"UpdatingUser": "Modification en cours..."
 	},
 	"SpacingEditor": {
 		"AddGap": "Ajouter un gap",

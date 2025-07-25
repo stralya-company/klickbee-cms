@@ -65,13 +65,20 @@
 		"Type": "Type:"
 	},
 	"Common": {
+		"Cancel": "Cancel",
 		"CreatedAt": "Created At",
 		"Delete": "Delete",
 		"DeleteSelected": "Delete Selected",
 		"Edit": "Edit",
+		"Email": "Email",
+		"EmailPlaceholder": "Enter your email",
+		"Name": "Name",
+		"NamePlaceholder": "Enter full name",
 		"Next": "Next",
 		"Of": "of",
 		"Page": "Page",
+		"Password": "Password",
+		"PasswordPlaceholder": "Your password",
 		"Previous": "Previous"
 	},
 	"Errors": {
@@ -85,11 +92,8 @@
 		"AdminLogin": "Admin Login",
 		"ConnectionError": "Bad credentials.",
 		"ConnectionFailed": "Connection failed. Please try again.",
-		"Email": "Email",
 		"LoggingIn": "Logging in...",
-		"LoginButton": "Login",
-		"Password": "Password",
-		"PasswordPlaceholder": "Your password"
+		"LoginButton": "Login"
 	},
 	"LogoEditor": {
 		"ClickToChoose": "Click to choose",
@@ -112,8 +116,6 @@
 		"SuccessMessage": "Your password has been reset successfully."
 	},
 	"ResetPasswordRequest": {
-		"EmailLabel": "Email",
-		"EmailPlaceholder": "Enter your email",
 		"ErrorMessage": "An error occurred while sending the reset link.",
 		"ResetPasswordRequest": "Password Reset Request",
 		"Sending": "Sending...",
@@ -122,13 +124,31 @@
 	},
 	"SettingsUsers": {
 		"AddUser": "Add User",
+		"CreateUser": "Create User",
+		"CreateUserError": "Error creating user",
+		"CreateUserSubtitle": "Add a new user account",
+		"CreateUserSuccess": "User created successfully and invitation sent",
+		"DeleteUserDescription": "This action cannot be undone. This will permanently delete the user account and all associated data.",
+		"DeleteUserError": "Error deleting user",
+		"DeleteUserSuccess": "User deleted successfully",
+		"DeleteUsersDescription": "This action cannot be undone. This will permanently delete {count, plural, =1 {# user account} other {# user accounts}} and all associated data.",
+		"DeleteUsersError": "Error deleting users",
+		"DeleteUsersSuccess": "{count, plural, =1 {# user deleted} other {# users deleted}} successfully",
+		"DeleteUsersTitle": "Delete Users",
+		"DeleteUserTitle": "Delete User",
 		"ManageUsers": "Manage Users",
 		"ManageUsersSubtitle": "Manage user accounts and permissions",
-		"Name": "Name",
 		"NameNotAvailable": "Name not available",
 		"NoUsersFound": "No users found",
 		"Profile": "Profile",
-		"SearchUsers": "Search users..."
+		"SearchUsers": "Search users...",
+		"SendInvite": "Send Invitation",
+		"SendingInvitation": "Sending invitation...",
+		"UpdateUser": "Update User",
+		"UpdateUserError": "Error updating user",
+		"UpdateUserSubtitle": "Update user information",
+		"UpdateUserSuccess": "User updated successfully",
+		"UpdatingUser": "Updating user..."
 	},
 	"SpacingEditor": {
 		"AddGap": "Add gap",
