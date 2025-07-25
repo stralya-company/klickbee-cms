@@ -19,7 +19,7 @@ export const getAllUsers = async () => {
 	});
 };
 
-export const getUserById = async (userId: string) => {
+export const getUserByIdForEdit = async (userId: string) => {
 	const authError = await isAuthenticatedGuard();
 	if (authError) {
 		return authError;

@@ -28,6 +28,7 @@ import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
 import { useAllUsers } from "@/feature/user/queries/useAllUsers";
 import { useDeleteUser } from "@/feature/user/queries/useDeleteUser";
 import { useUserSelectionStore } from "@/feature/user/stores/storeUserSelection";
+import { useDebounce } from "@/hooks/useDebounce";
 import { allUsersOptions } from "@/lib/allUsersOptions";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { createColumns } from "./usersTableColumns";
@@ -95,10 +96,13 @@ export default function UsersTable() {
 		handleDeleteUser,
 	);
 
-	// Sync rowSelection with URL
+	// Debounce rowSelection changes to avoid excessive URL updates
+	const debouncedRowSelection = useDebounce(rowSelection, 300);
+
+	// Sync rowSelection with URL (debounced)
 	useEffect(() => {
-		const selectedIds = Object.keys(rowSelection).filter(
-			(id) => rowSelection[id],
+		const selectedIds = Object.keys(debouncedRowSelection).filter(
+			(id) => debouncedRowSelection[id],
 		);
 		const params = new URLSearchParams(searchParams);
 
@@ -109,7 +113,7 @@ export default function UsersTable() {
 		}
 
 		router.replace(`?${params.toString()}`);
-	}, [rowSelection, router, searchParams]);
+	}, [debouncedRowSelection, router, searchParams]);
 
 	// Initialize rowSelection from URL
 	useEffect(() => {

@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import DashboardTitle from "@/components/admin/_partials/dashboardTitle";
 import UserUpdateForm from "@/components/admin/settings/users/update/userUpdateForm";
 import { getQueryClient } from "@/lib/getQueryClient";
-import { userByIdOptions } from "@/lib/userByIdOptions";
+import { userByIdForEditOptions } from "@/lib/userByIdOptions";
 
 interface PageProps {
 	params: {
@@ -15,7 +15,7 @@ export default function Page({ params }: PageProps) {
 	const t = useTranslations("SettingsUsers");
 
 	const queryClient = getQueryClient();
-	void queryClient.prefetchQuery(userByIdOptions(params.userId));
+	void queryClient.prefetchQuery(userByIdForEditOptions(params.userId));
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>

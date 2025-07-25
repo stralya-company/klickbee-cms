@@ -1,8 +1,8 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getUserById } from "@/lib/users";
+import { getUserByIdForEdit } from "@/lib/users";
 
-export const userByIdOptions = (userId: string) =>
+export const userByIdForEditOptions = (userId: string) =>
 	queryOptions({
-		queryFn: async () => await getUserById(userId),
-		queryKey: ["user", userId] as const,
+		queryFn: async () => await getUserByIdForEdit(userId),
+		queryKey: ["user", "edit", userId] as const,
 	});

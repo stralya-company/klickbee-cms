@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import UserForm from "@/components/admin/settings/users/userForm";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
 import { useUpdateUser } from "@/feature/user/queries/useUpdateUser";
-import { useUser } from "@/feature/user/queries/useUser";
+import { useUserForEdit } from "@/feature/user/queries/useUserForEdit";
 import {
 	UpdateUserFormValues,
 	updateUserSchema,
@@ -19,7 +19,7 @@ interface UserUpdateFormProps {
 }
 
 export default function UserUpdateForm({ userId }: UserUpdateFormProps) {
-	const { data: user } = useUser(userId);
+	const { data: user } = useUserForEdit(userId);
 	const t = useTranslations("SettingsUsers");
 	const router = useRouter();
 	const adminKey = useAdminKeyStore((state) => state.adminKey);
