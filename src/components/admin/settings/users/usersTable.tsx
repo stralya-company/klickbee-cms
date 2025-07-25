@@ -14,7 +14,7 @@ import {
 } from "@tanstack/react-table";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
 	Table,
@@ -57,26 +57,31 @@ export default function UsersTable() {
 	const tCommon = useTranslations("Common");
 	const locale = useLocale();
 
-	const handleDeleteUser = (userId: string) => {
-		deleteUserMutation.mutate(userId, {
-			onError: () => {
-				toast.error(t("DeleteUserError"));
-			},
-			onSuccess: async (result) => {
-				if (result) {
-					await queryClient.invalidateQueries({
-						queryKey: allUsersOptions.queryKey,
-					});
-					setRowSelection((prev) => {
-						const newSelection = { ...prev };
-						delete newSelection[userId];
-						return newSelection;
-					});
-					toast.success(t("DeleteUserSuccess"));
-				}
-			},
-		});
-	};
+	const handleDeleteUser = useCallback(
+		(userId: string) => {
+			deleteUserMutation.mutate(userId, {
+				onError: () => {
+					toast.error(t("DeleteUserError"));
+				},
+				onSuccess: async (result) => {
+					if (result) {
+						await queryClient.invalidateQueries({
+							queryKey: allUsersOptions.queryKey,
+						});
+						// Remove the deleted user from selection state
+						// Since getRowId: (row) => row.id, the rowId matches userId
+						setRowSelection((prev) => {
+							const newSelection = { ...prev };
+							delete newSelection[userId];
+							return newSelection;
+						});
+						toast.success(t("DeleteUserSuccess"));
+					}
+				},
+			});
+		},
+		[deleteUserMutation, queryClient, t],
+	);
 
 	const clearTableSelection = () => {
 		setRowSelection({});
