@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { useAllUsers } from "@/feature/settings/queries/useAllUsers";
+import { useAllUsers } from "@/feature/user/queries/useAllUsers";
 
 export default function Pagination() {
 	const tCommon = useTranslations("Common");
