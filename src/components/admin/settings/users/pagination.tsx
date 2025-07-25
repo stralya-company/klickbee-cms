@@ -41,6 +41,10 @@ export default function Pagination() {
 	const canGoPrevious = currentPage > 1;
 	const canGoNext = currentPage < totalPages;
 
+	if (totalPages <= 1) {
+		return null;
+	}
+
 	return (
 		<div className="flex items-center justify-between">
 			<div className="text-sm text-muted-foreground">
