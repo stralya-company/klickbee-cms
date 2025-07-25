@@ -8,7 +8,7 @@ interface ApiTranslations {
 	};
 }
 
-export async function getApiTranslation(
+export async function getTranslationApi(
 	section: keyof ApiTranslations["API"],
 	key: string,
 ): Promise<string> {

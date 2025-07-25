@@ -20,7 +20,7 @@ import { authClient } from "@/feature/auth/client/authClient";
 import {
 	authPasswordResetSchema,
 	UserPasswordResetFormValues,
-} from "@/feature/auth/types/authPasswordResetSchema";
+} from "@/feature/auth/schemas/authPasswordResetSchema";
 
 export default function ResetPasswordForm() {
 	const router = useRouter();

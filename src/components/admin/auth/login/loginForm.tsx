@@ -21,7 +21,7 @@ import { authClient } from "@/feature/auth/client/authClient";
 import {
 	authLoginSchema,
 	UserLoginFormValues,
-} from "@/feature/auth/types/authLoginSchema";
+} from "@/feature/auth/schemas/authLoginSchema";
 
 export default function LoginForm() {
 	const { adminKey } = useParams<{ adminKey: string }>();

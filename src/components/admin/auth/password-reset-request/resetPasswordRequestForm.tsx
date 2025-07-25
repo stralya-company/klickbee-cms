@@ -19,7 +19,7 @@ import { authClient } from "@/feature/auth/client/authClient";
 import {
 	authPasswordResetRequestSchema,
 	UserPasswordResetRequestFormValues,
-} from "@/feature/auth/types/authPasswordResetRequestSchema";
+} from "@/feature/auth/schemas/authPasswordResetRequestSchema";
 
 export default function ResetPasswordRequestForm() {
 	const t = useTranslations("ResetPasswordRequest");
