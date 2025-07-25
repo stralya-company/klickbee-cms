@@ -39,7 +39,7 @@ import {
 	SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
-import { useCurrentUser } from "@/feature/auth/queries/useUser";
+import { useCurrentUser } from "@/feature/user/queries/useUser";
 
 export function Sidebar() {
 	const t = useTranslations("AdminSidebar");
