@@ -62,7 +62,11 @@
 			"**/prisma/",
 			"**/node_modules/",
 			"**/.next/",
-			"**/.idea/"
+			"**/.idea/",
+			"**/*.test.ts",
+			"**/*.test.tsx",
+			"**/*.spec.ts",
+			"**/*.spec.tsx"
 		],
 		"rules": {
 			"complexity": {
