@@ -4,7 +4,7 @@ interface DashboardTitleProps {
 	backLink?: string;
 }
 
-export function DashboardTitle({
+export default function DashboardTitle({
 	title,
 	subtitle,
 	backLink,
