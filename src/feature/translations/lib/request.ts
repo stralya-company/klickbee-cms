@@ -1,5 +1,13 @@
 import { getRequestConfig } from "next-intl/server";
 import { getSetting, setSetting } from "@/feature/settings/lib/settings";
+import enMessages from "../languages/en.json";
+import frMessages from "../languages/fr.json";
+
+// Map of available translations
+const messagesMap: Record<string, object> = {
+	en: enMessages,
+	fr: frMessages,
+};
 
 export default getRequestConfig(async () => {
 	let locale = await getSetting("system_lang");
@@ -9,6 +17,6 @@ export default getRequestConfig(async () => {
 	}
 	return {
 		locale,
-		messages: (await import(`../../translations/${locale}.json`)).default,
+		messages: messagesMap[locale] || messagesMap.en,
 	};
 });
