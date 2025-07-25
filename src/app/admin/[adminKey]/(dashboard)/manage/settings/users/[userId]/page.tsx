@@ -2,8 +2,8 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import DashboardTitle from "@/components/admin/_partials/dashboardTitle";
 import UserUpdateForm from "@/components/admin/settings/users/update/userUpdateForm";
-import { getQueryClient } from "@/lib/react-query/getQueryClient";
-import { userOptions } from "@/lib/react-query/query-options/users/userOptions";
+import { getQueryClient } from "@/lib/getQueryClient";
+import { userByIdOptions } from "@/lib/userByIdOptions";
 
 interface PageProps {
 	params: {
@@ -15,7 +15,7 @@ export default function Page({ params }: PageProps) {
 	const t = useTranslations("SettingsUsers");
 
 	const queryClient = getQueryClient();
-	void queryClient.prefetchQuery(userOptions(params.userId));
+	void queryClient.prefetchQuery(userByIdOptions(params.userId));
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>

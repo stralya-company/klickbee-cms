@@ -1,5 +1,5 @@
 import { getRequestConfig } from "next-intl/server";
-import { getSetting, setSetting } from "@/lib/prisma/queries/settings";
+import { getSetting, setSetting } from "@/lib/settings";
 
 export default getRequestConfig(async () => {
 	let locale = await getSetting("system_lang");

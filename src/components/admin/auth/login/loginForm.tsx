@@ -21,7 +21,7 @@ import {
 	UserLoginFormValues,
 	userLoginSchema,
 } from "@/feature/auth/types/userLoginSchema";
-import { authClient } from "@/lib/better-auth/authClient";
+import { authClient } from "@/lib/authClient";
 
 export default function LoginForm() {
 	const { adminKey } = useParams<{ adminKey: string }>();

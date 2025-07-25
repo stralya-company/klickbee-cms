@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { UpdateUserFormValues } from "@/feature/user/types/updateUserSchema";
-import { authClient } from "@/lib/better-auth/authClient";
+import { authClient } from "@/lib/authClient";
 
 export function useUpdateUser() {
 	return useMutation({

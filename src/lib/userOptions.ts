@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
-import { authClient } from "@/lib/better-auth/authClient";
+import { authClient } from "@/lib/authClient";
 
 async function getCurrentUser() {
 	try {

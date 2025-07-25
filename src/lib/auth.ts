@@ -3,8 +3,8 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { admin } from "better-auth/plugins";
 import { getApiTranslation } from "@/i18n/apiTranslation";
-import { sendEmail } from "@/lib/mail/sendEmail";
-import prisma from "@/lib/prisma/prisma";
+import prisma from "@/lib/prisma";
+import { sendEmail } from "@/lib/sendEmail";
 
 export const auth = betterAuth({
 	advanced: {

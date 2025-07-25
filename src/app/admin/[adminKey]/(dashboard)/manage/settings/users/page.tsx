@@ -5,8 +5,8 @@ import ActionButton from "@/components/admin/settings/users/actionButton";
 import Pagination from "@/components/admin/settings/users/pagination";
 import SearchBar from "@/components/admin/settings/users/searchBar";
 import UsersTable from "@/components/admin/settings/users/usersTable";
-import { getQueryClient } from "@/lib/react-query/getQueryClient";
-import { allUsersOptions } from "@/lib/react-query/query-options/users/allUsersOptions";
+import { allUsersOptions } from "@/lib/allUsersOptions";
+import { getQueryClient } from "@/lib/getQueryClient";
 
 export default function Page() {
 	const t = useTranslations("SettingsUsers");

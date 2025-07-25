@@ -6,8 +6,8 @@ import { getLocale, getMessages } from "next-intl/server";
 import { Sidebar } from "@/components/admin/_partials/sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
-import { getQueryClient } from "@/lib/react-query/getQueryClient";
-import { userServerOptions } from "@/lib/react-query/query-options/auth/userServerOptions";
+import { getQueryClient } from "@/lib/getQueryClient";
+import { userServerOptions } from "@/lib/userServerOptions";
 import { UserProvider } from "@/providers/UserProvider";
 import { ZodTranslationProvider } from "@/providers/ZodTranslationProvider";
 

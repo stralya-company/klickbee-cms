@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isAuthenticatedGuard } from "@/lib/better-auth/session";
-import {
-	getSetting,
-	setSetting,
-	setUserSetting,
-} from "@/lib/prisma/queries/settings";
+import { isAuthenticatedGuard } from "@/lib/session";
+import { getSetting, setSetting, setUserSetting } from "@/lib/settings";
 
 export async function GET(req: NextRequest) {
 	// Vérification de l'authentification

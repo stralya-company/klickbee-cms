@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma/prisma";
+import { prisma } from "@/lib/prisma";
 
 export const getSetting = async (key: string, userId?: string | null) => {
 	if (userId) {

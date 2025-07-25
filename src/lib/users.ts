@@ -1,7 +1,7 @@
 "use server";
 
-import { isAuthenticatedGuard } from "@/lib/better-auth/session";
-import { prisma } from "@/lib/prisma/prisma";
+import { prisma } from "@/lib/prisma";
+import { isAuthenticatedGuard } from "@/lib/session";
 
 export const getAllUsers = async () => {
 	const authError = await isAuthenticatedGuard();

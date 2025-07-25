@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import prisma from "../src/lib/prisma/prisma";
+import prisma from "../src/lib/prisma";
 
 const rolePermissions: Record<string, string[]> = {
 	admin: ["read", "write", "delete", "manage_users"],

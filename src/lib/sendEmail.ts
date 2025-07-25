@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { decryptString } from "@/lib/crypto";
-import { getSetting } from "@/lib/prisma/queries/settings";
+import { getSetting } from "@/lib/settings";
 
 export interface EmailOptions {
 	to: string;

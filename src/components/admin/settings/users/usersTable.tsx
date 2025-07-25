@@ -28,8 +28,8 @@ import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
 import { useAllUsers } from "@/feature/user/queries/useAllUsers";
 import { useDeleteUser } from "@/feature/user/queries/useDeleteUser";
 import { useUserSelectionStore } from "@/feature/user/stores/storeUserSelection";
-import { getQueryClient } from "@/lib/react-query/getQueryClient";
-import { allUsersOptions } from "@/lib/react-query/query-options/users/allUsersOptions";
+import { allUsersOptions } from "@/lib/allUsersOptions";
+import { getQueryClient } from "@/lib/getQueryClient";
 import { createColumns } from "./usersTableColumns";
 
 export default function UsersTable() {

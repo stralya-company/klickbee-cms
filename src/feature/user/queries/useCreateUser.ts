@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
 import { CreateUserFormValues } from "@/feature/user/types/createUserSchema";
-import { authClient } from "@/lib/better-auth/authClient";
+import { authClient } from "@/lib/authClient";
 
 export function useCreateUser() {
 	const adminKey = useAdminKeyStore((state) => state.adminKey);
