@@ -32,6 +32,7 @@ export default function LoginForm() {
 	}, [adminKey, setAdminKey]);
 
 	const t = useTranslations("Login");
+	const tCommon = useTranslations("Common");
 
 	const loginForm = useForm<UserLoginFormValues>({
 		defaultValues: {
@@ -72,10 +73,10 @@ export default function LoginForm() {
 					name="email"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>{t("Email")}</FormLabel>
+							<FormLabel>{tCommon("Email")}</FormLabel>
 							<FormControl>
 								<Input
-									placeholder="Enter your email"
+									placeholder={tCommon("EmailPlaceholder")}
 									type="email"
 									{...field}
 									className="w-full"
@@ -91,10 +92,10 @@ export default function LoginForm() {
 					name="password"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>{t("Password")}</FormLabel>
+							<FormLabel>{tCommon("Password")}</FormLabel>
 							<FormControl>
 								<Input
-									placeholder={t("PasswordPlaceholder")}
+									placeholder={tCommon("PasswordPlaceholder")}
 									type="password"
 									{...field}
 									className="w-full"
