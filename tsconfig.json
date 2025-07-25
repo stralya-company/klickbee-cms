@@ -22,6 +22,14 @@
 		"strict": true,
 		"target": "ES2017"
 	},
-	"exclude": ["node_modules", ".next", ".idea"],
+	"exclude": [
+		"node_modules",
+		".next",
+		".idea",
+		"**/*.test.ts",
+		"**/*.test.tsx",
+		"**/*.spec.ts",
+		"**/*.spec.tsx"
+	],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }

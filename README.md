@@ -184,6 +184,12 @@ This ensures that your commit messages follow the [Conventional Commits](https:/
 
 ---
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=stralya-company/klickbee-cms&type=Date)](https://www.star-history.com/#stralya-company/klickbee-cms&Date)
+
+---
+
 ### 🚧 Contributing
 
 Klickbee CMS is built in the open. Feedback, ideas, PRs welcome.
