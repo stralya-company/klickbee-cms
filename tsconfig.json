@@ -29,7 +29,8 @@
 		"**/*.test.ts",
 		"**/*.test.tsx",
 		"**/*.spec.ts",
-		"**/*.spec.tsx"
+		"**/*.spec.tsx",
+		"prisma/roles-seed.ts"
 	],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }

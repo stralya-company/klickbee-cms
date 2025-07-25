@@ -2,11 +2,19 @@ import bcrypt from "bcrypt";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { admin } from "better-auth/plugins";
-import { getApiTranslation } from "@/lib/apiTranslation";
+import { getApiTranslation } from "@/i18n/apiTranslation";
 import prisma from "@/lib/prisma";
 import { sendEmail } from "@/lib/sendEmail";
 
 export const auth = betterAuth({
+	advanced: {
+		defaultCookieAttributes: {
+			httpOnly: true,
+			sameSite: "none",
+			secure: true,
+		},
+	},
+	baseURL: process.env.BETTER_AUTH_URL,
 	database: prismaAdapter(prisma, {
 		provider: "postgresql",
 	}),
@@ -51,4 +59,5 @@ export const auth = betterAuth({
 		},
 	},
 	plugins: [admin()],
+	secret: process.env.BETTER_AUTH_SECRET,
 });

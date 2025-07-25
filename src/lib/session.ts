@@ -1,10 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 
-async function getSession(req: NextRequest) {
+async function getSession() {
 	try {
 		return await auth.api.getSession({
-			headers: req.headers,
+			headers: await headers(),
 		});
 	} catch (error) {
 		console.error("Error getting session:", error);
@@ -12,9 +13,9 @@ async function getSession(req: NextRequest) {
 	}
 }
 
-export async function isAuthenticatedGuard(req: NextRequest) {
+export async function isAuthenticatedGuard() {
 	try {
-		const session = await getSession(req);
+		const session = await getSession();
 
 		if (!session) {
 			return NextResponse.json(

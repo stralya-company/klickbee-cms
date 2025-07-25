@@ -4,7 +4,7 @@ import { getSetting, setSetting, setUserSetting } from "@/lib/settings";
 
 export async function GET(req: NextRequest) {
 	// Vérification de l'authentification
-	const authError = await isAuthenticatedGuard(req);
+	const authError = await isAuthenticatedGuard();
 	if (authError) {
 		return authError;
 	}
@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	// Vérification de l'authentification
-	const authError = await isAuthenticatedGuard(req);
+	const authError = await isAuthenticatedGuard();
 	if (authError) {
 		return authError;
 	}
