@@ -23,6 +23,7 @@ import { authClient } from "@/lib/authClient";
 
 export default function ResetPasswordRequestForm() {
 	const t = useTranslations("ResetPasswordRequest");
+	const tCommon = useTranslations("Common");
 	const adminKey = useAdminKeyStore((state) => state.adminKey);
 
 	const resetPasswordRequestForm =
@@ -60,12 +61,12 @@ export default function ResetPasswordRequestForm() {
 					name="email"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>{t("EmailLabel")}</FormLabel>
+							<FormLabel>{tCommon("Email")}</FormLabel>
 							<FormControl>
 								<Input
 									{...field}
 									className="w-full"
-									placeholder={t("EmailPlaceholder")}
+									placeholder={tCommon("EmailPlaceholder")}
 								/>
 							</FormControl>
 							<FormMessage />

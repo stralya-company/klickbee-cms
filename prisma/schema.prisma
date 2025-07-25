@@ -16,8 +16,6 @@ datasource db {
 model User {
   id            String    @id @default(uuid())
   email         String    @unique
-  role          Role      @relation(fields: [roleId], references: [id])
-  roleId        String
   name          String
   emailVerified Boolean
   image         String?
@@ -29,6 +27,7 @@ model User {
   // Relations
   UserSettings UserSettings[]
 
+  role       String?   @default("user")
   banned     Boolean?
   banReason  String?
   banExpires DateTime?
@@ -83,21 +82,14 @@ model Verification {
   @@map("verification")
 }
 
-model Role {
-  id          String       @id @default(uuid())
-  name        String       @unique
-  permissions Permission[]
-  users       User[]
-}
-
-model Permission {
-  id     Int    @id @default(autoincrement())
-  action String
-  roleId String
-  role   Role   @relation(fields: [roleId], references: [id])
-
-  @@unique([roleId, action])
-}
+// model Permission {
+//   id     Int    @id @default(autoincrement())
+//   action String
+//   roleId String
+//   role   Role   @relation(fields: [roleId], references: [id])
+//
+//   @@unique([roleId, action])
+// }
 
 // === Settings Models ===
 
