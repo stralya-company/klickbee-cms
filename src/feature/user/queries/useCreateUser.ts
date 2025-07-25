@@ -3,6 +3,35 @@ import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
 import { CreateUserFormValues } from "@/feature/user/types/createUserSchema";
 import { authClient } from "@/lib/authClient";
 
+function generateSecurePassword(): string {
+	const lowercase = "abcdefghijklmnopqrstuvwxyz";
+	const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	const numbers = "0123456789";
+	const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+	const allChars = lowercase + uppercase + numbers + symbols;
+	const length = 16;
+
+	let password = "";
+
+	// Ensure at least one character from each category
+	password += lowercase[Math.floor(Math.random() * lowercase.length)];
+	password += uppercase[Math.floor(Math.random() * uppercase.length)];
+	password += numbers[Math.floor(Math.random() * numbers.length)];
+	password += symbols[Math.floor(Math.random() * symbols.length)];
+
+	// Fill the rest randomly
+	for (let i = password.length; i < length; i++) {
+		password += allChars[Math.floor(Math.random() * allChars.length)];
+	}
+
+	// Shuffle the password to avoid predictable patterns
+	return password
+		.split("")
+		.sort(() => Math.random() - 0.5)
+		.join("");
+}
+
 export function useCreateUser() {
 	const adminKey = useAdminKeyStore((state) => state.adminKey);
 
@@ -10,7 +39,7 @@ export function useCreateUser() {
 		mutationFn: async (createUserFormValues: CreateUserFormValues) => {
 			await authClient.admin.createUser({
 				...createUserFormValues,
-				password: "", // empty password, user will set it via password reset
+				password: generateSecurePassword(), // empty password, user will set it via password reset
 				role: "user",
 			});
 
