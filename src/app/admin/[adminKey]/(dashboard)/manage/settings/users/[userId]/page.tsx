@@ -2,8 +2,8 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import DashboardTitle from "@/components/admin/_partials/dashboardTitle";
 import UserUpdateForm from "@/components/admin/settings/users/update/userUpdateForm";
+import { userByIdForEditOptions } from "@/feature/user/options/userByIdOptions";
 import { getQueryClient } from "@/lib/getQueryClient";
-import { userByIdForEditOptions } from "@/lib/userByIdOptions";
 
 interface PageProps {
 	params: {

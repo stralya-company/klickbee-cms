@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getUserByIdForEdit } from "@/lib/users";
+import { getUserByIdForEdit } from "@/feature/user/lib/users";
 
 export const userByIdForEditOptions = (userId: string) =>
 	queryOptions({

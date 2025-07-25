@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
+import { getSetting } from "@/feature/settings/lib/settings";
 import { decryptString } from "@/lib/crypto";
-import { getSetting } from "@/lib/settings";
 
 export interface EmailOptions {
 	to: string;

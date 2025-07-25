@@ -11,7 +11,7 @@ import { useUserForEdit } from "@/feature/user/queries/useUserForEdit";
 import {
 	UpdateUserFormValues,
 	updateUserSchema,
-} from "@/feature/user/types/updateUserSchema";
+} from "@/feature/user/schemas/updateUserSchema";
 import { UserToUpdate } from "@/feature/user/types/user";
 
 interface UserUpdateFormProps {

@@ -10,7 +10,7 @@ import { useCreateUser } from "@/feature/user/queries/useCreateUser";
 import {
 	CreateUserFormValues,
 	createUserSchema,
-} from "@/feature/user/types/createUserSchema";
+} from "@/feature/user/schemas/createUserSchema";
 
 export default function UserCreateForm() {
 	const t = useTranslations("SettingsUsers");
