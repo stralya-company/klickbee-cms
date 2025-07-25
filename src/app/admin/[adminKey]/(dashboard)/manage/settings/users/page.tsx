@@ -1,6 +1,6 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { DashboardTitle } from "@/components/admin/_partials/dashboardTitle";
+import DashboardTitle from "@/components/admin/_partials/dashboardTitle";
 import ActionButton from "@/components/admin/settings/users/actionButton";
 import Pagination from "@/components/admin/settings/users/pagination";
 import SearchBar from "@/components/admin/settings/users/searchBar";
