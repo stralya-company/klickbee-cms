@@ -22,6 +22,15 @@
 		"strict": true,
 		"target": "ES2017"
 	},
-	"exclude": ["node_modules", ".next", ".idea", "prisma/roles-seed.ts"],
+	"exclude": [
+		"node_modules",
+		".next",
+		".idea",
+		"**/*.test.ts",
+		"**/*.test.tsx",
+		"**/*.spec.ts",
+		"**/*.spec.tsx",
+		"prisma/roles-seed.ts"
+	],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }
