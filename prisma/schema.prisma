@@ -2,121 +2,112 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+	provider = "prisma-client-js"
+	output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+	provider = "postgresql"
+	url      = env("DATABASE_URL")
 }
 
 // === Auth Models ===
 
 model User {
-  id            String    @id @default(uuid())
-  email         String    @unique
-  name          String
-  emailVerified Boolean
-  image         String?
-  updatedAt     DateTime
-  sessions      Session[]
-  accounts      Account[]
-  createdAt     DateTime  @default(now())
+	id            String    @id @default(uuid())
+	email         String    @unique
+	name          String
+	emailVerified Boolean
+	image         String?
+	updatedAt     DateTime  @updatedAt
+	sessions      Session[]
+	accounts      Account[]
+	createdAt     DateTime  @default(now())
 
-  // Relations
-  UserSettings UserSettings[]
+	// Relations
+	UserSettings UserSettings[]
 
-  role       String?   @default("user")
-  banned     Boolean?
-  banReason  String?
-  banExpires DateTime?
+	role       String?   @default("user")
+	banned     Boolean?
+	banReason  String?
+	banExpires DateTime?
 
-  @@map("user")
+	@@map("user")
 }
 
 model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  createdAt DateTime
-  updatedAt DateTime
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+	id        String   @id
+	expiresAt DateTime
+	token     String
+	createdAt DateTime
+	updatedAt DateTime @updatedAt
+	ipAddress String?
+	userAgent String?
+	userId    String
+	user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  impersonatedBy String?
+	impersonatedBy String?
 
-  @@unique([token])
-  @@map("session")
+	@@unique([token])
+	@@map("session")
 }
 
 model Account {
-  id                    String    @id
-  accountId             String
-  providerId            String
-  userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime
-  updatedAt             DateTime
+	id                    String    @id
+	accountId             String
+	providerId            String
+	userId                String
+	user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+	accessToken           String?
+	refreshToken          String?
+	idToken               String?
+	accessTokenExpiresAt  DateTime?
+	refreshTokenExpiresAt DateTime?
+	scope                 String?
+	password              String?
+	createdAt             DateTime  @default(now())
+	updatedAt             DateTime  @updatedAt
 
-  @@map("account")
+	@@map("account")
 }
 
 model Verification {
-  id         String    @id
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime?
-  updatedAt  DateTime?
+	id         String    @id
+	identifier String
+	value      String
+	expiresAt  DateTime
+	createdAt  DateTime?
+	updatedAt  DateTime? @updatedAt
 
-  @@map("verification")
+	@@map("verification")
 }
-
-// model Permission {
-//   id     Int    @id @default(autoincrement())
-//   action String
-//   roleId String
-//   role   Role   @relation(fields: [roleId], references: [id])
-//
-//   @@unique([roleId, action])
-// }
 
 // === Settings Models ===
 
 model Settings {
-  key       String   @unique
-  value     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+	key       String   @unique
+	value     String
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
 }
 
 model UserSettings {
-  key    String
-  value  String
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+	key    String
+	value  String
+	userId String
+	user   User   @relation(fields: [userId], references: [id])
 
-  @@id([key, userId])
+	@@id([key, userId])
 }
 
 // === Builder Models ===
 
 model GlobalSettings {
-  id         String   @id @default(cuid())
-  typography Json
-  colors     Json
-  spacing    Json
-  logos      Json[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+	id         String   @id @default(cuid())
+	typography Json
+	colors     Json
+	spacing    Json
+	logos      Json[]
+	createdAt  DateTime @default(now())
+	updatedAt  DateTime @updatedAt
 }
