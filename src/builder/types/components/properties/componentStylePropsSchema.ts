@@ -346,11 +346,11 @@ export const effectsStyleSchema = z
 				color: colorSchema,
 				x: z.object({
 					number: z.number(),
-					unit: z.literal("px"),
+					unit: z.enum(sizeUnits),
 				}),
 				y: z.object({
 					number: z.number(),
-					unit: z.literal("px"),
+					unit: z.enum(sizeUnits),
 				}),
 			})
 			.optional(),
