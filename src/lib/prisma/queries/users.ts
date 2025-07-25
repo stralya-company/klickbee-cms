@@ -18,3 +18,22 @@ export const getAllUsers = async () => {
 		},
 	});
 };
+
+export const getUserById = async (userId: string) => {
+	const authError = await isAuthenticatedGuard();
+	if (authError) {
+		return authError;
+	}
+
+	return prisma.user.findUnique({
+		select: {
+			email: true,
+			id: true,
+			image: true,
+			name: true,
+		},
+		where: {
+			id: userId,
+		},
+	});
+};
