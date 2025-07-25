@@ -1,5 +1,5 @@
-import { isAuthenticatedGuard } from "@stralya/auth";
 import { NextRequest, NextResponse } from "next/server";
+import { isAuthenticatedGuard } from "@/lib/session";
 import { getSetting, setSetting, setUserSetting } from "@/lib/settings";
 
 export async function GET(req: NextRequest) {
