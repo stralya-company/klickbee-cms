@@ -508,7 +508,7 @@ ${t("Hero.BuildTogether")}`}
 									<li>
 										<a
 											className="text-gray-400 hover:text-white transition-colors"
-											href="https://discord.gg/AetD8jjs"
+											href="https://discord.gg/SmBxh4wPrv"
 										>
 											Discord
 										</a>
