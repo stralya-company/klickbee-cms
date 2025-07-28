@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-// @ts-expect-error
+// @ts-expect-error : alias is supported in vitest
 import { getSetting } from "@/feature/settings/lib/settings";
 
 // Mock the settings module

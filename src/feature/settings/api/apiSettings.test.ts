@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-// @ts-expect-error
+// @ts-expect-error : alias is supported in vitest
 import { isAuthenticatedGuard } from "@/feature/auth/lib/session";
 import {
 	getSetting,
 	setSetting,
 	setUserSetting,
-	// @ts-expect-error
+	// @ts-expect-error : alias is supported in vitest
 } from "@/feature/settings/lib/settings";
 
 // Define response types
