@@ -2,7 +2,7 @@ import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { FieldArrayWithId, UseFormRegister, useForm } from "react-hook-form";
-import type { FormValues } from "@/app/admin/[adminKey]/(dashboard)/builder/settings/page";
+import type { FormValues } from "@/app/admin/[adminKey]/(dashboard)/manage/settings/builder/page";
 import {
 	SectionGap,
 	SectionPadding,
