@@ -4,10 +4,10 @@ import prisma from "../src/lib/prisma";
 async function main() {
 	// Create admin user (only in development)
 	if (process.env.NODE_ENV === "development") {
-		const adminRole = await prisma.user.findFirst({
+		const adminUser = await prisma.user.findFirst({
 			where: { role: "admin" },
 		});
-		if (adminRole) {
+		if (!adminUser) {
 			const existingUser = await prisma.user.findUnique({
 				where: { email: "admin@klickbee.com" },
 			});
