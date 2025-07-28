@@ -25,11 +25,11 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import { allUsersOptions } from "@/feature/user/options/allUsersOptions";
 import { useAllUsers } from "@/feature/user/queries/useAllUsers";
 import { useDeleteUser } from "@/feature/user/queries/useDeleteUser";
 import { useUserSelectionStore } from "@/feature/user/stores/storeUserSelection";
 import { useDebounce } from "@/hooks/useDebounce";
-import { allUsersOptions } from "@/lib/allUsersOptions";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { createColumns } from "./usersTableColumns";
 

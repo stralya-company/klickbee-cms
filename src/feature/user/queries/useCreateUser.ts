@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
-import { CreateUserFormValues } from "@/feature/user/types/createUserSchema";
-import { authClient } from "@/lib/authClient";
+import { authClient } from "@/feature/auth/lib/authClient";
+import { CreateUserFormValues } from "@/feature/user/schemas/createUserSchema";
 
 function generateSecurePassword(): string {
 	const lowercase = "abcdefghijklmnopqrstuvwxyz";

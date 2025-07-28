@@ -2,9 +2,9 @@ import bcrypt from "bcrypt";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { admin } from "better-auth/plugins";
-import { getApiTranslation } from "@/i18n/apiTranslation";
+import { sendEmail } from "@/feature/send-email/lib/sendEmail";
+import { getTranslationApi } from "@/feature/translations/lib/getTranslation";
 import prisma from "@/lib/prisma";
-import { sendEmail } from "@/lib/sendEmail";
 
 export const auth = betterAuth({
 	advanced: {
@@ -37,11 +37,11 @@ export const auth = betterAuth({
 			},
 		},
 		sendResetPassword: async ({ user, url, token }) => {
-			const emailSubject = await getApiTranslation(
+			const emailSubject = await getTranslationApi(
 				"PasswordResetRequest",
 				"EmailSubject",
 			);
-			const emailContent = await getApiTranslation(
+			const emailContent = await getTranslationApi(
 				"PasswordResetRequest",
 				"EmailContent",
 			);
