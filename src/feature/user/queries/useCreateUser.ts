@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
-import { authClient } from "@/feature/auth/client/authClient";
+import { authClient } from "@/feature/auth/lib/authClient";
 import { CreateUserFormValues } from "@/feature/user/schemas/createUserSchema";
 
 function generateSecurePassword(): string {

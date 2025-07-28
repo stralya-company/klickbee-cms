@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { authClient } from "@/feature/auth/client/authClient";
+import { authClient } from "@/feature/auth/lib/authClient";
 import { UpdateUserFormValues } from "@/feature/user/schemas/updateUserSchema";
 
 export function useUpdateUser() {

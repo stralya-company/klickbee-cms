@@ -16,7 +16,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/feature/auth/client/authClient";
+import { authClient } from "@/feature/auth/lib/authClient";
 import {
 	authPasswordResetSchema,
 	UserPasswordResetFormValues,

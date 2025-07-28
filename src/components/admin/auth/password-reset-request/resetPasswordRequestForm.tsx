@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
-import { authClient } from "@/feature/auth/client/authClient";
+import { authClient } from "@/feature/auth/lib/authClient";
 import {
 	authPasswordResetRequestSchema,
 	UserPasswordResetRequestFormValues,
