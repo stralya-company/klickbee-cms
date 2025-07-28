@@ -88,6 +88,66 @@
 		"UploadError": "Erreur upload",
 		"UserFetchError": "Erreur lors de la récupération de l'utilisateur"
 	},
+	"LandingPage": {
+		"Architecture": {
+			"AdminStructure": "Structure Admin",
+			"Benefit1": "Base de code unique pour le front-end et l'admin",
+			"Benefit2": "Déploiement simplifié avec un seul processus de build",
+			"Benefit3": "Types et validation partagés entre le front et le back",
+			"Benefit4": "Authentification et permissions intégrées",
+			"Benefit5": "Meilleure expérience développeur avec des modèles cohérents",
+			"Benefits": "Avantages clés",
+			"FrontEndStructure": "Structure Front-End",
+			"Title": "Architecture monolithique"
+		},
+		"Features": {
+			"CustomPostTypes": {
+				"Description": "Définissez vos propres types de contenu avec des champs personnalisés, de la validation et des relations.",
+				"Title": "Types de contenu personnalisés"
+			},
+			"TechStack": {
+				"Description": "Construit avec Next.js, React, Prisma ORM, Tailwind CSS et TypeScript pour une expérience conviviale pour les développeurs.",
+				"Title": "Stack technologique moderne"
+			},
+			"Title": "Fonctionnalités clés pour les développeurs",
+			"VisualBuilder": {
+				"Description": "Interface intuitive de glisser-déposer avec validation des composants et architecture basée sur des schémas.",
+				"Title": "Constructeur de pages visuel"
+			}
+		},
+		"Footer": {
+			"Community": "Communauté",
+			"Contact": "Contact",
+			"Copyright": "© {year} Stralya. Klickbee CMS est sous licence GNU Affero General Public License v3.0.",
+			"Resources": "Ressources",
+			"Tagline": "Le CMS que vous construiriez si vous aviez le temps d'en construire un."
+		},
+		"GettingStarted": {
+			"Option1": "Option 1 : Avec npm",
+			"Option2": "Option 2 : Avec Docker Compose",
+			"Step1": "1. Copiez le fichier d'environnement et configurez-le :",
+			"Step2docker": "2. Démarrez le conteneur de développement :",
+			"Step2npm": "2. Pour le premier lancement :",
+			"Step3npm": "3. Pour les lancements suivants :",
+			"Title": "Pour commencer"
+		},
+		"Hero": {
+			"AdminAccess": "Allez sur /admin/admin pour accéder au panneau d'administration",
+			"BuildTogether": "Construisons quelque chose de génial ensemble ! 🚀",
+			"DefaultCredentials": "et utilisez les identifiants par défaut :",
+			"GetStarted": "Commencer",
+			"GitHub": "GitHub",
+			"Password": "Mot de passe : admin123",
+			"Subtitle": "Monolithique. Visuel. Conçu pour la rapidité.",
+			"Title": "Votre nouveau CMS préféré",
+			"Username": "Nom d'utilisateur : admin@klickbee.com"
+		},
+		"LanguageSwitcher": {
+			"English": "Anglais",
+			"French": "Français",
+			"Label": "Changer de langue"
+		}
+	},
 	"Login": {
 		"AdminLogin": "Connexion admin",
 		"ConnectionError": "Identifiants incorrects.",
