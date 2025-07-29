@@ -111,3 +111,17 @@ model GlobalSettings {
 	createdAt  DateTime @default(now())
 	updatedAt  DateTime @updatedAt
 }
+
+// === Contact Models ===
+
+model Contact {
+	id         String   @id @default(uuid())
+	email      String
+	number     String
+	name       String
+	submitDate DateTime @default(now())
+	content    Json
+	createdAt  DateTime @default(now())
+
+	@@map("contact")
+}
