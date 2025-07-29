@@ -21,18 +21,22 @@ export default function ContactDetail({ contactId }: ContactDetailProps) {
 
 	return (
 		<div className="space-y-6">
-			<div className="space-y-2">
-				<p className="font-semibold">{tCommon("Email")}</p>
-				<p className="border rounded-md p-2 text-gray-500">
-					{contactData.email}
-				</p>
-			</div>
-			<div className="space-y-2">
-				<p className="font-semibold">{tCommon("PhoneNumber")}</p>
-				<p className="border rounded-md p-2 text-gray-500">
-					{contactData.number}
-				</p>
-			</div>
+			{contactData.email && (
+				<div className="space-y-2">
+					<p className="font-semibold">{tCommon("Email")}</p>
+					<p className="border rounded-md p-2 text-gray-500">
+						{contactData.email}
+					</p>
+				</div>
+			)}
+			{contactData.number && (
+				<div className="space-y-2">
+					<p className="font-semibold">{tCommon("PhoneNumber")}</p>
+					<p className="border rounded-md p-2 text-gray-500">
+						{contactData.number}
+					</p>
+				</div>
+			)}
 			{contactData.content && (
 				<ContentRenderer content={contactData.content} />
 			)}
