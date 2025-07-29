@@ -1,11 +1,38 @@
 import { create } from "zustand";
 
 interface UserSelectionStore {
-	clearSelection: (() => void) | null;
-	setClearSelection: (fn: () => void) => void;
+	selectedItems: string[];
+	addSelection: (id: string) => void;
+	removeSelection: (id: string) => void;
+	toggleSelection: (id: string) => void;
+	clearSelection: () => void;
+	setSelectedItems: (ids: string[]) => void;
 }
 
-export const useUserSelectionStore = create<UserSelectionStore>((set) => ({
-	clearSelection: null,
-	setClearSelection: (fn) => set({ clearSelection: fn }),
+export const useUserSelectionStore = create<UserSelectionStore>((set, get) => ({
+	addSelection: (id) =>
+		set((state) => ({
+			selectedItems: [...state.selectedItems, id],
+		})),
+	clearSelection: () => set({ selectedItems: [] }),
+	removeSelection: (id) =>
+		set((state) => ({
+			selectedItems: state.selectedItems.filter((item) => item !== id),
+		})),
+	selectedItems: [],
+	setSelectedItems: (ids) => set({ selectedItems: ids }),
+	toggleSelection: (id) => {
+		const { selectedItems } = get();
+		if (selectedItems.includes(id)) {
+			set((state) => ({
+				selectedItems: state.selectedItems.filter(
+					(item) => item !== id,
+				),
+			}));
+		} else {
+			set((state) => ({
+				selectedItems: [...state.selectedItems, id],
+			}));
+		}
+	},
 }));
