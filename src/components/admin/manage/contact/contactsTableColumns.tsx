@@ -1,31 +1,15 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import {
-	ChevronDownIcon,
-	ChevronUpIcon,
-	Eye,
-	MoreHorizontal,
-	Trash,
-} from "lucide-react";
+import { Eye } from "lucide-react";
 import Link from "next/link";
+import { ActionsDropdown } from "@/components/admin/_partials/table/actions-dropdown";
+import { DateCell } from "@/components/admin/_partials/table/date-cell";
+import { FormattedIdLink } from "@/components/admin/_partials/table/formatted-id-link";
 import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+	SelectColumnCell,
+	SelectColumnHeader,
+} from "@/components/admin/_partials/table/select-column";
+import { SortableColumnHeader } from "@/components/admin/_partials/table/sortable-column-header";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Contact } from "@/feature/contact/types/contact";
 
 const columnHelper = createColumnHelper<Contact>();
@@ -39,136 +23,64 @@ export function createColumns(
 ) {
 	return [
 		columnHelper.display({
-			cell: ({ row }) => (
-				<Checkbox
-					aria-label="Select row"
-					checked={row.getIsSelected()}
-					onCheckedChange={(value) => row.toggleSelected(!!value)}
-				/>
-			),
+			cell: ({ row }) => <SelectColumnCell row={row} />,
 			enableHiding: false,
 			enableSorting: false,
-			header: ({ table }) => (
-				<Checkbox
-					aria-label="Select all"
-					checked={
-						table.getIsAllPageRowsSelected() ||
-						(table.getIsSomePageRowsSelected() && "indeterminate")
-					}
-					onCheckedChange={(value) =>
-						table.toggleAllPageRowsSelected(!!value)
-					}
+			header: ({ table }) => <SelectColumnHeader table={table} />,
+			id: "select",
+		}),
+		columnHelper.accessor("readingId", {
+			cell: ({ getValue, row }) => (
+				<FormattedIdLink
+					href={`/admin/${adminKey}/manage/contact/${row.original.id}`}
+					id={getValue()}
 				/>
 			),
-			id: "select",
+			header: ({ column }) => (
+				<SortableColumnHeader column={column}>
+					{tCommon("Number")}
+				</SortableColumnHeader>
+			),
 		}),
 		columnHelper.accessor("name", {
 			cell: ({ getValue }) => (
 				<span>{getValue() || t("NameNotAvailable")}</span>
 			),
 			header: ({ column }) => (
-				<Button
-					className="p-0 h-auto font-semibold"
-					onClick={() =>
-						column.toggleSorting(column.getIsSorted() === "asc")
-					}
-					variant="ghost"
-				>
+				<SortableColumnHeader column={column}>
 					{tCommon("Name")}
-					{column.getIsSorted() === "asc" ? (
-						<ChevronUpIcon className="ml-2 h-4 w-4" />
-					) : column.getIsSorted() === "desc" ? (
-						<ChevronDownIcon className="ml-2 h-4 w-4" />
-					) : null}
-				</Button>
+				</SortableColumnHeader>
 			),
 		}),
 		columnHelper.accessor("submitDate", {
-			cell: ({ getValue }) => {
-				const date = getValue();
-				return new Intl.DateTimeFormat(locale, {
-					day: "2-digit",
-					hour: "2-digit",
-					minute: "2-digit",
-					month: "2-digit",
-					year: "numeric",
-				}).format(new Date(date));
-			},
+			cell: ({ getValue }) => (
+				<DateCell date={getValue()} locale={locale} />
+			),
 			header: ({ column }) => (
-				<Button
-					className="p-0 h-auto font-semibold"
-					onClick={() =>
-						column.toggleSorting(column.getIsSorted() === "asc")
-					}
-					variant="ghost"
-				>
+				<SortableColumnHeader column={column}>
 					{t("SubmitDate")}
-					{column.getIsSorted() === "asc" ? (
-						<ChevronUpIcon className="ml-2 h-4 w-4" />
-					) : column.getIsSorted() === "desc" ? (
-						<ChevronDownIcon className="ml-2 h-4 w-4" />
-					) : null}
-				</Button>
+				</SortableColumnHeader>
 			),
 		}),
 		columnHelper.display({
-			cell: ({ row }) => {
-				return (
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button className="h-8 w-8 p-0" variant="ghost">
-								<span className="sr-only">Open menu</span>
-								<MoreHorizontal className="h-4 w-4" />
-							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent align="end">
-							<DropdownMenuItem asChild>
-								<Link
-									href={`/admin/${adminKey}/manage/contact/${row.original.id}`}
-								>
-									<Eye className="mr-2 h-4 w-4" />
-									{t("ViewContact")}
-								</Link>
-							</DropdownMenuItem>
-							<AlertDialog>
-								<AlertDialogTrigger asChild>
-									<DropdownMenuItem
-										className="text-destructive"
-										onSelect={(e) => e.preventDefault()}
-									>
-										<Trash className="mr-2 h-4 w-4" />
-										{tCommon("Delete")}
-									</DropdownMenuItem>
-								</AlertDialogTrigger>
-								<AlertDialogContent>
-									<AlertDialogHeader>
-										<AlertDialogTitle>
-											{t("DeleteContactTitle")}
-										</AlertDialogTitle>
-										<AlertDialogDescription>
-											{t("DeleteContactDescription")}
-										</AlertDialogDescription>
-									</AlertDialogHeader>
-									<AlertDialogFooter>
-										<AlertDialogCancel>
-											{tCommon("Cancel")}
-										</AlertDialogCancel>
-										<AlertDialogAction
-											aria-label={`Confirm deletion of contact ${row.original.name}`}
-											className="bg-destructive text-white hover:bg-destructive/90"
-											onClick={() =>
-												onDeleteContact(row.original.id)
-											}
-										>
-											{tCommon("Delete")}
-										</AlertDialogAction>
-									</AlertDialogFooter>
-								</AlertDialogContent>
-							</AlertDialog>
-						</DropdownMenuContent>
-					</DropdownMenu>
-				);
-			},
+			cell: ({ row }) => (
+				<ActionsDropdown
+					deleteDescription={t("DeleteContactDescription")}
+					deleteTitle={t("DeleteContactTitle")}
+					onDelete={onDeleteContact}
+					row={row}
+					tCommon={tCommon}
+				>
+					<DropdownMenuItem asChild>
+						<Link
+							href={`/admin/${adminKey}/manage/contact/${row.original.id}`}
+						>
+							<Eye className="mr-2 h-4 w-4" />
+							{t("ViewContact")}
+						</Link>
+					</DropdownMenuItem>
+				</ActionsDropdown>
+			),
 			header: "",
 			id: "actions",
 		}),
