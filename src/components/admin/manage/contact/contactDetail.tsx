@@ -33,7 +33,9 @@ export default function ContactDetail({ contactId }: ContactDetailProps) {
 					{contactData.number}
 				</p>
 			</div>
-			<ContentRenderer content={contactData.content} />
+			{contactData.content && (
+				<ContentRenderer content={contactData.content} />
+			)}
 		</div>
 	);
 }
