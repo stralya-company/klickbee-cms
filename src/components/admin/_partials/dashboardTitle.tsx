@@ -10,6 +10,9 @@ interface DashboardTitleProps {
 	translationNamespace: string;
 	subtitle?: string;
 	hasBackButton?: boolean;
+	subtitleParams?: Record<string, string>;
+	titleParams?: Record<string, string>;
+	titleContent?: React.ReactNode;
 }
 
 export default function DashboardTitle({
@@ -17,15 +20,19 @@ export default function DashboardTitle({
 	translationNamespace,
 	subtitle,
 	hasBackButton = false,
+	subtitleParams,
+	titleParams,
+	titleContent,
 }: DashboardTitleProps) {
 	const router = useRouter();
 	const tCommon = useTranslations("Common");
 	const t = useTranslations(translationNamespace);
+
 	return (
 		<div className="flex flex-col gap-2 px-12 pb-12 border-b">
 			{hasBackButton && (
 				<Button
-					className="w-fit -ml-4"
+					className="w-fit -ml-4 text-primary"
 					onClick={() => router.back()}
 					variant="ghost"
 				>
@@ -33,8 +40,15 @@ export default function DashboardTitle({
 					{tCommon("Back")}
 				</Button>
 			)}
-			<h1 className="text-2xl font-bold">{t(title)}</h1>
-			{subtitle && <p className="text-gray-600">{t(subtitle)}</p>}
+			<h1 className="text-2xl font-bold">
+				{titleContent ||
+					(titleParams ? t(title, titleParams) : t(title))}
+			</h1>
+			{subtitle && (
+				<p className="text-gray-600">
+					{subtitleParams ? t(subtitle, subtitleParams) : t(subtitle)}
+				</p>
+			)}
 		</div>
 	);
 }
