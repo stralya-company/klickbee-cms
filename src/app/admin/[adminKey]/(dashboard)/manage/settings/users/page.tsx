@@ -1,5 +1,4 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { useTranslations } from "next-intl";
 import DashboardTitle from "@/components/admin/_partials/dashboardTitle";
 import UserActionButton from "@/components/admin/settings/users/actionButton";
 import UsersPagination from "@/components/admin/settings/users/pagination";
@@ -10,8 +9,6 @@ import { allUsersOptions } from "@/feature/user/options/allUsersOptions";
 import { getQueryClient } from "@/lib/getQueryClient";
 
 export default function Page() {
-	const t = useTranslations("SettingsUsers");
-
 	const queryClient = getQueryClient();
 	void queryClient.prefetchQuery(allUsersOptions);
 
@@ -19,8 +16,9 @@ export default function Page() {
 		<HydrationBoundary state={dehydrate(queryClient)}>
 			<section className="flex flex-col gap-4">
 				<DashboardTitle
-					subtitle={t("ManageUsersSubtitle")}
-					title={t("ManageUsers")}
+					subtitle="ManageUsersSubtitle"
+					title="ManageUsers"
+					translationNamespace="SettingsUsers"
 				/>
 				<div className="p-12 space-y-4">
 					<UsersTableProvider>
