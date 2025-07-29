@@ -18,7 +18,7 @@ export function createColumns(
 	t: (key: string) => string,
 	tCommon: (key: string) => string,
 	locale: string,
-	onDeleteContact: (contactId: string) => void,
+	onDeleteContact: (contactId: number) => void,
 	adminKey: string,
 ) {
 	return [
@@ -29,7 +29,7 @@ export function createColumns(
 			header: ({ table }) => <SelectColumnHeader table={table} />,
 			id: "select",
 		}),
-		columnHelper.accessor("readingId", {
+		columnHelper.accessor("id", {
 			cell: ({ getValue, row }) => (
 				<FormattedIdLink
 					href={`/admin/${adminKey}/manage/contact/${row.original.id}`}
