@@ -32,7 +32,6 @@ export default function SearchBar({
 					className="pl-8"
 					onChange={(e) => {
 						setLocalValue(e.target.value);
-						setSearchQuery(e.target.value);
 					}}
 					placeholder={placeholder}
 					value={localValue}
