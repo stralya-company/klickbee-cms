@@ -12,14 +12,14 @@ import {
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 
-interface UseGenericTableOptions<TData extends { id: string }> {
+interface UseGenericTableOptions<TData extends { id: string | number }> {
 	data: TData[];
 	columns: ColumnDef<TData>[];
 	searchQuery: string;
 	setSelectedItems: (items: string[]) => void;
 }
 
-export function useGenericTable<TData extends { id: string }>({
+export function useGenericTable<TData extends { id: string | number }>({
 	data,
 	columns,
 	searchQuery,
@@ -42,7 +42,7 @@ export function useGenericTable<TData extends { id: string }>({
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
-		getRowId: (row) => row.id,
+		getRowId: (row) => row.id.toString(),
 		getSortedRowModel: getSortedRowModel(),
 		globalFilterFn: "includesString",
 		manualPagination: false,
