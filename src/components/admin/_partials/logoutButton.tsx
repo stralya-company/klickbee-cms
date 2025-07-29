@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
-import { authClient } from "@/lib/authClient";
+import { authClient } from "@/feature/auth/lib/authClient";
 
 export default function LogoutButton() {
 	const router = useRouter();

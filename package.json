@@ -90,6 +90,7 @@
 	"scripts": {
 		"build": "next build",
 		"check": "biome check --write .",
+		"check:no-write": "biome check .",
 		"dev": "next dev --turbopack",
 		"format": "biome format --write .",
 		"format:check": "biome format .",
