@@ -116,6 +116,7 @@ model GlobalSettings {
 
 model Contact {
 	id         String   @id @default(uuid())
+	readingId  Int      @default(autoincrement()) @unique
 	email      String
 	number     String
 	name       String
