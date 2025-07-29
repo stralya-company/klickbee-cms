@@ -65,6 +65,7 @@
 		"Type": "Type :"
 	},
 	"Common": {
+		"Back": "Retour",
 		"Cancel": "Annuler",
 		"CreatedAt": "Date de création",
 		"Delete": "Supprimer",

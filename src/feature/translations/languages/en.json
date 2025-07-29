@@ -65,6 +65,7 @@
 		"Type": "Type:"
 	},
 	"Common": {
+		"Back": "Back",
 		"Cancel": "Cancel",
 		"CreatedAt": "Created At",
 		"Delete": "Delete",
