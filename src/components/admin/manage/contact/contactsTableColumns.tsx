@@ -83,29 +83,6 @@ export function createColumns(
 				</Button>
 			),
 		}),
-		columnHelper.accessor("email", {
-			cell: ({ getValue }) => <span>{getValue()}</span>,
-			header: ({ column }) => (
-				<Button
-					className="p-0 h-auto font-semibold"
-					onClick={() =>
-						column.toggleSorting(column.getIsSorted() === "asc")
-					}
-					variant="ghost"
-				>
-					{tCommon("Email")}
-					{column.getIsSorted() === "asc" ? (
-						<ChevronUpIcon className="ml-2 h-4 w-4" />
-					) : column.getIsSorted() === "desc" ? (
-						<ChevronDownIcon className="ml-2 h-4 w-4" />
-					) : null}
-				</Button>
-			),
-		}),
-		columnHelper.accessor("number", {
-			cell: ({ getValue }) => <span>{getValue()}</span>,
-			header: t("PhoneNumber"),
-		}),
 		columnHelper.accessor("submitDate", {
 			cell: ({ getValue }) => {
 				const date = getValue();
