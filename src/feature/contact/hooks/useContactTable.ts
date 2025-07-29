@@ -23,8 +23,8 @@ export function useContactsTable() {
 	const contactData = Array.isArray(contacts) ? contacts : [];
 
 	const handleDeleteContact = useCallback(
-		(contactId: string) => {
-			deleteContactMutation.mutate(contactId, {
+		(contactId: number) => {
+			deleteContactMutation.mutate(contactId.toString(), {
 				onError: () => {
 					toast.error(t("DeleteContactError"));
 				},
