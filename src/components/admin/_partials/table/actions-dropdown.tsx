@@ -18,23 +18,26 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-interface ActionsDropdownProps<T> {
+interface ActionsDropdownProps<T, TId = string | number> {
 	row: { original: T };
-	onDelete: (id: string) => void;
+	onDelete: (id: TId) => void;
 	deleteTitle: string;
 	deleteDescription: string;
 	tCommon: (key: string) => string;
 	children?: React.ReactNode;
 }
 
-export function ActionsDropdown<T extends { id: string; name?: string }>({
+export function ActionsDropdown<
+	T extends { id: string | number; name?: string | null },
+	TId = T["id"],
+>({
 	row,
 	onDelete,
 	deleteTitle,
 	deleteDescription,
 	tCommon,
 	children,
-}: ActionsDropdownProps<T>) {
+}: ActionsDropdownProps<T, TId>) {
 	return (
 		<div className="flex justify-end">
 			<DropdownMenu>
@@ -72,7 +75,9 @@ export function ActionsDropdown<T extends { id: string; name?: string }>({
 								<AlertDialogAction
 									aria-label={`Confirm deletion of ${row.original.name || "item"}`}
 									className="bg-destructive text-white hover:bg-destructive/90"
-									onClick={() => onDelete(row.original.id)}
+									onClick={() =>
+										onDelete(row.original.id as TId)
+									}
 								>
 									{tCommon("Delete")}
 								</AlertDialogAction>
