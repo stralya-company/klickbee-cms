@@ -20,6 +20,7 @@ export const getAllContacts = async () => {
 			id: true,
 			name: true,
 			number: true,
+			readingId: true,
 			submitDate: true,
 		},
 	});
@@ -39,6 +40,7 @@ export const getContactById = async (id: string) => {
 			id: true,
 			name: true,
 			number: true,
+			readingId: true,
 			submitDate: true,
 		},
 		where: { id },
