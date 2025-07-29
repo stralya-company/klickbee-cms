@@ -81,6 +81,24 @@
 		"PasswordPlaceholder": "Votre mot de passe",
 		"Previous": "Précédent"
 	},
+	"Contacts": {
+		"DeleteContactDescription": "Cette action ne peut pas être annulée. Cela supprimera définitivement le contact et toutes ses données associées.",
+		"DeleteContactError": "Erreur lors de la suppression du contact",
+		"DeleteContactSuccess": "Contact supprimé avec succès",
+		"DeleteContactTitle": "Supprimer le contact",
+		"DeleteDescription": "Cette action ne peut pas être annulée. Cela supprimera définitivement {count} contact(s) et toutes leurs données associées.",
+		"DeleteError": "Erreur lors de la suppression des contacts",
+		"DeleteSuccess": "{count} contact(s) supprimé(s) avec succès",
+		"DeleteTitle": "Supprimer les contacts",
+		"ManageContacts": "Gérer les contacts",
+		"ManageContactsSubtitle": "Gérer les soumissions de contact et les demandes",
+		"NameNotAvailable": "Nom non disponible",
+		"NoContactsFound": "Aucun contact trouvé",
+		"PhoneNumber": "Numéro de téléphone",
+		"SearchContacts": "Rechercher des contacts...",
+		"SubmitDate": "Date de soumission",
+		"ViewContact": "Voir le contact"
+	},
 	"Errors": {
 		"GoogleFontsError": "Erreur lors de la récupération des Google Fonts",
 		"LoadingError": "Erreur de chargement",
@@ -183,11 +201,15 @@
 		"SuccessMessage": "Un lien de réinitialisation a été envoyé à votre adresse email."
 	},
 	"SettingsUsers": {
-		"AddUser": "Ajouter un utilisateur",
+		"Add": "Ajouter un utilisateur",
 		"CreateUser": "Créer un utilisateur",
 		"CreateUserError": "Erreur lors de la création de l'utilisateur",
 		"CreateUserSubtitle": "Ajouter un nouveau compte utilisateur",
 		"CreateUserSuccess": "Utilisateur créé avec succès et invitation envoyée",
+		"DeleteDescription": "Cette action ne peut pas être annulée. Cela supprimera définitivement {count} utilisateur(s) et toutes leurs données associées.",
+		"DeleteError": "Erreur lors de la suppression des utilisateurs",
+		"DeleteSuccess": "{count} utilisateur(s) supprimé(s) avec succès",
+		"DeleteTitle": "Supprimer les utilisateurs",
 		"DeleteUserDescription": "Cette action ne peut pas être annulée. Cela supprimera définitivement le compte de l'utilisateur et toutes ses données.",
 		"DeleteUserError": "Erreur lors de la suppression de l'utilisateur",
 		"DeleteUserSuccess": "Utilisateur supprimé avec succès",
