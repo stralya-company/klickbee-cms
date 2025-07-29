@@ -20,7 +20,6 @@ export const getAllContacts = async () => {
 			id: true,
 			name: true,
 			number: true,
-			readingId: true,
 			submitDate: true,
 		},
 	});
@@ -40,10 +39,9 @@ export const getContactById = async (id: string) => {
 			id: true,
 			name: true,
 			number: true,
-			readingId: true,
 			submitDate: true,
 		},
-		where: { id },
+		where: { id: parseInt(id) },
 	});
 };
 
@@ -54,7 +52,7 @@ export const deleteContact = async (id: string) => {
 	}
 
 	return prisma.contact.delete({
-		where: { id },
+		where: { id: parseInt(id) },
 	});
 };
 
@@ -67,7 +65,7 @@ export const deleteContacts = async (ids: string[]) => {
 	return prisma.contact.deleteMany({
 		where: {
 			id: {
-				in: ids,
+				in: ids.map((id) => parseInt(id)),
 			},
 		},
 	});
