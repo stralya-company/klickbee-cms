@@ -1,28 +1,40 @@
+"use client";
+
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+
 interface DashboardTitleProps {
 	title: string;
+	translationNamespace: string;
 	subtitle?: string;
-	backLink?: string;
+	hasBackButton?: boolean;
 }
 
 export default function DashboardTitle({
 	title,
+	translationNamespace,
 	subtitle,
-	backLink,
+	hasBackButton = false,
 }: DashboardTitleProps) {
+	const router = useRouter();
+	const tCommon = useTranslations("Common");
+	const t = useTranslations(translationNamespace);
 	return (
 		<div className="flex flex-col gap-2 px-12 pb-12 border-b">
-			<div className="flex items-center gap-2">
-				{backLink && (
-					<a
-						className="text-blue-500 hover:underline"
-						href={backLink}
-					>
-						Back
-					</a>
-				)}
-				<h1 className="text-2xl font-bold">{title}</h1>
-			</div>
-			{subtitle && <p className="text-gray-600">{subtitle}</p>}
+			{hasBackButton && (
+				<Button
+					className="w-fit -ml-4"
+					onClick={() => router.back()}
+					variant="ghost"
+				>
+					<ArrowLeft className="h-4 w-4" />
+					{tCommon("Back")}
+				</Button>
+			)}
+			<h1 className="text-2xl font-bold">{t(title)}</h1>
+			{subtitle && <p className="text-gray-600">{t(subtitle)}</p>}
 		</div>
 	);
 }
