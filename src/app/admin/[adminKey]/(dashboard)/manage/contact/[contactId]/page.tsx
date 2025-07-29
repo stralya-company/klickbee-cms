@@ -27,7 +27,7 @@ export default async function Page({ params }: PageProps) {
 		redirect(`/admin/${adminKey}/manage/contact`);
 	}
 
-	const readingIdFormatted = `#${contact.readingId.toString().padStart(3, "0")}`;
+	const contactIdFormatted = `#${contact.id.toString().padStart(3, "0")}`;
 
 	const contactDate = new Date(contact.submitDate).toLocaleDateString(
 		"fr-FR",
@@ -50,8 +50,15 @@ export default async function Page({ params }: PageProps) {
 					title=""
 					titleContent={
 						<span>
-							{readingIdFormatted} -{" "}
-							<span className="text-primary">{contact.name}</span>
+							{contactIdFormatted}
+							{contact.name && (
+								<>
+									{" - "}
+									<span className="text-primary">
+										{contact.name}
+									</span>
+								</>
+							)}
 						</span>
 					}
 					translationNamespace="Contacts"
