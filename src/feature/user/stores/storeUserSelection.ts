@@ -22,17 +22,11 @@ export const useUserSelectionStore = create<UserSelectionStore>((set, get) => ({
 	selectedItems: [],
 	setSelectedItems: (ids) => set({ selectedItems: ids }),
 	toggleSelection: (id) => {
-		const { selectedItems } = get();
+		const { selectedItems, addSelection, removeSelection } = get();
 		if (selectedItems.includes(id)) {
-			set((state) => ({
-				selectedItems: state.selectedItems.filter(
-					(item) => item !== id,
-				),
-			}));
+			removeSelection(id);
 		} else {
-			set((state) => ({
-				selectedItems: [...state.selectedItems, id],
-			}));
+			addSelection(id);
 		}
 	},
 }));
