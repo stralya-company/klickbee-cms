@@ -1,3 +1,3 @@
 export default function BuilderTabSwitcher() {
-	return `to do`;
+	return `BuilderTabSwitcher`;
 }

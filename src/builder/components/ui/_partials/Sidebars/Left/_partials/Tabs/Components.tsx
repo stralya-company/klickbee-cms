@@ -1,3 +1,3 @@
 export default function BuilderTabComponents() {
-	return "to do";
+	return "BuilderTabComponents";
 }
