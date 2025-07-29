@@ -1,10 +1,11 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import DashboardTitle from "@/components/admin/_partials/dashboardTitle";
-import ActionButton from "@/components/admin/settings/users/actionButton";
-import Pagination from "@/components/admin/settings/users/pagination";
-import SearchBar from "@/components/admin/settings/users/searchBar";
+import UserActionButton from "@/components/admin/settings/users/actionButton";
+import UsersPagination from "@/components/admin/settings/users/pagination";
+import UserSearchBar from "@/components/admin/settings/users/searchBar";
 import UsersTable from "@/components/admin/settings/users/usersTable";
+import { UsersTableProvider } from "@/feature/user/contexts/UsersTableContext";
 import { allUsersOptions } from "@/feature/user/options/allUsersOptions";
 import { getQueryClient } from "@/lib/getQueryClient";
 
@@ -22,12 +23,14 @@ export default function Page() {
 					title={t("ManageUsers")}
 				/>
 				<div className="p-12 space-y-4">
-					<div className="flex items-center justify-between gap-4">
-						<SearchBar />
-						<ActionButton />
-					</div>
-					<UsersTable />
-					<Pagination />
+					<UsersTableProvider>
+						<div className="flex items-center justify-between gap-4">
+							<UserSearchBar />
+							<UserActionButton />
+						</div>
+						<UsersTable />
+						<UsersPagination />
+					</UsersTableProvider>
 				</div>
 			</section>
 		</HydrationBoundary>
