@@ -120,7 +120,7 @@ model Contact {
   number     String?
   name       String?
   submitDate DateTime @default(now())
-  content    Json
+  content    Json?
   createdAt  DateTime @default(now())
 
   @@map("contact")
