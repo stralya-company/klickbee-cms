@@ -9,8 +9,12 @@ export default function BuilderTabSwitcher() {
 	const [activeTab, setActiveTab] = React.useState("Pages");
 
 	return (
-		<div className="inline-flex items-center rounded-md bg-white p-1 text-sm font-medium py-4">
-			<div className={"text-muted-foreground bg-muted p-2"}>
+		<div className="inline-flex items-center p-1 text-sm font-medium py-4">
+			<div
+				className={
+					"text-muted-foreground bg-muted rounded-md p-2 m-auto"
+				}
+			>
 				{tabs.map((tab) => (
 					<button
 						className={cn(
