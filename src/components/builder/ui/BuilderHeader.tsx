@@ -3,9 +3,10 @@ import { LayoutDashboard, Play, Save, Send } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useAdminKeyStore } from "@/feature/admin-key/stores/storeAdminKey";
+import { useCurrentPageStore } from "@/feature/builder/store/storeCurrentPage";
 
 export default function BuilderHeader() {
-	const currentPage = "Home /";
+	const currentPage = useCurrentPageStore((state) => state.currentPage);
 	const adminKey = useAdminKeyStore((state) => state.adminKey);
 	return (
 		<header className="flex items-center justify-between px-4 py-6 border-b">

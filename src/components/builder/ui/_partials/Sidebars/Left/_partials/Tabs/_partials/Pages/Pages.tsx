@@ -28,16 +28,30 @@ const pages: Page[] = [
 
 export default function BuilderTabPagesPages() {
 	const currentPage = useCurrentPageStore((state) => state.currentPage);
+	const handleCurrentPageSwitch = (newCurrentSlug: string) => {
+		useCurrentPageStore.setState({
+			currentPage: newCurrentSlug,
+		});
+	};
 	const renderPage = (page: Page, isChild = false) => (
 		<div
-			className={`group flex items-center justify-between px-4 py-1.5 text-sm ${currentPage == page.slug ? ` text-muted-foreground` : "text-black"} hover:bg-muted rounded-sm`}
+			className={`group flex items-center justify-between px-4 py-1.5 text-sm  hover:bg-muted rounded-sm`}
 			key={page.id}
 		>
-			<span
-				className={`truncate ${isChild ? "pl-6 before:content-['—'] before:mr-1" : ""} ${page.type == "homepage" ? "after:content-['/']" : "before:content-['/']"}`}
+			<Button
+				className={"p-0 m-0 hover:no-underline"}
+				onClick={() => handleCurrentPageSwitch(page.slug)}
+				variant={"link"}
 			>
-				{page.title}
-			</span>
+				<span
+					className={`truncate ${isChild ? "pl-6 before:content-['—'] before:mr-1" : ""}
+				${page.type == "homepage" ? "after:content-['/']" : "before:content-['/']"}
+				${currentPage == page.slug ? ` text-black font-bold` : "text-muted-foreground"}`}
+				>
+					{page.title}
+				</span>
+			</Button>
+
 			<MoreHorizontal className="w-4 h-4 opacity-70 group-hover:opacity-100" />
 		</div>
 	);
