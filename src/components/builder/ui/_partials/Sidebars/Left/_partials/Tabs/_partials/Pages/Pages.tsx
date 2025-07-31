@@ -35,16 +35,18 @@ export default function BuilderTabPagesPages() {
 	};
 	const renderPage = (page: Page, isChild = false) => (
 		<div
-			className={`group flex items-center justify-between px-4 py-1.5 text-sm  hover:bg-muted rounded-sm`}
+			className={`group flex items-center justify-between px-4 text-sm  hover:bg-muted rounded-sm`}
 			key={page.id}
 		>
 			<Button
-				className={"p-0 m-0 hover:no-underline"}
+				className={
+					"px-0 m-0 hover:no-underline w-9/10 py-5 text-left flex justify-start "
+				}
 				onClick={() => handleCurrentPageSwitch(page.slug)}
 				variant={"link"}
 			>
 				<span
-					className={`truncate ${isChild ? "pl-6 before:content-['—'] before:mr-1" : ""}
+					className={`text-left truncate ${isChild ? "pl-6 before:content-['—'] before:mr-1" : ""}
 				${page.type == "homepage" ? "after:content-['/']" : "before:content-['/']"}
 				${currentPage == page.slug ? ` text-black font-bold` : "text-muted-foreground"}`}
 				>
