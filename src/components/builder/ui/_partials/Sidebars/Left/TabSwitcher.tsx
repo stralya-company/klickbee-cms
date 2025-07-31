@@ -5,16 +5,16 @@ import { cn } from "@/lib/utils";
 
 const tabs = ["Pages", "Layers", "Components"];
 
-export default function BuilderTabSwitcher() {
-	const [activeTab, setActiveTab] = React.useState("Pages");
-
+export default function BuilderTabSwitcher({
+	activeTab,
+	setActiveTab,
+}: {
+	activeTab: string;
+	setActiveTab: (tab: string) => void;
+}) {
 	return (
 		<div className="inline-flex items-center p-1 text-sm font-medium py-4">
-			<div
-				className={
-					"text-muted-foreground bg-muted rounded-md p-2 m-auto"
-				}
-			>
+			<div className="text-muted-foreground bg-muted rounded-md p-2 m-auto">
 				{tabs.map((tab) => (
 					<button
 						className={cn(
