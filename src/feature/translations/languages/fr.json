@@ -4,7 +4,7 @@
 	},
 	"AdminSidebar": {
 		"AI": "IA",
-		"Builder": "Constructeur",
+		"Builder": "Builder",
 		"Contact": "Contact",
 		"Content": "Contenu",
 		"Copyright": "© Klickbee CMS",
@@ -161,6 +161,7 @@
 			"DefaultCredentials": "et utilisez les identifiants par défaut :",
 			"GetStarted": "Commencer",
 			"GitHub": "GitHub",
+			"HaveALookBuilder": "Vous souhaitez voir le builder ? Aller à /admin/admin/builder",
 			"Password": "Mot de passe : admin123",
 			"Subtitle": "Monolithique. Visuel. Conçu pour la rapidité.",
 			"Title": "Votre nouveau CMS préféré",

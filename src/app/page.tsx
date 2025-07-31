@@ -155,6 +155,8 @@ ${t("Hero.DefaultCredentials")}
 ${t("Hero.Username")}
 ${t("Hero.Password")}
 
+${t("Hero.HaveALookBuilder")}
+
 ${t("Hero.BuildTogether")}`}
 									</code>
 								</pre>
