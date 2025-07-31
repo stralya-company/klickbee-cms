@@ -5,7 +5,7 @@ export default function BuilderTabPages() {
 	return (
 		<>
 			<BuilderTabPagesPages />
-			<BuilderTabPagesCollections />
+			{/*<BuilderTabPagesCollections />*/}
 		</>
 	);
 }

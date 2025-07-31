@@ -4,7 +4,7 @@ import BuilderTabSwitcher from "@/builder/components/ui/_partials/Sidebars/Left/
 
 export default function BuilderLeftSidebar() {
 	return (
-		<div className="w-64 bg-gray-50 border-r border-gray-200 h-full flex flex-col">
+		<div className="w-64 bg-white divide-y border-r border-t border-gray-200 h-full flex flex-col">
 			<BuilderTabSwitcher />
 			<BuilderSearchComponent />
 			<BuilderTabContent />

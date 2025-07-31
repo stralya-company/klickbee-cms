@@ -9,9 +9,9 @@ export default function BuilderComponent() {
 		<>
 			<BuilderHeader />
 			<BuilderLeftSidebar />
-			<BuilderPreview />
-			<BuilderRightSidebar />
-			<BuilderFloatingActions />
+			{/*<BuilderPreview />*/}
+			{/*<BuilderRightSidebar />*/}
+			{/*<BuilderFloatingActions />*/}
 		</>
 	);
 }
