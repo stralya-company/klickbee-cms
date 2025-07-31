@@ -161,6 +161,7 @@
 			"DefaultCredentials": "and use default credentials:",
 			"GetStarted": "Get Started",
 			"GitHub": "GitHub",
+			"HaveALookBuilder": "You want to have a look at the builder ? Go to /admin/admin/builder",
 			"Password": "Password: admin123",
 			"Subtitle": "Monolithic. Visual. Built for speed.",
 			"Title": "The last CMS you'll ever need",
