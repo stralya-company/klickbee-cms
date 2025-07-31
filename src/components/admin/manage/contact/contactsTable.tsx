@@ -10,11 +10,11 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { useUsersTableContext } from "@/feature/user/contexts/UsersTableContext";
+import { useContactsTableContext } from "@/feature/contact/contexts/ContactsTableContext";
 
-export default function UsersTable() {
-	const table = useUsersTableContext();
-	const t = useTranslations("SettingsUsers");
+export default function ContactsTable() {
+	const table = useContactsTableContext();
+	const t = useTranslations("Contacts");
 
 	return (
 		<div className="rounded-md border">
@@ -58,7 +58,7 @@ export default function UsersTable() {
 								className="h-24 text-center"
 								colSpan={table.getAllColumns().length}
 							>
-								{t("NoUsersFound")}
+								{t("NoContactsFound")}
 							</TableCell>
 						</TableRow>
 					)}
