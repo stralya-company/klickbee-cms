@@ -1,5 +1,7 @@
+"use client";
 import { MoreHorizontal, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCurrentPageStore } from "@/feature/builder/store/storeCurrentPage";
 
 type Page = {
 	id: string;
@@ -25,9 +27,10 @@ const pages: Page[] = [
 ];
 
 export default function BuilderTabPagesPages() {
+	const currentPage = useCurrentPageStore((state) => state.currentPage);
 	const renderPage = (page: Page, isChild = false) => (
 		<div
-			className="group flex items-center justify-between px-4 py-1.5 text-sm text-muted-foreground hover:bg-muted rounded-sm"
+			className={`group flex items-center justify-between px-4 py-1.5 text-sm ${currentPage == page.slug ? ` text-muted-foreground` : "text-black"} hover:bg-muted rounded-sm`}
 			key={page.id}
 		>
 			<span
