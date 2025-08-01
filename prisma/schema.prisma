@@ -138,7 +138,6 @@ model Page {
   parentId  String?
   parent    Page?    @relation("PageHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
   children  Page[]   @relation("PageHierarchy")
-  type      String   @default("page") // e.g., "page", "blog", "product"
 
   // SEO fields
   metaTitle       String?
