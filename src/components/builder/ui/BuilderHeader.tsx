@@ -24,7 +24,7 @@ export default function BuilderHeader() {
 			</div>
 
 			<div className="flex items-center gap-1 text-sm text-muted-foreground m-auto">
-				<p className="text-blue-600 font-medium">{currentPage}</p>
+				<p className="text-blue-600 font-medium">{currentPage.title}</p>
 			</div>
 
 			<div className="flex items-center gap-2">
