@@ -12,7 +12,7 @@ export const getAllPages = async () => {
 
 	return prisma.page.findMany({
 		orderBy: {
-			createdAt: "desc",
+			id: "asc",
 		},
 		select: {
 			content: true,
@@ -26,13 +26,12 @@ export const getAllPages = async () => {
 			publishedAt: true,
 			slug: true,
 			title: true,
-			type: true,
 			updatedAt: true,
 		},
 	});
 };
 
-export const getPageById = async (id: string) => {
+export const getPageById = async (id: number) => {
 	const authError = await isAuthenticatedGuard();
 	if (authError) {
 		return authError;
@@ -51,7 +50,6 @@ export const getPageById = async (id: string) => {
 			publishedAt: true,
 			slug: true,
 			title: true,
-			type: true,
 			updatedAt: true,
 		},
 		where: { id },
@@ -61,9 +59,8 @@ export const getPageById = async (id: string) => {
 export const createPage = async (data: {
 	title: string;
 	slug: string;
-	type?: string;
 	content?: JsonValue;
-	parentId?: string | null;
+	parentId?: number | null;
 }) => {
 	const authError = await isAuthenticatedGuard();
 	if (authError) {
@@ -77,7 +74,6 @@ export const createPage = async (data: {
 			parentId: data.parentId || null,
 			slug: data.slug,
 			title: data.title,
-			type: data.type || "default",
 		},
 		select: {
 			content: true,
@@ -91,7 +87,6 @@ export const createPage = async (data: {
 			publishedAt: true,
 			slug: true,
 			title: true,
-			type: true,
 			updatedAt: true,
 		},
 	});

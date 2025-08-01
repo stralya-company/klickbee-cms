@@ -9,7 +9,6 @@ export function useCreatePage() {
 		mutationFn: async (data: {
 			title: string;
 			slug: string;
-			type?: string;
 			content?: JsonValue;
 			parentId?: string | null;
 		}) => {
